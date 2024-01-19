@@ -5,6 +5,10 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaAPI", "CinemaAPI\CinemaAPI.csproj", "{6087454A-3DC5-4543-98D0-2F58CA129976}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIAdmin", "UIAdmin\UIAdmin.csproj", "{E3B0BC79-6C49-4DCB-9DE4-F859EB3B3339}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIClient", "UIClient\UIClient.csproj", "{75631F6E-2442-47DE-985B-666C997F539B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{6087454A-3DC5-4543-98D0-2F58CA129976}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6087454A-3DC5-4543-98D0-2F58CA129976}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6087454A-3DC5-4543-98D0-2F58CA129976}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3B0BC79-6C49-4DCB-9DE4-F859EB3B3339}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3B0BC79-6C49-4DCB-9DE4-F859EB3B3339}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3B0BC79-6C49-4DCB-9DE4-F859EB3B3339}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3B0BC79-6C49-4DCB-9DE4-F859EB3B3339}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75631F6E-2442-47DE-985B-666C997F539B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75631F6E-2442-47DE-985B-666C997F539B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75631F6E-2442-47DE-985B-666C997F539B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75631F6E-2442-47DE-985B-666C997F539B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
