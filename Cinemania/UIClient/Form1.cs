@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+
 namespace UIClient
 {
     public partial class Form1 : Form
@@ -16,6 +18,8 @@ namespace UIClient
                 if(response.IsSuccessStatusCode)
                 {
                     string responseContent = await response.Content.ReadAsStringAsync();
+                    var data = JsonConvert.DeserializeObject(responseContent);
+                    dataGrid.DataSource = data;
                 }
                 else
                 {
