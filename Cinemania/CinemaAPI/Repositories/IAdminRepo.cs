@@ -1,4 +1,4 @@
-﻿namespace CinemaAPI.Repositories
+﻿namespace Interfaces
 {
     public interface IAdminRepo
     {
