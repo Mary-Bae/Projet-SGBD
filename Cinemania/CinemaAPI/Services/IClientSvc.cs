@@ -1,6 +1,6 @@
-﻿namespace CinemaAPI.Services
+﻿namespace Interfaces
 {
-    public interface IClient
+    public interface IClientSvc
     {
     }
 }

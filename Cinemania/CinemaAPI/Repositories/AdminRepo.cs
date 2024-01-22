@@ -1,4 +1,4 @@
-﻿namespace CinemaAPI.Repositories
+﻿namespace Repositories
 {
     public class AdminRepo
     {

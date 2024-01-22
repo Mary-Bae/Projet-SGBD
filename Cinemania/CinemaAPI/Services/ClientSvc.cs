@@ -1,4 +1,4 @@
-﻿namespace CinemaAPI.Services
+﻿namespace Services
 {
     public class ClientSvc
     {
