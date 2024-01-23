@@ -2,5 +2,6 @@
 {
     public interface IAdminRepo
     {
+        Task<dynamic> GetCinema();
     }
 }

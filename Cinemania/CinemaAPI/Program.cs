@@ -1,8 +1,12 @@
 using Interfaces;
+using Microsoft.Data.SqlClient;
 using Repositories;
 using Services;
+using System.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<IDbConnection, SqlConnection>(_=> new SqlConnection("Server=DESKTOP-D5MF0AD\\SQL2023;Database=Cinemania-PSR12204;User Id=SA;Password=Unoeuf1978;trustServerCertificate=true;"));
 
 // Add services to the container.
 builder.Services.AddScoped<IAdminSvc, AdminSvc>();
