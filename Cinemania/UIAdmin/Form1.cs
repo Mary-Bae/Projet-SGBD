@@ -11,7 +11,7 @@ namespace UIAdmin
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            string sUrl = "https://localhost:7013/WeatherForecast";
+            string sUrl = "https://localhost:7013/api/Admin";
             using (HttpClient client = new HttpClient())
             {
                 HttpResponseMessage response = await client.GetAsync(sUrl);

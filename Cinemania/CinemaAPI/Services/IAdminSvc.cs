@@ -1,7 +1,9 @@
-﻿namespace Interfaces
+﻿using Models;
+
+namespace Interfaces
 {
     public interface IAdminSvc
     {
-        Task<List<string>> GetCinemaByChaine(string pChaineCinema);
+        Task<List<CinemasDTO>> GetCinemaByChaine(string pChaineCinema);
     }
 }

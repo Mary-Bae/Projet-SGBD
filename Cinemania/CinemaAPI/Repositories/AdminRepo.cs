@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Interfaces;
+using Models;
 using System.Data;
 
 namespace Repositories
@@ -12,10 +13,10 @@ namespace Repositories
             _Connection = pConnection;
         }
 
-        public async Task<dynamic> GetCinema()
+        public async Task<List<CinemasDTO>> GetCinema()
         {
-            var lst = await _Connection.ExecuteReaderAsync("");
-            return lst;
+            var lst = await _Connection.QueryAsync<CinemasDTO>("Select * from Cinemas");
+            return lst.ToList();
         }
     }
 }

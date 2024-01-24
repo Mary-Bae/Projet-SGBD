@@ -1,7 +1,9 @@
-﻿namespace Interfaces
+﻿using Models;
+
+namespace Interfaces
 {
     public interface IAdminRepo
     {
-        Task<dynamic> GetCinema();
+        Task<List<CinemasDTO>> GetCinema();
     }
 }

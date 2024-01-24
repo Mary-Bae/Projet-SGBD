@@ -1,4 +1,5 @@
 ﻿using Interfaces;
+using Models;
 
 namespace Services
 {
@@ -11,11 +12,11 @@ namespace Services
             _AdminRepo = pAdminRepo;
             _ClientRepo = pClientRepo;
         }
-        public async Task<List<string>> GetCinemaByChaine(string pChaineCinema)
+        public async Task<List<CinemasDTO>> GetCinemaByChaine(string pChaineCinema)
         {
-            List<string> list = new List<string>();
-            var lst = _AdminRepo.GetCinema();
-            return list;
+            
+            var lst = await _AdminRepo.GetCinema();
+            return lst;
         }
     }
 }
