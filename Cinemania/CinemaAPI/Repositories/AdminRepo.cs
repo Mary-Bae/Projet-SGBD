@@ -18,5 +18,15 @@ namespace Repositories
             var lst = await _Connection.QueryAsync<CinemasDTO>("Select * from Cinemas");
             return lst.ToList();
         }
+
+        //Task<List<CinemasDTO>> ICinemaRepo.GetCinema2()
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //Task<List<CinemasDTO>> IReservationRepo.GetCinema3()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

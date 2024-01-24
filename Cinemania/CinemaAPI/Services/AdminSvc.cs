@@ -14,8 +14,10 @@ namespace Services
         }
         public async Task<List<CinemasDTO>> GetCinemaByChaine(string pChaineCinema)
         {
-            
             var lst = await _AdminRepo.GetCinema();
+
+            //IReservationRepo _repoReservation = _AdminRepo;
+            //_repoReservation.GetCinema3();
             return lst;
         }
     }
