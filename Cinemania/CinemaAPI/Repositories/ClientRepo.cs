@@ -1,6 +1,8 @@
-﻿namespace Repositories
+﻿using Interfaces;
+
+namespace Repositories
 {
-    public class ClientRepo
+    public class ClientRepo : IClientRepo
     {
     }
 }

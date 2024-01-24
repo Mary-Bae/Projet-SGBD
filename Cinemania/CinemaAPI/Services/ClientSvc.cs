@@ -1,6 +1,8 @@
-﻿namespace Services
+﻿using Interfaces;
+
+namespace Services
 {
-    public class ClientSvc
+    public class ClientSvc : IClientSvc
     {
     }
 }
