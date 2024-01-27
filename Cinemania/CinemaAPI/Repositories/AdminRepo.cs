@@ -13,9 +13,9 @@ namespace Repositories
             _Connection = pConnection;
         }
 
-        public async Task<List<CinemasDTO>> GetCinema()
+        public async Task<List<ChaineDTO>> GetChaine()
         {
-            var lst = await _Connection.QueryAsync<CinemasDTO>("Select * from Cinemas");
+            var lst = await _Connection.QueryAsync<ChaineDTO>("Select * from Chaine");
             return lst.ToList();
         }
 

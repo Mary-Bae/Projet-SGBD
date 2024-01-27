@@ -4,6 +4,6 @@ namespace Interfaces
 {
     public interface IAdminSvc
     {
-        Task<List<CinemasDTO>> GetCinemaByChaine(string pChaineCinema);
+        Task<List<ChaineDTO>> GetCinemaByChaine(string pChaineCinema);
     }
 }
