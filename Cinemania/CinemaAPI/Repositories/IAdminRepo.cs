@@ -2,15 +2,14 @@
 
 namespace Interfaces
 {
-    public interface IAdminRepo //: IReservationRepo, ICinemaRepo
+    public interface IAdminRepo : ICinemaRepo
     {
         Task<List<ChaineDTO>> GetChaine();
     }
-
-    //public interface ICinemaRepo
-    //{
-    //    Task<List<CinemasDTO>> GetCinema2();
-    //}
+    public interface ICinemaRepo
+    {
+        Task<List<T>> GetCinemas<T>();
+    }
 
     //public interface IReservationRepo 
     //{

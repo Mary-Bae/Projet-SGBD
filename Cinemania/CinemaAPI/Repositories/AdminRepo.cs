@@ -2,6 +2,7 @@
 using Interfaces;
 using Models;
 using System.Data;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Repositories
 {
@@ -12,10 +13,14 @@ namespace Repositories
         {
             _Connection = pConnection;
         }
-
         public async Task<List<ChaineDTO>> GetChaine()
         {
             var lst = await _Connection.QueryAsync<ChaineDTO>("Select * from Chaine");
+            return lst.ToList();
+        }
+        public async Task<List<T>> GetCinemas<T>()
+        {
+            var lst = await _Connection.QueryAsync<T>("[admin].[Cinemas_SelectAll]");
             return lst.ToList();
         }
 

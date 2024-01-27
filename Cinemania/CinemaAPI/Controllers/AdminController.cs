@@ -15,7 +15,7 @@ namespace CinemaAPI.Controllers
             _adminSvc = pAdminSvc;
         }
 
-        [HttpGet(Name = "GetChaine")]
+        [HttpGet("Chaine")]
         public async Task<ActionResult> FindAllCinemas()
         {
             try
@@ -28,7 +28,24 @@ namespace CinemaAPI.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
 
+        [HttpGet("Cinemas")]
+        public async Task<ActionResult> GetCinemas()
+        {
+            try
+            {
+                List<CinemasDTO> lst;
+
+                ICinemasSVC cinemasSvc = _adminSvc;
+                lst = await cinemasSvc.GetCinemas<CinemasDTO>();
+
+                return Ok(lst);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
