@@ -15,12 +15,12 @@ namespace CinemaAPI.Controllers
             _adminSvc = pAdminSvc;
         }
 
-        [HttpGet(Name = "GetCinemas")]
+        [HttpGet(Name = "GetChaine")]
         public async Task<ActionResult> FindAllCinemas()
         {
             try
             {
-                List<CinemasDTO> lst;
+                List<ChaineDTO> lst;
                 lst = await _adminSvc.GetCinemaByChaine("sdsds");
                 return Ok(lst);
             }
