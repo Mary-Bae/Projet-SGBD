@@ -2,8 +2,13 @@
 
 namespace Interfaces
 {
-    public interface IAdminSvc
+    public interface IAdminSvc : ICinemasSVC
     {
         Task<List<ChaineDTO>> GetCinemaByChaine(string pChaineCinema);
+    }
+
+    public interface ICinemasSVC
+    {
+        Task<List<T>> GetCinemas<T>();
     }
 }
