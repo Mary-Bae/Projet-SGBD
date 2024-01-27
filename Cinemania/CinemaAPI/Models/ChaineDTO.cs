@@ -1,4 +1,4 @@
-﻿namespace CinemaAPI.Models
+﻿namespace Models
 {
     public class ChaineDTO
     {
