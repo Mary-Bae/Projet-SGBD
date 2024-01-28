@@ -9,6 +9,7 @@ namespace Interfaces
     public interface ICinemaRepo
     {
         Task<List<T>> GetCinemas<T>();
+        Task Delete(int pId);
     }
 
     //public interface IReservationRepo 
