@@ -10,6 +10,7 @@ namespace Interfaces
     {
         Task<List<T>> GetCinemas<T>();
         Task Delete(int pId);
+        Task Update(MajCinemasDTO pData);
     }
 
     //public interface IReservationRepo 

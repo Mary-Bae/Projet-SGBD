@@ -37,7 +37,7 @@ namespace CinemaAPI.Controllers
             {
                 List<CinemasDTO> lst;
 
-                ICinemasSVC cinemasSvc = _adminSvc;
+                ICinemasSvc cinemasSvc = _adminSvc;
                 lst = await cinemasSvc.GetCinemas<CinemasDTO>();
 
                 return Ok(lst);
@@ -53,8 +53,23 @@ namespace CinemaAPI.Controllers
         {
             try
             {
-                ICinemasSVC cinemasSvc = _adminSvc;
+                ICinemasSvc cinemasSvc = _adminSvc;
                 await cinemasSvc.Delete(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        
+        [HttpPost("Cinemas")]
+        public async Task<ActionResult> PostCinemas(MajCinemasDTO data)
+        {
+            try
+            {
+                ICinemasSvc cinemasSvc = _adminSvc;
+                await cinemasSvc.Update(data);
                 return Ok();
             }
             catch (Exception ex)
