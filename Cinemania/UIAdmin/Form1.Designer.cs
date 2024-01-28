@@ -28,20 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.btGetCinemas = new System.Windows.Forms.Button();
             this.dataGrid = new System.Windows.Forms.DataGridView();
+            this.btDelCinemas = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // btGetCinemas
             // 
-            this.button1.Location = new System.Drawing.Point(156, 105);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(141, 40);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btGetCinemas.Location = new System.Drawing.Point(156, 105);
+            this.btGetCinemas.Name = "btGetCinemas";
+            this.btGetCinemas.Size = new System.Drawing.Size(141, 40);
+            this.btGetCinemas.TabIndex = 0;
+            this.btGetCinemas.Text = "Get Cinemas";
+            this.btGetCinemas.UseVisualStyleBackColor = true;
+            this.btGetCinemas.Click += new System.EventHandler(this.btGetCinemas_Click);
             // 
             // dataGrid
             // 
@@ -52,13 +53,24 @@
             this.dataGrid.Size = new System.Drawing.Size(378, 178);
             this.dataGrid.TabIndex = 1;
             // 
+            // btDelCinemas
+            // 
+            this.btDelCinemas.Location = new System.Drawing.Point(334, 105);
+            this.btDelCinemas.Name = "btDelCinemas";
+            this.btDelCinemas.Size = new System.Drawing.Size(141, 40);
+            this.btDelCinemas.TabIndex = 2;
+            this.btDelCinemas.Text = "Del Cinemas";
+            this.btDelCinemas.UseVisualStyleBackColor = true;
+            this.btDelCinemas.Click += new System.EventHandler(this.btDelCinemas_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btDelCinemas);
             this.Controls.Add(this.dataGrid);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btGetCinemas);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).EndInit();
@@ -68,7 +80,8 @@
 
         #endregion
 
-        private Button button1;
+        private Button btGetCinemas;
         private DataGridView dataGrid;
+        private Button btDelCinemas;
     }
 }
