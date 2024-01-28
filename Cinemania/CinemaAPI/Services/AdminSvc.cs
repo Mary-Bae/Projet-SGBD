@@ -27,5 +27,10 @@ namespace Services
             var lst = await cinemasRepo.GetCinemas<T>();
             return lst.ToList<T>();
         }
+        async Task ICinemasSVC.Delete(int pId)
+        {
+            ICinemaRepo cinemasRepo = _AdminRepo;
+            await cinemasRepo.Delete(pId);
+        }
     }
 }

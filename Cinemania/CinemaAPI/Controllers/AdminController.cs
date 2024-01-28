@@ -47,5 +47,20 @@ namespace CinemaAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpDelete("Cinemas/{id}")]
+        public async Task<ActionResult> DelCinemas(int id)
+        {
+            try
+            {
+                ICinemasSVC cinemasSvc = _adminSvc;
+                await cinemasSvc.Delete(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

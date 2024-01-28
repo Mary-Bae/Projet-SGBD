@@ -10,5 +10,6 @@ namespace Interfaces
     public interface ICinemasSVC
     {
         Task<List<T>> GetCinemas<T>();
+        Task Delete(int pId);
     }
 }
