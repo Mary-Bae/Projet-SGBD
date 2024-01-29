@@ -28,5 +28,20 @@ namespace UIClient
             }
 
         }
+
+        private void bt1_Click(object sender, EventArgs e)
+        {
+            this.bt1 = new System.Windows.Forms.Button();
+
+            this.bt1.Location = new System.Drawing.Point(100, 273);
+            this.bt1.Name = "bt2";
+            this.bt1.Size = new System.Drawing.Size(30, 23);
+            this.bt1.TabIndex = 2;
+            this.bt1.Text = "2";
+            this.bt1.UseVisualStyleBackColor = true;
+            this.bt1.Click += new System.EventHandler(this.bt1_Click);
+
+            this.Controls.Add(this.bt1);
+        }
     }
 }
