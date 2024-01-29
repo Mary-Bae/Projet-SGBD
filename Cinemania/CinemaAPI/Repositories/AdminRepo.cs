@@ -31,11 +31,17 @@ namespace Repositories
 
             await _Connection.ExecuteAsync("[admin].[Cinemas_Delete]", dbParams);
         }
+        async Task ICinemaRepo.Update(MajCinemasDTO pData)
+        {
+            Dictionary<string, object> dbParams = new Dictionary<string, object>();
 
-        //Task<List<CinemasDTO>> ICinemaRepo.GetCinema2()
-        //{
-        //    throw new NotImplementedException();
-        //}
+            dbParams.Add("@id", pData.CINE_ID); 
+            dbParams.Add("@Nom", pData.CINE_Nom);
+            dbParams.Add("@NbrSalles", pData.CINE_NbrSalles);
+
+            await _Connection.ExecuteAsync("[admin].[Cinemas_Update]", dbParams);
+        }
+
 
         //Task<List<CinemasDTO>> IReservationRepo.GetCinema3()
         //{
