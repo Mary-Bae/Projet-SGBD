@@ -57,7 +57,7 @@ namespace UIAdmin
             MajCinemasDTO oCinema = new MajCinemasDTO();
             oCinema.CINE_ID = 1;
             oCinema.CINE_Nom = "Kinepolis";
-            oCinema.CINE_NbrSalles = 11;
+            oCinema.CINE_NbrSalles = 10;
 
             JsonContent content = JsonContent.Create(oCinema);
 
