@@ -55,9 +55,10 @@ namespace UIAdmin
             string sUrlServeur = "https://localhost:7013";
 
             MajCinemasDTO oCinema = new MajCinemasDTO();
-            oCinema.CINE_ID = 1;
-            oCinema.CINE_Nom = "Kinepolis";
-            oCinema.CINE_NbrSalles = 10;
+            oCinema.ci_id = 1;
+            oCinema.ci_nom = "Kinepolis";
+            oCinema.ci_adresse = "";
+            oCinema.ci_ch_id = 1;
 
             JsonContent content = JsonContent.Create(oCinema);
 

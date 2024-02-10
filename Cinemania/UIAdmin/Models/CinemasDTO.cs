@@ -2,14 +2,16 @@
 {
     public class CinemasDTO
     {
-        public string? CINE_Nom { get; set; }
-        public string? CINE_Adresse { get; set; }
-        public int? CINE_NbrSalles { get; set; }
+        public int ci_id { get; set; }
+        public string ci_nom { get; set; }
+        public string? ci_adresse { get; set; }
+        public int? ci_ch_id { get; set; }
     }
     public class MajCinemasDTO
     {
-        public int CINE_ID { get; set; }
-        public string? CINE_Nom { get; set; }
-        public int? CINE_NbrSalles { get; set; }
+        public int ci_id { get; set; }
+        public string ci_nom { get; set; }
+        public string? ci_adresse { get; set; }
+        public int? ci_ch_id { get; set; }
     }
 }
