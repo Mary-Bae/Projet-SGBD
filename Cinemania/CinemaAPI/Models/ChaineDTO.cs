@@ -2,7 +2,7 @@
 {
     public class ChaineDTO
     {
-        public string? CH_ID { get; set; }
-        public string? CH_Nom { get; set; }
+        public string? ch_id { get; set; }
+        public string? ch_nom { get; set; }
     }
 }
