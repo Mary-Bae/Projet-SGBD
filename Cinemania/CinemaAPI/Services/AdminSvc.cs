@@ -5,16 +5,14 @@ namespace Services
 {
     public class AdminSvc : IAdminSvc, ICinemasSvc
     {
-        IAdminRepo _AdminRepo;
-        IClientRepo _ClientRepo;
-        public AdminSvc(IAdminRepo pAdminRepo, IClientRepo pClientRepo)
+        IAdminRepo _adminRepo;
+        public AdminSvc(IAdminRepo pAdminRepo)
         {
-            _AdminRepo = pAdminRepo;
-            _ClientRepo = pClientRepo;
+            _adminRepo = pAdminRepo;
         }
         public async Task<List<ChaineDTO>> GetCinemaByChaine(string pChaineCinema)
         {
-            var lst = await _AdminRepo.GetChaine();
+            var lst = await _adminRepo.GetChaine();
 
             //IReservationRepo _repoReservation = _AdminRepo;
             //_repoReservation.GetCinema3();
@@ -23,18 +21,18 @@ namespace Services
 
         async Task<List<T>> ICinemasSvc.GetCinemas<T>()
         {
-            ICinemaRepo cinemasRepo = _AdminRepo;
+            ICinemaRepo cinemasRepo = _adminRepo;
             var lst = await cinemasRepo.GetCinemas<T>();
             return lst.ToList<T>();
         }
         async Task ICinemasSvc.Delete(int pId)
         {
-            ICinemaRepo cinemasRepo = _AdminRepo;
+            ICinemaRepo cinemasRepo = _adminRepo;
             await cinemasRepo.Delete(pId);
         }
         async Task ICinemasSvc.Update(MajCinemasDTO pData)
         {
-            ICinemaRepo cinemasRepo = _AdminRepo;
+            ICinemaRepo cinemasRepo = _adminRepo;
             await cinemasRepo.Update(pData);
         }
     }

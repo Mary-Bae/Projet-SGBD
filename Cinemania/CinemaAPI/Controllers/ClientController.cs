@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaAPI.Controllers
@@ -7,5 +8,10 @@ namespace CinemaAPI.Controllers
     [ApiController]
     public class ClientController : ControllerBase
     {
+        IClientSvc _clientSvc;
+        public ClientController(IClientSvc pClientSvc)
+        {
+            _clientSvc = pClientSvc;
+        }
     }
 }

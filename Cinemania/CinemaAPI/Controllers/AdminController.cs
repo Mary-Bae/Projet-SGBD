@@ -21,7 +21,7 @@ namespace CinemaAPI.Controllers
             try
             {
                 List<ChaineDTO> lst;
-                lst = await _adminSvc.GetCinemaByChaine("sdsds");
+                lst = await _adminSvc.GetCinemaByChaine("");
                 return Ok(lst);
             }
             catch (Exception ex)
