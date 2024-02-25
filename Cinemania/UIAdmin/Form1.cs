@@ -24,7 +24,7 @@ namespace UIAdmin
                 {
                     string responseContent = await response.Content.ReadAsStringAsync();
                     List<CinemasDTO> data = JsonConvert.DeserializeObject<List<CinemasDTO>>(responseContent);
-                    dataGrid.DataSource = data;
+                    dgvCine.DataSource = data;
                 }
                 else
                 {

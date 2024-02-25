@@ -9,17 +9,18 @@ namespace UIClient
             InitializeComponent();
         }
 
-        private async void button1_Click(object sender, EventArgs e)
+        private async void btCine_Click(object sender, EventArgs e)
         {
-            string sUrl = "https://localhost:7013/api/Admin";
+            string sUrlServeur = "https://localhost:7013";
             using (HttpClient client = new HttpClient())
             {
-                HttpResponseMessage response = await client.GetAsync(sUrl);
-                if(response.IsSuccessStatusCode)
+                HttpResponseMessage response = await client.GetAsync(sUrlServeur + "/api/Admin/Cinemas");
+
+                if (response.IsSuccessStatusCode)
                 {
                     string responseContent = await response.Content.ReadAsStringAsync();
                     var data = JsonConvert.DeserializeObject(responseContent);
-                    dataGrid.DataSource = data;
+                    dgvCine.DataSource = data;
                 }
                 else
                 {
