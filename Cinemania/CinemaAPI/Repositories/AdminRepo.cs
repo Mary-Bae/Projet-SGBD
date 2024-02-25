@@ -15,12 +15,12 @@ namespace Repositories
         }
         public async Task<List<ChaineDTO>> GetChaine()
         {
-            var lst = await _Connection.QueryAsync<ChaineDTO>("Select * from Chaine");
+            var lst = await _Connection.QueryAsync<ChaineDTO>("Select * from Chaine_de_cinema");
             return lst.ToList();
         }
         public async Task<List<T>> GetCinemas<T>()
         {
-            var lst = await _Connection.QueryAsync<T>("[admin].[Cinema_SelectAll]");
+            var lst = await _Connection.QueryAsync<T>("[Admin].[Cinema_SelectAll]");
             return lst.ToList();
         }
 
@@ -29,7 +29,7 @@ namespace Repositories
             Dictionary<string, object> dbParams = new Dictionary<string, object>();
             dbParams.Add("@id", pId);
 
-            await _Connection.ExecuteAsync("[admin].[Cinema_Delete]", dbParams);
+            await _Connection.ExecuteAsync("[Admin].[Cinema_Delete]", dbParams);
         }
         async Task ICinemaRepo.Update(MajCinemasDTO pData)
         {
@@ -40,7 +40,7 @@ namespace Repositories
             dbParams.Add("@Adresse", pData.ci_adresse);
             dbParams.Add("@CineChaine", pData.ci_ch_id);
 
-            await _Connection.ExecuteAsync("[admin].[Cinema_Update]", dbParams);
+            await _Connection.ExecuteAsync("[Admin].[Cinema_Update]", dbParams);
         }
 
 
