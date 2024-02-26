@@ -21,7 +21,7 @@ builder.Services.AddScoped<IAdminRepo, AdminRepo>(serviceProvider =>
 builder.Services.AddScoped<IClientRepo, ClientRepo>(serviceProvider =>
 {
     var configuration = serviceProvider.GetRequiredService<IConfiguration>();
-    var connectionString = configuration.GetConnectionString("Server=DESKTOP-D5MF0AD\\SQL2023;Database=Cinemania-PSR12204;User Id=Client;Password=;trustServerCertificate=true;");
+    var connectionString = configuration.GetConnectionString("ClientDb");
     return new ClientRepo(new SqlConnection(connectionString));
 });
 

@@ -1,4 +1,5 @@
-﻿using Interfaces;
+﻿using Dapper;
+using Interfaces;
 using System.Data;
 
 namespace Repositories
@@ -9,6 +10,12 @@ namespace Repositories
         public ClientRepo(IDbConnection pConnection)
         {
             _Connection = pConnection;
+        }
+
+        public async Task<List<T>> GetCinemas<T>()
+        {
+            var lst = await _Connection.QueryAsync<T>("[Client].[Cinema_SelectAll]");
+            return lst.ToList();
         }
     }
 }

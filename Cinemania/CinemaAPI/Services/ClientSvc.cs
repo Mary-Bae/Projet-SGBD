@@ -1,4 +1,5 @@
 ﻿using Interfaces;
+using Repositories;
 
 namespace Services
 {
@@ -8,6 +9,12 @@ namespace Services
         public ClientSvc(IClientRepo pClientRepo)
         {
             _clientRepo = pClientRepo;
+        }
+        async Task<List<T>> IClientSvc.GetCinemas<T>()
+        {
+            IClientRepo clientRepo = _clientRepo;
+            var lst = await clientRepo.GetCinemas<T>();
+            return lst.ToList<T>();
         }
     }
 }
