@@ -18,14 +18,10 @@ namespace Services
             return lst.ToList<T>();
         }
 
-        //public async Task<List<ChaineDTO>> GetCinemaByChaine(string pChaineCinema)
-        //{
-        //    var lst = await _adminRepo.GetChaine();
-
-        //    //IReservationRepo _repoReservation = _AdminRepo;
-        //    //_repoReservation.GetCinema3();
-        //    return lst;
-        //}
+        public async Task<List<T>> GetCinemasByChaine<T>(int chaineId)
+        {
+            return await _adminRepo.GetCinemasByChaine<T>(chaineId);
+        }
 
         async Task<List<T>> ICinemasSvc.GetCinemas<T>()
         {

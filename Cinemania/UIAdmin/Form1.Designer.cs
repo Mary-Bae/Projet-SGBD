@@ -105,6 +105,7 @@
             this.dgvChaine.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvChaine.Size = new System.Drawing.Size(381, 231);
             this.dgvChaine.TabIndex = 5;
+            this.dgvChaine.SelectionChanged += new System.EventHandler(this.dgvChaines_SelectionChanged);
             // 
             // Form1
             // 

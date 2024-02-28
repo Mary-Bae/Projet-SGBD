@@ -13,21 +13,23 @@ namespace Repositories
         {
             _Connection = pConnection;
         }
-        //public async Task<List<ChaineDTO>> GetChaine()
-        //{
-        //    var lst = await _Connection.QueryAsync<ChaineDTO>("Select * from Chaine_de_cinema");
-        //    return lst.ToList();
-        //}
-
         public async Task<List<T>> GetChaine<T>()
         {
             var lst = await _Connection.QueryAsync<T>("[Client].[Chaine_SelectAll]");
             return lst.ToList();
         }
 
+        public async Task<List<T>> GetCinemasByChaine<T>(int chaineId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@ch_id", chaineId);
+            var lst = await _Connection.QueryAsync<T>("[Admin].[Cinema_SelectByChain]", parameters, commandType: CommandType.StoredProcedure);
+            return lst.ToList();
+        }
+
         public async Task<List<T>> GetCinemas<T>()
         {
-            var lst = await _Connection.QueryAsync<T>("[Admin].[Cinema_SelectAll]");
+            var lst = await _Connection.QueryAsync<T>("[Client].[Cinema_SelectAll]");
             return lst.ToList();
         }
 
