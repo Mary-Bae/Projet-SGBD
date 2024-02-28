@@ -16,12 +16,14 @@ namespace CinemaAPI.Controllers
         }
 
         [HttpGet("Chaine")]
-        public async Task<ActionResult> FindAllCinemas()
+        public async Task<ActionResult> GetChaine()
         {
             try
             {
                 List<ChaineDTO> lst;
-                lst = await _adminSvc.GetCinemaByChaine("");
+
+                IAdminSvc adminSvc = _adminSvc;
+                lst = await adminSvc.GetChaine<ChaineDTO>();
                 return Ok(lst);
             }
             catch (Exception ex)
