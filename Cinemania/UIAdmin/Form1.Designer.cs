@@ -41,11 +41,11 @@
             // btGetCinemas
             // 
             this.btGetCinemas.BackColor = System.Drawing.SystemColors.Info;
-            this.btGetCinemas.Location = new System.Drawing.Point(476, 100);
+            this.btGetCinemas.Location = new System.Drawing.Point(665, 90);
             this.btGetCinemas.Name = "btGetCinemas";
-            this.btGetCinemas.Size = new System.Drawing.Size(92, 40);
+            this.btGetCinemas.Size = new System.Drawing.Size(114, 40);
             this.btGetCinemas.TabIndex = 0;
-            this.btGetCinemas.Text = "Get Cinemas";
+            this.btGetCinemas.Text = "Tous les Cinemas";
             this.btGetCinemas.UseVisualStyleBackColor = false;
             this.btGetCinemas.Click += new System.EventHandler(this.btGetCinemas_Click);
             // 
@@ -54,17 +54,17 @@
             this.dgvCine.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCine.BackgroundColor = System.Drawing.Color.Salmon;
             this.dgvCine.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCine.Location = new System.Drawing.Point(425, 198);
+            this.dgvCine.Location = new System.Drawing.Point(290, 198);
             this.dgvCine.Name = "dgvCine";
             this.dgvCine.RowTemplate.Height = 25;
-            this.dgvCine.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvCine.Size = new System.Drawing.Size(363, 231);
+            this.dgvCine.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvCine.Size = new System.Drawing.Size(498, 231);
             this.dgvCine.TabIndex = 1;
             // 
             // btDelCinemas
             // 
             this.btDelCinemas.BackColor = System.Drawing.SystemColors.Info;
-            this.btDelCinemas.Location = new System.Drawing.Point(584, 100);
+            this.btDelCinemas.Location = new System.Drawing.Point(422, 90);
             this.btDelCinemas.Name = "btDelCinemas";
             this.btDelCinemas.Size = new System.Drawing.Size(99, 40);
             this.btDelCinemas.TabIndex = 2;
@@ -75,7 +75,7 @@
             // btUpdate
             // 
             this.btUpdate.BackColor = System.Drawing.SystemColors.Info;
-            this.btUpdate.Location = new System.Drawing.Point(689, 100);
+            this.btUpdate.Location = new System.Drawing.Point(542, 90);
             this.btUpdate.Name = "btUpdate";
             this.btUpdate.Size = new System.Drawing.Size(99, 40);
             this.btUpdate.TabIndex = 3;
@@ -102,8 +102,8 @@
             this.dgvChaine.Location = new System.Drawing.Point(22, 198);
             this.dgvChaine.Name = "dgvChaine";
             this.dgvChaine.RowTemplate.Height = 25;
-            this.dgvChaine.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvChaine.Size = new System.Drawing.Size(381, 231);
+            this.dgvChaine.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvChaine.Size = new System.Drawing.Size(241, 231);
             this.dgvChaine.TabIndex = 5;
             this.dgvChaine.SelectionChanged += new System.EventHandler(this.dgvChaines_SelectionChanged);
             // 

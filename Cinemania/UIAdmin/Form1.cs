@@ -12,6 +12,7 @@ namespace UIAdmin
         {
             InitializeComponent();
             LoadChaines();
+            CustomizeDataGridView();
 
         }
 
@@ -32,6 +33,17 @@ namespace UIAdmin
                     dgvChaine.Columns["ch_nom"].HeaderText = "Chaine de Cinéma";
                 }
             }
+        }
+
+        void CustomizeDataGridView()
+        {
+            dgvChaine.DefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Italic);
+            dgvChaine.DefaultCellStyle.ForeColor = Color.LightSalmon;
+            dgvChaine.DefaultCellStyle.BackColor = Color.Black;
+
+            dgvCine.DefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Italic);
+            dgvCine.DefaultCellStyle.ForeColor = Color.LightSalmon;
+            dgvCine.DefaultCellStyle.BackColor = Color.Black;
         }
 
         private void dgvChaines_SelectionChanged(object sender, EventArgs e)
