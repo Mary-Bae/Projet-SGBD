@@ -11,9 +11,76 @@ namespace UIAdmin
         public Form1()
         {
             InitializeComponent();
+            LoadChaines();
+            CustomizeDataGridView();
+
         }
 
-        async private void btGetCinemas_Click(object sender, EventArgs e)
+        async void LoadChaines()
+        {
+            string sUrlServeur = "https://localhost:7013";
+            using (HttpClient client = new HttpClient())
+            {
+                HttpResponseMessage response = await client.GetAsync(sUrlServeur + "/api/Admin/Chaine");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    var chaines = JsonConvert.DeserializeObject<List<ChaineDTO>>(responseContent);
+                    dgvChaine.DataSource = chaines;
+
+                    dgvChaine.Columns["ch_id"].Visible = false;
+                    dgvChaine.Columns["ch_nom"].HeaderText = "Chaine de Cinéma";
+                }
+            }
+        }
+
+        void CustomizeDataGridView()
+        {
+            dgvChaine.DefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Italic);
+            dgvChaine.DefaultCellStyle.ForeColor = Color.LightSalmon;
+            dgvChaine.DefaultCellStyle.BackColor = Color.Black;
+
+            dgvCine.DefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Italic);
+            dgvCine.DefaultCellStyle.ForeColor = Color.LightSalmon;
+            dgvCine.DefaultCellStyle.BackColor = Color.Black;
+        }
+
+        private void dgvChaines_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvChaine.CurrentRow?.DataBoundItem is ChaineDTO selectedChaine)
+            {
+                int chaineId = selectedChaine.ch_id;
+                LoadCinemasByChaine(chaineId);
+            }
+        }
+
+        async void LoadCinemasByChaine(int chaineId)
+        {
+            string sUrlServeur = "https://localhost:7013";
+            using (HttpClient client = new HttpClient())
+            {
+                HttpResponseMessage response = await client.GetAsync($"{sUrlServeur}/api/Admin/CinemasByChaine/{chaineId}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    var cinemas = JsonConvert.DeserializeObject<List<CinemasDTO>>(responseContent);
+                    dgvCine.DataSource = cinemas;
+
+                    dgvCine.Columns["ci_nom"].HeaderText = "Nom du Cinéma";
+                    dgvCine.Columns["ci_adresse"].HeaderText = "Adresse";
+                }
+                else
+                {
+                    string responseContent = await response.Content.ReadAsStringAsync();
+                }
+            }
+        }
+
+
+
+    async private void btGetCinemas_Click(object sender, EventArgs e)
         {
             string sUrlServeur = "https://localhost:7013";
             using (HttpClient client = new HttpClient())
