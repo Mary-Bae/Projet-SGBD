@@ -31,21 +31,20 @@
             this.components = new System.ComponentModel.Container();
             this.btGetCinemas = new System.Windows.Forms.Button();
             this.dgvCine = new System.Windows.Forms.DataGridView();
-            this.btDelCinemas = new System.Windows.Forms.Button();
-            this.btUpdate = new System.Windows.Forms.Button();
-            this.labelTitre = new System.Windows.Forms.Label();
-            this.dgvChaine = new System.Windows.Forms.DataGridView();
             this.MenuCinema = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ajouterCinemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modifierCinemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.supprimerCinémaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btUpdate = new System.Windows.Forms.Button();
+            this.labelTitre = new System.Windows.Forms.Label();
+            this.dgvChaine = new System.Windows.Forms.DataGridView();
             this.MenuChaine = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ajouterChaineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modifierChaineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.supprimerChaineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCine)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvChaine)).BeginInit();
             this.MenuCinema.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvChaine)).BeginInit();
             this.MenuChaine.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,16 +72,33 @@
             this.dgvCine.Size = new System.Drawing.Size(498, 231);
             this.dgvCine.TabIndex = 1;
             // 
-            // btDelCinemas
+            // MenuCinema
             // 
-            this.btDelCinemas.BackColor = System.Drawing.SystemColors.Info;
-            this.btDelCinemas.Location = new System.Drawing.Point(422, 90);
-            this.btDelCinemas.Name = "btDelCinemas";
-            this.btDelCinemas.Size = new System.Drawing.Size(99, 40);
-            this.btDelCinemas.TabIndex = 2;
-            this.btDelCinemas.Text = "Del Cinemas";
-            this.btDelCinemas.UseVisualStyleBackColor = false;
-            this.btDelCinemas.Click += new System.EventHandler(this.btDelCinemas_Click);
+            this.MenuCinema.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ajouterCinemaToolStripMenuItem,
+            this.modifierCinemaToolStripMenuItem,
+            this.supprimerCinémaToolStripMenuItem});
+            this.MenuCinema.Name = "MenuCinema";
+            this.MenuCinema.Size = new System.Drawing.Size(174, 70);
+            // 
+            // ajouterCinemaToolStripMenuItem
+            // 
+            this.ajouterCinemaToolStripMenuItem.Name = "ajouterCinemaToolStripMenuItem";
+            this.ajouterCinemaToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.ajouterCinemaToolStripMenuItem.Text = "Ajouter Cinéma";
+            // 
+            // modifierCinemaToolStripMenuItem
+            // 
+            this.modifierCinemaToolStripMenuItem.Name = "modifierCinemaToolStripMenuItem";
+            this.modifierCinemaToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.modifierCinemaToolStripMenuItem.Text = "Modifier Cinéma";
+            // 
+            // supprimerCinémaToolStripMenuItem
+            // 
+            this.supprimerCinémaToolStripMenuItem.Name = "supprimerCinémaToolStripMenuItem";
+            this.supprimerCinémaToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.supprimerCinémaToolStripMenuItem.Text = "Supprimer Cinéma";
+            this.supprimerCinémaToolStripMenuItem.Click += new System.EventHandler(this.supprimerCinémaToolStripMenuItem_Click);
             // 
             // btUpdate
             // 
@@ -118,34 +134,6 @@
             this.dgvChaine.Size = new System.Drawing.Size(241, 231);
             this.dgvChaine.TabIndex = 5;
             this.dgvChaine.SelectionChanged += new System.EventHandler(this.dgvChaines_SelectionChanged);
-            // 
-            // MenuCinema
-            // 
-            this.MenuCinema.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ajouterCinemaToolStripMenuItem,
-            this.modifierCinemaToolStripMenuItem,
-            this.supprimerCinémaToolStripMenuItem});
-            this.MenuCinema.Name = "MenuCinema";
-            this.MenuCinema.Size = new System.Drawing.Size(181, 92);
-            // 
-            // ajouterCinemaToolStripMenuItem
-            // 
-            this.ajouterCinemaToolStripMenuItem.Name = "ajouterCinemaToolStripMenuItem";
-            this.ajouterCinemaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.ajouterCinemaToolStripMenuItem.Text = "Ajouter Cinéma";
-            // 
-            // modifierCinemaToolStripMenuItem
-            // 
-            this.modifierCinemaToolStripMenuItem.Name = "modifierCinemaToolStripMenuItem";
-            this.modifierCinemaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.modifierCinemaToolStripMenuItem.Text = "Modifier Cinéma";
-            // 
-            // supprimerCinémaToolStripMenuItem
-            // 
-            this.supprimerCinémaToolStripMenuItem.Name = "supprimerCinémaToolStripMenuItem";
-            this.supprimerCinémaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.supprimerCinémaToolStripMenuItem.Text = "Supprimer Cinéma";
-            this.supprimerCinémaToolStripMenuItem.Click += new System.EventHandler(this.supprimerCinémaToolStripMenuItem_Click);
             // 
             // MenuChaine
             // 
@@ -183,14 +171,13 @@
             this.Controls.Add(this.dgvChaine);
             this.Controls.Add(this.labelTitre);
             this.Controls.Add(this.btUpdate);
-            this.Controls.Add(this.btDelCinemas);
             this.Controls.Add(this.dgvCine);
             this.Controls.Add(this.btGetCinemas);
             this.Name = "Form1";
             this.Text = "Administration";
             ((System.ComponentModel.ISupportInitialize)(this.dgvCine)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvChaine)).EndInit();
             this.MenuCinema.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvChaine)).EndInit();
             this.MenuChaine.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -201,7 +188,6 @@
 
         private Button btGetCinemas;
         private DataGridView dgvCine;
-        private Button btDelCinemas;
         private Button btUpdate;
         private Label labelTitre;
         private DataGridView dgvChaine;
