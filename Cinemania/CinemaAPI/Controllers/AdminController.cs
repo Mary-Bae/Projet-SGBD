@@ -32,6 +32,21 @@ namespace CinemaAPI.Controllers
             }
         }
 
+        [HttpPost("Chaines")]
+        public async Task<ActionResult> PostChaine(AjoutChaineDTO data)
+        {
+            try
+            {
+                IAdminSvc adminSvc = _adminSvc;
+                await adminSvc.AddChaine(data);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet("CinemasByChaine/{chaineId}")]
         public async Task<ActionResult> GetCinemasByChaine(int chaineId)
         {

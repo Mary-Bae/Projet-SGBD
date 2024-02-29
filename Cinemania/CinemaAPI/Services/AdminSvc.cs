@@ -18,6 +18,11 @@ namespace Services
             return lst.ToList<T>();
         }
 
+        public async Task AddChaine(AjoutChaineDTO ajoutChaineDTO)
+        {
+            await _adminRepo.AddChaine(ajoutChaineDTO);
+        }
+
         public async Task<List<T>> GetCinemasByChaine<T>(int chaineId)
         {
             return await _adminRepo.GetCinemasByChaine<T>(chaineId);

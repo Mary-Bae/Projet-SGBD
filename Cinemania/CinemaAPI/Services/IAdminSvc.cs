@@ -5,7 +5,8 @@ namespace Interfaces
     public interface IAdminSvc : ICinemasSvc
     {
         Task<List<T>> GetChaine<T>();
-        
+        Task AddChaine(AjoutChaineDTO ajoutChaineDTO);
+
     }
 
     public interface ICinemasSvc

@@ -19,6 +19,14 @@ namespace Repositories
             return lst.ToList();
         }
 
+        public async Task AddChaine(AjoutChaineDTO ajoutChaineDTO)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@Nom", ajoutChaineDTO.ch_nom);
+
+            await _Connection.ExecuteAsync("[Admin].[Chaine_AddChaine]", parameters, commandType: CommandType.StoredProcedure);
+        }
+
         public async Task<List<T>> GetCinemasByChaine<T>(int chaineId)
         {
             var parameters = new DynamicParameters();
