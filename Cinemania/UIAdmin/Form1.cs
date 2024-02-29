@@ -8,6 +8,7 @@ namespace UIAdmin
 {
     public partial class Form1 : Form
     {
+        private int _currentChaineId;
         public Form1()
         {
             InitializeComponent();
@@ -57,6 +58,7 @@ namespace UIAdmin
 
         async void LoadCinemasByChaine(int chaineId)
         {
+            _currentChaineId = chaineId;
             string sUrlServeur = "https://localhost:7013";
             using (HttpClient client = new HttpClient())
             {
@@ -68,6 +70,7 @@ namespace UIAdmin
                     var cinemas = JsonConvert.DeserializeObject<List<CinemasDTO>>(responseContent);
                     dgvCine.DataSource = cinemas;
 
+                    dgvCine.Columns["ci_id"].Visible = false;
                     dgvCine.Columns["ci_nom"].HeaderText = "Nom du Cinéma";
                     dgvCine.Columns["ci_adresse"].HeaderText = "Adresse";
                 }
@@ -140,6 +143,30 @@ namespace UIAdmin
                 else
                 {
                     string responseContent = await response.Content.ReadAsStringAsync();
+                }
+            }
+        }
+
+        private async void supprimerCinémaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvCine.CurrentRow != null)
+            {
+                int cinemaId = Convert.ToInt32(dgvCine.CurrentRow.Cells["ci_id"].Value); 
+                string sUrlServeur = "https://localhost:7013";
+
+                using (HttpClient client = new HttpClient())
+                {
+                    HttpResponseMessage response = await client.DeleteAsync($"{sUrlServeur}/api/Admin/Cinemas/{cinemaId}");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        LoadCinemasByChaine(_currentChaineId);
+                        dgvCine.Columns["ci_id"].Visible = false;
+                    }
+                    else
+                    {
+                        MessageBox.Show("La suppression a échoué.");
+                    }
                 }
             }
         }

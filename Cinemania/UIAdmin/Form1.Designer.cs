@@ -28,14 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btGetCinemas = new System.Windows.Forms.Button();
             this.dgvCine = new System.Windows.Forms.DataGridView();
             this.btDelCinemas = new System.Windows.Forms.Button();
             this.btUpdate = new System.Windows.Forms.Button();
             this.labelTitre = new System.Windows.Forms.Label();
             this.dgvChaine = new System.Windows.Forms.DataGridView();
+            this.MenuCinema = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ajouterCinemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modifierCinemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.supprimerCinémaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuChaine = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ajouterChaineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modifierChaineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.supprimerChaineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChaine)).BeginInit();
+            this.MenuCinema.SuspendLayout();
+            this.MenuChaine.SuspendLayout();
             this.SuspendLayout();
             // 
             // btGetCinemas
@@ -54,6 +65,7 @@
             this.dgvCine.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCine.BackgroundColor = System.Drawing.Color.Salmon;
             this.dgvCine.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCine.ContextMenuStrip = this.MenuCinema;
             this.dgvCine.Location = new System.Drawing.Point(290, 198);
             this.dgvCine.Name = "dgvCine";
             this.dgvCine.RowTemplate.Height = 25;
@@ -107,6 +119,61 @@
             this.dgvChaine.TabIndex = 5;
             this.dgvChaine.SelectionChanged += new System.EventHandler(this.dgvChaines_SelectionChanged);
             // 
+            // MenuCinema
+            // 
+            this.MenuCinema.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ajouterCinemaToolStripMenuItem,
+            this.modifierCinemaToolStripMenuItem,
+            this.supprimerCinémaToolStripMenuItem});
+            this.MenuCinema.Name = "MenuCinema";
+            this.MenuCinema.Size = new System.Drawing.Size(181, 92);
+            // 
+            // ajouterCinemaToolStripMenuItem
+            // 
+            this.ajouterCinemaToolStripMenuItem.Name = "ajouterCinemaToolStripMenuItem";
+            this.ajouterCinemaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ajouterCinemaToolStripMenuItem.Text = "Ajouter Cinéma";
+            // 
+            // modifierCinemaToolStripMenuItem
+            // 
+            this.modifierCinemaToolStripMenuItem.Name = "modifierCinemaToolStripMenuItem";
+            this.modifierCinemaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.modifierCinemaToolStripMenuItem.Text = "Modifier Cinéma";
+            // 
+            // supprimerCinémaToolStripMenuItem
+            // 
+            this.supprimerCinémaToolStripMenuItem.Name = "supprimerCinémaToolStripMenuItem";
+            this.supprimerCinémaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.supprimerCinémaToolStripMenuItem.Text = "Supprimer Cinéma";
+            this.supprimerCinémaToolStripMenuItem.Click += new System.EventHandler(this.supprimerCinémaToolStripMenuItem_Click);
+            // 
+            // MenuChaine
+            // 
+            this.MenuChaine.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ajouterChaineToolStripMenuItem,
+            this.modifierChaineToolStripMenuItem,
+            this.supprimerChaineToolStripMenuItem});
+            this.MenuChaine.Name = "MenuChaine";
+            this.MenuChaine.Size = new System.Drawing.Size(170, 70);
+            // 
+            // ajouterChaineToolStripMenuItem
+            // 
+            this.ajouterChaineToolStripMenuItem.Name = "ajouterChaineToolStripMenuItem";
+            this.ajouterChaineToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.ajouterChaineToolStripMenuItem.Text = "Ajouter Chaine";
+            // 
+            // modifierChaineToolStripMenuItem
+            // 
+            this.modifierChaineToolStripMenuItem.Name = "modifierChaineToolStripMenuItem";
+            this.modifierChaineToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.modifierChaineToolStripMenuItem.Text = "Modifier Chaine";
+            // 
+            // supprimerChaineToolStripMenuItem
+            // 
+            this.supprimerChaineToolStripMenuItem.Name = "supprimerChaineToolStripMenuItem";
+            this.supprimerChaineToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.supprimerChaineToolStripMenuItem.Text = "Supprimer Chaine";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -123,6 +190,8 @@
             this.Text = "Administration";
             ((System.ComponentModel.ISupportInitialize)(this.dgvCine)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChaine)).EndInit();
+            this.MenuCinema.ResumeLayout(false);
+            this.MenuChaine.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -136,5 +205,13 @@
         private Button btUpdate;
         private Label labelTitre;
         private DataGridView dgvChaine;
+        private ContextMenuStrip MenuCinema;
+        private ToolStripMenuItem ajouterCinemaToolStripMenuItem;
+        private ToolStripMenuItem modifierCinemaToolStripMenuItem;
+        private ToolStripMenuItem supprimerCinémaToolStripMenuItem;
+        private ContextMenuStrip MenuChaine;
+        private ToolStripMenuItem ajouterChaineToolStripMenuItem;
+        private ToolStripMenuItem modifierChaineToolStripMenuItem;
+        private ToolStripMenuItem supprimerChaineToolStripMenuItem;
     }
 }
