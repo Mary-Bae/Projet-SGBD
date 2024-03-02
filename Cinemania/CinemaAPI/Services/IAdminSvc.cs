@@ -6,6 +6,7 @@ namespace Interfaces
     {
         Task<List<T>> GetChaine<T>();
         Task AddChaine(AjoutChaineDTO ajoutChaineDTO);
+        Task DeleteChaine(int pId);
 
     }
 
@@ -13,7 +14,7 @@ namespace Interfaces
     {
         Task<List<T>> GetCinemas<T>();
         Task<List<T>> GetCinemasByChaine<T>(int chaineId);
-        Task Delete(int pId);
+        Task DeleteCinemas(int pId);
         Task Update(MajCinemasDTO pData);
     }
 }

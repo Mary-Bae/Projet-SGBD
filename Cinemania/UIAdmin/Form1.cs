@@ -7,11 +7,11 @@ using System.Text;
 
 namespace UIAdmin
 {
-    public partial class Form1 : Form
+    public partial class frmAdmin : Form
     {
         private static readonly HttpClient client = new HttpClient();
         private int _currentChaineId;
-        public Form1()
+        public frmAdmin()
         {
             InitializeComponent();
             LoadChaines();
@@ -20,24 +20,39 @@ namespace UIAdmin
 
         async void LoadChaines()
         {
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7013/api/Admin/Chaine");
+            const int maxRetries = 3;
+            int attempts = 0;
+            bool success = false;
 
-            if (response.IsSuccessStatusCode)
+            while (attempts < maxRetries && !success)
+            {
+                try
                 {
-                    var responseContent = await response.Content.ReadAsStringAsync();
-                    var chaines = JsonConvert.DeserializeObject<BindingList<ChaineDTO>>(responseContent);
-                    dgvChaine.DataSource = chaines;
-
-                    dgvChaine.Columns["ch_id"].Visible = false;
-                    dgvChaine.Columns["ch_nom"].HeaderText = "Chaine de Cinéma";
-
-                    foreach (DataGridViewColumn column in dgvChaine.Columns)
+                    HttpResponseMessage response = await client.GetAsync("https://localhost:7013/api/Admin/Chaine");
+                    success = response.IsSuccessStatusCode;
+                    if (success)
                     {
-                        column.ReadOnly = false;
+                        var responseContent = await response.Content.ReadAsStringAsync();
+                        var chaines = JsonConvert.DeserializeObject<BindingList<ChaineDTO>>(responseContent);
+                        dgvChaine.DataSource = chaines;
+
+                        dgvChaine.Columns["ch_id"].Visible = false;
+                        dgvChaine.Columns["ch_nom"].HeaderText = "Chaine de Cinéma";
+
+                        foreach (DataGridViewColumn column in dgvChaine.Columns)
+                        {
+                            column.ReadOnly = false;
+                        }
                     }
                 }
+                catch (HttpRequestException)
+                {
+                    attempts++;
+                    if (attempts < maxRetries) await Task.Delay(1000); // Attendre 1 seconde avant de réessayer
+                }
+            }
+            if (!success) MessageBox.Show("Impossible de charger les données après plusieurs tentatives.");
         }
-
         void CustomizeDataGridView()
         {
             dgvChaine.DefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Italic);
@@ -57,7 +72,7 @@ namespace UIAdmin
                 LoadCinemasByChaine(chaineId);
             }
         }
-        async void LoadCinemasByChaine(int chaineId)
+        async private void LoadCinemasByChaine(int chaineId)
         {
             _currentChaineId = chaineId;
             HttpResponseMessage response = await client.GetAsync("https://localhost:7013/api/Admin/CinemasByChaine/" + chaineId);
@@ -74,7 +89,7 @@ namespace UIAdmin
             }
             else
             {
-                string responseContent = await response.Content.ReadAsStringAsync();
+                var responseContent = await response.Content.ReadAsStringAsync();
             }
         }
 
@@ -147,14 +162,11 @@ namespace UIAdmin
                 StringContent content = new StringContent(JsonConvert.SerializeObject(nouvelleChaine), Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await client.PostAsync("https://localhost:7013/api/Admin/Chaines", content);
 
-                if (response.IsSuccessStatusCode)
-                {
-                    LoadChaines();
-                }
-                else
-                {
-                    MessageBox.Show("Erreur lors de l'ajout de la nouvelle chaîne. Veuillez réessayer.");
-                }   
+            if (!response.IsSuccessStatusCode)
+            {
+                MessageBox.Show("Erreur lors de l'ajout de la nouvelle chaîne. Veuillez réessayer.");
+            }
+
         }
         private async void dgvChaine_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
@@ -170,6 +182,10 @@ namespace UIAdmin
                     await AjouterNouvelleChaine(nouvelleChaine);
                 }
             }
+        }
+        private void supprimerChaineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

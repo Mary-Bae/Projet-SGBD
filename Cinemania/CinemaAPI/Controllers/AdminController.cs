@@ -47,6 +47,21 @@ namespace CinemaAPI.Controllers
             }
         }
 
+        [HttpDelete("Chaines/{id}")]
+        public async Task<IActionResult> DeleteChaine(int id)
+        {
+            try
+            {
+                IAdminSvc adminSvc = _adminSvc;
+                await adminSvc.DeleteChaine(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
         [HttpGet("CinemasByChaine/{chaineId}")]
         public async Task<ActionResult> GetCinemasByChaine(int chaineId)
         {
@@ -87,7 +102,7 @@ namespace CinemaAPI.Controllers
             try
             {
                 ICinemasSvc cinemasSvc = _adminSvc;
-                await cinemasSvc.Delete(id);
+                await cinemasSvc.DeleteCinemas(id);
                 return Ok();
             }
             catch (Exception ex)

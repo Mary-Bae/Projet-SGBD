@@ -27,6 +27,14 @@ namespace Repositories
             await _Connection.ExecuteAsync("[Admin].[Chaine_AddChaine]", parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task DeleteChaine(int pId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@id", pId);
+
+            await _Connection.ExecuteAsync("[Admin].[Chaine_Delete]", parameters, commandType: CommandType.StoredProcedure);
+        }
+
         public async Task<List<T>> GetCinemasByChaine<T>(int chaineId)
         {
             var parameters = new DynamicParameters();
@@ -41,7 +49,7 @@ namespace Repositories
             return lst.ToList();
         }
 
-        async Task ICinemaRepo.Delete(int pId)
+        async Task ICinemaRepo.DeleteCinemas(int pId)
         {
             Dictionary<string, object> dbParams = new Dictionary<string, object>();
             dbParams.Add("@id", pId);
