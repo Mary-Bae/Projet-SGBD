@@ -127,6 +127,7 @@
             this.dgvChaine.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvChaine.BackgroundColor = System.Drawing.Color.Salmon;
             this.dgvChaine.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvChaine.ContextMenuStrip = this.MenuChaine;
             this.dgvChaine.Location = new System.Drawing.Point(22, 198);
             this.dgvChaine.Name = "dgvChaine";
             this.dgvChaine.RowHeadersWidth = 51;
@@ -143,12 +144,12 @@
             this.MenuChaine.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.supprimerChaineToolStripMenuItem});
             this.MenuChaine.Name = "MenuChaine";
-            this.MenuChaine.Size = new System.Drawing.Size(181, 48);
+            this.MenuChaine.Size = new System.Drawing.Size(170, 26);
             // 
             // supprimerChaineToolStripMenuItem
             // 
             this.supprimerChaineToolStripMenuItem.Name = "supprimerChaineToolStripMenuItem";
-            this.supprimerChaineToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.supprimerChaineToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.supprimerChaineToolStripMenuItem.Text = "Supprimer Chaine";
             this.supprimerChaineToolStripMenuItem.Click += new System.EventHandler(this.supprimerChaineToolStripMenuItem_Click);
             // 

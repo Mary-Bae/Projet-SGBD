@@ -119,8 +119,6 @@ namespace UIAdmin
 
         async private void btUpdate_Click(object sender, EventArgs e)
         {
-            string sUrlServeur = "https://localhost:7013";
-
             MajCinemasDTO oCinema = new MajCinemasDTO();
             oCinema.ci_id = 1;
             oCinema.ci_nom = "Kinepolis";
@@ -183,9 +181,22 @@ namespace UIAdmin
                 }
             }
         }
-        private void supprimerChaineToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void supprimerChaineToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            if (dgvChaine.CurrentRow != null)
+            {
+                int chaineId = Convert.ToInt32(dgvChaine.CurrentRow.Cells["ch_id"].Value);
+                HttpResponseMessage response = await client.DeleteAsync("https://localhost:7013/api/Admin/Chaines/" + chaineId);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    LoadChaines(); // Rechargez la liste des chaînes après la suppression
+                }
+                else
+                {
+                    MessageBox.Show("La suppression de la chaîne a échoué.");
+                }
+            }
         }
     }
 }
