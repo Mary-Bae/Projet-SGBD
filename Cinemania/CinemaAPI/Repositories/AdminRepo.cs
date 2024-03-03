@@ -19,10 +19,10 @@ namespace Repositories
             return lst.ToList();
         }
 
-        public async Task AddChaine(AjoutChaineDTO ajoutChaineDTO)
+        public async Task AddChaine(AjoutChaineDTO ajoutChaine)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@Nom", ajoutChaineDTO.ch_nom);
+            parameters.Add("@Nom", ajoutChaine.ch_nom);
 
             await _Connection.ExecuteAsync("[Admin].[Chaine_AddChaine]", parameters, commandType: CommandType.StoredProcedure);
         }
@@ -33,6 +33,15 @@ namespace Repositories
             parameters.Add("@id", pId);
 
             await _Connection.ExecuteAsync("[Admin].[Chaine_Delete]", parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task UpdateChaine(ChaineDTO pData)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@id", pData.ch_id);
+            parameters.Add("@NouveauNom", pData.ch_nom);
+
+            await _Connection.ExecuteAsync("[Admin].[Chaine_Update]", parameters, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<List<T>> GetCinemasByChaine<T>(int chaineId)

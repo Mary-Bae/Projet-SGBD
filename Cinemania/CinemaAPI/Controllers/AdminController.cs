@@ -32,13 +32,29 @@ namespace CinemaAPI.Controllers
             }
         }
 
-        [HttpPost("Chaines")]
+        [HttpPost("AddChaines")]
         public async Task<ActionResult> PostChaine(AjoutChaineDTO data)
         {
             try
             {
                 IAdminSvc adminSvc = _adminSvc;
                 await adminSvc.AddChaine(data);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("MajChaines/{id}")]
+        public async Task<ActionResult> MajChaine(int id, AjoutChaineDTO data)
+        {
+            try
+            {
+                IAdminSvc adminSvc = _adminSvc;
+                ChaineDTO chaineToUpdate = new ChaineDTO { ch_id = id, ch_nom = data.ch_nom };
+                await adminSvc.UpdateChaine(chaineToUpdate);
                 return Ok();
             }
             catch (Exception ex)

@@ -24,7 +24,8 @@ namespace UIAdmin
             int attempts = 0;
             bool success = false;
 
-            while (attempts < maxRetries && !success)
+            //Recharge les chaines en trois tentatives si elles n'arrivent pas à se charger, ca laisse le temps à l'API de se charger
+            while (attempts < maxRetries && !success) 
             {
                 try
                 {
@@ -64,6 +65,7 @@ namespace UIAdmin
             dgvCine.DefaultCellStyle.BackColor = Color.Black;
         }
 
+        //Charge les cinemas associés aux chaines à chaque sélection de chaine
         private void dgvChaines_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvChaine.CurrentRow?.DataBoundItem is ChaineDTO selectedChaine)
@@ -90,6 +92,49 @@ namespace UIAdmin
             else
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
+            }
+        }
+        private async Task AjouterNouvelleChaine(AjoutChaineDTO nouvelleChaine)
+        {
+            StringContent content = new StringContent(JsonConvert.SerializeObject(nouvelleChaine), Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PostAsync("https://localhost:7013/api/Admin/AddChaines/", content);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                MessageBox.Show("Erreur lors de l'ajout de la nouvelle chaîne. Veuillez réessayer.");
+            }
+        }
+        private async void dgvChaine_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvChaine.Columns[e.ColumnIndex].Name == "ch_nom")
+            {
+                var row = dgvChaine.Rows[e.RowIndex];
+                var nouvelleChaineNom = row.Cells["ch_nom"].Value?.ToString();
+
+                // Vérifier si la cellule éditée contient une valeur non nulle et non vide
+                if (!string.IsNullOrWhiteSpace(nouvelleChaineNom))
+                {
+                    AjoutChaineDTO nouvelleChaine = new AjoutChaineDTO { ch_nom = nouvelleChaineNom };
+                    await AjouterNouvelleChaine(nouvelleChaine);
+                }
+            }
+        }
+
+        private async void supprimerChaineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvChaine.CurrentRow != null)
+            {
+                int chaineId = Convert.ToInt32(dgvChaine.CurrentRow.Cells["ch_id"].Value);
+                HttpResponseMessage response = await client.DeleteAsync("https://localhost:7013/api/Admin/Chaines/" + chaineId);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    LoadChaines();
+                }
+                else
+                {
+                    MessageBox.Show("La suppression de la chaîne a échoué.");
+                }
             }
         }
 
@@ -152,49 +197,6 @@ namespace UIAdmin
                 else
                 {
                     MessageBox.Show("La suppression a échoué.");
-                }
-            }
-        }
-        private async Task AjouterNouvelleChaine(AjoutChaineDTO nouvelleChaine)
-        {
-                StringContent content = new StringContent(JsonConvert.SerializeObject(nouvelleChaine), Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await client.PostAsync("https://localhost:7013/api/Admin/Chaines", content);
-
-            if (!response.IsSuccessStatusCode)
-            {
-                MessageBox.Show("Erreur lors de l'ajout de la nouvelle chaîne. Veuillez réessayer.");
-            }
-
-        }
-        private async void dgvChaine_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dgvChaine.Columns[e.ColumnIndex].Name == "ch_nom")
-            {
-                var row = dgvChaine.Rows[e.RowIndex];
-                var nouvelleChaineNom = row.Cells["ch_nom"].Value?.ToString();
-
-                // Vérifier si la cellule éditée contient une valeur non nulle et non vide
-                if (!string.IsNullOrWhiteSpace(nouvelleChaineNom))
-                {
-                    AjoutChaineDTO nouvelleChaine = new AjoutChaineDTO { ch_nom = nouvelleChaineNom };
-                    await AjouterNouvelleChaine(nouvelleChaine);
-                }
-            }
-        }
-        private async void supprimerChaineToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (dgvChaine.CurrentRow != null)
-            {
-                int chaineId = Convert.ToInt32(dgvChaine.CurrentRow.Cells["ch_id"].Value);
-                HttpResponseMessage response = await client.DeleteAsync("https://localhost:7013/api/Admin/Chaines/" + chaineId);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    LoadChaines(); // Rechargez la liste des chaînes après la suppression
-                }
-                else
-                {
-                    MessageBox.Show("La suppression de la chaîne a échoué.");
                 }
             }
         }

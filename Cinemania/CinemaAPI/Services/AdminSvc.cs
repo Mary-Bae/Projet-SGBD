@@ -18,15 +18,21 @@ namespace Services
             return lst.ToList<T>();
         }
 
-        public async Task AddChaine(AjoutChaineDTO ajoutChaineDTO)
+        public async Task AddChaine(AjoutChaineDTO ajoutChaine)
         {
-            await _adminRepo.AddChaine(ajoutChaineDTO);
+            await _adminRepo.AddChaine(ajoutChaine);
         }
         async Task IAdminSvc.DeleteChaine(int pId)
         {
             IAdminRepo adminRepo = _adminRepo;
             await adminRepo.DeleteChaine(pId);
         }
+
+        public Task UpdateChaine(ChaineDTO majChaine)
+        {
+            return _adminRepo.UpdateChaine(majChaine);
+        }
+
         public async Task<List<T>> GetCinemasByChaine<T>(int chaineId)
         {
             return await _adminRepo.GetCinemasByChaine<T>(chaineId);
