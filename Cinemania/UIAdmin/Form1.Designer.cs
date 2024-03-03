@@ -1,6 +1,6 @@
 ﻿namespace UIAdmin
 {
-    partial class Form1
+    partial class frmAdmin
     {
         /// <summary>
         ///  Required designer variable.
@@ -39,8 +39,6 @@
             this.labelTitre = new System.Windows.Forms.Label();
             this.dgvChaine = new System.Windows.Forms.DataGridView();
             this.MenuChaine = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ajouterChaineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.modifierChaineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.supprimerChaineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCine)).BeginInit();
             this.MenuCinema.SuspendLayout();
@@ -67,6 +65,7 @@
             this.dgvCine.ContextMenuStrip = this.MenuCinema;
             this.dgvCine.Location = new System.Drawing.Point(290, 198);
             this.dgvCine.Name = "dgvCine";
+            this.dgvCine.RowHeadersWidth = 51;
             this.dgvCine.RowTemplate.Height = 25;
             this.dgvCine.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCine.Size = new System.Drawing.Size(498, 231);
@@ -74,6 +73,7 @@
             // 
             // MenuCinema
             // 
+            this.MenuCinema.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.MenuCinema.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ajouterCinemaToolStripMenuItem,
             this.modifierCinemaToolStripMenuItem,
@@ -127,42 +127,33 @@
             this.dgvChaine.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvChaine.BackgroundColor = System.Drawing.Color.Salmon;
             this.dgvChaine.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvChaine.ContextMenuStrip = this.MenuChaine;
             this.dgvChaine.Location = new System.Drawing.Point(22, 198);
             this.dgvChaine.Name = "dgvChaine";
+            this.dgvChaine.RowHeadersWidth = 51;
             this.dgvChaine.RowTemplate.Height = 25;
             this.dgvChaine.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvChaine.Size = new System.Drawing.Size(241, 231);
             this.dgvChaine.TabIndex = 5;
+            this.dgvChaine.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvChaine_CellEndEdit);
             this.dgvChaine.SelectionChanged += new System.EventHandler(this.dgvChaines_SelectionChanged);
             // 
             // MenuChaine
             // 
+            this.MenuChaine.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.MenuChaine.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ajouterChaineToolStripMenuItem,
-            this.modifierChaineToolStripMenuItem,
             this.supprimerChaineToolStripMenuItem});
             this.MenuChaine.Name = "MenuChaine";
-            this.MenuChaine.Size = new System.Drawing.Size(170, 70);
-            // 
-            // ajouterChaineToolStripMenuItem
-            // 
-            this.ajouterChaineToolStripMenuItem.Name = "ajouterChaineToolStripMenuItem";
-            this.ajouterChaineToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.ajouterChaineToolStripMenuItem.Text = "Ajouter Chaine";
-            // 
-            // modifierChaineToolStripMenuItem
-            // 
-            this.modifierChaineToolStripMenuItem.Name = "modifierChaineToolStripMenuItem";
-            this.modifierChaineToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.modifierChaineToolStripMenuItem.Text = "Modifier Chaine";
+            this.MenuChaine.Size = new System.Drawing.Size(170, 26);
             // 
             // supprimerChaineToolStripMenuItem
             // 
             this.supprimerChaineToolStripMenuItem.Name = "supprimerChaineToolStripMenuItem";
             this.supprimerChaineToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.supprimerChaineToolStripMenuItem.Text = "Supprimer Chaine";
+            this.supprimerChaineToolStripMenuItem.Click += new System.EventHandler(this.supprimerChaineToolStripMenuItem_Click);
             // 
-            // Form1
+            // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -173,8 +164,9 @@
             this.Controls.Add(this.btUpdate);
             this.Controls.Add(this.dgvCine);
             this.Controls.Add(this.btGetCinemas);
-            this.Name = "Form1";
+            this.Name = "frmAdmin";
             this.Text = "Administration";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.dgvCine)).EndInit();
             this.MenuCinema.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvChaine)).EndInit();
@@ -196,8 +188,6 @@
         private ToolStripMenuItem modifierCinemaToolStripMenuItem;
         private ToolStripMenuItem supprimerCinémaToolStripMenuItem;
         private ContextMenuStrip MenuChaine;
-        private ToolStripMenuItem ajouterChaineToolStripMenuItem;
-        private ToolStripMenuItem modifierChaineToolStripMenuItem;
         private ToolStripMenuItem supprimerChaineToolStripMenuItem;
     }
 }

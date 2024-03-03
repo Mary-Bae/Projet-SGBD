@@ -18,6 +18,21 @@ namespace Services
             return lst.ToList<T>();
         }
 
+        public async Task AddChaine(AjoutChaineDTO ajoutChaine)
+        {
+            await _adminRepo.AddChaine(ajoutChaine);
+        }
+        async Task IAdminSvc.DeleteChaine(int pId)
+        {
+            IAdminRepo adminRepo = _adminRepo;
+            await adminRepo.DeleteChaine(pId);
+        }
+
+        public Task UpdateChaine(ChaineDTO majChaine)
+        {
+            return _adminRepo.UpdateChaine(majChaine);
+        }
+
         public async Task<List<T>> GetCinemasByChaine<T>(int chaineId)
         {
             return await _adminRepo.GetCinemasByChaine<T>(chaineId);
@@ -29,10 +44,10 @@ namespace Services
             var lst = await cinemasRepo.GetCinemas<T>();
             return lst.ToList<T>();
         }
-        async Task ICinemasSvc.Delete(int pId)
+        async Task ICinemasSvc.DeleteCinemas(int pId)
         {
             ICinemaRepo cinemasRepo = _adminRepo;
-            await cinemasRepo.Delete(pId);
+            await cinemasRepo.DeleteCinemas(pId);
         }
         async Task ICinemasSvc.Update(MajCinemasDTO pData)
         {

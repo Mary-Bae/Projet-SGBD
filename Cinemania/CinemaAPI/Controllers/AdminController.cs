@@ -32,6 +32,52 @@ namespace CinemaAPI.Controllers
             }
         }
 
+        [HttpPost("AddChaines")]
+        public async Task<ActionResult> PostChaine(AjoutChaineDTO data)
+        {
+            try
+            {
+                IAdminSvc adminSvc = _adminSvc;
+                await adminSvc.AddChaine(data);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut("MajChaines/{id}")]
+        public async Task<ActionResult> MajChaine(int id, AjoutChaineDTO data)
+        {
+            try
+            {
+                IAdminSvc adminSvc = _adminSvc;
+                ChaineDTO chaineToUpdate = new ChaineDTO { ch_id = id, ch_nom = data.ch_nom };
+                await adminSvc.UpdateChaine(chaineToUpdate);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("Chaines/{id}")]
+        public async Task<IActionResult> DeleteChaine(int id)
+        {
+            try
+            {
+                IAdminSvc adminSvc = _adminSvc;
+                await adminSvc.DeleteChaine(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
         [HttpGet("CinemasByChaine/{chaineId}")]
         public async Task<ActionResult> GetCinemasByChaine(int chaineId)
         {
@@ -72,7 +118,7 @@ namespace CinemaAPI.Controllers
             try
             {
                 ICinemasSvc cinemasSvc = _adminSvc;
-                await cinemasSvc.Delete(id);
+                await cinemasSvc.DeleteCinemas(id);
                 return Ok();
             }
             catch (Exception ex)
