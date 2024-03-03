@@ -47,7 +47,7 @@ namespace CinemaAPI.Controllers
             }
         }
 
-        [HttpPost("MajChaines/{id}")]
+        [HttpPut("MajChaines/{id}")]
         public async Task<ActionResult> MajChaine(int id, AjoutChaineDTO data)
         {
             try

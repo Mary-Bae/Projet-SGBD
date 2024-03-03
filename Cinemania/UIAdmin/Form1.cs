@@ -99,23 +99,56 @@ namespace UIAdmin
             StringContent content = new StringContent(JsonConvert.SerializeObject(nouvelleChaine), Encoding.UTF8, "application/json");
             HttpResponseMessage response = await client.PostAsync("https://localhost:7013/api/Admin/AddChaines/", content);
 
-            if (!response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode)
+            {
+                LoadChaines(); // Rafraîchir les données après l'ajout pour s'assurer que les ID sont corrects
+            }
+            else
             {
                 MessageBox.Show("Erreur lors de l'ajout de la nouvelle chaîne. Veuillez réessayer.");
             }
         }
+
+        private async Task MettreAJourChaine(ChaineDTO chaine)
+        {
+            // Sérialisez l'objet ChaineDTO en JSON
+            StringContent content = new StringContent(JsonConvert.SerializeObject(chaine), Encoding.UTF8, "application/json");
+
+            // Envoyez une requête PUT à votre API pour mettre à jour la chaîne existante
+            HttpResponseMessage response = await client.PutAsync("https://localhost:7013/api/Admin/MajChaines/" +chaine.ch_id, content);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                MessageBox.Show("Erreur lors de la mise à jour de la chaîne. Veuillez réessayer.");
+            }
+            else
+            {
+                // Optionnellement, vous pouvez confirmer que la mise à jour a réussi et rafraîchir la liste des chaînes
+                LoadChaines();
+            }
+        }
+
         private async void dgvChaine_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             if (dgvChaine.Columns[e.ColumnIndex].Name == "ch_nom")
             {
                 var row = dgvChaine.Rows[e.RowIndex];
-                var nouvelleChaineNom = row.Cells["ch_nom"].Value?.ToString();
+                var chaineNom = row.Cells["ch_nom"].Value?.ToString();
 
-                // Vérifier si la cellule éditée contient une valeur non nulle et non vide
-                if (!string.IsNullOrWhiteSpace(nouvelleChaineNom))
+                if (!string.IsNullOrWhiteSpace(chaineNom))
                 {
-                    AjoutChaineDTO nouvelleChaine = new AjoutChaineDTO { ch_nom = nouvelleChaineNom };
-                    await AjouterNouvelleChaine(nouvelleChaine);
+                    // Vérifie si l'ID est disponible et valide pour une mise à jour
+                    if (int.TryParse(row.Cells["ch_id"].Value?.ToString(), out int chaineId) && chaineId > 0)
+                    {
+                        ChaineDTO chaineAMettreAJour = new ChaineDTO { ch_id = chaineId, ch_nom = chaineNom };
+                        await MettreAJourChaine(chaineAMettreAJour);
+                    }
+                    else
+                    {
+                        // Sinon, ce sera un ajout
+                        AjoutChaineDTO nouvelleChaine = new AjoutChaineDTO { ch_nom = chaineNom };
+                        await AjouterNouvelleChaine(nouvelleChaine);
+                    }
                 }
             }
         }

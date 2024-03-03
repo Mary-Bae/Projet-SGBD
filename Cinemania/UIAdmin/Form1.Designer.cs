@@ -166,6 +166,7 @@
             this.Controls.Add(this.btGetCinemas);
             this.Name = "frmAdmin";
             this.Text = "Administration";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.dgvCine)).EndInit();
             this.MenuCinema.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvChaine)).EndInit();
