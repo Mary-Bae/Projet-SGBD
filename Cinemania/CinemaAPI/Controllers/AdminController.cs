@@ -127,13 +127,27 @@ namespace CinemaAPI.Controllers
             }
         }
         
-        [HttpPost("Cinemas")]
+        [HttpPut("Cinemas")]
         public async Task<ActionResult> PostCinemas(MajCinemasDTO data)
         {
             try
             {
                 ICinemasSvc cinemasSvc = _adminSvc;
                 await cinemasSvc.Update(data);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpPost("Cinemas")]
+        public async Task<ActionResult> AddCinemas(MajCinemasDTO data)
+        {
+            try
+            {
+                ICinemasSvc cinemasSvc = _adminSvc;
+                await cinemasSvc.Add(data);
                 return Ok();
             }
             catch (Exception ex)

@@ -54,5 +54,10 @@ namespace Services
             ICinemaRepo cinemasRepo = _adminRepo;
             await cinemasRepo.Update(pData);
         }
+        async Task ICinemasSvc.Add(MajCinemasDTO pData)
+        {
+            ICinemaRepo cinemasRepo = _adminRepo;
+            await cinemasRepo.Add(pData);
+        }
     }
 }

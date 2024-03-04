@@ -16,6 +16,7 @@ namespace Interfaces
         Task<List<T>> GetCinemasByChaine<T>(int chaineId);
         Task DeleteCinemas(int pId);
         Task Update(MajCinemasDTO pData);
+        Task Add(MajCinemasDTO pData);
     }
 
     //public interface IReservationRepo 

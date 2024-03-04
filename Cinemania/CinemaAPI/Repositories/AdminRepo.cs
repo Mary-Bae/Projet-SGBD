@@ -60,22 +60,36 @@ namespace Repositories
 
         async Task ICinemaRepo.DeleteCinemas(int pId)
         {
-            Dictionary<string, object> dbParams = new Dictionary<string, object>();
-            dbParams.Add("@id", pId);
+            Dictionary<string, object> dbParams = new Dictionary<string, object>
+            {
+                { "@id", pId }
+            };
 
             await _Connection.ExecuteAsync("[Admin].[Cinema_Delete]", dbParams);
         }
         async Task ICinemaRepo.Update(MajCinemasDTO pData)
         {
-            Dictionary<string, object> dbParams = new Dictionary<string, object>();
-
-            dbParams.Add("@id", pData.ci_id); 
-            dbParams.Add("@Nom", pData.ci_nom);
-            dbParams.Add("@Adresse", pData.ci_adresse);
-            dbParams.Add("@CineChaine", pData.ci_ch_id);
-
+            Dictionary<string, object> dbParams = new Dictionary<string, object>
+            {
+                //{ "@id", pData.ci_id },
+                { "@Nom", pData.ci_nom },
+                { "@Adresse", pData.ci_adresse },
+                { "@CineChaine", pData.ci_ch_id }
+            };
             await _Connection.ExecuteAsync("[Admin].[Cinema_Update]", dbParams);
         }
+        async Task ICinemaRepo.Add(MajCinemasDTO pData)
+        {
+            Dictionary<string, object> dbParams = new Dictionary<string, object>
+            {
+                { "@Nom", pData.ci_nom },
+                { "@Adresse", pData.ci_adresse },
+                { "@CineChaine", pData.ci_ch_id }
+            };
+            await _Connection.ExecuteAsync("[Admin].[Cinema_AddCinema]", dbParams);
+        }
+
+
 
 
         //Task<List<CinemasDTO>> IReservationRepo.GetCinema3()
