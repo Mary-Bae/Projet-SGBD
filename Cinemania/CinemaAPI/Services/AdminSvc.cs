@@ -18,9 +18,9 @@ namespace Services
             return lst.ToList<T>();
         }
 
-        public async Task AddChaine(AjoutChaineDTO ajoutChaine)
+        public async Task AddChaine(AjoutChaineDTO pData)
         {
-            await _adminRepo.AddChaine(ajoutChaine);
+            await _adminRepo.AddChaine(pData);
         }
         async Task IAdminSvc.DeleteChaine(int pId)
         {
@@ -28,14 +28,14 @@ namespace Services
             await adminRepo.DeleteChaine(pId);
         }
 
-        public Task UpdateChaine(ChaineDTO majChaine)
+        public Task UpdateChaine(int pId, MajChaineDTO pData)
         {
-            return _adminRepo.UpdateChaine(majChaine);
+            return _adminRepo.UpdateChaine(pId, pData);
         }
 
-        public async Task<List<T>> GetCinemasByChaine<T>(int chaineId)
+        public async Task<List<T>> GetCinemasByChaine<T>(int pId)
         {
-            return await _adminRepo.GetCinemasByChaine<T>(chaineId);
+            return await _adminRepo.GetCinemasByChaine<T>(pId);
         }
 
         async Task<List<T>> ICinemasSvc.GetCinemas<T>()
@@ -49,15 +49,15 @@ namespace Services
             ICinemaRepo cinemasRepo = _adminRepo;
             await cinemasRepo.DeleteCinemas(pId);
         }
-        async Task ICinemasSvc.Update(MajCinemasDTO pData)
+        async Task ICinemasSvc.UpdateCinema(int pId, MajCinemasDTO pData)
         {
             ICinemaRepo cinemasRepo = _adminRepo;
-            await cinemasRepo.Update(pData);
+            await cinemasRepo.UpdateCinema(pId, pData);
         }
-        async Task ICinemasSvc.Add(MajCinemasDTO pData)
+        async Task ICinemasSvc.AddCinema(AjoutCinemasDTO pData)
         {
             ICinemaRepo cinemasRepo = _adminRepo;
-            await cinemasRepo.Add(pData);
+            await cinemasRepo.AddCinema(pData);
         }
     }
 }

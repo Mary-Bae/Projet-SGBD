@@ -7,7 +7,7 @@ namespace Interfaces
         Task<List<T>> GetChaine<T>();
         Task AddChaine(AjoutChaineDTO ajoutChaine);
         Task DeleteChaine(int pId);
-        Task UpdateChaine(ChaineDTO majChaine);
+        Task UpdateChaine(int pId, MajChaineDTO majChaine);
 
     }
     public interface ICinemasSvc
@@ -15,7 +15,7 @@ namespace Interfaces
         Task<List<T>> GetCinemas<T>();
         Task<List<T>> GetCinemasByChaine<T>(int chaineId);
         Task DeleteCinemas(int pId);
-        Task Update(MajCinemasDTO pData);
-        Task Add(MajCinemasDTO pData);
+        Task UpdateCinema(int pId, MajCinemasDTO MajCinemas);
+        Task AddCinema(AjoutCinemasDTO ajoutCinemas);
     }
 }

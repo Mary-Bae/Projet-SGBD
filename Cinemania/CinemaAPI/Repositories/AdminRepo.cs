@@ -19,10 +19,10 @@ namespace Repositories
             return lst.ToList();
         }
 
-        public async Task AddChaine(AjoutChaineDTO ajoutChaine)
+        public async Task AddChaine(AjoutChaineDTO pData)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@Nom", ajoutChaine.ch_nom);
+            parameters.Add("@Nom", pData.ch_nom);
 
             await _Connection.ExecuteAsync("[Admin].[Chaine_AddChaine]", parameters, commandType: CommandType.StoredProcedure);
         }
@@ -35,19 +35,19 @@ namespace Repositories
             await _Connection.ExecuteAsync("[Admin].[Chaine_Delete]", parameters, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task UpdateChaine(ChaineDTO pData)
+        public async Task UpdateChaine(int pId, MajChaineDTO pData)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@id", pData.ch_id);
+            parameters.Add("@id", pId);
             parameters.Add("@NouveauNom", pData.ch_nom);
 
             await _Connection.ExecuteAsync("[Admin].[Chaine_Update]", parameters, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<List<T>> GetCinemasByChaine<T>(int chaineId)
+        public async Task<List<T>> GetCinemasByChaine<T>(int pId)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@ch_id", chaineId);
+            parameters.Add("@ch_id", pId);
             var lst = await _Connection.QueryAsync<T>("[Admin].[Cinema_SelectByChain]", parameters, commandType: CommandType.StoredProcedure);
             return lst.ToList();
         }
@@ -60,33 +60,30 @@ namespace Repositories
 
         async Task ICinemaRepo.DeleteCinemas(int pId)
         {
-            Dictionary<string, object> dbParams = new Dictionary<string, object>
-            {
-                { "@id", pId }
-            };
+            var parameters = new DynamicParameters();
+            parameters.Add("@id", pId);
 
-            await _Connection.ExecuteAsync("[Admin].[Cinema_Delete]", dbParams);
+            await _Connection.ExecuteAsync("[Admin].[Cinema_Delete]", parameters, commandType: CommandType.StoredProcedure);
         }
-        async Task ICinemaRepo.Update(MajCinemasDTO pData)
+    
+        async Task ICinemaRepo.UpdateCinema(int pId, MajCinemasDTO pData)
         {
-            Dictionary<string, object> dbParams = new Dictionary<string, object>
-            {
-                //{ "@id", pData.ci_id },
-                { "@Nom", pData.ci_nom },
-                { "@Adresse", pData.ci_adresse },
-                { "@CineChaine", pData.ci_ch_id }
-            };
-            await _Connection.ExecuteAsync("[Admin].[Cinema_Update]", dbParams);
+            var parameters = new DynamicParameters();
+            parameters.Add("@id", pId);
+            parameters.Add("@Nom", pData.ci_nom);
+            parameters.Add("@Adresse", pData.ci_adresse);
+            parameters.Add("@CineChaine", pData.ci_ch_id);
+
+            await _Connection.ExecuteAsync("[Admin].[Cinema_Update]", parameters, commandType: CommandType.StoredProcedure);
         }
-        async Task ICinemaRepo.Add(MajCinemasDTO pData)
+        async Task ICinemaRepo.AddCinema(AjoutCinemasDTO pData)
         {
-            Dictionary<string, object> dbParams = new Dictionary<string, object>
-            {
-                { "@Nom", pData.ci_nom },
-                { "@Adresse", pData.ci_adresse },
-                { "@CineChaine", pData.ci_ch_id }
-            };
-            await _Connection.ExecuteAsync("[Admin].[Cinema_AddCinema]", dbParams);
+            var parameters = new DynamicParameters();
+            parameters.Add("@Nom", pData.ci_nom);
+            parameters.Add("@Adresse", pData.ci_adresse);
+            parameters.Add("@CineChaine", pData.ci_ch_id);
+
+            await _Connection.ExecuteAsync("[Admin].[Cinema_AddCinema]", parameters, commandType: CommandType.StoredProcedure);
         }
 
 

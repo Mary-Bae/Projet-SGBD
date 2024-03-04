@@ -48,13 +48,12 @@ namespace CinemaAPI.Controllers
         }
 
         [HttpPut("MajChaines/{id}")]
-        public async Task<ActionResult> MajChaine(int id, AjoutChaineDTO data)
+        public async Task<ActionResult> MajChaine(int id, MajChaineDTO data)
         {
             try
             {
                 IAdminSvc adminSvc = _adminSvc;
-                ChaineDTO chaineToUpdate = new ChaineDTO { ch_id = id, ch_nom = data.ch_nom };
-                await adminSvc.UpdateChaine(chaineToUpdate);
+                await adminSvc.UpdateChaine(id, data);
                 return Ok();
             }
             catch (Exception ex)
@@ -127,13 +126,13 @@ namespace CinemaAPI.Controllers
             }
         }
         
-        [HttpPut("Cinemas")]
-        public async Task<ActionResult> PostCinemas(MajCinemasDTO data)
+        [HttpPut("Cinemas/{id}")]
+        public async Task<ActionResult> MajCinemas(int id, MajCinemasDTO data)
         {
             try
             {
                 ICinemasSvc cinemasSvc = _adminSvc;
-                await cinemasSvc.Update(data);
+                await cinemasSvc.UpdateCinema(id, data);
                 return Ok();
             }
             catch (Exception ex)
@@ -142,12 +141,12 @@ namespace CinemaAPI.Controllers
             }
         }
         [HttpPost("Cinemas")]
-        public async Task<ActionResult> AddCinemas(MajCinemasDTO data)
+        public async Task<ActionResult> AddCinemas(AjoutCinemasDTO data)
         {
             try
             {
                 ICinemasSvc cinemasSvc = _adminSvc;
-                await cinemasSvc.Add(data);
+                await cinemasSvc.AddCinema(data);
                 return Ok();
             }
             catch (Exception ex)
