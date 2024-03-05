@@ -15,6 +15,8 @@ namespace CinemaAPI.Controllers
             _adminSvc = pAdminSvc;
         }
 
+        // Chaines de cinema
+
         [HttpGet("Chaine")]
         public async Task<ActionResult> GetChaine()
         {
@@ -62,7 +64,7 @@ namespace CinemaAPI.Controllers
             }
         }
 
-        [HttpDelete("Chaines/{id}")]
+        [HttpDelete("DeleteChaines/{id}")]
         public async Task<IActionResult> DeleteChaine(int id)
         {
             try
@@ -76,6 +78,8 @@ namespace CinemaAPI.Controllers
                 return BadRequest(ex);
             }
         }
+
+        // Cinema
 
         [HttpGet("CinemasByChaine/{chaineId}")]
         public async Task<ActionResult> GetCinemasByChaine(int chaineId)
@@ -111,7 +115,7 @@ namespace CinemaAPI.Controllers
             }
         }
 
-        [HttpDelete("Cinemas/{id}")]
+        [HttpDelete("DeleteCinemas/{id}")]
         public async Task<ActionResult> DelCinemas(int id)
         {
             try
@@ -126,7 +130,7 @@ namespace CinemaAPI.Controllers
             }
         }
         
-        [HttpPut("Cinemas/{id}")]
+        [HttpPut("MajCinemas/{id}")]
         public async Task<ActionResult> MajCinemas(int id, MajCinemasDTO data)
         {
             try
@@ -140,7 +144,7 @@ namespace CinemaAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpPost("Cinemas")]
+        [HttpPost("AjoutCinemas")]
         public async Task<ActionResult> AddCinemas(AjoutCinemasDTO data)
         {
             try
@@ -148,6 +152,26 @@ namespace CinemaAPI.Controllers
                 ICinemasSvc cinemasSvc = _adminSvc;
                 await cinemasSvc.AddCinema(data);
                 return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        // Salles de cinema
+
+        [HttpGet("Salles")]
+        public async Task<ActionResult> GetSalles()
+        {
+            try
+            {
+                List<SalleDTO> lst;
+
+                ISalleSvc salleSvc = _adminSvc;
+                lst = await salleSvc.GetSalles<SalleDTO>();
+
+                return Ok(lst);
             }
             catch (Exception ex)
             {

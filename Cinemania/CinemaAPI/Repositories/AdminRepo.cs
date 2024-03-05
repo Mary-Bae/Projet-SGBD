@@ -6,13 +6,15 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace Repositories
 {
-    public class AdminRepo : IAdminRepo
+    public class AdminRepo : IAdminRepo, ISalleRepo
     {
         IDbConnection _Connection;
         public AdminRepo(IDbConnection pConnection)
         {
             _Connection = pConnection;
         }
+
+        // Chaines de cinema
         public async Task<List<T>> GetChaine<T>()
         {
             var lst = await _Connection.QueryAsync<T>("[Client].[Chaine_SelectAll]");
@@ -44,6 +46,7 @@ namespace Repositories
             await _Connection.ExecuteAsync("[Admin].[Chaine_Update]", parameters, commandType: CommandType.StoredProcedure);
         }
 
+        // Cinemas
         public async Task<List<T>> GetCinemasByChaine<T>(int pId)
         {
             var parameters = new DynamicParameters();
@@ -86,12 +89,11 @@ namespace Repositories
             await _Connection.ExecuteAsync("[Admin].[Cinema_AddCinema]", parameters, commandType: CommandType.StoredProcedure);
         }
 
-
-
-
-        //Task<List<CinemasDTO>> IReservationRepo.GetCinema3()
-        //{
-        //    throw new NotImplementedException();
-        //}
+        // Salles de cinema
+        public async Task<List<T>> GetSalles<T>()
+        {
+            var lst = await _Connection.QueryAsync<T>("[Client].[Salle_SelectAll]");
+            return lst.ToList();
+        }
     }
 }

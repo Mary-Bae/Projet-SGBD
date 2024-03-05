@@ -3,7 +3,7 @@ using Models;
 
 namespace Services
 {
-    public class AdminSvc : IAdminSvc, ICinemasSvc
+    public class AdminSvc : IAdminSvc, ICinemasSvc, ISalleSvc
     {
         IAdminRepo _adminRepo;
         public AdminSvc(IAdminRepo pAdminRepo)
@@ -11,6 +11,7 @@ namespace Services
             _adminRepo = pAdminRepo;
         }
 
+        // chaine de cinema
         async Task<List<T>> IAdminSvc.GetChaine<T>()
         {
             IAdminRepo adminRepo = _adminRepo;
@@ -33,6 +34,7 @@ namespace Services
             return _adminRepo.UpdateChaine(pId, pData);
         }
 
+        // Cinema
         public async Task<List<T>> GetCinemasByChaine<T>(int pId)
         {
             return await _adminRepo.GetCinemasByChaine<T>(pId);
@@ -58,6 +60,15 @@ namespace Services
         {
             ICinemaRepo cinemasRepo = _adminRepo;
             await cinemasRepo.AddCinema(pData);
+        }
+
+        // Salles de cinema
+
+        async Task<List<T>> ISalleSvc.GetSalles<T>()
+        {
+            ISalleRepo salleRepo = _adminRepo;
+            var lst = await salleRepo.GetSalles<T>();
+            return lst.ToList<T>();
         }
     }
 }

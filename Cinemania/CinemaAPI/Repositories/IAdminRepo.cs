@@ -2,7 +2,7 @@
 
 namespace Interfaces
 {
-    public interface IAdminRepo : ICinemaRepo
+    public interface IAdminRepo : ICinemaRepo, ISalleRepo
     {
         Task<List<T>> GetChaine<T>();
         Task AddChaine(AjoutChaineDTO pData);
@@ -13,14 +13,17 @@ namespace Interfaces
     public interface ICinemaRepo
     {
         Task<List<T>> GetCinemas<T>();
-        Task<List<T>> GetCinemasByChaine<T>(int pId);
+        Task<List<T>> GetCinemasByChaine<T>(int pIdChaine);
         Task DeleteCinemas(int pId);
         Task UpdateCinema(int pId, MajCinemasDTO pData);
         Task AddCinema(AjoutCinemasDTO pData);
     }
-
-    //public interface IReservationRepo 
-    //{
-    //    Task<List<CinemasDTO>> GetCinema3();
-    //}
+    public interface ISalleRepo
+    {
+        Task<List<T>> GetSalles<T>();
+        //Task<List<T>> GetSallesByCinema<T>(int pIdCinema);
+        //Task DeleteSalle(int pId);
+        //Task UpdateSalle(int pId, MajSalleDTO pData);
+        //Task AddSalle(AjoutSalleDTO pData);
+    }
 }
