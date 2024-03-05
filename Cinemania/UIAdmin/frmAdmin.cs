@@ -11,11 +11,11 @@ namespace UIAdmin
     {
         private static readonly HttpClient client = new HttpClient();
         private int _currentChaineId;
+        private int _currentCinemaId;
         public frmAdmin()
         {
             InitializeComponent();
             LoadChaines();
-            CustomizeDataGridView();
         }
 
         async void LoadChaines()
@@ -54,16 +54,6 @@ namespace UIAdmin
             }
             if (!success) MessageBox.Show("Impossible de charger les données après plusieurs tentatives.");
         }
-        void CustomizeDataGridView()
-        {
-            dgvChaine.DefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Italic);
-            dgvChaine.DefaultCellStyle.ForeColor = Color.LightSalmon;
-            dgvChaine.DefaultCellStyle.BackColor = Color.Black;
-
-            dgvCine.DefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Italic);
-            dgvCine.DefaultCellStyle.ForeColor = Color.LightSalmon;
-            dgvCine.DefaultCellStyle.BackColor = Color.Black;
-        }
 
         //Charge les cinemas associés aux chaines à chaque sélection de chaine
         private void dgvChaines_SelectionChanged(object sender, EventArgs e)
@@ -74,7 +64,7 @@ namespace UIAdmin
                 LoadCinemasByChaine(chaineId);
             }
         }
-        async private void LoadCinemasByChaine(int chaineId)
+        private async void LoadCinemasByChaine(int chaineId)
         {
             _currentChaineId = chaineId;
             HttpResponseMessage response = await client.GetAsync("https://localhost:7013/Admin/CinemasByChaine/" + chaineId);
@@ -204,7 +194,7 @@ namespace UIAdmin
             oCinema.ci_ch_id = 1;
 
             JsonContent content = JsonContent.Create(oCinema);
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7013/Admin/Cinemas/MajCinemas");
+            HttpResponseMessage response = await client.PutAsync("https://localhost:7013/Admin/Cinemas/MajCinemas/" + oCinema.ci_id, content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -233,5 +223,61 @@ namespace UIAdmin
                 }
             }
         }
+
+        private void btAjoutercinema_Click(object sender, EventArgs e)
+        {
+            if (dgvChaine.CurrentRow != null)
+            {
+                int chaineId = Convert.ToInt32(dgvChaine.CurrentRow.Cells["ch_id"].Value);
+
+                using (var formAjoutCinema = new frmAjoutCinema())
+                {
+                    formAjoutCinema.ChaineId = chaineId;
+
+                    var result = formAjoutCinema.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        // Vous pouvez rafraîchir la liste des cinémas ici si nécessaire
+                        LoadCinemasByChaine(chaineId);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner une chaîne.");
+            }
+        }
+
+        private void dgvCine_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvCine.CurrentRow?.DataBoundItem is CinemasDTO selectedCinema)
+            {
+                int cinemaId = selectedCinema.ci_id;
+                LoadSallesByCinema(cinemaId);
+            }
+        }
+        private async void LoadSallesByCinema(int cinemaId)
+        {
+            _currentCinemaId = cinemaId;
+            HttpResponseMessage response = await client.GetAsync("https://localhost:7013/Admin/SallesByCinema/" + cinemaId);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                var salles = JsonConvert.DeserializeObject<List<SalleDTO>>(responseContent);
+                //dgvSalles.AutoGenerateColumns = true;
+                dgvSalles.DataSource = salles;
+
+                dgvSalles.Columns["sa_id"].Visible = false;
+                dgvSalles.Columns["sa_numeroSalle"].HeaderText = "Numéro de salle";
+                dgvSalles.Columns["sa_qtePlace"].HeaderText = "Nombre de places";
+                dgvSalles.Columns["sa_qteRangees"].HeaderText = "Nombre de rangées";
+            }
+            else
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+            }
+        }
     }
-}
+    }
+
