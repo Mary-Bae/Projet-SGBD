@@ -194,5 +194,20 @@ namespace CinemaAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPost("Salles/AjoutSalle")]
+        public async Task<ActionResult> AddSalle(AjoutSalleDTO data)
+        {
+            try
+            {
+                ISalleSvc salleSvc = _adminSvc;
+                await salleSvc.AddSalle(data);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

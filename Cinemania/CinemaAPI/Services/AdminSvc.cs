@@ -74,5 +74,10 @@ namespace Services
             var lst = await salleRepo.GetSalles<T>();
             return lst.ToList<T>();
         }
+        async Task ISalleSvc.AddSalle(AjoutSalleDTO pData)
+        {
+            ISalleRepo salleRepo = _adminRepo;
+            await salleRepo.AddSalle(pData);
+        }
     }
 }

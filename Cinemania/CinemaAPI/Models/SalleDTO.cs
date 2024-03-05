@@ -12,7 +12,6 @@ namespace Models
     }
     public class AjoutSalleDTO
     {
-        public int sa_id { get; set; }
         public int sa_qteRangees { get; set; }
         public int sa_qtePlace { get; set; }
         public int sa_qtePlace_Rangee { get; set; }

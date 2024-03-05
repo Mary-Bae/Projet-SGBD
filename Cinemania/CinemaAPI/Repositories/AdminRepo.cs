@@ -103,5 +103,16 @@ namespace Repositories
             var lst = await _Connection.QueryAsync<T>("[Client].[Salle_SelectAll]");
             return lst.ToList();
         }
+        async Task ISalleRepo.AddSalle(AjoutSalleDTO pData)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@NumeroSalle", pData.sa_numeroSalle);
+            parameters.Add("@QtePlace", pData.sa_qtePlace);
+            parameters.Add("@QteRangees", pData.sa_qteRangees);
+            parameters.Add("@QtePlaces_Rangee", pData.sa_qtePlace_Rangee);
+            parameters.Add("@CinemaId", pData.sa_ci_id);
+
+            await _Connection.ExecuteAsync("[Admin].[Salle_AddSalle]", parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }
