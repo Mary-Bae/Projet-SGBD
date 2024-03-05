@@ -5,7 +5,7 @@ using Models;
 
 namespace CinemaAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class AdminController : ControllerBase
     {
@@ -34,7 +34,7 @@ namespace CinemaAPI.Controllers
             }
         }
 
-        [HttpPost("AddChaines")]
+        [HttpPost("Chaine/AddChaines")]
         public async Task<ActionResult> PostChaine(AjoutChaineDTO data)
         {
             try
@@ -49,7 +49,7 @@ namespace CinemaAPI.Controllers
             }
         }
 
-        [HttpPut("MajChaines/{id}")]
+        [HttpPut("Chaine/MajChaines/{id}")]
         public async Task<ActionResult> MajChaine(int id, MajChaineDTO data)
         {
             try
@@ -64,7 +64,7 @@ namespace CinemaAPI.Controllers
             }
         }
 
-        [HttpDelete("DeleteChaines/{id}")]
+        [HttpDelete("Chaine/DelChaines/{id}")]
         public async Task<IActionResult> DeleteChaine(int id)
         {
             try
@@ -115,7 +115,7 @@ namespace CinemaAPI.Controllers
             }
         }
 
-        [HttpDelete("DeleteCinemas/{id}")]
+        [HttpDelete("Cinemas/DelCinemas/{id}")]
         public async Task<ActionResult> DelCinemas(int id)
         {
             try
@@ -130,7 +130,7 @@ namespace CinemaAPI.Controllers
             }
         }
         
-        [HttpPut("MajCinemas/{id}")]
+        [HttpPut("Cinemas/MajCinemas/{id}")]
         public async Task<ActionResult> MajCinemas(int id, MajCinemasDTO data)
         {
             try
@@ -144,7 +144,7 @@ namespace CinemaAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpPost("AjoutCinemas")]
+        [HttpPost("Cinemas/AjoutCinemas")]
         public async Task<ActionResult> AddCinemas(AjoutCinemasDTO data)
         {
             try
@@ -160,6 +160,22 @@ namespace CinemaAPI.Controllers
         }
 
         // Salles de cinema
+
+        [HttpGet("SallesByCinema/{cinemaId}")]
+        public async Task<ActionResult> GetSallesByCinema(int cinemaId)
+        {
+            try
+            {
+                List<SalleDTO> lst;
+                ISalleSvc sallesSvc = _adminSvc;
+                lst = await sallesSvc.GetSallesByCinema<SalleDTO>(cinemaId);
+                return Ok(lst);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
         [HttpGet("Salles")]
         public async Task<ActionResult> GetSalles()

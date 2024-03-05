@@ -64,6 +64,10 @@ namespace Services
 
         // Salles de cinema
 
+        public async Task<List<T>> GetSallesByCinema<T>(int pId)
+        {
+            return await _adminRepo.GetSallesByCinema<T>(pId);
+        }
         async Task<List<T>> ISalleSvc.GetSalles<T>()
         {
             ISalleRepo salleRepo = _adminRepo;

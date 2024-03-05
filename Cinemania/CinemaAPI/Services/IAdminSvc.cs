@@ -21,7 +21,7 @@ namespace Interfaces
     public interface ISalleSvc
     {
         Task<List<T>> GetSalles<T>();
-        //Task<List<T>> GetSallesByCinema<T>(int pIdCinema);
+        Task<List<T>> GetSallesByCinema<T>(int pIdCinema);
         //Task DeleteSalle(int pId);
         //Task UpdateSalle(int pId, MajCinemasDTO MajCinemas);
         //Task AddSalle(AjoutCinemasDTO ajoutCinemas);

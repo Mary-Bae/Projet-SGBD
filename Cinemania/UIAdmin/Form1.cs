@@ -29,7 +29,7 @@ namespace UIAdmin
             {
                 try
                 {
-                    HttpResponseMessage response = await client.GetAsync("https://localhost:7013/api/Admin/Chaine");
+                    HttpResponseMessage response = await client.GetAsync("https://localhost:7013/Admin/Chaine");
                     success = response.IsSuccessStatusCode;
                     if (success)
                     {
@@ -77,7 +77,7 @@ namespace UIAdmin
         async private void LoadCinemasByChaine(int chaineId)
         {
             _currentChaineId = chaineId;
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7013/api/Admin/CinemasByChaine/" + chaineId);
+            HttpResponseMessage response = await client.GetAsync("https://localhost:7013/Admin/CinemasByChaine/" + chaineId);
 
             if (response.IsSuccessStatusCode)
             {
@@ -97,7 +97,7 @@ namespace UIAdmin
         private async Task AjouterNouvelleChaine(AjoutChaineDTO nouvelleChaine)
         {
             StringContent content = new StringContent(JsonConvert.SerializeObject(nouvelleChaine), Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync("https://localhost:7013/api/Admin/AddChaines/", content);
+            HttpResponseMessage response = await client.PostAsync("https://localhost:7013/Admin/Chaine/AddChaines/", content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -115,7 +115,7 @@ namespace UIAdmin
             StringContent content = new StringContent(JsonConvert.SerializeObject(chaine), Encoding.UTF8, "application/json");
 
             // Envoyez une requête PUT à votre API pour mettre à jour la chaîne existante
-            HttpResponseMessage response = await client.PutAsync("https://localhost:7013/api/Admin/MajChaines/" +chaine.ch_id, content);
+            HttpResponseMessage response = await client.PutAsync("https://localhost:7013/Admin/Chaine/MajChaines/" + chaine.ch_id, content);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -158,7 +158,7 @@ namespace UIAdmin
             if (dgvChaine.CurrentRow != null)
             {
                 int chaineId = Convert.ToInt32(dgvChaine.CurrentRow.Cells["ch_id"].Value);
-                HttpResponseMessage response = await client.DeleteAsync("https://localhost:7013/api/Admin/DeleteChaines/" + chaineId);
+                HttpResponseMessage response = await client.DeleteAsync("https://localhost:7013/Admin/Chaine/DelChaines/" + chaineId);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -173,7 +173,7 @@ namespace UIAdmin
 
         async private void btGetCinemas_Click(object sender, EventArgs e)
         {
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7013/api/Admin/Cinemas");
+            HttpResponseMessage response = await client.GetAsync("https://localhost:7013/Admin/Cinemas");
 
             if (response.IsSuccessStatusCode)
             {
@@ -204,7 +204,7 @@ namespace UIAdmin
             oCinema.ci_ch_id = 1;
 
             JsonContent content = JsonContent.Create(oCinema);
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7013/api/Admin/MajCinemas");
+            HttpResponseMessage response = await client.GetAsync("https://localhost:7013/Admin/Cinemas/MajCinemas");
 
             if (response.IsSuccessStatusCode)
             {
@@ -220,7 +220,7 @@ namespace UIAdmin
             if (dgvCine.CurrentRow != null)
             {
                 int cinemaId = Convert.ToInt32(dgvCine.CurrentRow.Cells["ci_id"].Value);
-                HttpResponseMessage response = await client.GetAsync("https://localhost:7013/api/Admin/DeleteCinemas" + cinemaId);
+                HttpResponseMessage response = await client.DeleteAsync("https://localhost:7013/Admin/Cinemas/DelCinemas/" + cinemaId);
 
                 if (response.IsSuccessStatusCode)
                 {

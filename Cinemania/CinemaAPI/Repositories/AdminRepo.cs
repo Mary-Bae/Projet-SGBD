@@ -90,6 +90,14 @@ namespace Repositories
         }
 
         // Salles de cinema
+
+        public async Task<List<T>> GetSallesByCinema<T>(int pId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@ci_id", pId);
+            var lst = await _Connection.QueryAsync<T>("[Client].[Salle_SelectByCinema]", parameters, commandType: CommandType.StoredProcedure);
+            return lst.ToList();
+        }
         public async Task<List<T>> GetSalles<T>()
         {
             var lst = await _Connection.QueryAsync<T>("[Client].[Salle_SelectAll]");

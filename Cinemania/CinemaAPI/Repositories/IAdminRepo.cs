@@ -21,7 +21,7 @@ namespace Interfaces
     public interface ISalleRepo
     {
         Task<List<T>> GetSalles<T>();
-        //Task<List<T>> GetSallesByCinema<T>(int pIdCinema);
+        Task<List<T>> GetSallesByCinema<T>(int pIdCinema);
         //Task DeleteSalle(int pId);
         //Task UpdateSalle(int pId, MajSalleDTO pData);
         //Task AddSalle(AjoutSalleDTO pData);
