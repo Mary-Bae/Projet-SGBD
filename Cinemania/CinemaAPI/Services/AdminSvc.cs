@@ -56,11 +56,6 @@ namespace Services
             ICinemaRepo cinemasRepo = _adminRepo;
             await cinemasRepo.UpdateCinema(pId, pData);
         }
-        async Task ICinemasSvc.AddCinema(AjoutCinemasDTO pData)
-        {
-            ICinemaRepo cinemasRepo = _adminRepo;
-            await cinemasRepo.AddCinema(pData);
-        }
 
         // Salles de cinema
 
@@ -78,6 +73,11 @@ namespace Services
         {
             ISalleRepo salleRepo = _adminRepo;
             await salleRepo.AddSalle(pData);
+        }
+
+        public async Task<bool> AjouterCinemaEtSalle(CinemaEtSalleDTO cinemaEtSalleDTO)
+        {
+            return await _adminRepo.AjouterCinemaEtSalle(cinemaEtSalleDTO);
         }
     }
 }

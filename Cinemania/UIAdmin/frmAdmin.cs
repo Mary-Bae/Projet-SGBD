@@ -237,7 +237,7 @@ namespace UIAdmin
                     var result = formAjoutCinema.ShowDialog();
                     if (result == DialogResult.OK)
                     {
-                        // Vous pouvez rafraîchir la liste des cinémas ici si nécessaire
+                        // Raffraichir les cinemas après le rajout
                         LoadCinemasByChaine(chaineId);
                     }
                 }

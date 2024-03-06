@@ -16,7 +16,7 @@ namespace Interfaces
         Task<List<T>> GetCinemasByChaine<T>(int pIdChaine);
         Task DeleteCinemas(int pId);
         Task UpdateCinema(int pId, MajCinemasDTO MajCinemas);
-        Task AddCinema(AjoutCinemasDTO ajoutCinemas);
+        Task<bool> AjouterCinemaEtSalle(CinemaEtSalleDTO cinemaEtSalleDTO);
     }
     public interface ISalleSvc
     {
@@ -25,5 +25,6 @@ namespace Interfaces
         //Task DeleteSalle(int pId);
         //Task UpdateSalle(int pId, MajCinemasDTO MajCinemas);
         Task AddSalle(AjoutSalleDTO ajoutSalle);
+ 
     }
 }

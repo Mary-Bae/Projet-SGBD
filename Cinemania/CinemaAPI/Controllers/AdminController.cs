@@ -144,22 +144,6 @@ namespace CinemaAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpPost("Cinemas/AjoutCinemas")]
-        public async Task<ActionResult> AddCinemas(AjoutCinemasDTO data)
-        {
-            try
-            {
-                ICinemasSvc cinemasSvc = _adminSvc;
-                await cinemasSvc.AddCinema(data);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        // Salles de cinema
 
         [HttpGet("SallesByCinema/{cinemaId}")]
         public async Task<ActionResult> GetSallesByCinema(int cinemaId)
@@ -208,6 +192,17 @@ namespace CinemaAPI.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+        [HttpPost]
+        [Route("AjouterCinemaEtSalle")]
+        public async Task<IActionResult> AjouterCinemaEtSalle(CinemaEtSalleDTO cinemaEtSalleDTO)
+        {
+            ICinemasSvc cinemasSvc = _adminSvc;
+            
+            var success = await cinemasSvc.AjouterCinemaEtSalle(cinemaEtSalleDTO);
+
+            if (success) return Ok();
+            else return BadRequest("Erreur lors de l'ajout du cinéma et de la salle.");
         }
     }
 }

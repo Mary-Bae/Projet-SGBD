@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Models;
 using System.Data;
 using System.Reflection.Metadata.Ecma335;
@@ -79,15 +80,6 @@ namespace Repositories
 
             await _Connection.ExecuteAsync("[Admin].[Cinema_Update]", parameters, commandType: CommandType.StoredProcedure);
         }
-        async Task ICinemaRepo.AddCinema(AjoutCinemasDTO pData)
-        {
-            var parameters = new DynamicParameters();
-            parameters.Add("@Nom", pData.ci_nom);
-            parameters.Add("@Adresse", pData.ci_adresse);
-            parameters.Add("@CineChaine", pData.ci_ch_id);
-
-            await _Connection.ExecuteAsync("[Admin].[Cinema_AddCinema]", parameters, commandType: CommandType.StoredProcedure);
-        }
 
         // Salles de cinema
 
@@ -113,6 +105,22 @@ namespace Repositories
             parameters.Add("@CinemaId", pData.sa_ci_id);
 
             await _Connection.ExecuteAsync("[Admin].[Salle_AddSalle]", parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<bool> AjouterCinemaEtSalle(CinemaEtSalleDTO cinemaEtSalleDTO)
+        {
+            var parameters = new DynamicParameters(new
+            {
+                NomCinema = cinemaEtSalleDTO.NomCinema,
+                AdresseCinema = cinemaEtSalleDTO.AdresseCinema,
+                CineChaineId = cinemaEtSalleDTO.CineChaineId,
+                NumeroSalle = cinemaEtSalleDTO.NumeroSalle,
+                QteRangees = cinemaEtSalleDTO.QteRangees,
+                QtePlace = cinemaEtSalleDTO.QtePlace,
+                QtePlacesRangee = cinemaEtSalleDTO.QtePlacesRangee
+            });
+                await _Connection.ExecuteAsync("[Admin].[AjouterCinemaEtSalle]", parameters, commandType: CommandType.StoredProcedure);
+                return true;
         }
     }
 }

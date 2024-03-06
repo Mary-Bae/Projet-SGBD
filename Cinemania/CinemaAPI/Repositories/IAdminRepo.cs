@@ -16,7 +16,7 @@ namespace Interfaces
         Task<List<T>> GetCinemasByChaine<T>(int pIdChaine);
         Task DeleteCinemas(int pId);
         Task UpdateCinema(int pId, MajCinemasDTO pData);
-        Task AddCinema(AjoutCinemasDTO pData);
+        Task<bool> AjouterCinemaEtSalle(CinemaEtSalleDTO cinemaEtSalleDTO);
     }
     public interface ISalleRepo
     {
