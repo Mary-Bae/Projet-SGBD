@@ -2,20 +2,29 @@
 
 namespace Interfaces
 {
-    public interface IAdminSvc : ICinemasSvc
+    public interface IAdminSvc : ICinemasSvc, ISalleSvc
     {
         Task<List<T>> GetChaine<T>();
         Task AddChaine(AjoutChaineDTO ajoutChaine);
         Task DeleteChaine(int pId);
-        Task UpdateChaine(ChaineDTO majChaine);
+        Task UpdateChaine(int pId, MajChaineDTO majChaine);
 
     }
-
     public interface ICinemasSvc
     {
         Task<List<T>> GetCinemas<T>();
-        Task<List<T>> GetCinemasByChaine<T>(int chaineId);
+        Task<List<T>> GetCinemasByChaine<T>(int pIdChaine);
         Task DeleteCinemas(int pId);
-        Task Update(MajCinemasDTO pData);
+        Task UpdateCinema(int pId, MajCinemasDTO MajCinemas);
+        Task<bool> AjouterCinemaEtSalle(CinemaEtSalleDTO cinemaEtSalleDTO);
+    }
+    public interface ISalleSvc
+    {
+        Task<List<T>> GetSalles<T>();
+        Task<List<T>> GetSallesByCinema<T>(int pIdCinema);
+        //Task DeleteSalle(int pId);
+        //Task UpdateSalle(int pId, MajCinemasDTO MajCinemas);
+        Task AddSalle(AjoutSalleDTO ajoutSalle);
+ 
     }
 }

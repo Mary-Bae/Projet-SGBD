@@ -10,4 +10,8 @@
     {
         public string ch_nom { get; set; }
     }
+    public class MajChaineDTO
+    {
+        public string ch_nom { get; set; }
+    }
 }

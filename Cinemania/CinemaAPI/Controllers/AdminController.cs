@@ -5,7 +5,7 @@ using Models;
 
 namespace CinemaAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class AdminController : ControllerBase
     {
@@ -14,6 +14,8 @@ namespace CinemaAPI.Controllers
         {
             _adminSvc = pAdminSvc;
         }
+
+        // Chaines de cinema
 
         [HttpGet("Chaine")]
         public async Task<ActionResult> GetChaine()
@@ -32,7 +34,7 @@ namespace CinemaAPI.Controllers
             }
         }
 
-        [HttpPost("AddChaines")]
+        [HttpPost("Chaine/AddChaines")]
         public async Task<ActionResult> PostChaine(AjoutChaineDTO data)
         {
             try
@@ -47,14 +49,13 @@ namespace CinemaAPI.Controllers
             }
         }
 
-        [HttpPut("MajChaines/{id}")]
-        public async Task<ActionResult> MajChaine(int id, AjoutChaineDTO data)
+        [HttpPut("Chaine/MajChaines/{id}")]
+        public async Task<ActionResult> MajChaine(int id, MajChaineDTO data)
         {
             try
             {
                 IAdminSvc adminSvc = _adminSvc;
-                ChaineDTO chaineToUpdate = new ChaineDTO { ch_id = id, ch_nom = data.ch_nom };
-                await adminSvc.UpdateChaine(chaineToUpdate);
+                await adminSvc.UpdateChaine(id, data);
                 return Ok();
             }
             catch (Exception ex)
@@ -63,7 +64,7 @@ namespace CinemaAPI.Controllers
             }
         }
 
-        [HttpDelete("Chaines/{id}")]
+        [HttpDelete("Chaine/DelChaines/{id}")]
         public async Task<IActionResult> DeleteChaine(int id)
         {
             try
@@ -77,6 +78,8 @@ namespace CinemaAPI.Controllers
                 return BadRequest(ex);
             }
         }
+
+        // Cinema
 
         [HttpGet("CinemasByChaine/{chaineId}")]
         public async Task<ActionResult> GetCinemasByChaine(int chaineId)
@@ -112,7 +115,7 @@ namespace CinemaAPI.Controllers
             }
         }
 
-        [HttpDelete("Cinemas/{id}")]
+        [HttpDelete("Cinemas/DelCinemas/{id}")]
         public async Task<ActionResult> DelCinemas(int id)
         {
             try
@@ -127,19 +130,79 @@ namespace CinemaAPI.Controllers
             }
         }
         
-        [HttpPost("Cinemas")]
-        public async Task<ActionResult> PostCinemas(MajCinemasDTO data)
+        [HttpPut("Cinemas/MajCinemas/{id}")]
+        public async Task<ActionResult> MajCinemas(int id, MajCinemasDTO data)
         {
             try
             {
                 ICinemasSvc cinemasSvc = _adminSvc;
-                await cinemasSvc.Update(data);
+                await cinemasSvc.UpdateCinema(id, data);
                 return Ok();
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [HttpGet("SallesByCinema/{cinemaId}")]
+        public async Task<ActionResult> GetSallesByCinema(int cinemaId)
+        {
+            try
+            {
+                List<SalleDTO> lst;
+                ISalleSvc sallesSvc = _adminSvc;
+                lst = await sallesSvc.GetSallesByCinema<SalleDTO>(cinemaId);
+                return Ok(lst);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("Salles")]
+        public async Task<ActionResult> GetSalles()
+        {
+            try
+            {
+                List<SalleDTO> lst;
+
+                ISalleSvc salleSvc = _adminSvc;
+                lst = await salleSvc.GetSalles<SalleDTO>();
+
+                return Ok(lst);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("Salles/AjoutSalle")]
+        public async Task<ActionResult> AddSalle(AjoutSalleDTO data)
+        {
+            try
+            {
+                ISalleSvc salleSvc = _adminSvc;
+                await salleSvc.AddSalle(data);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpPost]
+        [Route("AjouterCinemaEtSalle")]
+        public async Task<IActionResult> AjouterCinemaEtSalle(CinemaEtSalleDTO cinemaEtSalleDTO)
+        {
+            ICinemasSvc cinemasSvc = _adminSvc;
+            
+            var success = await cinemasSvc.AjouterCinemaEtSalle(cinemaEtSalleDTO);
+
+            if (success) return Ok();
+            else return BadRequest("Erreur lors de l'ajout du cinéma et de la salle.");
         }
     }
 }
