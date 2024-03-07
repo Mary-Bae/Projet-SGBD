@@ -29,7 +29,7 @@ namespace UIAdmin
                 cmbNbrPlace.Items.Add(i);
             }
         }
-        private void CalculerPlacesParRangee()
+        public void CalculerPlacesParRangee()
         {
             if (cmbNbrPlace.SelectedItem != null && cmbQteRangees.SelectedItem != null ) 
             {

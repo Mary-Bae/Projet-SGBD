@@ -49,6 +49,7 @@
             this.supprimerChaineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btAjoutercinema = new System.Windows.Forms.Button();
             this.dgvSalles = new System.Windows.Forms.DataGridView();
+            this.btAddSalle = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCine)).BeginInit();
             this.MenuCinema.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChaine)).BeginInit();
@@ -59,11 +60,11 @@
             // btGetCinemas
             // 
             this.btGetCinemas.BackColor = System.Drawing.SystemColors.Info;
-            this.btGetCinemas.Location = new System.Drawing.Point(715, 90);
+            this.btGetCinemas.Location = new System.Drawing.Point(519, 117);
             this.btGetCinemas.Name = "btGetCinemas";
-            this.btGetCinemas.Size = new System.Drawing.Size(114, 40);
+            this.btGetCinemas.Size = new System.Drawing.Size(538, 40);
             this.btGetCinemas.TabIndex = 0;
-            this.btGetCinemas.Text = "Tous les Cinemas";
+            this.btGetCinemas.Text = "Visualisation de tous les Cinemas";
             this.btGetCinemas.UseVisualStyleBackColor = false;
             this.btGetCinemas.Click += new System.EventHandler(this.btGetCinemas_Click);
             // 
@@ -92,7 +93,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvCine.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvCine.EnableHeadersVisualStyles = false;
-            this.dgvCine.Location = new System.Drawing.Point(290, 163);
+            this.dgvCine.Location = new System.Drawing.Point(517, 163);
             this.dgvCine.Name = "dgvCine";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.Salmon;
@@ -127,11 +128,11 @@
             // btUpdate
             // 
             this.btUpdate.BackColor = System.Drawing.SystemColors.Info;
-            this.btUpdate.Location = new System.Drawing.Point(592, 90);
+            this.btUpdate.Location = new System.Drawing.Point(519, 71);
             this.btUpdate.Name = "btUpdate";
-            this.btUpdate.Size = new System.Drawing.Size(99, 40);
+            this.btUpdate.Size = new System.Drawing.Size(537, 40);
             this.btUpdate.TabIndex = 3;
-            this.btUpdate.Text = "Upd Cinemas";
+            this.btUpdate.Text = "Update Cinema";
             this.btUpdate.UseVisualStyleBackColor = false;
             this.btUpdate.Click += new System.EventHandler(this.btUpdate_Click);
             // 
@@ -184,7 +185,7 @@
             this.dgvChaine.RowHeadersWidth = 51;
             this.dgvChaine.RowTemplate.Height = 25;
             this.dgvChaine.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvChaine.Size = new System.Drawing.Size(241, 488);
+            this.dgvChaine.Size = new System.Drawing.Size(241, 521);
             this.dgvChaine.TabIndex = 5;
             this.dgvChaine.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvChaine_CellEndEdit);
             this.dgvChaine.SelectionChanged += new System.EventHandler(this.dgvChaines_SelectionChanged);
@@ -207,11 +208,11 @@
             // btAjoutercinema
             // 
             this.btAjoutercinema.BackColor = System.Drawing.SystemColors.Info;
-            this.btAjoutercinema.Location = new System.Drawing.Point(22, 90);
+            this.btAjoutercinema.Location = new System.Drawing.Point(269, 163);
             this.btAjoutercinema.Name = "btAjoutercinema";
-            this.btAjoutercinema.Size = new System.Drawing.Size(99, 40);
+            this.btAjoutercinema.Size = new System.Drawing.Size(242, 40);
             this.btAjoutercinema.TabIndex = 6;
-            this.btAjoutercinema.Text = "Ajouter Cinema";
+            this.btAjoutercinema.Text = "Enregistrement d\'un cinema -->";
             this.btAjoutercinema.UseVisualStyleBackColor = false;
             this.btAjoutercinema.Click += new System.EventHandler(this.btAjoutercinema_Click);
             // 
@@ -240,7 +241,7 @@
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvSalles.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvSalles.EnableHeadersVisualStyles = false;
-            this.dgvSalles.Location = new System.Drawing.Point(290, 419);
+            this.dgvSalles.Location = new System.Drawing.Point(518, 446);
             this.dgvSalles.Name = "dgvSalles";
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle9.BackColor = System.Drawing.Color.Salmon;
@@ -256,12 +257,24 @@
             this.dgvSalles.Size = new System.Drawing.Size(539, 232);
             this.dgvSalles.TabIndex = 7;
             // 
+            // btAddSalle
+            // 
+            this.btAddSalle.BackColor = System.Drawing.SystemColors.Info;
+            this.btAddSalle.Location = new System.Drawing.Point(518, 400);
+            this.btAddSalle.Name = "btAddSalle";
+            this.btAddSalle.Size = new System.Drawing.Size(538, 40);
+            this.btAddSalle.TabIndex = 8;
+            this.btAddSalle.Text = "Enregistrement d\'une salle de cinema";
+            this.btAddSalle.UseVisualStyleBackColor = false;
+            this.btAddSalle.Click += new System.EventHandler(this.btAddSalle_Click);
+            // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(1108, 696);
+            this.Controls.Add(this.btAddSalle);
             this.Controls.Add(this.dgvSalles);
             this.Controls.Add(this.btAjoutercinema);
             this.Controls.Add(this.dgvChaine);
@@ -295,5 +308,6 @@
         private ToolStripMenuItem supprimerChaineToolStripMenuItem;
         private Button btAjoutercinema;
         private DataGridView dgvSalles;
+        private Button btAddSalle;
     }
 }

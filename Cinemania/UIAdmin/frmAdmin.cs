@@ -230,8 +230,7 @@ namespace UIAdmin
             {
                 int chaineId = Convert.ToInt32(dgvChaine.CurrentRow.Cells["ch_id"].Value);
 
-                using (var formAjoutCinema = new frmAjoutCinema())
-                {
+                var formAjoutCinema = new frmAjoutCinema();
                     formAjoutCinema.ChaineId = chaineId;
 
                     var result = formAjoutCinema.ShowDialog();
@@ -240,7 +239,7 @@ namespace UIAdmin
                         // Raffraichir les cinemas après le rajout
                         LoadCinemasByChaine(chaineId);
                     }
-                }
+                
             }
             else
             {
@@ -278,6 +277,28 @@ namespace UIAdmin
                 var responseContent = await response.Content.ReadAsStringAsync();
             }
         }
+
+        private void btAddSalle_Click(object sender, EventArgs e)
+        {
+            if (dgvCine.CurrentRow != null)
+            {
+                var cinemaId = Convert.ToInt32(dgvCine.CurrentRow.Cells["ci_id"].Value);
+
+                var formAjoutSalle = new frmAjoutSalle(cinemaId);
+
+                var result = formAjoutSalle.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    // Rafraîchir la liste des salles pour le cinéma sélectionné
+                    LoadSallesByCinema(cinemaId);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner un cinéma.");
+            }
+        }
     }
-    }
+
+}
 
