@@ -304,19 +304,49 @@ namespace UIAdmin
             if (dgvSalles.CurrentRow != null)
             {
                 int salleId = Convert.ToInt32(dgvSalles.CurrentRow.Cells["sa_id"].Value);
-                HttpResponseMessage response = await client.DeleteAsync("https://localhost:7013/Admin/Salles/DelSalle/" + salleId);
+                int nombreSalles = await CompterSallesByCinema(_currentCinemaId);
 
-                if (response.IsSuccessStatusCode)
+                if (nombreSalles > 1) // Si il y a plus d'une salle, on fait le delete,
+                                      // sinon le delete ne se fera pas
                 {
-                    LoadSallesByCinema(_currentCinemaId);
-                    dgvSalles.Columns["sa_id"].Visible = false;
+                    HttpResponseMessage response = await client.DeleteAsync("https://localhost:7013/Admin/Salles/DelSalle/" + salleId);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        LoadSallesByCinema(_currentCinemaId);
+                        dgvSalles.Columns["sa_id"].Visible = false;
+                    }
+                    else
+                    {
+                        MessageBox.Show("La suppression a échoué.");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("La suppression a échoué.");
+                    MessageBox.Show("Vous ne pouvez pas supprimer la dernière salle du cinéma.");
                 }
             }
         }
+        private async Task<int> CompterSallesByCinema(int cinemaId)
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("https://localhost:7013/Admin/SallesByCinema/" + cinemaId);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseString = await response.Content.ReadAsStringAsync();
+                    var salles = JsonConvert.DeserializeObject<List<SalleDTO>>(responseString);
+                    return salles.Count; // Retourne le nombre total de salles
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Une erreur est survenue lors de la récupération des salles : {ex.Message}");
+            }
+            return 0; // Retourne 0 en cas d'erreur
+        }
+
     }
 
 }
