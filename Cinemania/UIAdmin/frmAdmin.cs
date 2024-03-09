@@ -298,6 +298,25 @@ namespace UIAdmin
                 MessageBox.Show("Veuillez sélectionner un cinéma.");
             }
         }
+
+        private async void supprimerSalleDeCinemaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvSalles.CurrentRow != null)
+            {
+                int salleId = Convert.ToInt32(dgvSalles.CurrentRow.Cells["sa_id"].Value);
+                HttpResponseMessage response = await client.DeleteAsync("https://localhost:7013/Admin/Salles/DelSalle/" + salleId);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    LoadSallesByCinema(_currentCinemaId);
+                    dgvSalles.Columns["sa_id"].Visible = false;
+                }
+                else
+                {
+                    MessageBox.Show("La suppression a échoué.");
+                }
+            }
+        }
     }
 
 }

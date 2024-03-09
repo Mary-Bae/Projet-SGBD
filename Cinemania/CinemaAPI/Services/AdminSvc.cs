@@ -79,5 +79,10 @@ namespace Services
         {
             return await _adminRepo.AjouterCinemaEtSalle(cinemaEtSalleDTO);
         }
+        async Task ISalleSvc.DeleteSalle(int pId)
+        {
+            ISalleRepo salleRepo = _adminRepo;
+            await salleRepo.DeleteSalle(pId);
+        }
     }
 }

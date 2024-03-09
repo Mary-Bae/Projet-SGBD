@@ -204,5 +204,20 @@ namespace CinemaAPI.Controllers
             if (success) return Ok();
             else return BadRequest("Erreur lors de l'ajout du cinéma et de la salle.");
         }
+
+        [HttpDelete("Salles/DelSalle/{id}")]
+        public async Task<ActionResult> DelSalle(int id)
+        {
+            try
+            {
+                ISalleSvc sallesSvc = _adminSvc;
+                await sallesSvc.DeleteSalle(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
