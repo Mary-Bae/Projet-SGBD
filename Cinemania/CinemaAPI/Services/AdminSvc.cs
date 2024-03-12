@@ -63,6 +63,26 @@ namespace Services
         {
             return await _adminRepo.GetSallesByCinema<T>(pId);
         }
+        public async Task<SalleDTO> GetSalleBySalleId(int salleId)
+        {
+            ISalleRepo salleRepo = _adminRepo;
+            var salle = await salleRepo.GetSalleBySalleId(salleId);
+
+            if (salle != null)
+            {
+                return new SalleDTO
+                {
+                    sa_id = salle.sa_id,
+                    sa_numeroSalle = salle.sa_numeroSalle,
+                    sa_qteRangees = salle.sa_qteRangees,
+                    sa_qtePlace = salle.sa_qtePlace,
+                    sa_qtePlace_Rangee= salle.sa_qtePlace_Rangee,
+                    sa_ci_id= salle.sa_ci_id
+                };
+            }
+
+            return null; // Ou gérer autrement si la salle n'est pas trouvée
+        }
         async Task<List<T>> ISalleSvc.GetSalles<T>()
         {
             ISalleRepo salleRepo = _adminRepo;
@@ -78,6 +98,16 @@ namespace Services
         public async Task<bool> AjouterCinemaEtSalle(CinemaEtSalleDTO cinemaEtSalleDTO)
         {
             return await _adminRepo.AjouterCinemaEtSalle(cinemaEtSalleDTO);
+        }
+        async Task ISalleSvc.DeleteSalle(int pId)
+        {
+            ISalleRepo salleRepo = _adminRepo;
+            await salleRepo.DeleteSalle(pId);
+        }
+        async Task ISalleSvc.UpdateSalle(int pId, MajSalleDTO pData)
+        {
+            ISalleRepo salleRepo = _adminRepo;
+            await salleRepo.UpdateSalle(pId, pData);
         }
     }
 }

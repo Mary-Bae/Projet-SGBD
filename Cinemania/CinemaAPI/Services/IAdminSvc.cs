@@ -22,8 +22,9 @@ namespace Interfaces
     {
         Task<List<T>> GetSalles<T>();
         Task<List<T>> GetSallesByCinema<T>(int pIdCinema);
-        //Task DeleteSalle(int pId);
-        //Task UpdateSalle(int pId, MajCinemasDTO MajCinemas);
+        Task<SalleDTO> GetSalleBySalleId(int salleId);
+        Task DeleteSalle(int pId);
+        Task UpdateSalle(int pId, MajSalleDTO MajSalle);
         Task AddSalle(AjoutSalleDTO ajoutSalle);
  
     }
