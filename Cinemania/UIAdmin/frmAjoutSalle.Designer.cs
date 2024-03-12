@@ -43,8 +43,11 @@
             // 
             // cmbNumSalle
             // 
+            this.cmbNumSalle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbNumSalle.FormattingEnabled = true;
-            this.cmbNumSalle.Location = new System.Drawing.Point(155, 89);
+            this.cmbNumSalle.Location = new System.Drawing.Point(225, 112);
             this.cmbNumSalle.Name = "cmbNumSalle";
             this.cmbNumSalle.Size = new System.Drawing.Size(62, 23);
             this.cmbNumSalle.TabIndex = 0;
@@ -52,8 +55,11 @@
             // 
             // cmbNbrPlace
             // 
+            this.cmbNbrPlace.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbNbrPlace.FormattingEnabled = true;
-            this.cmbNbrPlace.Location = new System.Drawing.Point(155, 153);
+            this.cmbNbrPlace.Location = new System.Drawing.Point(225, 168);
             this.cmbNbrPlace.Name = "cmbNbrPlace";
             this.cmbNbrPlace.Size = new System.Drawing.Size(62, 23);
             this.cmbNbrPlace.TabIndex = 1;
@@ -61,8 +67,11 @@
             // 
             // cmbQteRangees
             // 
+            this.cmbQteRangees.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbQteRangees.FormattingEnabled = true;
-            this.cmbQteRangees.Location = new System.Drawing.Point(377, 153);
+            this.cmbQteRangees.Location = new System.Drawing.Point(471, 168);
             this.cmbQteRangees.Name = "cmbQteRangees";
             this.cmbQteRangees.Size = new System.Drawing.Size(62, 23);
             this.cmbQteRangees.TabIndex = 2;
@@ -70,8 +79,11 @@
             // 
             // labelNumSalle
             // 
+            this.labelNumSalle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelNumSalle.AutoSize = true;
-            this.labelNumSalle.Location = new System.Drawing.Point(39, 97);
+            this.labelNumSalle.Location = new System.Drawing.Point(78, 114);
             this.labelNumSalle.Name = "labelNumSalle";
             this.labelNumSalle.Size = new System.Drawing.Size(93, 15);
             this.labelNumSalle.TabIndex = 3;
@@ -79,8 +91,11 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(39, 156);
+            this.label1.Location = new System.Drawing.Point(78, 170);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(103, 15);
             this.label1.TabIndex = 4;
@@ -88,8 +103,11 @@
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(260, 156);
+            this.label2.Location = new System.Drawing.Point(327, 170);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(111, 15);
             this.label2.TabIndex = 5;
@@ -97,30 +115,39 @@
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label3.Location = new System.Drawing.Point(39, 18);
+            this.label3.Location = new System.Drawing.Point(97, 35);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(256, 30);
+            this.label3.Size = new System.Drawing.Size(165, 30);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Nouvelle salle de cinema";
+            this.label3.Text = "Salle de cinema";
             // 
             // btSave
             // 
+            this.btSave.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btSave.BackColor = System.Drawing.Color.Snow;
-            this.btSave.Location = new System.Drawing.Point(92, 256);
+            this.btSave.Location = new System.Drawing.Point(111, 273);
             this.btSave.Name = "btSave";
             this.btSave.Size = new System.Drawing.Size(125, 23);
             this.btSave.TabIndex = 7;
-            this.btSave.Text = "Ajouter Salle";
+            this.btSave.Text = "Sauver";
             this.btSave.UseVisualStyleBackColor = false;
             this.btSave.Click += new System.EventHandler(this.btSave_Click);
             // 
             // btCancel
             // 
+            this.btCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btCancel.BackColor = System.Drawing.Color.Snow;
-            this.btCancel.Location = new System.Drawing.Point(260, 256);
+            this.btCancel.Location = new System.Drawing.Point(306, 273);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(125, 23);
             this.btCancel.TabIndex = 8;
@@ -133,7 +160,7 @@
             this.lblPlacesParRangee.AutoSize = true;
             this.lblPlacesParRangee.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblPlacesParRangee.ForeColor = System.Drawing.Color.Red;
-            this.lblPlacesParRangee.Location = new System.Drawing.Point(82, 217);
+            this.lblPlacesParRangee.Location = new System.Drawing.Point(140, 234);
             this.lblPlacesParRangee.Name = "lblPlacesParRangee";
             this.lblPlacesParRangee.Size = new System.Drawing.Size(0, 17);
             this.lblPlacesParRangee.TabIndex = 9;
@@ -143,7 +170,7 @@
             this.lblAvertissement.AutoSize = true;
             this.lblAvertissement.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblAvertissement.ForeColor = System.Drawing.Color.Red;
-            this.lblAvertissement.Location = new System.Drawing.Point(82, 190);
+            this.lblAvertissement.Location = new System.Drawing.Point(140, 207);
             this.lblAvertissement.Name = "lblAvertissement";
             this.lblAvertissement.Size = new System.Drawing.Size(0, 17);
             this.lblAvertissement.TabIndex = 10;
@@ -153,7 +180,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SeaShell;
-            this.ClientSize = new System.Drawing.Size(502, 334);
+            this.ClientSize = new System.Drawing.Size(590, 362);
             this.Controls.Add(this.lblAvertissement);
             this.Controls.Add(this.lblPlacesParRangee);
             this.Controls.Add(this.btCancel);

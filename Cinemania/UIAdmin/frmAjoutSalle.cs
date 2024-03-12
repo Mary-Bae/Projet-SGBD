@@ -131,8 +131,6 @@ namespace UIAdmin
                 MessageBox.Show(_modeActuel == Mode.Ajout ? "L'ajout de la salle de cinéma a échoué." : "La modification de la salle de cinéma a échoué.");
             }
         }
-
-
         private async Task<bool> AjouterSalle(AjoutSalleDTO Salle)
         {
             var content = new StringContent(JsonConvert.SerializeObject(Salle), Encoding.UTF8, "application/json");
@@ -143,7 +141,7 @@ namespace UIAdmin
         private async Task<bool> ModifierSalle(MajSalleDTO salle)
         {
             var content = new StringContent(JsonConvert.SerializeObject(salle), Encoding.UTF8, "application/json");
-            var response = await client.PutAsync($"https://localhost:7013/Admin/Salles/MajSalle/{salle.sa_id}", content);
+            var response = await client.PutAsync("https://localhost:7013/Admin/Salles/MajSalle/" + salle.sa_id, content);
             return response.IsSuccessStatusCode;
         }
 
@@ -166,7 +164,7 @@ namespace UIAdmin
         private async void cmbNumSalle_SelectedIndexChanged(object sender, EventArgs e)
         {
             int salleSelectionnee = Convert.ToInt32(cmbNumSalle.SelectedItem);
-            bool estUtilise = await NumeroSalleUtiliseAsync(_cinemaId, salleSelectionnee);
+            bool estUtilise = await NumeroSalleUtilise(_cinemaId, salleSelectionnee);
 
             if (estUtilise)
             {
@@ -177,7 +175,7 @@ namespace UIAdmin
                 lblAvertissement.Text = ""; // Effacer l'avertissement si le numéro n'est pas utilisé
             }
         }
-        private async Task<bool> NumeroSalleUtiliseAsync(int cinemaId, int numeroSalle)
+        private async Task<bool> NumeroSalleUtilise(int cinemaId, int numeroSalle)
         {
 
             try
