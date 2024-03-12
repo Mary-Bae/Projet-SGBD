@@ -1,6 +1,7 @@
 ﻿using Models;
 using Newtonsoft.Json;
 using System.Text;
+using static UIAdmin.frmAjoutSalle;
 
 namespace UIAdmin
 {
@@ -9,11 +10,22 @@ namespace UIAdmin
         private static readonly HttpClient client = new HttpClient();
         private int _qtePlacesRangee = 0;
         private readonly int _cinemaId;
-        public frmAjoutSalle(int cinemaId)
+
+        public enum Mode { Ajout, Modification }
+        private Mode _modeActuel;
+        private SalleDTO _salleSelectionnee;
+        public frmAjoutSalle(int cinemaId, Mode mode, SalleDTO salle = null)
         {
             InitializeComponent();
             InitialiserComboBoxes();
             _cinemaId = cinemaId;
+            _modeActuel = mode;
+            _salleSelectionnee = salle;
+
+            if (_modeActuel == Mode.Modification && _salleSelectionnee != null)
+            {
+                PreremplirChamps(_salleSelectionnee);
+            }
         }
 
         private void InitialiserComboBoxes()
@@ -33,6 +45,14 @@ namespace UIAdmin
             {
                 cmbNbrPlace.Items.Add(i);
             }
+        }
+
+        private void PreremplirChamps(SalleDTO salle)
+        {
+            cmbNumSalle.SelectedItem = salle.sa_numeroSalle.ToString();
+            cmbQteRangees.SelectedItem = salle.sa_qteRangees.ToString();
+            cmbNbrPlace.SelectedItem = salle.sa_qtePlace.ToString();
+            CalculerPlacesParRangee();
         }
 
         public void CalculerPlacesParRangee()
@@ -64,39 +84,66 @@ namespace UIAdmin
                 return;
             }
 
-            // Le total des places doit être divisible par le nombre de rangées
             if (_qtePlacesRangee <= 0)
             {
-                MessageBox.Show("Le nombre de places par rangée n'est pas juste");
+                MessageBox.Show("Le nombre de places par rangée n'est pas juste.");
                 return;
             }
-            var salleDTO = new AjoutSalleDTO
-            {
-                sa_numeroSalle = (int)cmbNumSalle.SelectedItem,
-                sa_qteRangees = (int)cmbQteRangees.SelectedItem,
-                sa_qtePlace = (int)cmbNbrPlace.SelectedItem,
-                sa_qtePlace_Rangee = _qtePlacesRangee,
-                sa_ci_id = _cinemaId
-            };
 
-            bool isSuccess = await AjouterSalle(salleDTO);
+            bool isSuccess;
+
+            if (_modeActuel == Mode.Ajout)
+            {
+                var salleDTO = new AjoutSalleDTO
+                {
+                    sa_numeroSalle = Convert.ToInt32(cmbNumSalle.SelectedItem),
+                    sa_qteRangees = Convert.ToInt32(cmbQteRangees.SelectedItem),
+                    sa_qtePlace = Convert.ToInt32(cmbNbrPlace.SelectedItem),
+                    sa_qtePlace_Rangee = _qtePlacesRangee,
+                    sa_ci_id = _cinemaId
+                };
+
+                isSuccess = await AjouterSalle(salleDTO);
+            }
+            else // Mode.Modification
+            {
+                var salleDTO = new MajSalleDTO
+                {
+                    sa_id = _salleSelectionnee.sa_id,
+                    sa_numeroSalle = Convert.ToInt32(cmbNumSalle.SelectedItem),
+                    sa_qteRangees = Convert.ToInt32(cmbQteRangees.SelectedItem),
+                    sa_qtePlace = Convert.ToInt32(cmbNbrPlace.SelectedItem),
+                    sa_qtePlace_Rangee = _qtePlacesRangee,
+                    sa_ci_id = _cinemaId
+                };
+
+                isSuccess = await ModifierSalle(salleDTO);
+            }
 
             if (isSuccess)
             {
-                MessageBox.Show("Salle de cinéma ajouté avec succès.");
+                MessageBox.Show(_modeActuel == Mode.Ajout ? "Salle de cinéma ajoutée avec succès." : "Salle de cinéma modifiée avec succès.");
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             else
             {
-                MessageBox.Show("L'ajout de la salle de cinéma a échoué.");
+                MessageBox.Show(_modeActuel == Mode.Ajout ? "L'ajout de la salle de cinéma a échoué." : "La modification de la salle de cinéma a échoué.");
             }
         }
+
 
         private async Task<bool> AjouterSalle(AjoutSalleDTO Salle)
         {
             var content = new StringContent(JsonConvert.SerializeObject(Salle), Encoding.UTF8, "application/json");
             var response = await client.PostAsync("https://localhost:7013/Admin/Salles/AjoutSalle", content);
+            return response.IsSuccessStatusCode;
+        }
+
+        private async Task<bool> ModifierSalle(MajSalleDTO salle)
+        {
+            var content = new StringContent(JsonConvert.SerializeObject(salle), Encoding.UTF8, "application/json");
+            var response = await client.PutAsync($"https://localhost:7013/Admin/Salles/MajSalle/{salle.sa_id}", content);
             return response.IsSuccessStatusCode;
         }
 

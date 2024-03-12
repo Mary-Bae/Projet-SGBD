@@ -130,5 +130,28 @@ namespace Repositories
 
             await _Connection.ExecuteAsync("[Admin].[Salle_Delete]", parameters, commandType: CommandType.StoredProcedure);
         }
+
+        async Task ISalleRepo.UpdateSalle(int pId, MajSalleDTO pData)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@id", pId);
+            parameters.Add("@NumeroSalle", pData.sa_numeroSalle);
+            parameters.Add("@QtePlace", pData.sa_qtePlace);
+            parameters.Add("@QteRangees", pData.sa_qteRangees);
+            parameters.Add("@QtePlaces_Rangee", pData.sa_qtePlace_Rangee);
+            parameters.Add("@CinemaId", pData.sa_ci_id);
+
+            await _Connection.ExecuteAsync("[Admin].[Salle_Update]", parameters, commandType: CommandType.StoredProcedure);
+        }
+        public async Task<SalleDTO> GetSalleBySalleId(int salleId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@id", salleId);
+
+            // Supposons que la procédure stockée "[Admin].[Salle_SelectBySalle]" retourne les colonnes nécessaires pour un objet SalleDTO
+            var salle = await _Connection.QueryFirstOrDefaultAsync<SalleDTO>("[Admin].[Salle_SelectBySalle]", parameters, commandType: CommandType.StoredProcedure);
+
+            return salle;
+        }
     }
 }

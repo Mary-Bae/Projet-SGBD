@@ -129,7 +129,7 @@ namespace CinemaAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        
+
         [HttpPut("Cinemas/MajCinemas/{id}")]
         public async Task<ActionResult> MajCinemas(int id, MajCinemasDTO data)
         {
@@ -198,7 +198,7 @@ namespace CinemaAPI.Controllers
         public async Task<IActionResult> AjouterCinemaEtSalle(CinemaEtSalleDTO cinemaEtSalleDTO)
         {
             ICinemasSvc cinemasSvc = _adminSvc;
-            
+
             var success = await cinemasSvc.AjouterCinemaEtSalle(cinemaEtSalleDTO);
 
             if (success) return Ok();
@@ -217,6 +217,44 @@ namespace CinemaAPI.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut("Salles/MajSalle/{id}")]
+        public async Task<ActionResult> MajSalle(int id, MajSalleDTO data)
+        {
+            try
+            {
+                ISalleSvc SallesSvc = _adminSvc;
+                await SallesSvc.UpdateSalle(id, data);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("SalleBySalleId/{salleId}")]
+        public async Task<ActionResult<SalleDTO>> GetSalleBySalleId(int salleId)
+        {
+            try
+            {
+                ISalleSvc sallesSvc = _adminSvc;
+                var salle = await sallesSvc.GetSalleBySalleId(salleId);
+
+                if (salle != null)
+                {
+                    return Ok(salle); // Retourne directement l'objet SalleDTO
+                }
+                else
+                {
+                    return NotFound("Salle non trouvée."); // Aucune salle trouvée pour cet ID
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erreur lors de la récupération des détails de la salle : {ex.Message}");
             }
         }
     }

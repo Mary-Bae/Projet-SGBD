@@ -49,9 +49,10 @@
             this.supprimerChaineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btAjoutercinema = new System.Windows.Forms.Button();
             this.dgvSalles = new System.Windows.Forms.DataGridView();
-            this.btAddSalle = new System.Windows.Forms.Button();
             this.MenuSalle = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.supprimerSalleDeCinemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btAddSalle = new System.Windows.Forms.Button();
+            this.modifierSalleDeCinemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCine)).BeginInit();
             this.MenuCinema.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChaine)).BeginInit();
@@ -63,10 +64,9 @@
             // btGetCinemas
             // 
             this.btGetCinemas.BackColor = System.Drawing.SystemColors.Info;
-            this.btGetCinemas.Location = new System.Drawing.Point(593, 156);
-            this.btGetCinemas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btGetCinemas.Location = new System.Drawing.Point(519, 117);
             this.btGetCinemas.Name = "btGetCinemas";
-            this.btGetCinemas.Size = new System.Drawing.Size(615, 53);
+            this.btGetCinemas.Size = new System.Drawing.Size(538, 40);
             this.btGetCinemas.TabIndex = 0;
             this.btGetCinemas.Text = "Visualisation de tous les Cinemas";
             this.btGetCinemas.UseVisualStyleBackColor = false;
@@ -97,8 +97,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvCine.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvCine.EnableHeadersVisualStyles = false;
-            this.dgvCine.Location = new System.Drawing.Point(591, 217);
-            this.dgvCine.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dgvCine.Location = new System.Drawing.Point(517, 163);
             this.dgvCine.Name = "dgvCine";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.Salmon;
@@ -111,7 +110,7 @@
             this.dgvCine.RowHeadersWidth = 51;
             this.dgvCine.RowTemplate.Height = 25;
             this.dgvCine.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCine.Size = new System.Drawing.Size(616, 308);
+            this.dgvCine.Size = new System.Drawing.Size(539, 231);
             this.dgvCine.TabIndex = 1;
             this.dgvCine.SelectionChanged += new System.EventHandler(this.dgvCine_SelectionChanged);
             // 
@@ -121,22 +120,21 @@
             this.MenuCinema.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.supprimerCinémaToolStripMenuItem});
             this.MenuCinema.Name = "MenuCinema";
-            this.MenuCinema.Size = new System.Drawing.Size(202, 28);
+            this.MenuCinema.Size = new System.Drawing.Size(174, 26);
             // 
             // supprimerCinémaToolStripMenuItem
             // 
             this.supprimerCinémaToolStripMenuItem.Name = "supprimerCinémaToolStripMenuItem";
-            this.supprimerCinémaToolStripMenuItem.Size = new System.Drawing.Size(201, 24);
+            this.supprimerCinémaToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.supprimerCinémaToolStripMenuItem.Text = "Supprimer Cinéma";
             this.supprimerCinémaToolStripMenuItem.Click += new System.EventHandler(this.supprimerCinémaToolStripMenuItem_Click);
             // 
             // btUpdate
             // 
             this.btUpdate.BackColor = System.Drawing.SystemColors.Info;
-            this.btUpdate.Location = new System.Drawing.Point(593, 95);
-            this.btUpdate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btUpdate.Location = new System.Drawing.Point(519, 71);
             this.btUpdate.Name = "btUpdate";
-            this.btUpdate.Size = new System.Drawing.Size(614, 53);
+            this.btUpdate.Size = new System.Drawing.Size(537, 40);
             this.btUpdate.TabIndex = 3;
             this.btUpdate.Text = "Update Cinema";
             this.btUpdate.UseVisualStyleBackColor = false;
@@ -147,9 +145,9 @@
             this.labelTitre.AutoSize = true;
             this.labelTitre.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelTitre.ForeColor = System.Drawing.Color.Maroon;
-            this.labelTitre.Location = new System.Drawing.Point(43, 28);
+            this.labelTitre.Location = new System.Drawing.Point(38, 21);
             this.labelTitre.Name = "labelTitre";
-            this.labelTitre.Size = new System.Drawing.Size(456, 43);
+            this.labelTitre.Size = new System.Drawing.Size(365, 35);
             this.labelTitre.TabIndex = 4;
             this.labelTitre.Text = "Administration des cinemas";
             // 
@@ -178,8 +176,7 @@
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvChaine.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvChaine.EnableHeadersVisualStyles = false;
-            this.dgvChaine.Location = new System.Drawing.Point(25, 217);
-            this.dgvChaine.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dgvChaine.Location = new System.Drawing.Point(22, 163);
             this.dgvChaine.Name = "dgvChaine";
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.Color.Salmon;
@@ -192,7 +189,7 @@
             this.dgvChaine.RowHeadersWidth = 51;
             this.dgvChaine.RowTemplate.Height = 25;
             this.dgvChaine.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvChaine.Size = new System.Drawing.Size(275, 695);
+            this.dgvChaine.Size = new System.Drawing.Size(241, 521);
             this.dgvChaine.TabIndex = 5;
             this.dgvChaine.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvChaine_CellEndEdit);
             this.dgvChaine.SelectionChanged += new System.EventHandler(this.dgvChaines_SelectionChanged);
@@ -203,22 +200,21 @@
             this.MenuChaine.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.supprimerChaineToolStripMenuItem});
             this.MenuChaine.Name = "MenuChaine";
-            this.MenuChaine.Size = new System.Drawing.Size(197, 28);
+            this.MenuChaine.Size = new System.Drawing.Size(170, 26);
             // 
             // supprimerChaineToolStripMenuItem
             // 
             this.supprimerChaineToolStripMenuItem.Name = "supprimerChaineToolStripMenuItem";
-            this.supprimerChaineToolStripMenuItem.Size = new System.Drawing.Size(196, 24);
+            this.supprimerChaineToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.supprimerChaineToolStripMenuItem.Text = "Supprimer Chaine";
             this.supprimerChaineToolStripMenuItem.Click += new System.EventHandler(this.supprimerChaineToolStripMenuItem_Click);
             // 
             // btAjoutercinema
             // 
             this.btAjoutercinema.BackColor = System.Drawing.SystemColors.Info;
-            this.btAjoutercinema.Location = new System.Drawing.Point(307, 217);
-            this.btAjoutercinema.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btAjoutercinema.Location = new System.Drawing.Point(269, 163);
             this.btAjoutercinema.Name = "btAjoutercinema";
-            this.btAjoutercinema.Size = new System.Drawing.Size(277, 53);
+            this.btAjoutercinema.Size = new System.Drawing.Size(242, 40);
             this.btAjoutercinema.TabIndex = 6;
             this.btAjoutercinema.Text = "Enregistrement d\'un cinema -->";
             this.btAjoutercinema.UseVisualStyleBackColor = false;
@@ -249,8 +245,7 @@
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvSalles.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvSalles.EnableHeadersVisualStyles = false;
-            this.dgvSalles.Location = new System.Drawing.Point(592, 595);
-            this.dgvSalles.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dgvSalles.Location = new System.Drawing.Point(518, 446);
             this.dgvSalles.Name = "dgvSalles";
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle9.BackColor = System.Drawing.Color.Salmon;
@@ -263,42 +258,49 @@
             this.dgvSalles.RowHeadersWidth = 51;
             this.dgvSalles.RowTemplate.Height = 25;
             this.dgvSalles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSalles.Size = new System.Drawing.Size(616, 309);
+            this.dgvSalles.Size = new System.Drawing.Size(539, 232);
             this.dgvSalles.TabIndex = 7;
-            // 
-            // btAddSalle
-            // 
-            this.btAddSalle.BackColor = System.Drawing.SystemColors.Info;
-            this.btAddSalle.Location = new System.Drawing.Point(592, 533);
-            this.btAddSalle.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btAddSalle.Name = "btAddSalle";
-            this.btAddSalle.Size = new System.Drawing.Size(615, 53);
-            this.btAddSalle.TabIndex = 8;
-            this.btAddSalle.Text = "Enregistrement d\'une salle de cinema";
-            this.btAddSalle.UseVisualStyleBackColor = false;
-            this.btAddSalle.Click += new System.EventHandler(this.btAddSalle_Click);
             // 
             // MenuSalle
             // 
             this.MenuSalle.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.MenuSalle.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.supprimerSalleDeCinemaToolStripMenuItem});
+            this.supprimerSalleDeCinemaToolStripMenuItem,
+            this.modifierSalleDeCinemaToolStripMenuItem});
             this.MenuSalle.Name = "MenuSalle";
-            this.MenuSalle.Size = new System.Drawing.Size(255, 28);
+            this.MenuSalle.Size = new System.Drawing.Size(214, 70);
             // 
             // supprimerSalleDeCinemaToolStripMenuItem
             // 
             this.supprimerSalleDeCinemaToolStripMenuItem.Name = "supprimerSalleDeCinemaToolStripMenuItem";
-            this.supprimerSalleDeCinemaToolStripMenuItem.Size = new System.Drawing.Size(254, 24);
+            this.supprimerSalleDeCinemaToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.supprimerSalleDeCinemaToolStripMenuItem.Text = "Supprimer salle de cinema";
             this.supprimerSalleDeCinemaToolStripMenuItem.Click += new System.EventHandler(this.supprimerSalleDeCinemaToolStripMenuItem_Click);
             // 
+            // btAddSalle
+            // 
+            this.btAddSalle.BackColor = System.Drawing.SystemColors.Info;
+            this.btAddSalle.Location = new System.Drawing.Point(518, 400);
+            this.btAddSalle.Name = "btAddSalle";
+            this.btAddSalle.Size = new System.Drawing.Size(538, 40);
+            this.btAddSalle.TabIndex = 8;
+            this.btAddSalle.Text = "Enregistrement d\'une salle de cinema";
+            this.btAddSalle.UseVisualStyleBackColor = false;
+            this.btAddSalle.Click += new System.EventHandler(this.btAddSalle_Click);
+            // 
+            // modifierSalleDeCinemaToolStripMenuItem
+            // 
+            this.modifierSalleDeCinemaToolStripMenuItem.Name = "modifierSalleDeCinemaToolStripMenuItem";
+            this.modifierSalleDeCinemaToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.modifierSalleDeCinemaToolStripMenuItem.Text = "Modifier salle de cinema";
+            this.modifierSalleDeCinemaToolStripMenuItem.Click += new System.EventHandler(this.modifierSalleDeCinemaToolStripMenuItem_Click);
+            // 
             // frmAdmin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(1266, 928);
+            this.ClientSize = new System.Drawing.Size(1108, 696);
             this.Controls.Add(this.btAddSalle);
             this.Controls.Add(this.dgvSalles);
             this.Controls.Add(this.btAjoutercinema);
@@ -307,7 +309,6 @@
             this.Controls.Add(this.btUpdate);
             this.Controls.Add(this.dgvCine);
             this.Controls.Add(this.btGetCinemas);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmAdmin";
             this.Text = "Administration";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -338,5 +339,6 @@
         private Button btAddSalle;
         private ContextMenuStrip MenuSalle;
         private ToolStripMenuItem supprimerSalleDeCinemaToolStripMenuItem;
+        private ToolStripMenuItem modifierSalleDeCinemaToolStripMenuItem;
     }
 }

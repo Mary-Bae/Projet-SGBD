@@ -25,7 +25,7 @@ namespace UIAdmin
             bool success = false;
 
             //Recharge les chaines en trois tentatives si elles n'arrivent pas à se charger, ca laisse le temps à l'API de se charger
-            while (attempts < maxRetries && !success) 
+            while (attempts < maxRetries && !success)
             {
                 try
                 {
@@ -231,15 +231,15 @@ namespace UIAdmin
                 int chaineId = Convert.ToInt32(dgvChaine.CurrentRow.Cells["ch_id"].Value);
 
                 var formAjoutCinema = new frmAjoutCinema();
-                    formAjoutCinema.ChaineId = chaineId;
+                formAjoutCinema.ChaineId = chaineId;
 
-                    var result = formAjoutCinema.ShowDialog();
-                    if (result == DialogResult.OK)
-                    {
-                        // Raffraichir les cinemas après le rajout
-                        LoadCinemasByChaine(chaineId);
-                    }
-                
+                var result = formAjoutCinema.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    // Raffraichir les cinemas après le rajout
+                    LoadCinemasByChaine(chaineId);
+                }
+
             }
             else
             {
@@ -277,14 +277,13 @@ namespace UIAdmin
                 var responseContent = await response.Content.ReadAsStringAsync();
             }
         }
-
         private void btAddSalle_Click(object sender, EventArgs e)
         {
             if (dgvCine.CurrentRow != null)
             {
                 var cinemaId = Convert.ToInt32(dgvCine.CurrentRow.Cells["ci_id"].Value);
 
-                var formAjoutSalle = new frmAjoutSalle(cinemaId);
+                var formAjoutSalle = new frmAjoutSalle(cinemaId, frmAjoutSalle.Mode.Ajout);
 
                 var result = formAjoutSalle.ShowDialog();
                 if (result == DialogResult.OK)
@@ -347,7 +346,58 @@ namespace UIAdmin
             return 0; // Retourne 0 en cas d'erreur
         }
 
-    }
+        private async void modifierSalleDeCinemaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvSalles.CurrentRow != null)
+            {
+                int salleId = Convert.ToInt32(dgvSalles.CurrentRow.Cells["sa_id"].Value);
 
+                // Récupérez les détails complets de la salle via l'API
+                SalleDTO salleDetails = await GetSalleDetailsAsync(salleId);
+
+                if (salleDetails != null)
+                {
+                    // Ouvrez le formulaire frmAjoutSalle en mode Modification avec les détails de la salle
+                    var formAjoutSalle = new frmAjoutSalle(salleDetails.sa_ci_id, frmAjoutSalle.Mode.Modification, salleDetails);
+                    var result = formAjoutSalle.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        // Rafraîchir la liste des salles pour le cinéma associé
+                        LoadSallesByCinema(salleDetails.sa_ci_id);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner une salle à modifier.");
+            }
+
+        }
+        private async Task<SalleDTO> GetSalleDetailsAsync(int salleId)
+        {
+            try
+            {
+                var response = await client.GetAsync("https://localhost:7013/Admin/SalleBySalleId/" + salleId);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var salleJson = await response.Content.ReadAsStringAsync();
+                    var salleDetails = JsonConvert.DeserializeObject<SalleDTO>(salleJson);
+                    return salleDetails;
+                }
+                else
+                {
+                    MessageBox.Show("Impossible de récupérer les détails de la salle.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erreur lors de la récupération des détails de la salle : {ex.Message}");
+            }
+
+            return null;
+        }
+    }
 }
 

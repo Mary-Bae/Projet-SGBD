@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Models;
 
 namespace Interfaces
 {
@@ -22,8 +23,9 @@ namespace Interfaces
     {
         Task<List<T>> GetSalles<T>();
         Task<List<T>> GetSallesByCinema<T>(int pIdCinema);
+        Task<SalleDTO> GetSalleBySalleId(int salleId);
         Task DeleteSalle(int pId);
-        //Task UpdateSalle(int pId, MajSalleDTO pData);
+        Task UpdateSalle(int pId, MajSalleDTO pData);
         Task AddSalle(AjoutSalleDTO pData);
     }
 }
