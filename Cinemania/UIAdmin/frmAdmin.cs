@@ -56,15 +56,15 @@ namespace UIAdmin
         }
 
         //Charge les cinemas associés aux chaines à chaque sélection de chaine
-        private void dgvChaines_SelectionChanged(object sender, EventArgs e)
+        private async void dgvChaines_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvChaine.CurrentRow?.DataBoundItem is ChaineDTO selectedChaine)
             {
                 int chaineId = selectedChaine.ch_id;
-                LoadCinemasByChaine(chaineId);
+                await LoadCinemasByChaine(chaineId);
             }
         }
-        private async void LoadCinemasByChaine(int chaineId)
+        private async Task<List<CinemasDTO>> LoadCinemasByChaine(int chaineId)
         {
             _currentChaineId = chaineId;
             HttpResponseMessage response = await client.GetAsync("https://localhost:7013/Admin/CinemasByChaine/" + chaineId);
@@ -78,11 +78,14 @@ namespace UIAdmin
                 dgvCine.Columns["ci_id"].Visible = false;
                 dgvCine.Columns["ci_nom"].HeaderText = "Nom du Cinéma";
                 dgvCine.Columns["ci_adresse"].HeaderText = "Adresse";
+
+                return cinemas;
             }
             else
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
                 MessageBox.Show("Les cinemas n'ont pas pu être chargés. Détails : " + responseContent);
+                return new List<CinemasDTO>();
             }
         }
         private async Task AjouterNouvelleChaine(AjoutChaineDTO nouvelleChaine)
@@ -142,23 +145,45 @@ namespace UIAdmin
                 }
             }
         }
+        private async Task SupprimerChaineEtCinemas(int chaineId)
+        {
+            // Obtenez la liste des cinémas appartenant à la chaîne
+            var cinemas = await LoadCinemasByChaine(chaineId);
 
+            // Supprimez chaque cinéma (ce qui devrait également supprimer leurs salles)
+            foreach (var cinema in cinemas)
+            {
+                HttpResponseMessage responseCinema = await client.DeleteAsync($"https://localhost:7013/Admin/Cinemas/DelCinemas/{cinema.ci_id}");
+                if (!responseCinema.IsSuccessStatusCode)
+                {
+                    // Gestion des erreurs pour chaque cinéma, arrêtez le processus si nécessaire
+                    MessageBox.Show($"Échec de la suppression du cinéma ID {cinema.ci_id}. Processus interrompu.");
+                    return;
+                }
+            }
+
+            // Une fois tous les cinémas supprimés, supprimez la chaîne
+            HttpResponseMessage responseChaine = await client.DeleteAsync($"https://localhost:7013/Admin/Chaine/DelChaines/{chaineId}");
+            if (responseChaine.IsSuccessStatusCode)
+            {
+                MessageBox.Show("Chaîne et tous les cinémas associés supprimés avec succès.");
+                LoadChaines(); // Mettez à jour l'affichage des chaînes
+            }
+            else
+            {
+                MessageBox.Show("Échec de la suppression de la chaîne.");
+            }
+        }
         private async void supprimerChaineToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (dgvChaine.CurrentRow != null)
             {
                 int chaineId = Convert.ToInt32(dgvChaine.CurrentRow.Cells["ch_id"].Value);
-                HttpResponseMessage response = await client.DeleteAsync("https://localhost:7013/Admin/Chaine/DelChaines/" + chaineId);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    LoadChaines();
-                }
-                else
-                {
-                    var responseContent = await response.Content.ReadAsStringAsync();
-                    MessageBox.Show("La suppression de la chaîne a échoué Détails : " + responseContent);
-                }
+                await SupprimerChaineEtCinemas(chaineId);
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner une chaîne à supprimer.");
             }
         }
 
@@ -194,7 +219,7 @@ namespace UIAdmin
 
                 if (response.IsSuccessStatusCode)
                 {
-                    LoadCinemasByChaine(_currentChaineId);
+                    await LoadCinemasByChaine(_currentChaineId);
                     dgvCine.Columns["ci_id"].Visible = false;
                 }
                 else
@@ -218,7 +243,7 @@ namespace UIAdmin
                 if (result == DialogResult.OK)
                 {
                     // Raffraichir les cinemas après le rajout
-                    LoadCinemasByChaine(chaineId);
+                    Task<List<CinemasDTO>> task = LoadCinemasByChaine(chaineId);
                 }
             }
             else
@@ -398,7 +423,7 @@ namespace UIAdmin
                     var result = frm.ShowDialog();
                     if (result == DialogResult.OK)
                     {
-                        LoadCinemasByChaine(_currentChaineId);
+                        Task<List<CinemasDTO>> task = LoadCinemasByChaine(_currentChaineId);
                     }
                 }
             }

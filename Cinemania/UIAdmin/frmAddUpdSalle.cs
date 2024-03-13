@@ -14,7 +14,7 @@ namespace UIAdmin
         public enum Mode { Ajout, Modification }
         private Mode _modeActuel;
         private SalleDTO _salleSelectionnee;
-        public frmAddUpdSalle(int cinemaId, Mode mode, SalleDTO salle = null)
+        public frmAddUpdSalle(int cinemaId, Mode mode, SalleDTO? salle = null)
         {
             InitializeComponent();
             InitialiserComboBoxes();
