@@ -1,11 +1,11 @@
 ﻿using Models;
 using Newtonsoft.Json;
 using System.Text;
-using static UIAdmin.frmAjoutSalle;
+using static UIAdmin.frmAddUpdSalle;
 
 namespace UIAdmin
 {
-    public partial class frmAjoutSalle : Form
+    public partial class frmAddUpdSalle : Form
     {
         private static readonly HttpClient client = new HttpClient();
         private int _qtePlacesRangee = 0;
@@ -14,7 +14,7 @@ namespace UIAdmin
         public enum Mode { Ajout, Modification }
         private Mode _modeActuel;
         private SalleDTO _salleSelectionnee;
-        public frmAjoutSalle(int cinemaId, Mode mode, SalleDTO salle = null)
+        public frmAddUpdSalle(int cinemaId, Mode mode, SalleDTO salle = null)
         {
             InitializeComponent();
             InitialiserComboBoxes();

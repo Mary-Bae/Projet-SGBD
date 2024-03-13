@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Interfaces;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Models;
 using System.Data;
@@ -130,6 +131,14 @@ namespace Repositories
 
             await _Connection.ExecuteAsync("[Admin].[Salle_Delete]", parameters, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task DeleteSallesByCinemaId(int cinemaId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@CinemaId", cinemaId);
+            await _Connection.ExecuteAsync("[Admin].[Salle_DeleteSallesByCinemaId]", parameters, commandType: CommandType.StoredProcedure);
+        }
+
 
         async Task ISalleRepo.UpdateSalle(int pId, MajSalleDTO pData)
         {

@@ -104,6 +104,12 @@ namespace Services
             ISalleRepo salleRepo = _adminRepo;
             await salleRepo.DeleteSalle(pId);
         }
+        public async Task DeleteSallesByCinemaId(int cinemaId)
+        {
+            ISalleRepo salleRepo = _adminRepo;
+            await salleRepo.DeleteSallesByCinemaId(cinemaId);
+        }
+
         async Task ISalleSvc.UpdateSalle(int pId, MajSalleDTO pData)
         {
             ISalleRepo salleRepo = _adminRepo;
