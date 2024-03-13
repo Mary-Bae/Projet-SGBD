@@ -115,20 +115,20 @@ namespace CinemaAPI.Controllers
             }
         }
 
-        [HttpDelete("Cinemas/DelCinemas/{id}")]
-        public async Task<ActionResult> DelCinemas(int id)
-        {
-            try
-            {
-                ICinemasSvc cinemasSvc = _adminSvc;
-                await cinemasSvc.DeleteCinemas(id);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+        //[HttpDelete("Cinemas/DelCinemas/{id}")]
+        //public async Task<ActionResult> DelCinemas(int id)
+        //{
+        //    try
+        //    {
+        //        ICinemasSvc cinemasSvc = _adminSvc;
+        //        await cinemasSvc.DeleteCinemas(id);
+        //        return Ok();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
 
         [HttpPut("Cinemas/MajCinemas/{id}")]
         public async Task<ActionResult> MajCinemas(int id, MajCinemasDTO data)
@@ -256,6 +256,28 @@ namespace CinemaAPI.Controllers
             {
                 return BadRequest($"Erreur lors de la récupération des détails de la salle : {ex.Message}");
             }
+        }
+
+        [HttpDelete("Cinemas/DelCinemas/{cinemaId}")]
+        public async Task<IActionResult> DeleteCinema(int cinemaId)
+        {
+            try
+            {
+                // Supprime d'abord toutes les salles associées au cinéma
+                ISalleSvc SallesSvc = _adminSvc;
+                await SallesSvc.DeleteSallesByCinemaId(cinemaId);
+
+                // Ensuite, supprime le cinéma
+                ICinemasSvc cinemasSvc = _adminSvc;
+                await cinemasSvc.DeleteCinemas(cinemaId);
+
+                return Ok("Cinéma et toutes les salles associées supprimés avec succès.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Erreur lors de la suppression : " + ex.Message);
+            }
+
         }
     }
 }
