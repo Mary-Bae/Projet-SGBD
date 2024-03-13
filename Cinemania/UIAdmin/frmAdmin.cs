@@ -82,6 +82,7 @@ namespace UIAdmin
             else
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
+                MessageBox.Show("Les cinemas n'ont pas pu être chargés. Détails : " + responseContent);
             }
         }
         private async Task AjouterNouvelleChaine(AjoutChaineDTO nouvelleChaine)
@@ -95,26 +96,25 @@ namespace UIAdmin
             }
             else
             {
-                MessageBox.Show("Erreur lors de l'ajout de la nouvelle chaîne. Veuillez réessayer.");
+                var responseContent = await response.Content.ReadAsStringAsync();
+                MessageBox.Show("Erreur lors de l'ajout de la nouvelle chaîne. Détails : " + responseContent);
             }
         }
 
         private async Task MettreAJourChaine(ChaineDTO chaine)
         {
-            // Sérialisez l'objet ChaineDTO en JSON
             StringContent content = new StringContent(JsonConvert.SerializeObject(chaine), Encoding.UTF8, "application/json");
-
-            // Envoyez une requête PUT à votre API pour mettre à jour la chaîne existante
             HttpResponseMessage response = await client.PutAsync("https://localhost:7013/Admin/Chaine/MajChaines/" + chaine.ch_id, content);
 
-            if (!response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode)
             {
-                MessageBox.Show("Erreur lors de la mise à jour de la chaîne. Veuillez réessayer.");
+                LoadChaines();
             }
             else
             {
-                // Optionnellement, vous pouvez confirmer que la mise à jour a réussi et rafraîchir la liste des chaînes
-                LoadChaines();
+                
+                var responseContent = await response.Content.ReadAsStringAsync();
+                MessageBox.Show("Erreur lors de la mise à jour de la chaîne. Détails : " + responseContent);
             }
         }
 
@@ -156,7 +156,8 @@ namespace UIAdmin
                 }
                 else
                 {
-                    MessageBox.Show("La suppression de la chaîne a échoué.");
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    MessageBox.Show("La suppression de la chaîne a échoué Détails : " + responseContent);
                 }
             }
         }
@@ -181,28 +182,7 @@ namespace UIAdmin
             else
             {
                 string responseContent = await response.Content.ReadAsStringAsync();
-                MessageBox.Show("Impossible de charger les données des cinémas.");
-            }
-        }
-
-        async private void btUpdate_Click(object sender, EventArgs e)
-        {
-            MajCinemasDTO oCinema = new MajCinemasDTO();
-            oCinema.ci_id = 1;
-            oCinema.ci_nom = "Kinepolis";
-            oCinema.ci_adresse = "";
-            oCinema.ci_ch_id = 1;
-
-            JsonContent content = JsonContent.Create(oCinema);
-            HttpResponseMessage response = await client.PutAsync("https://localhost:7013/Admin/Cinemas/MajCinemas/" + oCinema.ci_id, content);
-
-            if (response.IsSuccessStatusCode)
-            {
-                string responseContent = await response.Content.ReadAsStringAsync();
-            }
-            else
-            {
-                string responseContent = await response.Content.ReadAsStringAsync();
+                MessageBox.Show("Impossible de charger les données des cinémas. Details : " + responseContent);
             }
         }
         private async void supprimerCinémaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -219,7 +199,8 @@ namespace UIAdmin
                 }
                 else
                 {
-                    MessageBox.Show("La suppression a échoué.");
+                    string responseContent = await response.Content.ReadAsStringAsync();
+                    MessageBox.Show("La suppression a échoué. Details : " + responseContent);
                 }
             }
         }
@@ -239,7 +220,6 @@ namespace UIAdmin
                     // Raffraichir les cinemas après le rajout
                     LoadCinemasByChaine(chaineId);
                 }
-
             }
             else
             {
@@ -271,10 +251,12 @@ namespace UIAdmin
                 dgvSalles.Columns["sa_numeroSalle"].HeaderText = "Numéro de salle";
                 dgvSalles.Columns["sa_qtePlace"].HeaderText = "Nombre de places";
                 dgvSalles.Columns["sa_qteRangees"].HeaderText = "Nombre de rangées";
+                dgvSalles.Columns["sa_ci_id"].Visible = false;
             }
             else
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
+                MessageBox.Show("Les salles de cinema n'ont pas pu être chargées. Details : " + responseContent);
             }
         }
         private void btAddSalle_Click(object sender, EventArgs e)
@@ -283,7 +265,7 @@ namespace UIAdmin
             {
                 var cinemaId = Convert.ToInt32(dgvCine.CurrentRow.Cells["ci_id"].Value);
 
-                var formAjoutSalle = new frmAjoutSalle(cinemaId, frmAjoutSalle.Mode.Ajout);
+                var formAjoutSalle = new frmAddUpdSalle(cinemaId, frmAddUpdSalle.Mode.Ajout);
 
                 var result = formAjoutSalle.ShowDialog();
                 if (result == DialogResult.OK)
@@ -317,7 +299,8 @@ namespace UIAdmin
                     }
                     else
                     {
-                        MessageBox.Show("La suppression a échoué.");
+                        var responseContent = await response.Content.ReadAsStringAsync();
+                        MessageBox.Show("La suppression a échoué. Details : " + responseContent);
                     }
                 }
                 else
@@ -341,7 +324,7 @@ namespace UIAdmin
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Une erreur est survenue lors de la récupération des salles : {ex.Message}");
+                MessageBox.Show("Une erreur est survenue lors de la récupération des salles : " + ex.Message);
             }
             return 0; // Retourne 0 en cas d'erreur
         }
@@ -351,14 +334,12 @@ namespace UIAdmin
             if (dgvSalles.CurrentRow != null)
             {
                 int salleId = Convert.ToInt32(dgvSalles.CurrentRow.Cells["sa_id"].Value);
-
-                // Récupérez les détails complets de la salle via l'API
-                SalleDTO salleDetails = await GetSalleDetailsAsync(salleId);
+                SalleDTO salleDetails = await GetSalleDetails(salleId);
 
                 if (salleDetails != null)
                 {
-                    // Ouvrez le formulaire frmAjoutSalle en mode Modification avec les détails de la salle
-                    var formAjoutSalle = new frmAjoutSalle(salleDetails.sa_ci_id, frmAjoutSalle.Mode.Modification, salleDetails);
+                    // Ouvre le formulaire frmAjoutSalle en mode Modification avec les détails de la salle
+                    var formAjoutSalle = new frmAddUpdSalle(salleDetails.sa_ci_id, frmAddUpdSalle.Mode.Modification, salleDetails);
                     var result = formAjoutSalle.ShowDialog();
 
                     if (result == DialogResult.OK)
@@ -372,9 +353,8 @@ namespace UIAdmin
             {
                 MessageBox.Show("Veuillez sélectionner une salle à modifier.");
             }
-
         }
-        private async Task<SalleDTO> GetSalleDetailsAsync(int salleId)
+        private async Task<SalleDTO> GetSalleDetails(int salleId)
         {
             try
             {
@@ -388,15 +368,44 @@ namespace UIAdmin
                 }
                 else
                 {
-                    MessageBox.Show("Impossible de récupérer les détails de la salle.");
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    MessageBox.Show("Impossible de récupérer les détails de la salle. Details : " + responseContent);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erreur lors de la récupération des détails de la salle : {ex.Message}");
+                MessageBox.Show("Erreur lors de la récupération des détails de la salle : " + ex.Message);
             }
 
             return null;
+        }
+
+        private void modifierCinémaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvCine.CurrentRow != null)
+            {
+                var selectedRow = dgvCine.CurrentRow;
+                var selectedCinema = new MajCinemasDTO
+                {
+                    ci_id = Convert.ToInt32(selectedRow.Cells["ci_id"].Value),
+                    ci_nom = Convert.ToString(selectedRow.Cells["ci_nom"].Value),
+                    ci_adresse = Convert.ToString(selectedRow.Cells["ci_adresse"].Value),
+                    ci_ch_id = _currentChaineId
+                };
+
+                using (var frm = new frmUpdateCinema(selectedCinema))
+                {
+                    var result = frm.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        LoadCinemasByChaine(_currentChaineId);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner un cinéma à modifier.");
+            }
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace UIAdmin
 {
-    partial class frmAjoutSalle
+    partial class frmAddUpdSalle
     {
         /// <summary>
         /// Required designer variable.
