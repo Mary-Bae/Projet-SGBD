@@ -19,9 +19,9 @@ namespace Services
             return lst.ToList<T>();
         }
 
-        public async Task AddChaine(AjoutChaineDTO pData)
+        public async Task<bool> AjouterChaineCinemaEtSalle(ChaineCinemaEtSalleDTO chaineCinemaEtSalleDTO)
         {
-            await _adminRepo.AddChaine(pData);
+            return await _adminRepo.AjouterChaineCinemaEtSalle(chaineCinemaEtSalleDTO);
         }
         async Task IAdminSvc.DeleteChaine(int pId)
         {

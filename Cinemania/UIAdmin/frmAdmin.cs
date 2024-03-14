@@ -88,21 +88,21 @@ namespace UIAdmin
                 return new List<CinemasDTO>();
             }
         }
-        private async Task AjouterNouvelleChaine(AjoutChaineDTO nouvelleChaine)
-        {
-            StringContent content = new StringContent(JsonConvert.SerializeObject(nouvelleChaine), Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync("https://localhost:7013/Admin/Chaine/AddChaines/", content);
+        //private async Task AjouterNouvelleChaine(AjoutChaineDTO nouvelleChaine)
+        //{
+        //    StringContent content = new StringContent(JsonConvert.SerializeObject(nouvelleChaine), Encoding.UTF8, "application/json");
+        //    HttpResponseMessage response = await client.PostAsync("https://localhost:7013/Admin/Chaine/AddChaines/", content);
 
-            if (response.IsSuccessStatusCode)
-            {
-                LoadChaines(); // Rafraîchir les données après l'ajout pour s'assurer que les ID sont corrects
-            }
-            else
-            {
-                var responseContent = await response.Content.ReadAsStringAsync();
-                MessageBox.Show("Erreur lors de l'ajout de la nouvelle chaîne. Détails : " + responseContent);
-            }
-        }
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        LoadChaines(); // Rafraîchir les données après l'ajout pour s'assurer que les ID sont corrects
+        //    }
+        //    else
+        //    {
+        //        var responseContent = await response.Content.ReadAsStringAsync();
+        //        MessageBox.Show("Erreur lors de l'ajout de la nouvelle chaîne. Détails : " + responseContent);
+        //    }
+        //}
 
         private async Task MettreAJourChaine(ChaineDTO chaine)
         {
@@ -136,38 +136,32 @@ namespace UIAdmin
                         ChaineDTO chaineAMettreAJour = new ChaineDTO { ch_id = chaineId, ch_nom = chaineNom };
                         await MettreAJourChaine(chaineAMettreAJour);
                     }
-                    else
-                    {
-                        // Sinon, ce sera un ajout
-                        AjoutChaineDTO nouvelleChaine = new AjoutChaineDTO { ch_nom = chaineNom };
-                        await AjouterNouvelleChaine(nouvelleChaine);
-                    }
                 }
             }
         }
         private async Task SupprimerChaineEtCinemas(int chaineId)
         {
-            // Obtenez la liste des cinémas appartenant à la chaîne
+            // Obtient la liste des cinémas appartenant à la chaîne
             var cinemas = await LoadCinemasByChaine(chaineId);
 
-            // Supprimez chaque cinéma (ce qui devrait également supprimer leurs salles)
+            // Supprime chaque cinéma et leurs salles
             foreach (var cinema in cinemas)
             {
                 HttpResponseMessage responseCinema = await client.DeleteAsync($"https://localhost:7013/Admin/Cinemas/DelCinemas/{cinema.ci_id}");
                 if (!responseCinema.IsSuccessStatusCode)
                 {
-                    // Gestion des erreurs pour chaque cinéma, arrêtez le processus si nécessaire
-                    MessageBox.Show($"Échec de la suppression du cinéma ID {cinema.ci_id}. Processus interrompu.");
+                    // Gestion des erreurs pour chaque cinéma, arrêtera le processus
+                    MessageBox.Show("Échec de la suppression du cinéma ID : " + cinema.ci_id + ". Processus interrompu.");
                     return;
                 }
             }
 
-            // Une fois tous les cinémas supprimés, supprimez la chaîne
-            HttpResponseMessage responseChaine = await client.DeleteAsync($"https://localhost:7013/Admin/Chaine/DelChaines/{chaineId}");
+            // Une fois tous les cinémas supprimés, suppression de la chaîne
+            HttpResponseMessage responseChaine = await client.DeleteAsync("https://localhost:7013/Admin/Chaine/DelChaines/" + chaineId);
             if (responseChaine.IsSuccessStatusCode)
             {
                 MessageBox.Show("Chaîne et tous les cinémas associés supprimés avec succès.");
-                LoadChaines(); // Mettez à jour l'affichage des chaînes
+                LoadChaines();
             }
             else
             {
@@ -379,7 +373,9 @@ namespace UIAdmin
                 MessageBox.Show("Veuillez sélectionner une salle à modifier.");
             }
         }
-        private async Task<SalleDTO> GetSalleDetails(int salleId)
+
+        //Permet de récuperer les détails de la salle de cinéma pour qu'ils s'affichent dans les textbox lors de l'ouverture de la forme pour la modification de la salle
+        private async Task<SalleDTO?> GetSalleDetails(int salleId) 
         {
             try
             {

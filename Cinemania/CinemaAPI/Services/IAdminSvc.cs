@@ -5,9 +5,9 @@ namespace Interfaces
     public interface IAdminSvc : ICinemasSvc, ISalleSvc
     {
         Task<List<T>> GetChaine<T>();
-        Task AddChaine(AjoutChaineDTO ajoutChaine);
         Task DeleteChaine(int pId);
         Task UpdateChaine(int pId, MajChaineDTO majChaine);
+        Task<bool> AjouterChaineCinemaEtSalle(ChaineCinemaEtSalleDTO chaineCinemaEtSalleDTO);
 
     }
     public interface ICinemasSvc

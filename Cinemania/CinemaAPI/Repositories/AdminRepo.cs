@@ -31,6 +31,25 @@ namespace Repositories
             await _Connection.ExecuteAsync("[Admin].[Chaine_AddChaine]", parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<bool> AjouterChaineCinemaEtSalle(ChaineCinemaEtSalleDTO pData)
+        {
+            // Logique pour appeler la procédure stockée avec les paramètres du DTO
+            var parameters = new DynamicParameters(new
+            {
+                NomChaine = pData.NomChaine,
+                NomCinema = pData.NomCinema,
+                AdresseCinema = pData.AdresseCinema,
+                NumeroSalle = pData.NumeroSalle,
+                QteRangees = pData.QteRangees,
+                QtePlace = pData.QtePlace,
+                QtePlacesRangee = pData.QtePlacesRangee
+            });
+
+            await _Connection.ExecuteAsync("[Admin].[AjouterChaineCinemaEtSalle]", parameters, commandType: CommandType.StoredProcedure);
+            return true;
+        }
+
+
         public async Task DeleteChaine(int pId)
         {
             var parameters = new DynamicParameters();
