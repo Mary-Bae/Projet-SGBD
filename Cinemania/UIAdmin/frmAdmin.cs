@@ -428,6 +428,21 @@ namespace UIAdmin
                 MessageBox.Show("Veuillez sélectionner un cinéma à modifier.");
             }
         }
+
+        private void modifierChaineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btAddChaine_Click(object sender, EventArgs e)
+        {
+            var frmAjoutChaine = new frmAjoutChaine();
+            var result = frmAjoutChaine.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                LoadChaines();
+            }
+        }
     }
 }
 
