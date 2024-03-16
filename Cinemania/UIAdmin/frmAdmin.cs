@@ -88,21 +88,6 @@ namespace UIAdmin
                 return new List<CinemasDTO>();
             }
         }
-        //private async Task AjouterNouvelleChaine(AjoutChaineDTO nouvelleChaine)
-        //{
-        //    StringContent content = new StringContent(JsonConvert.SerializeObject(nouvelleChaine), Encoding.UTF8, "application/json");
-        //    HttpResponseMessage response = await client.PostAsync("https://localhost:7013/Admin/Chaine/AddChaines/", content);
-
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        LoadChaines(); // Rafraîchir les données après l'ajout pour s'assurer que les ID sont corrects
-        //    }
-        //    else
-        //    {
-        //        var responseContent = await response.Content.ReadAsStringAsync();
-        //        MessageBox.Show("Erreur lors de l'ajout de la nouvelle chaîne. Détails : " + responseContent);
-        //    }
-        //}
 
         private async Task MettreAJourChaine(ChaineDTO chaine)
         {
@@ -223,7 +208,6 @@ namespace UIAdmin
                 }
             }
         }
-
         private void btAjoutercinema_Click(object sender, EventArgs e)
         {
             if (dgvChaine.CurrentRow != null)
@@ -433,7 +417,6 @@ namespace UIAdmin
         {
 
         }
-
         private void btAddChaine_Click(object sender, EventArgs e)
         {
             var frmAjoutChaine = new frmAjoutChaine();

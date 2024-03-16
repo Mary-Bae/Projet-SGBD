@@ -14,40 +14,10 @@ namespace UIAdmin
             InitializeComponent();
             InitialiserComboBoxes();
         }
-
         private void InitialiserComboBoxes()
         {
-            //Quantité de rangées
-            for(int i = 1; i <= 5; i++)
-            {
-                cmbQteRangees.Items.Add(i);
-            }
-
-            //Quantité de places
-            for(int i = 5; i <= 50; i++)
-            {
-                cmbNbrPlace.Items.Add(i);
-            }
-        }
-        public void CalculerPlacesParRangee()
-        {
-            if (cmbNbrPlace.SelectedItem != null && cmbQteRangees.SelectedItem != null ) 
-            {
-                int totalPlaces = Convert.ToInt32(cmbNbrPlace.SelectedItem);
-                int totalRangees = Convert.ToInt32(cmbQteRangees.SelectedItem);
-
-                // Verifier si le total des places est divisible par le nombre de rangées sans reste
-                if (totalPlaces % totalRangees == 0)
-                {
-                    _qtePlacesRangee = totalPlaces / totalRangees;
-                    lblPlacesParRangee.Text = _qtePlacesRangee + " places par rangée";
-                }
-                else
-                {
-                    lblPlacesParRangee.Text = "Erreur : Le total des places doit être divisible par le nombre de rangées";
-                    _qtePlacesRangee = 0;
-                }
-            }
+            Utils.InitialiserQteRangees(cmbQteRangees);
+            Utils.InitialiserQtePlaces(cmbNbrPlace);
         }
         private async void btSave_Click(object sender, EventArgs e)
         {
@@ -93,7 +63,7 @@ namespace UIAdmin
         private async Task<bool> AjouterCinemaEtSalle(CinemaEtSalleDTO cinemaEtSalle)
         {
             var content = new StringContent(JsonConvert.SerializeObject(cinemaEtSalle), Encoding.UTF8, "application/json");
-            var response = await client.PostAsync("https://localhost:7013/Admin/AjouterCinemaEtSalle", content);
+            var response = await client.PostAsync("https://localhost:7013/Admin/Cinemas/AjouterCinema", content);
             return response.IsSuccessStatusCode;
         }
 
@@ -105,12 +75,26 @@ namespace UIAdmin
 
         private void cmbQteRangees_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CalculerPlacesParRangee();
+            MettreAJourPlacesParRangee();
         }
 
         private void cmbNbrPlace_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CalculerPlacesParRangee();
+            MettreAJourPlacesParRangee();
         }
+
+        private void MettreAJourPlacesParRangee()
+        {
+            if (cmbNbrPlace.SelectedItem != null && cmbQteRangees.SelectedItem != null)
+            {
+                int totalPlaces = Convert.ToInt32(cmbNbrPlace.SelectedItem);
+                int totalRangees = Convert.ToInt32(cmbQteRangees.SelectedItem);
+                string message;
+
+                _qtePlacesRangee = Utils.CalculerPlacesParRangee(totalPlaces, totalRangees, out message);
+                lblPlacesParRangee.Text = message;
+            }
+        }
+
     }
 }

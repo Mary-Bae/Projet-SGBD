@@ -34,7 +34,7 @@ namespace CinemaAPI.Controllers
             }
         }
 
-        [HttpPost("AjouterChaineCinemaEtSalle")]
+        [HttpPost("Chaine/AjouterChaine")]
         public async Task<IActionResult> AjouterChaineCinemaEtSalle(ChaineCinemaEtSalleDTO chaineCinemaEtSalle)
         {
             IAdminSvc adminSvc = _adminSvc;
@@ -178,7 +178,7 @@ namespace CinemaAPI.Controllers
             }
         }
 
-        [HttpPost("AjouterCinemaEtSalle")]
+        [HttpPost("Cinemas/AjouterCinema")]
         public async Task<IActionResult> AjouterCinemaEtSalle(CinemaEtSalleDTO cinemaEtSalleDTO)
         {
             ICinemasSvc cinemasSvc = _adminSvc;
