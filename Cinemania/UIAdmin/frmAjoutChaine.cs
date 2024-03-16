@@ -96,7 +96,6 @@ namespace UIAdmin
         {
             MettreAJourPlacesParRangee();
         }
-
         private void cmbNbrPlace_SelectedIndexChanged(object sender, EventArgs e)
         {
             MettreAJourPlacesParRangee();
