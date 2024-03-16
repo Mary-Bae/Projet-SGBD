@@ -1,7 +1,9 @@
-﻿using Interfaces;
+﻿using CustomErrors;
+using Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CinemaAPI.Controllers
 {
@@ -37,12 +39,16 @@ namespace CinemaAPI.Controllers
         [HttpPost("Chaine/AjouterChaine")]
         public async Task<IActionResult> AjouterChaineCinemaEtSalle(ChaineCinemaEtSalleDTO chaineCinemaEtSalle)
         {
-            IAdminSvc adminSvc = _adminSvc;
-
-            var success = await adminSvc.AjouterChaineCinemaEtSalle(chaineCinemaEtSalle);
-
-            if (success) return Ok();
-            else return BadRequest("Erreur lors de l'ajout de la chaine de cinéma.");
+            try
+            {
+                IAdminSvc adminSvc = _adminSvc;
+                await adminSvc.AjouterChaineCinemaEtSalle(chaineCinemaEtSalle);
+                return Ok();
+            }
+            catch (CustomError ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         

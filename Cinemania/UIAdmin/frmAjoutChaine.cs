@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using Microsoft.VisualBasic.Logging;
+using Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -60,9 +61,9 @@ namespace UIAdmin
                 QtePlacesRangee = _qtePlacesRangee
             };
 
-            bool isSuccess = await AjouterChaine(chaine);
+            var errorMessage = await AjouterChaine(chaine);
 
-            if (isSuccess)
+            if (string.IsNullOrEmpty(errorMessage))
             {
                 MessageBox.Show("Chaine de cinéma ajoutée avec succès.");
                 this.DialogResult = DialogResult.OK;
@@ -70,14 +71,36 @@ namespace UIAdmin
             }
             else
             {
-                MessageBox.Show("L'ajout de la chaine a échoué.");
+                MessageBox.Show(errorMessage);
             }
         }
-        private async Task<bool> AjouterChaine(ChaineCinemaEtSalleDTO chaine)
+        private async Task<string> AjouterChaine(ChaineCinemaEtSalleDTO chaine)
         {
-            var content = new StringContent(JsonConvert.SerializeObject(chaine), Encoding.UTF8, "application/json");
-            var response = await client.PostAsync("https://localhost:7013/Admin/Chaine/AjouterChaine", content);
-            return response.IsSuccessStatusCode;
+            try
+            {
+                var content = new StringContent(JsonConvert.SerializeObject(chaine), Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("https://localhost:7013/Admin/Chaine/AjouterChaine", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return string.Empty; // Opération réussie
+                }
+                else
+                {
+                    // Lire le contenu de la réponse pour obtenir le message d'erreur métier
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    var statusCode = response.StatusCode;
+                    // Ici, vous pouvez utiliser 'statusCode' pour affiner la gestion des erreurs
+                    Console.WriteLine("Échec de la requête : " + statusCode);
+                    return !string.IsNullOrWhiteSpace(errorContent) ? errorContent : "Échec de la requête avec le statut " + statusCode;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Ce bloc attrape les exceptions qui ne sont pas liées à des réponses HTTP d'erreur
+                Console.WriteLine("Une erreur est survenue lors de la communication avec l'API : " + ex.Message);
+                return "Une erreur inattendue est survenue.";
+            }
         }
         private void MettreAJourPlacesParRangee()
         {
