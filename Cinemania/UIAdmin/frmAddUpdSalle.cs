@@ -14,7 +14,7 @@ namespace UIAdmin
         public enum Mode { Ajout, Modification }
         private Mode _modeActuel;
         private SalleDTO _salleSelectionnee;
-        public frmAddUpdSalle(int cinemaId, Mode mode, SalleDTO salle = null)
+        public frmAddUpdSalle(int cinemaId, Mode mode, SalleDTO? salle = null)
         {
             InitializeComponent();
             InitialiserComboBoxes();
@@ -30,51 +30,19 @@ namespace UIAdmin
 
         private void InitialiserComboBoxes()
         {
-            //Numero de salle
-            for (int i = 2; i <= 20; i++)
-            {
-                cmbNumSalle.Items.Add(i);
-            }
-            //Quantité de rangées
-            for (int i = 1; i <= 5; i++)
-            {
-                cmbQteRangees.Items.Add(i);
-            }
-            //Quantité de places
-            for (int i = 5; i <= 50; i++)
-            {
-                cmbNbrPlace.Items.Add(i);
-            }
+            Utils.InitialiserNumSalle(cmbNumSalle);
+            Utils.InitialiserQteRangees(cmbQteRangees);
+            Utils.InitialiserQtePlaces(cmbNbrPlace);
         }
 
         private void PreremplirChamps(SalleDTO salle)
         {
-            cmbNumSalle.SelectedItem = salle.sa_numeroSalle.ToString();
-            cmbQteRangees.SelectedItem = salle.sa_qteRangees.ToString();
-            cmbNbrPlace.SelectedItem = salle.sa_qtePlace.ToString();
-            CalculerPlacesParRangee();
+            cmbNumSalle.SelectedItem = Convert.ToInt32(salle.sa_numeroSalle);
+            cmbQteRangees.SelectedItem = Convert.ToInt32(salle.sa_qteRangees);
+            cmbNbrPlace.SelectedItem = Convert.ToInt32(salle.sa_qtePlace);
+            MettreAJourPlacesParRangee();
         }
 
-        public void CalculerPlacesParRangee()
-        {
-            if (cmbNbrPlace.SelectedItem != null && cmbQteRangees.SelectedItem != null)
-            {
-                int totalPlaces = Convert.ToInt32(cmbNbrPlace.SelectedItem);
-                int totalRangees = Convert.ToInt32(cmbQteRangees.SelectedItem);
-
-                // Verifier si le total des places est divisible par le nombre de rangées sans reste
-                if (totalPlaces % totalRangees == 0)
-                {
-                    _qtePlacesRangee = totalPlaces / totalRangees;
-                    lblPlacesParRangee.Text = _qtePlacesRangee + " places par rangée";
-                }
-                else
-                {
-                    lblPlacesParRangee.Text = "Erreur : Le total des places doit être divisible par le nombre de rangées";
-                    _qtePlacesRangee = 0;
-                }
-            }
-        }
 
         private async void btSave_Click(object sender, EventArgs e)
         {
@@ -145,14 +113,27 @@ namespace UIAdmin
             return response.IsSuccessStatusCode;
         }
 
-        private void cmbNbrPlace_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CalculerPlacesParRangee();
-        }
-
         private void cmbQteRangees_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CalculerPlacesParRangee();
+            MettreAJourPlacesParRangee();
+        }
+
+        private void cmbNbrPlace_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MettreAJourPlacesParRangee();
+        }
+
+        private void MettreAJourPlacesParRangee()
+        {
+            if (cmbNbrPlace.SelectedItem != null && cmbQteRangees.SelectedItem != null)
+            {
+                int totalPlaces = Convert.ToInt32(cmbNbrPlace.SelectedItem);
+                int totalRangees = Convert.ToInt32(cmbQteRangees.SelectedItem);
+                string message;
+
+                _qtePlacesRangee = Utils.CalculerPlacesParRangee(totalPlaces, totalRangees, out message);
+                lblPlacesParRangee.Text = message;
+            }
         }
 
         private void btCancel_Click(object sender, EventArgs e)
@@ -164,18 +145,14 @@ namespace UIAdmin
         private async void cmbNumSalle_SelectedIndexChanged(object sender, EventArgs e)
         {
             int salleSelectionnee = Convert.ToInt32(cmbNumSalle.SelectedItem);
-            bool estUtilise = await NumeroSalleUtilise(_cinemaId, salleSelectionnee);
 
-            if (estUtilise)
-            {
-                lblAvertissement.Text = "Numéro de salle déjà utilisé pour ce cinéma.";
-            }
-            else
-            {
-                lblAvertissement.Text = ""; // Effacer l'avertissement si le numéro n'est pas utilisé
-            }
+            // Passer l'ID de la salle actuelle en mode Modification, sinon null en mode Ajout
+            int? salleIdExclue = _modeActuel == Mode.Modification ? _salleSelectionnee?.sa_id : null;
+            bool estUtilise = await NumeroSalleUtilise(_cinemaId, salleSelectionnee, salleIdExclue);
+
+            lblAvertissement.Text = estUtilise ? "Numéro de salle déjà utilisé pour ce cinéma." : "";
         }
-        private async Task<bool> NumeroSalleUtilise(int cinemaId, int numeroSalle)
+        private async Task<bool> NumeroSalleUtilise(int cinemaId, int numeroSalle, int? salleIdExclue = null)
         {
 
             try
@@ -187,8 +164,8 @@ namespace UIAdmin
                     string responseString = await response.Content.ReadAsStringAsync();
                     var salles = JsonConvert.DeserializeObject<List<SalleDTO>>(responseString);
 
-                    // Vérifie si une des salles utilise le numéro de salle spécifié
-                    return salles.Any(salle => salle.sa_numeroSalle == numeroSalle);
+                    // Vérifie si une des salles, autre que 'salleIdExclue', utilise le numéro de salle spécifié
+                    return salles.Any(salle => salle.sa_numeroSalle == numeroSalle && salle.sa_id != salleIdExclue);
                 }
                 else
                 {

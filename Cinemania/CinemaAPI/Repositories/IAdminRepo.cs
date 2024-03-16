@@ -6,9 +6,9 @@ namespace Interfaces
     public interface IAdminRepo : ICinemaRepo, ISalleRepo
     {
         Task<List<T>> GetChaine<T>();
-        Task AddChaine(AjoutChaineDTO pData);
         Task DeleteChaine(int pId);
         Task UpdateChaine(int pId, MajChaineDTO pData);
+        Task<bool> AjouterChaineCinemaEtSalle(ChaineCinemaEtSalleDTO chaineCinemaEtSalleDTO);
 
     }
     public interface ICinemaRepo
