@@ -1,6 +1,7 @@
 ﻿using Models;
 using Newtonsoft.Json;
 using System.Text;
+using System.Threading.Channels;
 
 namespace UIAdmin
 {
@@ -45,26 +46,49 @@ namespace UIAdmin
                 QtePlace = (int)cmbNbrPlace.SelectedItem,
                 QtePlacesRangee = _qtePlacesRangee
             };
+            var errorMessage = await AjouterCinemaEtSalle(cinemaEtSalleDTO);
 
-            bool isSuccess = await AjouterCinemaEtSalle(cinemaEtSalleDTO);
-
-            if (isSuccess)
+            if (string.IsNullOrEmpty(errorMessage))
             {
-                MessageBox.Show("Cinéma et salle ajoutés avec succès.");
+                MessageBox.Show("Cinéma ajouté avec succès.");
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             else
             {
-                MessageBox.Show("L'ajout du cinéma et de la salle a échoué.");
+                MessageBox.Show(errorMessage);
             }
         }
 
-        private async Task<bool> AjouterCinemaEtSalle(CinemaEtSalleDTO cinemaEtSalle)
+        private async Task<string> AjouterCinemaEtSalle(CinemaEtSalleDTO cinemaEtSalle)
         {
-            var content = new StringContent(JsonConvert.SerializeObject(cinemaEtSalle), Encoding.UTF8, "application/json");
-            var response = await client.PostAsync("https://localhost:7013/Admin/Cinemas/AjouterCinema", content);
-            return response.IsSuccessStatusCode;
+            try
+            {
+                var content = new StringContent(JsonConvert.SerializeObject(cinemaEtSalle), Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("https://localhost:7013/Admin/Cinemas/AjouterCinema", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return string.Empty; // Opération réussie
+                }
+                else
+                {
+                    // Lire le contenu de la réponse pour obtenir le message d'erreur métier
+                    var errorContent = await response.Content.ReadAsStringAsync();
+
+                    // Utilisation de 'statusCode' pour affiner la gestion des erreurs
+                    var statusCode = response.StatusCode;
+                    Console.WriteLine("Échec de la requête : " + statusCode);
+                    return !string.IsNullOrWhiteSpace(errorContent) ? errorContent : "Échec de la requête avec le statut " + statusCode;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Une erreur est survenue lors de la communication avec l'API : " + ex.Message);
+                return "Une erreur inattendue est survenue.";
+            }
+
+
         }
 
         private void btCancel_Click(object sender, EventArgs e)

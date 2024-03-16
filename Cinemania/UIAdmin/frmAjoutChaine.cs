@@ -89,15 +89,15 @@ namespace UIAdmin
                 {
                     // Lire le contenu de la réponse pour obtenir le message d'erreur métier
                     var errorContent = await response.Content.ReadAsStringAsync();
+
+                    // Utilisation de 'statusCode' pour affiner la gestion des erreurs
                     var statusCode = response.StatusCode;
-                    // Ici, vous pouvez utiliser 'statusCode' pour affiner la gestion des erreurs
                     Console.WriteLine("Échec de la requête : " + statusCode);
                     return !string.IsNullOrWhiteSpace(errorContent) ? errorContent : "Échec de la requête avec le statut " + statusCode;
                 }
             }
             catch (Exception ex)
             {
-                // Ce bloc attrape les exceptions qui ne sont pas liées à des réponses HTTP d'erreur
                 Console.WriteLine("Une erreur est survenue lors de la communication avec l'API : " + ex.Message);
                 return "Une erreur inattendue est survenue.";
             }
