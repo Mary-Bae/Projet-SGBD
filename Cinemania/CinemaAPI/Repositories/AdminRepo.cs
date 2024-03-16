@@ -1,10 +1,12 @@
-﻿using Dapper;
+﻿using CustomErrors;
+using Dapper;
 using Interfaces;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Models;
 using System.Data;
 using System.Reflection.Metadata.Ecma335;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Repositories
 {
@@ -33,20 +35,40 @@ namespace Repositories
 
         public async Task<bool> AjouterChaineCinemaEtSalle(ChaineCinemaEtSalleDTO pData)
         {
-            // Logique pour appeler la procédure stockée avec les paramètres du DTO
-            var parameters = new DynamicParameters(new
+            try
             {
-                NomChaine = pData.NomChaine,
-                NomCinema = pData.NomCinema,
-                AdresseCinema = pData.AdresseCinema,
-                NumeroSalle = pData.NumeroSalle,
-                QteRangees = pData.QteRangees,
-                QtePlace = pData.QtePlace,
-                QtePlacesRangee = pData.QtePlacesRangee
-            });
+                // Logique pour appeler la procédure stockée avec les paramètres du DTO
+                var parameters = new DynamicParameters(new
+                {
+                    NomChaine = pData.NomChaine,
+                    NomCinema = pData.NomCinema,
+                    AdresseCinema = pData.AdresseCinema,
+                    NumeroSalle = pData.NumeroSalle,
+                    QteRangees = pData.QteRangees,
+                    QtePlace = pData.QtePlace,
+                    QtePlacesRangee = pData.QtePlacesRangee
+                });
 
-            await _Connection.ExecuteAsync("[Admin].[AjouterChaineCinemaEtSalle]", parameters, commandType: CommandType.StoredProcedure);
-            return true;
+                await _Connection.ExecuteAsync("[Admin].[AjouterChaineCinemaEtSalle]", parameters, commandType: CommandType.StoredProcedure);
+                return true;
+            }
+            catch(SqlException ex)
+            {
+                if(ex.Number == 0x00000a29)
+                {
+                    throw new CustomError(ErreurCodeEnum.UK_CHAINE_NOM, ex);
+                }
+                if(ex.Number == 0x00000a43)
+                {
+                    throw new CustomError(ErreurCodeEnum.UK_CINEMA_NOM, ex);
+                }
+                throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
+            }
+            catch(Exception ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
+            }
+            
         }
 
 
