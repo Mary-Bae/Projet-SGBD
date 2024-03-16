@@ -187,12 +187,16 @@ namespace CinemaAPI.Controllers
         [HttpPost("Cinemas/AjouterCinema")]
         public async Task<IActionResult> AjouterCinemaEtSalle(CinemaEtSalleDTO cinemaEtSalleDTO)
         {
-            ICinemasSvc cinemasSvc = _adminSvc;
-
-            var success = await cinemasSvc.AjouterCinemaEtSalle(cinemaEtSalleDTO);
-
-            if (success) return Ok();
-            else return BadRequest("Erreur lors de l'ajout du cinéma et de la salle.");
+            try
+            {
+                ICinemasSvc cinemasSvc = _adminSvc;
+                await cinemasSvc.AjouterCinemaEtSalle(cinemaEtSalleDTO);
+                return Ok();
+            }
+            catch (CustomError ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpDelete("Salles/DelSalle/{id}")]
