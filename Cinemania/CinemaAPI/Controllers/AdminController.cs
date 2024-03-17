@@ -214,7 +214,6 @@ namespace CinemaAPI.Controllers
             }
         }
 
-
         [HttpPut("Salles/MajSalle/{id}")]
         public async Task<ActionResult> MajSalle(int id, MajSalleDTO data)
         {

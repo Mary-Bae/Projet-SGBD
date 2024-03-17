@@ -136,6 +136,12 @@ namespace Repositories
         }
         async Task ISalleRepo.AddSalle(AjoutSalleDTO pData)
         {
+            if (pData.sa_qtePlace <= 4 || pData.sa_qteRangees <= 0)
+            {
+                throw new CustomError(ErreurCodeEnum.NombreInvalide);
+            }
+
+            try {    
             var parameters = new DynamicParameters();
             parameters.Add("@NumeroSalle", pData.sa_numeroSalle);
             parameters.Add("@QtePlace", pData.sa_qtePlace);
@@ -144,8 +150,29 @@ namespace Repositories
             parameters.Add("@CinemaId", pData.sa_ci_id);
 
             await _Connection.ExecuteAsync("[Admin].[Salle_AddSalle]", parameters, commandType: CommandType.StoredProcedure);
-        }
 
+             if (pData.sa_qtePlace <= 4 || pData.sa_qteRangees <= 0)
+              {
+                throw new CustomError(ErreurCodeEnum.NombreInvalide);
+              }
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 0x00000a29)
+                {
+                    throw new CustomError(ErreurCodeEnum.UK_SALLE_NUMBER, ex);
+                }
+                if (ex.Number == 0x00000223)
+                {
+                    throw new CustomError(ErreurCodeEnum.FK_SALLE_CINEMA, ex);
+                }
+                throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
+            }
+        }
         public async Task<bool> AjouterCinemaEtSalle(CinemaEtSalleDTO cinemaEtSalleDTO)
         {
             try {
@@ -175,10 +202,7 @@ namespace Repositories
                 throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
             }
         }
-
-
-
-async Task ISalleRepo.DeleteSalle(int pId)
+        async Task ISalleRepo.DeleteSalle(int pId)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@id", pId);
@@ -192,10 +216,10 @@ async Task ISalleRepo.DeleteSalle(int pId)
             parameters.Add("@CinemaId", cinemaId);
             await _Connection.ExecuteAsync("[Admin].[Salle_DeleteSallesByCinemaId]", parameters, commandType: CommandType.StoredProcedure);
         }
-
-
         async Task ISalleRepo.UpdateSalle(int pId, MajSalleDTO pData)
         {
+          try
+          {
             var parameters = new DynamicParameters();
             parameters.Add("@id", pId);
             parameters.Add("@NumeroSalle", pData.sa_numeroSalle);
@@ -205,7 +229,20 @@ async Task ISalleRepo.DeleteSalle(int pId)
             parameters.Add("@CinemaId", pData.sa_ci_id);
 
             await _Connection.ExecuteAsync("[Admin].[Salle_Update]", parameters, commandType: CommandType.StoredProcedure);
-        }
+          }
+          catch (SqlException ex)
+          {
+              if (ex.Number == 0x00000a29)
+              {
+                  throw new CustomError(ErreurCodeEnum.UK_SALLE_NUMBER, ex);
+              }
+              throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
+          }
+          catch (Exception ex)
+          {
+              throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
+          }
+      }
         public async Task<SalleDTO> GetSalleBySalleId(int salleId)
         {
             var parameters = new DynamicParameters();

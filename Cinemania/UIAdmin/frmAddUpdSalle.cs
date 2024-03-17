@@ -1,6 +1,7 @@
 ﻿using Models;
 using Newtonsoft.Json;
 using System.Text;
+using System.Threading.Tasks;
 using static UIAdmin.frmAddUpdSalle;
 
 namespace UIAdmin
@@ -46,6 +47,8 @@ namespace UIAdmin
 
         private async void btSave_Click(object sender, EventArgs e)
         {
+            string resultMessage;
+
             if (cmbNumSalle.SelectedItem == null || cmbQteRangees.SelectedItem == null || cmbNbrPlace.SelectedItem == null)
             {
                 MessageBox.Show("Veuillez sélectionner des valeurs pour tous les champs.");
@@ -71,7 +74,7 @@ namespace UIAdmin
                     sa_ci_id = _cinemaId
                 };
 
-                isSuccess = await AjouterSalle(salleDTO);
+                resultMessage = await AjouterSalle(salleDTO);
             }
             else // Mode.Modification
             {
@@ -85,39 +88,56 @@ namespace UIAdmin
                     sa_ci_id = _cinemaId
                 };
 
-                isSuccess = await ModifierSalle(salleDTO);
+                resultMessage = await ModifierSalle(salleDTO);
             }
 
-            if (isSuccess)
+            if (string.IsNullOrEmpty(resultMessage))
             {
-                MessageBox.Show(_modeActuel == Mode.Ajout ? "Salle de cinéma ajoutée avec succès." : "Salle de cinéma modifiée avec succès.");
+                MessageBox.Show("Opération réussie.");
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             else
             {
-                MessageBox.Show(_modeActuel == Mode.Ajout ? "L'ajout de la salle de cinéma a échoué." : "La modification de la salle de cinéma a échoué.");
+                MessageBox.Show(resultMessage); // Afficher le message d'erreur retourné par l'API
             }
         }
-        private async Task<bool> AjouterSalle(AjoutSalleDTO Salle)
+        private async Task<string> AjouterSalle(AjoutSalleDTO Salle)
         {
             var content = new StringContent(JsonConvert.SerializeObject(Salle), Encoding.UTF8, "application/json");
             var response = await client.PostAsync("https://localhost:7013/Admin/Salles/AjoutSalle", content);
-            return response.IsSuccessStatusCode;
-        }
 
-        private async Task<bool> ModifierSalle(MajSalleDTO salle)
+            if (response.IsSuccessStatusCode)
+            {
+                return string.Empty; // Opération réussie
+            }
+            else
+            {
+                // Lire le contenu de la réponse pour obtenir le message d'erreur
+                var errorContent = await response.Content.ReadAsStringAsync();
+                return !string.IsNullOrWhiteSpace(errorContent) ? errorContent : "Échec de l'ajout de la salle.";
+            }
+        }
+        private async Task<string> ModifierSalle(MajSalleDTO salle)
         {
             var content = new StringContent(JsonConvert.SerializeObject(salle), Encoding.UTF8, "application/json");
             var response = await client.PutAsync("https://localhost:7013/Admin/Salles/MajSalle/" + salle.sa_id, content);
-            return response.IsSuccessStatusCode;
-        }
 
+            if (response.IsSuccessStatusCode)
+            {
+                return string.Empty; // Opération réussie
+            }
+            else
+            {
+                // Lire le contenu de la réponse pour obtenir le message d'erreur
+                var errorContent = await response.Content.ReadAsStringAsync();
+                return !string.IsNullOrWhiteSpace(errorContent) ? errorContent : "Échec de la modification de la salle.";
+            }
+        }
         private void cmbQteRangees_SelectedIndexChanged(object sender, EventArgs e)
         {
             MettreAJourPlacesParRangee();
         }
-
         private void cmbNbrPlace_SelectedIndexChanged(object sender, EventArgs e)
         {
             MettreAJourPlacesParRangee();
