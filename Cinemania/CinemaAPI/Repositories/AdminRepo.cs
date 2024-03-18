@@ -137,17 +137,11 @@ namespace Repositories
         async Task ISalleRepo.AddSalle(AjoutSalleDTO pData)
         {
             if (pData.sa_qtePlace <= 4 || pData.sa_qteRangees <= 0)
-            {
                 throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
-            }
             if (pData.sa_numeroSalle <= 0)
-            {
                 throw new CustomError(ErreurCodeEnum.NumeroInvalide);
-            }
-            if(pData.sa_qtePlace % pData.sa_qteRangees != 0)
-            {
+            if (pData.sa_qtePlace % pData.sa_qteRangees != 0)
                 throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
-            }
 
             try {    
             var parameters = new DynamicParameters();
@@ -223,17 +217,12 @@ namespace Repositories
         async Task ISalleRepo.UpdateSalle(int pId, MajSalleDTO pData)
         {
             if (pData.sa_qtePlace <= 4 || pData.sa_qteRangees <= 0)
-            {
                 throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
-            }
             if (pData.sa_numeroSalle <= 0)
-            {
                 throw new CustomError(ErreurCodeEnum.NumeroInvalide);
-            }
             if (pData.sa_qtePlace % pData.sa_qteRangees != 0)
-            {
                 throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
-            }
+
             try
           {
             var parameters = new DynamicParameters();
