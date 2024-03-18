@@ -9,7 +9,8 @@ namespace CustomErrors
         UK_SALLE_NUMBER,
         FK_SALLE_CINEMA,
         ErreurSQL,
-        NombreInvalide,
+        QuantiteMinimaleDePlaces,
+        NumeroInvalide,
         ErreurGenerale
     }
     public class CustomError : Exception
@@ -44,7 +45,7 @@ namespace CustomErrors
                     _messageToReturn = "Ajout impossible : Il ne peut pas y avoir deux fois le même numero de salle pour un cinéma ";
                     break;
                 case ErreurCodeEnum.FK_SALLE_CINEMA:
-                    _messageToReturn = "Ajout impossible : Une salle de cinema doit appartenir à un cinema ";
+                    _messageToReturn = "Une salle de cinema doit appartenir à un cinema ";
                     break;
                 case ErreurCodeEnum.ErreurSQL:
                     _messageToReturn = "Erreur liée à la base de données SQL.";
@@ -52,8 +53,11 @@ namespace CustomErrors
                 case ErreurCodeEnum.ErreurGenerale:
                     _messageToReturn = "Une erreur générale s'est produite.";
                     break;
-                case ErreurCodeEnum.NombreInvalide:
-                    _messageToReturn = "Il doit y avoir au moins 5 places de cinema et au moins une rangée.";
+                case ErreurCodeEnum.QuantiteMinimaleDePlaces:
+                    _messageToReturn = "Le nombre de places de cinéma n'est pas correct.";
+                    break;
+                case ErreurCodeEnum.NumeroInvalide:
+                    _messageToReturn = "Veuillez rentrer un numero de salle valide.";
                     break;
                 default:
                     _messageToReturn = "Erreur non reconnue";

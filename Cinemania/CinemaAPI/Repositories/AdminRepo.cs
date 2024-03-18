@@ -138,7 +138,15 @@ namespace Repositories
         {
             if (pData.sa_qtePlace <= 4 || pData.sa_qteRangees <= 0)
             {
-                throw new CustomError(ErreurCodeEnum.NombreInvalide);
+                throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
+            }
+            if (pData.sa_numeroSalle <= 0)
+            {
+                throw new CustomError(ErreurCodeEnum.NumeroInvalide);
+            }
+            if(pData.sa_qtePlace % pData.sa_qteRangees != 0)
+            {
+                throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
             }
 
             try {    
@@ -151,10 +159,6 @@ namespace Repositories
 
             await _Connection.ExecuteAsync("[Admin].[Salle_AddSalle]", parameters, commandType: CommandType.StoredProcedure);
 
-             if (pData.sa_qtePlace <= 4 || pData.sa_qteRangees <= 0)
-              {
-                throw new CustomError(ErreurCodeEnum.NombreInvalide);
-              }
             }
             catch (SqlException ex)
             {
@@ -218,7 +222,19 @@ namespace Repositories
         }
         async Task ISalleRepo.UpdateSalle(int pId, MajSalleDTO pData)
         {
-          try
+            if (pData.sa_qtePlace <= 4 || pData.sa_qteRangees <= 0)
+            {
+                throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
+            }
+            if (pData.sa_numeroSalle <= 0)
+            {
+                throw new CustomError(ErreurCodeEnum.NumeroInvalide);
+            }
+            if (pData.sa_qtePlace % pData.sa_qteRangees != 0)
+            {
+                throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
+            }
+            try
           {
             var parameters = new DynamicParameters();
             parameters.Add("@id", pId);

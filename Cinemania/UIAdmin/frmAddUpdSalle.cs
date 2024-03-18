@@ -48,19 +48,6 @@ namespace UIAdmin
         private async void btSave_Click(object sender, EventArgs e)
         {
             string resultMessage;
-
-            if (cmbNumSalle.SelectedItem == null || cmbQteRangees.SelectedItem == null || cmbNbrPlace.SelectedItem == null)
-            {
-                MessageBox.Show("Veuillez sélectionner des valeurs pour tous les champs.");
-                return;
-            }
-
-            if (_qtePlacesRangee <= 0)
-            {
-                MessageBox.Show("Le nombre de places par rangée n'est pas juste.");
-                return;
-            }
-
             bool isSuccess;
 
             if (_modeActuel == Mode.Ajout)
