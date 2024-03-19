@@ -35,7 +35,7 @@ namespace UIAdmin
             else
             {
                 string responseContent = await response.Content.ReadAsStringAsync();
-                MessageBox.Show("La mise à jour du cinéma a échoué. Détails : " + responseContent);
+                MessageBox.Show(responseContent);
             }
         }
         private void btCancel_Click(object sender, EventArgs e)

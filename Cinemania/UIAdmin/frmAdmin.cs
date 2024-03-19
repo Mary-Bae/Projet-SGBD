@@ -102,7 +102,8 @@ namespace UIAdmin
             {
                 
                 var responseContent = await response.Content.ReadAsStringAsync();
-                MessageBox.Show("Erreur lors de la mise à jour de la chaîne. Détails : " + responseContent);
+                MessageBox.Show(responseContent);
+                LoadChaines();
             }
         }
 

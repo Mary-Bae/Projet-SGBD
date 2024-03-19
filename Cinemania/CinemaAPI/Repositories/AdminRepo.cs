@@ -5,6 +5,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Models;
 using System.Data;
+using System.IO;
 using System.Reflection.Metadata.Ecma335;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -25,16 +26,16 @@ namespace Repositories
             return lst.ToList();
         }
 
-        public async Task AddChaine(AjoutChaineDTO pData)
-        {
-            var parameters = new DynamicParameters();
-            parameters.Add("@Nom", pData.ch_nom);
-
-            await _Connection.ExecuteAsync("[Admin].[Chaine_AddChaine]", parameters, commandType: CommandType.StoredProcedure);
-        }
-
         public async Task<bool> AjouterChaineCinemaEtSalle(ChaineCinemaEtSalleDTO pData)
         {
+            if (pData.QtePlace <= 4 || pData.QteRangees <= 0)
+                throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
+            if (pData.NumeroSalle <= 0)
+                throw new CustomError(ErreurCodeEnum.NumeroInvalide);
+            if (pData.QtePlace % pData.QteRangees != 0)
+                throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
+            if(pData.NomChaine == "" || pData.NomChaine == null || pData.NomCinema == "" || pData.NomCinema == null)
+                throw new CustomError(ErreurCodeEnum.ChampVide);
             try
             {
                 // Logique pour appeler la procédure stockée avec les paramètres du DTO
@@ -55,13 +56,9 @@ namespace Repositories
             catch(SqlException ex)
             {
                 if(ex.Number == 0x00000a29)
-                {
                     throw new CustomError(ErreurCodeEnum.UK_CHAINE_NOM, ex);
-                }
                 if(ex.Number == 0x00000a43)
-                {
                     throw new CustomError(ErreurCodeEnum.UK_CINEMA_NOM, ex);
-                }
                 throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
             }
             catch(Exception ex)
@@ -69,7 +66,6 @@ namespace Repositories
                 throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
             }       
         }
-
 
         public async Task DeleteChaine(int pId)
         {
@@ -81,11 +77,26 @@ namespace Repositories
 
         public async Task UpdateChaine(int pId, MajChaineDTO pData)
         {
-            var parameters = new DynamicParameters();
-            parameters.Add("@id", pId);
-            parameters.Add("@NouveauNom", pData.ch_nom);
+            if (pData.ch_nom == "" || pData.ch_nom == null)
+                throw new CustomError(ErreurCodeEnum.ChampVide);
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@id", pId);
+                parameters.Add("@NouveauNom", pData.ch_nom);
 
-            await _Connection.ExecuteAsync("[Admin].[Chaine_Update]", parameters, commandType: CommandType.StoredProcedure);
+                await _Connection.ExecuteAsync("[Admin].[Chaine_Update]", parameters, commandType: CommandType.StoredProcedure);
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 0x00000a29)
+                    throw new CustomError(ErreurCodeEnum.UK_CHAINE_NOM, ex);
+                throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
+            }
         }
 
         // Cinemas
@@ -111,13 +122,29 @@ namespace Repositories
     
         async Task ICinemaRepo.UpdateCinema(int pId, MajCinemasDTO pData)
         {
-            var parameters = new DynamicParameters();
-            parameters.Add("@id", pId);
-            parameters.Add("@Nom", pData.ci_nom);
-            parameters.Add("@Adresse", pData.ci_adresse);
-            parameters.Add("@CineChaine", pData.ci_ch_id);
+            if (pData.ci_nom == "" || pData.ci_nom == null)
+                throw new CustomError(ErreurCodeEnum.ChampVide);
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@id", pId);
+                parameters.Add("@Nom", pData.ci_nom);
+                parameters.Add("@Adresse", pData.ci_adresse);
+                parameters.Add("@CineChaine", pData.ci_ch_id);
 
-            await _Connection.ExecuteAsync("[Admin].[Cinema_Update]", parameters, commandType: CommandType.StoredProcedure);
+                await _Connection.ExecuteAsync("[Admin].[Cinema_Update]", parameters, commandType: CommandType.StoredProcedure);
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 0x00000223)
+                    throw new CustomError(ErreurCodeEnum.FK_SALLE_CINEMA, ex);
+                throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
+            }
+
         }
 
         // Salles de cinema
@@ -157,13 +184,9 @@ namespace Repositories
             catch (SqlException ex)
             {
                 if (ex.Number == 0x00000a29)
-                {
                     throw new CustomError(ErreurCodeEnum.UK_SALLE_NUMBER, ex);
-                }
                 if (ex.Number == 0x00000223)
-                {
                     throw new CustomError(ErreurCodeEnum.FK_SALLE_CINEMA, ex);
-                }
                 throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
             }
             catch (Exception ex)
@@ -173,16 +196,22 @@ namespace Repositories
         }
         public async Task<bool> AjouterCinemaEtSalle(CinemaEtSalleDTO cinemaEtSalleDTO)
         {
+            if (cinemaEtSalleDTO.QtePlace <= 4 || cinemaEtSalleDTO.QteRangees <= 0)
+                throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
+            if (cinemaEtSalleDTO.QtePlace % cinemaEtSalleDTO.QteRangees != 0)
+                throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
+            if (cinemaEtSalleDTO.NomCinema == "" || cinemaEtSalleDTO.NomCinema == null)
+                throw new CustomError(ErreurCodeEnum.ChampVide);
             try {
-            var parameters = new DynamicParameters(new
-            {
-                NomCinema = cinemaEtSalleDTO.NomCinema,
-                AdresseCinema = cinemaEtSalleDTO.AdresseCinema,
-                CineChaineId = cinemaEtSalleDTO.CineChaineId,
-                NumeroSalle = cinemaEtSalleDTO.NumeroSalle,
-                QteRangees = cinemaEtSalleDTO.QteRangees,
-                QtePlace = cinemaEtSalleDTO.QtePlace,
-                QtePlacesRangee = cinemaEtSalleDTO.QtePlacesRangee
+                var parameters = new DynamicParameters(new
+                {
+                    NomCinema = cinemaEtSalleDTO.NomCinema,
+                    AdresseCinema = cinemaEtSalleDTO.AdresseCinema,
+                    CineChaineId = cinemaEtSalleDTO.CineChaineId,
+                    NumeroSalle = cinemaEtSalleDTO.NumeroSalle,
+                    QteRangees = cinemaEtSalleDTO.QteRangees,
+                    QtePlace = cinemaEtSalleDTO.QtePlace,
+                    QtePlacesRangee = cinemaEtSalleDTO.QtePlacesRangee
             });
                 await _Connection.ExecuteAsync("[Admin].[AjouterCinemaEtSalle]", parameters, commandType: CommandType.StoredProcedure);
                 return true;
@@ -190,9 +219,7 @@ namespace Repositories
             catch (SqlException ex)
             {
                 if (ex.Number == 0x00000a43)
-                {
                     throw new CustomError(ErreurCodeEnum.UK_CINEMA_NOM, ex);
-                }
                 throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
             }
             catch (Exception ex)

@@ -22,18 +22,6 @@ namespace UIAdmin
         }
         private async void btSave_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtNomCinema.Text) || cmbQteRangees.SelectedItem == null || cmbNbrPlace.SelectedItem == null)
-            {
-                MessageBox.Show("Veuillez remplir tous les champs requis");
-                return;
-            }
-
-            // Le total des places doit être divisible par le nombre de rangées
-            if(_qtePlacesRangee <= 0)
-            {
-                MessageBox.Show("Le nombre de places par rangée n'est pas juste");
-                return;
-            }
             var cinemaEtSalleDTO = new CinemaEtSalleDTO
             {
                 NomCinema = txtNomCinema.Text,
@@ -87,7 +75,6 @@ namespace UIAdmin
                 Console.WriteLine("Une erreur est survenue lors de la communication avec l'API : " + ex.Message);
                 return "Une erreur inattendue est survenue.";
             }
-
 
         }
 

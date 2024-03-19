@@ -10,6 +10,7 @@ namespace CustomErrors
         FK_SALLE_CINEMA,
         ErreurSQL,
         QuantiteMinimaleDePlaces,
+        ChampVide,
         NumeroInvalide,
         ErreurGenerale
     }
@@ -58,6 +59,9 @@ namespace CustomErrors
                     break;
                 case ErreurCodeEnum.NumeroInvalide:
                     _messageToReturn = "Veuillez rentrer un numero de salle valide.";
+                    break;
+                case ErreurCodeEnum.ChampVide:
+                    _messageToReturn = "Les champs obligatoires ne peuvent pas être vide.";
                     break;
                 default:
                     _messageToReturn = "Erreur non reconnue";
