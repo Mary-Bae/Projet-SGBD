@@ -7,6 +7,7 @@ using Models;
 using System.Data;
 using System.IO;
 using System.Reflection.Metadata.Ecma335;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Repositories
@@ -69,10 +70,10 @@ namespace Repositories
 
         public async Task DeleteChaine(int pId)
         {
-            var parameters = new DynamicParameters();
-            parameters.Add("@id", pId);
+                var parameters = new DynamicParameters();
+                parameters.Add("@id", pId);
 
-            await _Connection.ExecuteAsync("[Admin].[Chaine_Delete]", parameters, commandType: CommandType.StoredProcedure);
+                await _Connection.ExecuteAsync("[Admin].[Chaine_Delete]", parameters, commandType: CommandType.StoredProcedure);
         }
 
         public async Task UpdateChaine(int pId, MajChaineDTO pData)
@@ -114,10 +115,23 @@ namespace Repositories
         }
         async Task ICinemaRepo.DeleteCinemas(int pId)
         {
-            var parameters = new DynamicParameters();
-            parameters.Add("@id", pId);
+            
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@id", pId);
 
-            await _Connection.ExecuteAsync("[Admin].[Cinema_Delete]", parameters, commandType: CommandType.StoredProcedure);
+                await _Connection.ExecuteAsync("[Admin].[Cinema_Delete]", parameters, commandType: CommandType.StoredProcedure);
+            }
+
+            //Attention, revoir le try catch ici : Une chaine doit avoir au moins un cinéma !!!
+            catch(SqlException ex)
+            {
+                if (ex.Number == 0x00000a29)
+                    throw new CustomError(ErreurCodeEnum.UK_CHAINE_NOM, ex);
+                throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
+            }
+
         }
     
         async Task ICinemaRepo.UpdateCinema(int pId, MajCinemasDTO pData)
