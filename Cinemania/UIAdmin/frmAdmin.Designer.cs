@@ -83,19 +83,19 @@
             this.supprimerCinémaToolStripMenuItem,
             this.modifierCinémaToolStripMenuItem});
             this.MenuCinema.Name = "MenuCinema";
-            this.MenuCinema.Size = new System.Drawing.Size(202, 52);
+            this.MenuCinema.Size = new System.Drawing.Size(174, 48);
             // 
             // supprimerCinémaToolStripMenuItem
             // 
             this.supprimerCinémaToolStripMenuItem.Name = "supprimerCinémaToolStripMenuItem";
-            this.supprimerCinémaToolStripMenuItem.Size = new System.Drawing.Size(201, 24);
+            this.supprimerCinémaToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.supprimerCinémaToolStripMenuItem.Text = "Supprimer Cinéma";
             this.supprimerCinémaToolStripMenuItem.Click += new System.EventHandler(this.supprimerCinémaToolStripMenuItem_Click);
             // 
             // modifierCinémaToolStripMenuItem
             // 
             this.modifierCinémaToolStripMenuItem.Name = "modifierCinémaToolStripMenuItem";
-            this.modifierCinémaToolStripMenuItem.Size = new System.Drawing.Size(201, 24);
+            this.modifierCinémaToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.modifierCinémaToolStripMenuItem.Text = "Modifier Cinéma";
             this.modifierCinémaToolStripMenuItem.Click += new System.EventHandler(this.modifierCinémaToolStripMenuItem_Click);
             // 
@@ -105,12 +105,12 @@
             this.MenuChaine.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.supprimerChaineToolStripMenuItem});
             this.MenuChaine.Name = "MenuChaine";
-            this.MenuChaine.Size = new System.Drawing.Size(197, 28);
+            this.MenuChaine.Size = new System.Drawing.Size(170, 26);
             // 
             // supprimerChaineToolStripMenuItem
             // 
             this.supprimerChaineToolStripMenuItem.Name = "supprimerChaineToolStripMenuItem";
-            this.supprimerChaineToolStripMenuItem.Size = new System.Drawing.Size(196, 24);
+            this.supprimerChaineToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.supprimerChaineToolStripMenuItem.Text = "Supprimer Chaine";
             this.supprimerChaineToolStripMenuItem.Click += new System.EventHandler(this.supprimerChaineToolStripMenuItem_Click);
             // 
@@ -121,19 +121,19 @@
             this.supprimerSalleDeCinemaToolStripMenuItem,
             this.modifierSalleDeCinemaToolStripMenuItem});
             this.MenuSalle.Name = "MenuSalle";
-            this.MenuSalle.Size = new System.Drawing.Size(255, 52);
+            this.MenuSalle.Size = new System.Drawing.Size(214, 48);
             // 
             // supprimerSalleDeCinemaToolStripMenuItem
             // 
             this.supprimerSalleDeCinemaToolStripMenuItem.Name = "supprimerSalleDeCinemaToolStripMenuItem";
-            this.supprimerSalleDeCinemaToolStripMenuItem.Size = new System.Drawing.Size(254, 24);
+            this.supprimerSalleDeCinemaToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.supprimerSalleDeCinemaToolStripMenuItem.Text = "Supprimer salle de cinema";
             this.supprimerSalleDeCinemaToolStripMenuItem.Click += new System.EventHandler(this.supprimerSalleDeCinemaToolStripMenuItem_Click);
             // 
             // modifierSalleDeCinemaToolStripMenuItem
             // 
             this.modifierSalleDeCinemaToolStripMenuItem.Name = "modifierSalleDeCinemaToolStripMenuItem";
-            this.modifierSalleDeCinemaToolStripMenuItem.Size = new System.Drawing.Size(254, 24);
+            this.modifierSalleDeCinemaToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.modifierSalleDeCinemaToolStripMenuItem.Text = "Modifier salle de cinema";
             this.modifierSalleDeCinemaToolStripMenuItem.Click += new System.EventHandler(this.modifierSalleDeCinemaToolStripMenuItem_Click);
             // 
@@ -144,10 +144,9 @@
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1185, 928);
+            this.tabControl1.Size = new System.Drawing.Size(1037, 696);
             this.tabControl1.TabIndex = 3;
             // 
             // tabAdmin
@@ -155,11 +154,10 @@
             this.tabAdmin.BackColor = System.Drawing.Color.Black;
             this.tabAdmin.Controls.Add(this.tableLayoutPanel1);
             this.tabAdmin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tabAdmin.Location = new System.Drawing.Point(4, 37);
-            this.tabAdmin.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabAdmin.Location = new System.Drawing.Point(4, 30);
             this.tabAdmin.Name = "tabAdmin";
-            this.tabAdmin.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabAdmin.Size = new System.Drawing.Size(1177, 887);
+            this.tabAdmin.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabAdmin.Size = new System.Drawing.Size(1029, 662);
             this.tabAdmin.TabIndex = 0;
             this.tabAdmin.Text = "Administration Cinemas";
             // 
@@ -176,14 +174,13 @@
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 4);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1171, 879);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1023, 656);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel3
@@ -193,14 +190,14 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.Controls.Add(this.label1, 0, 2);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(585, 0);
-            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0, 0, 0, 10);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(511, 0);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 3;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 41.46341F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 58.53659F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 76F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(586, 253);
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 57F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(512, 188);
             this.tableLayoutPanel3.TabIndex = 13;
             // 
             // label1
@@ -209,9 +206,9 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Left;
             this.label1.Font = new System.Drawing.Font("Lucida Calligraphy", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.label1.Location = new System.Drawing.Point(3, 176);
+            this.label1.Location = new System.Drawing.Point(3, 130);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(565, 77);
+            this.label1.Size = new System.Drawing.Size(457, 58);
             this.label1.TabIndex = 13;
             this.label1.Text = "Administration cinemas";
             // 
@@ -242,8 +239,7 @@
             this.dgvChaine.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvChaine.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvChaine.EnableHeadersVisualStyles = false;
-            this.dgvChaine.Location = new System.Drawing.Point(3, 267);
-            this.dgvChaine.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dgvChaine.Location = new System.Drawing.Point(3, 199);
             this.dgvChaine.Name = "dgvChaine";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.Gray;
@@ -256,9 +252,9 @@
             this.dgvChaine.RowHeadersWidth = 51;
             this.dgvChaine.RowTemplate.Height = 25;
             this.dgvChaine.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvChaine.Size = new System.Drawing.Size(579, 255);
+            this.dgvChaine.Size = new System.Drawing.Size(505, 190);
             this.dgvChaine.TabIndex = 13;
-            this.dgvChaine.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvChaine_CellEndEdit);
+            this.dgvChaine.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvChaine_CellValueChanged);
             this.dgvChaine.CurrentCellChanged += new System.EventHandler(this.dgvChaines_SelectionChanged);
             // 
             // dgvCine
@@ -287,8 +283,7 @@
             this.dgvCine.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvCine.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCine.EnableHeadersVisualStyles = false;
-            this.dgvCine.Location = new System.Drawing.Point(3, 530);
-            this.dgvCine.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dgvCine.Location = new System.Drawing.Point(3, 395);
             this.dgvCine.Name = "dgvCine";
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.Color.Gray;
@@ -301,7 +296,7 @@
             this.dgvCine.RowHeadersWidth = 51;
             this.dgvCine.RowTemplate.Height = 25;
             this.dgvCine.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCine.Size = new System.Drawing.Size(579, 345);
+            this.dgvCine.Size = new System.Drawing.Size(505, 258);
             this.dgvCine.TabIndex = 11;
             this.dgvCine.CurrentCellChanged += new System.EventHandler(this.dgvCine_SelectionChanged);
             // 
@@ -331,8 +326,7 @@
             this.dgvSalles.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvSalles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvSalles.EnableHeadersVisualStyles = false;
-            this.dgvSalles.Location = new System.Drawing.Point(588, 530);
-            this.dgvSalles.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dgvSalles.Location = new System.Drawing.Point(514, 395);
             this.dgvSalles.Name = "dgvSalles";
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle9.BackColor = System.Drawing.Color.Gray;
@@ -345,7 +339,7 @@
             this.dgvSalles.RowHeadersWidth = 51;
             this.dgvSalles.RowTemplate.Height = 25;
             this.dgvSalles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSalles.Size = new System.Drawing.Size(580, 345);
+            this.dgvSalles.Size = new System.Drawing.Size(506, 258);
             this.dgvSalles.TabIndex = 15;
             // 
             // tableLayoutPanel2
@@ -358,13 +352,13 @@
             this.tableLayoutPanel2.Controls.Add(this.btAjoutercinema, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.btAddSalle, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(595, 273);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(10);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(520, 204);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(566, 243);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(494, 180);
             this.tableLayoutPanel2.TabIndex = 18;
             // 
             // btGetCinemas
@@ -372,10 +366,9 @@
             this.btGetCinemas.BackColor = System.Drawing.SystemColors.Info;
             this.btGetCinemas.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btGetCinemas.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btGetCinemas.Location = new System.Drawing.Point(286, 148);
-            this.btGetCinemas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btGetCinemas.Location = new System.Drawing.Point(250, 109);
             this.btGetCinemas.Name = "btGetCinemas";
-            this.btGetCinemas.Size = new System.Drawing.Size(277, 91);
+            this.btGetCinemas.Size = new System.Drawing.Size(241, 68);
             this.btGetCinemas.TabIndex = 10;
             this.btGetCinemas.Text = "Visualiser tous les Cinemas";
             this.btGetCinemas.UseVisualStyleBackColor = false;
@@ -386,10 +379,9 @@
             this.btAddChaine.BackColor = System.Drawing.SystemColors.Info;
             this.btAddChaine.Dock = System.Windows.Forms.DockStyle.Top;
             this.btAddChaine.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btAddChaine.Location = new System.Drawing.Point(286, 4);
-            this.btAddChaine.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btAddChaine.Location = new System.Drawing.Point(250, 3);
             this.btAddChaine.Name = "btAddChaine";
-            this.btAddChaine.Size = new System.Drawing.Size(277, 84);
+            this.btAddChaine.Size = new System.Drawing.Size(241, 63);
             this.btAddChaine.TabIndex = 17;
             this.btAddChaine.Text = "Ajout chaine de cinéma";
             this.btAddChaine.UseVisualStyleBackColor = false;
@@ -400,10 +392,9 @@
             this.btAjoutercinema.BackColor = System.Drawing.SystemColors.Info;
             this.btAjoutercinema.Dock = System.Windows.Forms.DockStyle.Top;
             this.btAjoutercinema.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btAjoutercinema.Location = new System.Drawing.Point(3, 4);
-            this.btAjoutercinema.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btAjoutercinema.Location = new System.Drawing.Point(3, 3);
             this.btAjoutercinema.Name = "btAjoutercinema";
-            this.btAjoutercinema.Size = new System.Drawing.Size(277, 84);
+            this.btAjoutercinema.Size = new System.Drawing.Size(241, 63);
             this.btAjoutercinema.TabIndex = 14;
             this.btAjoutercinema.Text = "Ajout nouveau cinema ";
             this.btAjoutercinema.UseVisualStyleBackColor = false;
@@ -414,10 +405,9 @@
             this.btAddSalle.BackColor = System.Drawing.SystemColors.Info;
             this.btAddSalle.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btAddSalle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btAddSalle.Location = new System.Drawing.Point(3, 148);
-            this.btAddSalle.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btAddSalle.Location = new System.Drawing.Point(3, 109);
             this.btAddSalle.Name = "btAddSalle";
-            this.btAddSalle.Size = new System.Drawing.Size(277, 91);
+            this.btAddSalle.Size = new System.Drawing.Size(241, 68);
             this.btAddSalle.TabIndex = 16;
             this.btAddSalle.Text = "Ajout salle de cinema";
             this.btAddSalle.UseVisualStyleBackColor = false;
@@ -431,13 +421,13 @@
             this.tableLayoutPanel4.Controls.Add(this.labelTitre, 0, 1);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0, 0, 0, 10);
+            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 3;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 27.19665F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 72.80334F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(585, 253);
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(511, 188);
             this.tableLayoutPanel4.TabIndex = 19;
             // 
             // labelTitre
@@ -446,34 +436,32 @@
             this.labelTitre.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelTitre.Font = new System.Drawing.Font("Viner Hand ITC", 48F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
             this.labelTitre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.labelTitre.Location = new System.Drawing.Point(3, 63);
+            this.labelTitre.Location = new System.Drawing.Point(3, 47);
             this.labelTitre.Name = "labelTitre";
-            this.labelTitre.Padding = new System.Windows.Forms.Padding(50, 0, 0, 0);
-            this.labelTitre.Size = new System.Drawing.Size(579, 169);
+            this.labelTitre.Padding = new System.Windows.Forms.Padding(44, 0, 0, 0);
+            this.labelTitre.Size = new System.Drawing.Size(505, 125);
             this.labelTitre.TabIndex = 13;
             this.labelTitre.Text = "CINEMANIA";
             // 
             // tabProgrammation
             // 
             this.tabProgrammation.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tabProgrammation.Location = new System.Drawing.Point(4, 37);
-            this.tabProgrammation.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabProgrammation.Location = new System.Drawing.Point(4, 30);
             this.tabProgrammation.Name = "tabProgrammation";
-            this.tabProgrammation.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabProgrammation.Size = new System.Drawing.Size(1177, 887);
+            this.tabProgrammation.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabProgrammation.Size = new System.Drawing.Size(1029, 662);
             this.tabProgrammation.TabIndex = 1;
             this.tabProgrammation.Text = "Programmation";
             this.tabProgrammation.UseVisualStyleBackColor = true;
             // 
             // frmAdmin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1185, 928);
+            this.ClientSize = new System.Drawing.Size(1037, 696);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmAdmin";
             this.Text = "Administration";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

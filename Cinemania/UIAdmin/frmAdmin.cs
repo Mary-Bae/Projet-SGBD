@@ -109,21 +109,7 @@ namespace UIAdmin
 
         private async void dgvChaine_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgvChaine.Columns[e.ColumnIndex].Name == "ch_nom")
-            {
-                var row = dgvChaine.Rows[e.RowIndex];
-                var chaineNom = row.Cells["ch_nom"].Value?.ToString();
-
-                if (!string.IsNullOrWhiteSpace(chaineNom))
-                {
-                    // Vérifie si l'ID est disponible et valide pour une mise à jour
-                    if (int.TryParse(row.Cells["ch_id"].Value?.ToString(), out int chaineId) && chaineId > 0)
-                    {
-                        ChaineDTO chaineAMettreAJour = new ChaineDTO { ch_id = chaineId, ch_nom = chaineNom };
-                        await MettreAJourChaine(chaineAMettreAJour);
-                    }
-                }
-            }
+            
         }
         private async Task SupprimerChaineEtCinemas(int chaineId)
         {
@@ -413,11 +399,6 @@ namespace UIAdmin
                 MessageBox.Show("Veuillez sélectionner un cinéma à modifier.");
             }
         }
-
-        private void modifierChaineToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
         private void btAddChaine_Click(object sender, EventArgs e)
         {
             var frmAjoutChaine = new frmAjoutChaine();
@@ -425,6 +406,35 @@ namespace UIAdmin
             if (result == DialogResult.OK)
             {
                 LoadChaines();
+            }
+        }
+
+        private async void dgvChaine_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < dgvChaine.Rows.Count - 1)
+            {
+                if (dgvChaine.Columns[e.ColumnIndex].Name == "ch_nom")
+                {
+                    var row = dgvChaine.Rows[e.RowIndex];
+                    var chaineNom = row.Cells["ch_nom"].Value?.ToString();
+
+                    if (!string.IsNullOrWhiteSpace(chaineNom))
+                    {
+                        if (MessageBox.Show("Voulez-vous enregistrer les modifications ?", "Confirmer", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            // Vérifie si l'ID est disponible et valide pour une mise à jour
+                            if (int.TryParse(row.Cells["ch_id"].Value?.ToString(), out int chaineId) && chaineId > 0)
+                            {
+                                ChaineDTO chaineAMettreAJour = new ChaineDTO { ch_id = chaineId, ch_nom = chaineNom };
+                                await MettreAJourChaine(chaineAMettreAJour);
+                            }          
+                        }
+                        else
+                        {
+                            LoadChaines();
+                        }
+                    }
+                }
             }
         }
     }
