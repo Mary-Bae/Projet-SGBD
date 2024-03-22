@@ -31,8 +31,6 @@ namespace Repositories
         {
             if (pData.QtePlace <= 4 || pData.QteRangees <= 0)
                 throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
-            if (pData.NumeroSalle <= 0)
-                throw new CustomError(ErreurCodeEnum.NumeroInvalide);
             if (pData.QtePlace % pData.QteRangees != 0)
                 throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
             if(pData.NomChaine == "" || pData.NomChaine == null || pData.NomCinema == "" || pData.NomCinema == null)
@@ -294,7 +292,6 @@ namespace Repositories
             var parameters = new DynamicParameters();
             parameters.Add("@id", salleId);
 
-            // Supposons que la procédure stockée "[Admin].[Salle_SelectBySalle]" retourne les colonnes nécessaires pour un objet SalleDTO
             var salle = await _Connection.QueryFirstOrDefaultAsync<SalleDTO>("[Admin].[Salle_SelectBySalle]", parameters, commandType: CommandType.StoredProcedure);
 
             return salle;

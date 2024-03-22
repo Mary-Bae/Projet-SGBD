@@ -20,12 +20,21 @@ namespace UIAdmin
         }
         private void btCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            if (MessageBox.Show("Voulez-vous quitter sans enregistrer les modifications ?", "Confirmer", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+            }
         }
 
         private async void btSave_Click(object sender, EventArgs e)
         {
+            if (cmbQteRangees.SelectedItem == null || cmbNbrPlace.SelectedItem == null)
+            {
+                MessageBox.Show("Veuillez sélectionner une quantité de rangées et un nombre de places.", "Erreur de sélection", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             var chaine = new ChaineCinemaEtSalleDTO
             {
                 NomChaine= txtNomChaine.Text,
@@ -44,13 +53,14 @@ namespace UIAdmin
 
             if (string.IsNullOrEmpty(errorMessage))
             {
-                MessageBox.Show("Chaine de cinéma ajoutée avec succès.");
+                MessageBox.Show("La chaîne de cinéma a été ajoutée avec succès dans le système.", "Ajout Réussi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             else
             {
-                MessageBox.Show(errorMessage);
+                MessageBox.Show("Un problème est survenu : " + errorMessage, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
         }
         private async Task<string> AjouterChaine(ChaineCinemaEtSalleDTO chaine)

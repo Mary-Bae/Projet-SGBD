@@ -37,13 +37,13 @@ namespace CustomErrors
             switch (pCodeError)
             {
                 case ErreurCodeEnum.UK_CHAINE_NOM:
-                    _messageToReturn = "Ajout impossible : La chaine de cinéma doit être unique ";
+                    _messageToReturn = "La chaine de cinéma doit être unique ";
                     break;
                 case ErreurCodeEnum.UK_CINEMA_NOM:
-                    _messageToReturn = "Ajout impossible : Le cinéma doit être unique ";
+                    _messageToReturn = "Le cinéma doit être unique ";
                     break;
                 case ErreurCodeEnum.UK_SALLE_NUMBER:
-                    _messageToReturn = "Ajout impossible : Il ne peut pas y avoir deux fois le même numero de salle pour un cinéma ";
+                    _messageToReturn = "Il ne peut pas y avoir deux fois le même numero de salle pour un cinéma ";
                     break;
                 case ErreurCodeEnum.FK_SALLE_CINEMA:
                     _messageToReturn = "Une salle de cinema doit appartenir à un cinema ";
