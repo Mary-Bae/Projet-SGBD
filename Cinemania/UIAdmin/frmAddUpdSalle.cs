@@ -47,6 +47,13 @@ namespace UIAdmin
 
         private async void btSave_Click(object sender, EventArgs e)
         {
+            lblAvertissement.Text = "";
+            if (cmbQteRangees.SelectedItem == null || cmbNbrPlace.SelectedItem == null || cmbNumSalle.SelectedItem == null)
+            {
+                lblAvertissement.Text = "Tout doit être sélectionné pour valider l'entrée.";
+                return;
+            }
+
             string resultMessage;
             bool isSuccess;
 
@@ -80,13 +87,13 @@ namespace UIAdmin
 
             if (string.IsNullOrEmpty(resultMessage))
             {
-                MessageBox.Show("Opération réussie.");
+                MessageBox.Show("L'opération a été réalisée avec succès ! Les informations ont été mises à jour dans la base de données.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             else
             {
-                MessageBox.Show(resultMessage); // Afficher le message d'erreur retourné par l'API
+                lblAvertissement.Text = resultMessage; // Afficher le message d'erreur retourné par l'API
             }
         }
         private async Task<string> AjouterSalle(AjoutSalleDTO Salle)
@@ -142,11 +149,13 @@ namespace UIAdmin
                 lblPlacesParRangee.Text = message;
             }
         }
-
         private void btCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            if (MessageBox.Show("Voulez-vous quitter sans enregistrer les modifications ?", "Confirmer", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+            }
         }
 
         private async void cmbNumSalle_SelectedIndexChanged(object sender, EventArgs e)

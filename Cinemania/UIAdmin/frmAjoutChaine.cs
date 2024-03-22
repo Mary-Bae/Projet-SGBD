@@ -31,7 +31,7 @@ namespace UIAdmin
         {
             if (cmbQteRangees.SelectedItem == null || cmbNbrPlace.SelectedItem == null)
             {
-                MessageBox.Show("Veuillez sélectionner une quantité de rangées et un nombre de places.", "Erreur de sélection", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblPlacesParRangee.Text = "Veuillez sélectionner une quantité de rangées et un nombre de places.";
                 return;
             }
 
