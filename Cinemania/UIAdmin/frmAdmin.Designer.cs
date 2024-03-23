@@ -270,11 +270,12 @@
             this.dgvChaine.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvChaine.Size = new System.Drawing.Size(505, 158);
             this.dgvChaine.TabIndex = 13;
-            this.dgvChaine.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvChaine_CellValueChanged);
+            this.dgvChaine.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvChaine_CellEndEdit);
             this.dgvChaine.CurrentCellChanged += new System.EventHandler(this.dgvChaines_SelectionChanged);
             // 
             // dgvCine
             // 
+            this.dgvCine.AllowUserToAddRows = false;
             this.dgvCine.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCine.BackgroundColor = System.Drawing.Color.Black;
             this.dgvCine.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -301,6 +302,7 @@
             this.dgvCine.EnableHeadersVisualStyles = false;
             this.dgvCine.Location = new System.Drawing.Point(3, 331);
             this.dgvCine.Name = "dgvCine";
+            this.dgvCine.ReadOnly = true;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.Color.Gray;
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -318,6 +320,7 @@
             // 
             // dgvSalles
             // 
+            this.dgvSalles.AllowUserToAddRows = false;
             this.dgvSalles.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvSalles.BackgroundColor = System.Drawing.Color.Black;
             this.dgvSalles.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -344,6 +347,7 @@
             this.dgvSalles.EnableHeadersVisualStyles = false;
             this.dgvSalles.Location = new System.Drawing.Point(514, 331);
             this.dgvSalles.Name = "dgvSalles";
+            this.dgvSalles.ReadOnly = true;
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle9.BackColor = System.Drawing.Color.Gray;
             dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);

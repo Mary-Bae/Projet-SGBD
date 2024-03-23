@@ -35,6 +35,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtNomCinema = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.lblErreur = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label6
@@ -45,9 +46,9 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label6.Location = new System.Drawing.Point(157, 55);
+            this.label6.Location = new System.Drawing.Point(137, 41);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(233, 38);
+            this.label6.Size = new System.Drawing.Size(182, 30);
             this.label6.TabIndex = 26;
             this.label6.Text = "Modifier cinema";
             // 
@@ -57,10 +58,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btCancel.BackColor = System.Drawing.Color.Snow;
-            this.btCancel.Location = new System.Drawing.Point(445, 391);
-            this.btCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btCancel.Location = new System.Drawing.Point(389, 293);
             this.btCancel.Name = "btCancel";
-            this.btCancel.Size = new System.Drawing.Size(158, 45);
+            this.btCancel.Size = new System.Drawing.Size(138, 34);
             this.btCancel.TabIndex = 24;
             this.btCancel.Text = "Annuler";
             this.btCancel.UseVisualStyleBackColor = false;
@@ -72,10 +72,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btSave.BackColor = System.Drawing.Color.Snow;
-            this.btSave.Location = new System.Drawing.Point(151, 391);
-            this.btSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btSave.Location = new System.Drawing.Point(132, 293);
             this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(159, 45);
+            this.btSave.Size = new System.Drawing.Size(139, 34);
             this.btSave.TabIndex = 23;
             this.btSave.Text = "Modifier Cinema";
             this.btSave.UseVisualStyleBackColor = false;
@@ -86,11 +85,11 @@
             this.txtAdresseCinema.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAdresseCinema.Location = new System.Drawing.Point(319, 269);
-            this.txtAdresseCinema.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtAdresseCinema.Location = new System.Drawing.Point(279, 202);
             this.txtAdresseCinema.Name = "txtAdresseCinema";
-            this.txtAdresseCinema.Size = new System.Drawing.Size(326, 27);
+            this.txtAdresseCinema.Size = new System.Drawing.Size(286, 23);
             this.txtAdresseCinema.TabIndex = 22;
+            this.txtAdresseCinema.TextChanged += new System.EventHandler(this.txtAdresseCinema_TextChanged);
             // 
             // label2
             // 
@@ -98,9 +97,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(157, 269);
+            this.label2.Location = new System.Drawing.Point(137, 202);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(134, 20);
+            this.label2.Size = new System.Drawing.Size(107, 15);
             this.label2.TabIndex = 21;
             this.label2.Text = "Adresse du cinema";
             // 
@@ -109,11 +108,11 @@
             this.txtNomCinema.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNomCinema.Location = new System.Drawing.Point(319, 176);
-            this.txtNomCinema.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtNomCinema.Location = new System.Drawing.Point(279, 132);
             this.txtNomCinema.Name = "txtNomCinema";
-            this.txtNomCinema.Size = new System.Drawing.Size(190, 27);
+            this.txtNomCinema.Size = new System.Drawing.Size(167, 23);
             this.txtNomCinema.TabIndex = 20;
+            this.txtNomCinema.TextChanged += new System.EventHandler(this.txtNomCinema_TextChanged);
             // 
             // label1
             // 
@@ -121,19 +120,30 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(157, 183);
+            this.label1.Location = new System.Drawing.Point(137, 137);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(115, 20);
+            this.label1.Size = new System.Drawing.Size(104, 15);
             this.label1.TabIndex = 19;
-            this.label1.Text = "Nom du cinema";
+            this.label1.Text = "Nom du cinema  *";
+            // 
+            // lblErreur
+            // 
+            this.lblErreur.AutoSize = true;
+            this.lblErreur.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblErreur.ForeColor = System.Drawing.Color.Red;
+            this.lblErreur.Location = new System.Drawing.Point(137, 260);
+            this.lblErreur.Name = "lblErreur";
+            this.lblErreur.Size = new System.Drawing.Size(0, 15);
+            this.lblErreur.TabIndex = 27;
             // 
             // frmUpdateCinema
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SeaShell;
-            this.ClientSize = new System.Drawing.Size(801, 584);
+            this.ClientSize = new System.Drawing.Size(701, 438);
             this.ControlBox = false;
+            this.Controls.Add(this.lblErreur);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btCancel);
             this.Controls.Add(this.btSave);
@@ -142,7 +152,6 @@
             this.Controls.Add(this.txtNomCinema);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmUpdateCinema";
             this.Text = "Modifier le cinema";
             this.ResumeLayout(false);
@@ -159,5 +168,6 @@
         private Label label2;
         private TextBox txtNomCinema;
         private Label label1;
+        private Label lblErreur;
     }
 }

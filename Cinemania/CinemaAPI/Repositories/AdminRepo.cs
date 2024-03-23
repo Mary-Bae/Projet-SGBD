@@ -150,6 +150,8 @@ namespace Repositories
             {
                 if (ex.Number == 0x00000223)
                     throw new CustomError(ErreurCodeEnum.FK_SALLE_CINEMA, ex);
+                if (ex.Number == 0x00000a43)
+                    throw new CustomError(ErreurCodeEnum.UK_CINEMA_NOM, ex);
                 throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
             }
             catch (Exception ex)

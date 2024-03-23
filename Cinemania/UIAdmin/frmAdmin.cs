@@ -105,7 +105,7 @@ namespace UIAdmin
             {
                 
                 var responseContent = await response.Content.ReadAsStringAsync();
-                MessageBox.Show(responseContent);
+                MessageBox.Show(responseContent, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 LoadChaines();
             }
         }
@@ -470,37 +470,42 @@ namespace UIAdmin
                 LoadChaines();
             }
         }
-
-        private async void dgvChaine_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private async void dgvChaine_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             lblStatusMessage.Text = "";
 
             if (e.RowIndex >= 0)
             {
+                var row = dgvChaine.Rows[e.RowIndex];
+                var cellValue = row.Cells[e.ColumnIndex].Value?.ToString();
+
                 if (dgvChaine.Columns[e.ColumnIndex].Name == "ch_nom")
                 {
-                    var row = dgvChaine.Rows[e.RowIndex];
-                    var chaineNom = row.Cells["ch_nom"].Value?.ToString();
-
-                    if (!string.IsNullOrWhiteSpace(chaineNom))
+                    // Si la cellule est vide, afficher un message d'erreur
+                    if (string.IsNullOrWhiteSpace(cellValue))
                     {
-                        if (MessageBox.Show("Voulez-vous enregistrer les modifications ?", "Confirmer", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        MessageBox.Show("Le champ ne peut pas être vide.", "Erreur de Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        LoadChaines();
+                        return;
+                    }
+
+                    if (MessageBox.Show("Voulez-vous enregistrer les modifications ?", "Confirmer", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        // Vérifie si l'ID est disponible et valide pour une mise à jour
+                        if (int.TryParse(row.Cells["ch_id"].Value?.ToString(), out int chaineId) && chaineId > 0)
                         {
-                            // Vérifie si l'ID est disponible et valide pour une mise à jour
-                            if (int.TryParse(row.Cells["ch_id"].Value?.ToString(), out int chaineId) && chaineId > 0)
-                            {
-                                ChaineDTO chaineAMettreAJour = new ChaineDTO { ch_id = chaineId, ch_nom = chaineNom };
-                                await MettreAJourChaine(chaineAMettreAJour);
-                            }          
-                        }
-                        else
-                        {
-                            LoadChaines();
+                            ChaineDTO chaineAMettreAJour = new ChaineDTO { ch_id = chaineId, ch_nom = cellValue };
+                            await MettreAJourChaine(chaineAMettreAJour);
                         }
                     }
+                    else
+                    {
+                        LoadChaines();
+                    }
                 }
+            }
         }
-    }
+
     }
 }
 
