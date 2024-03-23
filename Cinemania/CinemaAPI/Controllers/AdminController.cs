@@ -50,9 +50,6 @@ namespace CinemaAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-        
-
         [HttpPut("Chaine/MajChaines/{id}")]
         public async Task<ActionResult> MajChaine(int id, MajChaineDTO data)
         {
@@ -213,7 +210,6 @@ namespace CinemaAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
 
         [HttpPut("Salles/MajSalle/{id}")]
         public async Task<ActionResult> MajSalle(int id, MajSalleDTO data)

@@ -52,7 +52,7 @@ namespace UIAdmin
                     if (attempts < maxRetries) await Task.Delay(1000); // Attendre 1 seconde avant de réessayer
                 }
             }
-            if (!success) MessageBox.Show("Impossible de charger les données après plusieurs tentatives.");
+            if (!success) MessageBox.Show("Impossible de charger les données après plusieurs tentatives.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         //Charge les cinemas associés aux chaines à chaque sélection de chaine
@@ -60,6 +60,7 @@ namespace UIAdmin
         {
             if (dgvChaine.CurrentRow?.DataBoundItem is ChaineDTO selectedChaine)
             {
+                lblStatusMessage.Text = "";
                 int chaineId = selectedChaine.ch_id;
                 await LoadCinemasByChaine(chaineId);
             }
@@ -91,6 +92,8 @@ namespace UIAdmin
 
         private async Task MettreAJourChaine(ChaineDTO chaine)
         {
+            lblStatusMessage.Text = "";
+
             StringContent content = new StringContent(JsonConvert.SerializeObject(chaine), Encoding.UTF8, "application/json");
             HttpResponseMessage response = await client.PutAsync("https://localhost:7013/Admin/Chaine/MajChaines/" + chaine.ch_id, content);
 
@@ -102,72 +105,63 @@ namespace UIAdmin
             {
                 
                 var responseContent = await response.Content.ReadAsStringAsync();
-                MessageBox.Show("Erreur lors de la mise à jour de la chaîne. Détails : " + responseContent);
-            }
-        }
-
-        private async void dgvChaine_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dgvChaine.Columns[e.ColumnIndex].Name == "ch_nom")
-            {
-                var row = dgvChaine.Rows[e.RowIndex];
-                var chaineNom = row.Cells["ch_nom"].Value?.ToString();
-
-                if (!string.IsNullOrWhiteSpace(chaineNom))
-                {
-                    // Vérifie si l'ID est disponible et valide pour une mise à jour
-                    if (int.TryParse(row.Cells["ch_id"].Value?.ToString(), out int chaineId) && chaineId > 0)
-                    {
-                        ChaineDTO chaineAMettreAJour = new ChaineDTO { ch_id = chaineId, ch_nom = chaineNom };
-                        await MettreAJourChaine(chaineAMettreAJour);
-                    }
-                }
+                MessageBox.Show(responseContent, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                LoadChaines();
             }
         }
         private async Task SupprimerChaineEtCinemas(int chaineId)
         {
-            // Obtient la liste des cinémas appartenant à la chaîne
-            var cinemas = await LoadCinemasByChaine(chaineId);
+            var confirmResult = MessageBox.Show("Êtes-vous sûr de vouloir supprimer cette chaîne et tous les cinémas associés ?","Confirmer la suppression",MessageBoxButtons.YesNo,MessageBoxIcon.Warning);
 
-            // Supprime chaque cinéma et leurs salles
-            foreach (var cinema in cinemas)
+            if (confirmResult == DialogResult.Yes)
             {
-                HttpResponseMessage responseCinema = await client.DeleteAsync($"https://localhost:7013/Admin/Cinemas/DelCinemas/{cinema.ci_id}");
-                if (!responseCinema.IsSuccessStatusCode)
+                 // Obtient la liste des cinémas appartenant à la chaîne
+                 var cinemas = await LoadCinemasByChaine(chaineId);
+
+                // Supprime chaque cinéma et leurs salles
+                foreach (var cinema in cinemas)
                 {
-                    // Gestion des erreurs pour chaque cinéma, arrêtera le processus
-                    MessageBox.Show("Échec de la suppression du cinéma ID : " + cinema.ci_id + ". Processus interrompu.");
-                    return;
+                    HttpResponseMessage responseCinema = await client.DeleteAsync("https://localhost:7013/Admin/Cinemas/DelCinemas/" + cinema.ci_id);
+                    if (!responseCinema.IsSuccessStatusCode)
+                    {
+                        // Gestion des erreurs pour chaque cinéma, arrêtera le processus
+                        MessageBox.Show("Échec de la suppression du cinéma ID : " + cinema.ci_id + ". Processus interrompu.");
+                        return;
+                    }
                 }
-            }
 
-            // Une fois tous les cinémas supprimés, suppression de la chaîne
-            HttpResponseMessage responseChaine = await client.DeleteAsync("https://localhost:7013/Admin/Chaine/DelChaines/" + chaineId);
-            if (responseChaine.IsSuccessStatusCode)
-            {
-                MessageBox.Show("Chaîne et tous les cinémas associés supprimés avec succès.");
-                LoadChaines();
-            }
-            else
-            {
-                MessageBox.Show("Échec de la suppression de la chaîne.");
+                // Une fois tous les cinémas supprimés, suppression de la chaîne
+                HttpResponseMessage responseChaine = await client.DeleteAsync("https://localhost:7013/Admin/Chaine/DelChaines/" + chaineId);
+                if (responseChaine.IsSuccessStatusCode)
+                {
+
+                    MessageBox.Show("Chaîne et tous les cinémas associés supprimés avec succès.", "Suppression Réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadChaines();
+                }
+                else
+                {
+                    MessageBox.Show("Échec de la suppression de la chaîne.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
         private async void supprimerChaineToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (dgvChaine.CurrentRow != null)
             {
+                lblStatusMessage.Text = "";
                 int chaineId = Convert.ToInt32(dgvChaine.CurrentRow.Cells["ch_id"].Value);
                 await SupprimerChaineEtCinemas(chaineId);
             }
             else
             {
-                MessageBox.Show("Veuillez sélectionner une chaîne à supprimer.");
+                lblStatusMessage.Text = "Aucune chaîne n'a été sélectionnée. Veuillez choisir la chaîne à supprimer.";
             }
         }
 
         async private void btGetCinemas_Click(object sender, EventArgs e)
         {
+            lblStatusMessage.Text = "";
+
             HttpResponseMessage response = await client.GetAsync("https://localhost:7013/Admin/Cinemas");
 
             if (response.IsSuccessStatusCode)
@@ -186,30 +180,73 @@ namespace UIAdmin
             else
             {
                 string responseContent = await response.Content.ReadAsStringAsync();
-                MessageBox.Show("Impossible de charger les données des cinémas. Details : " + responseContent);
+                MessageBox.Show("Nous rencontrons un problème pour charger les données des cinémas. Détail technique : " + responseContent, "Erreur de Chargement", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
         }
         private async void supprimerCinémaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            lblStatusMessage.Text = "";
             if (dgvCine.CurrentRow != null)
             {
                 int cinemaId = Convert.ToInt32(dgvCine.CurrentRow.Cells["ci_id"].Value);
-                HttpResponseMessage response = await client.DeleteAsync("https://localhost:7013/Admin/Cinemas/DelCinemas/" + cinemaId);
+                int nombreCinemas = await CompterCinemasByChaine(_currentChaineId);
+
+                if (nombreCinemas <= 1) // Si c'est le dernier cinéma de la chaîne, empêcher la suppression
+                {
+                    lblStatusMessage.Text = "Vous ne pouvez pas supprimer le dernier cinéma de la chaîne.";
+                }
+                else // S'il y a plus d'un cinéma, demander confirmation avant suppression
+                {
+                    var confirmResult = MessageBox.Show("Êtes-vous sûr de vouloir supprimer le cinéma ?", "Confirmer la suppression", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                    if (confirmResult == DialogResult.Yes)
+                    {
+                        HttpResponseMessage response = await client.DeleteAsync("https://localhost:7013/Admin/Cinemas/DelCinemas/" + cinemaId);
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            MessageBox.Show("Cinémas supprimé avec succès.", "Suppression Réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            await LoadCinemasByChaine(_currentChaineId);
+                            dgvCine.Columns["ci_id"].Visible = false;
+                        }
+                        else
+                        {
+                            string responseContent = await response.Content.ReadAsStringAsync();
+                            MessageBox.Show("La suppression du cinéma a échoué. Détail de l'erreur : " + responseContent, "Erreur de Suppression", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                lblStatusMessage.Text = "Veuillez sélectionner un cinéma à supprimer.";
+            }
+        }
+
+        private async Task<int> CompterCinemasByChaine(int cinemaId)
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("https://localhost:7013/Admin/CinemasByChaine/" + cinemaId);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    await LoadCinemasByChaine(_currentChaineId);
-                    dgvCine.Columns["ci_id"].Visible = false;
-                }
-                else
-                {
-                    string responseContent = await response.Content.ReadAsStringAsync();
-                    MessageBox.Show("La suppression a échoué. Details : " + responseContent);
+                    var responseString = await response.Content.ReadAsStringAsync();
+                    var cinemas = JsonConvert.DeserializeObject<List<CinemasDTO>>(responseString);
+                    return cinemas.Count; // Retourne le nombre total de cinemas
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show( ex.Message, "Erreur de Récupération", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return 0; // Retourne 0 en cas d'erreur
         }
         private void btAjoutercinema_Click(object sender, EventArgs e)
         {
+            lblStatusMessage.Text = "";
+
             if (dgvChaine.CurrentRow != null)
             {
                 int chaineId = Convert.ToInt32(dgvChaine.CurrentRow.Cells["ch_id"].Value);
@@ -226,12 +263,14 @@ namespace UIAdmin
             }
             else
             {
-                MessageBox.Show("Veuillez sélectionner une chaîne.");
+                lblStatusMessage.Text = "Sélectionnez une chaine de cinéma pour pouvoir lui attribuer un nouveau cinéma";
             }
         }
 
         private void dgvCine_SelectionChanged(object sender, EventArgs e)
         {
+            lblStatusMessage.Text = "";
+
             if (dgvCine.CurrentRow?.DataBoundItem is CinemasDTO selectedCinema)
             {
                 int cinemaId = selectedCinema.ci_id;
@@ -259,11 +298,13 @@ namespace UIAdmin
             else
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
-                MessageBox.Show("Les salles de cinema n'ont pas pu être chargées. Details : " + responseContent);
+                MessageBox.Show("Nous rencontrons un problème pour charger les salles de cinéma. Détail technique : " + responseContent, "Problème de Chargement", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void btAddSalle_Click(object sender, EventArgs e)
         {
+            lblStatusMessage.Text = "";
+
             if (dgvCine.CurrentRow != null)
             {
                 var cinemaId = Convert.ToInt32(dgvCine.CurrentRow.Cells["ci_id"].Value);
@@ -279,12 +320,15 @@ namespace UIAdmin
             }
             else
             {
-                MessageBox.Show("Veuillez sélectionner un cinéma.");
+                lblStatusMessage.Text = "Vous devez sélectionner un cinéma de la liste afin de lui attribuer une salle.";
+
             }
         }
 
         private async void supprimerSalleDeCinemaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            lblStatusMessage.Text = "";
+
             if (dgvSalles.CurrentRow != null)
             {
                 int salleId = Convert.ToInt32(dgvSalles.CurrentRow.Cells["sa_id"].Value);
@@ -293,22 +337,28 @@ namespace UIAdmin
                 if (nombreSalles > 1) // Si il y a plus d'une salle, on fait le delete,
                                       // sinon le delete ne se fera pas
                 {
-                    HttpResponseMessage response = await client.DeleteAsync("https://localhost:7013/Admin/Salles/DelSalle/" + salleId);
+                    var confirmResult = MessageBox.Show("Êtes-vous sûr de vouloir supprimer cette salle de cinéma ?", "Confirmer la suppression", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-                    if (response.IsSuccessStatusCode)
+                    if (confirmResult == DialogResult.Yes)
                     {
-                        LoadSallesByCinema(_currentCinemaId);
-                        dgvSalles.Columns["sa_id"].Visible = false;
-                    }
-                    else
-                    {
-                        var responseContent = await response.Content.ReadAsStringAsync();
-                        MessageBox.Show("La suppression a échoué. Details : " + responseContent);
+                        HttpResponseMessage response = await client.DeleteAsync("https://localhost:7013/Admin/Salles/DelSalle/" + salleId);
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            MessageBox.Show("Salle de cinéma supprimée avec succès.", "Suppression Réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            LoadSallesByCinema(_currentCinemaId);
+                            dgvSalles.Columns["sa_id"].Visible = false;
+                        }
+                        else
+                        {
+                            var responseContent = await response.Content.ReadAsStringAsync();
+                            MessageBox.Show("Nous n'avons pas réussi à supprimer l'élément sélectionné. Détail technique : " + responseContent, "Échec de la Suppression", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Vous ne pouvez pas supprimer la dernière salle du cinéma.");
+                    lblStatusMessage.Text = "La dernière salle du cinéma ne peut être supprimée. Chaque cinéma doit conserver au moins une salle.";
                 }
             }
         }
@@ -327,13 +377,15 @@ namespace UIAdmin
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Une erreur est survenue lors de la récupération des salles : " + ex.Message);
+                MessageBox.Show("Nous avons rencontré un problème lors de la tentative de récupération des informations sur les salles. Détail technique : " + ex.Message, "Erreur de Récupération", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return 0; // Retourne 0 en cas d'erreur
         }
 
         private async void modifierSalleDeCinemaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            lblStatusMessage.Text = "";
+
             if (dgvSalles.CurrentRow != null)
             {
                 int salleId = Convert.ToInt32(dgvSalles.CurrentRow.Cells["sa_id"].Value);
@@ -354,7 +406,7 @@ namespace UIAdmin
             }
             else
             {
-                MessageBox.Show("Veuillez sélectionner une salle à modifier.");
+                lblStatusMessage.Text = "Vous devez sélectionner une salle de la liste pour pouvoir la modifier.";
             }
         }
 
@@ -374,12 +426,12 @@ namespace UIAdmin
                 else
                 {
                     var responseContent = await response.Content.ReadAsStringAsync();
-                    MessageBox.Show("Impossible de récupérer les détails de la salle. Details : " + responseContent);
+                    MessageBox.Show("Nous n'avons pas pu charger les détails de la salle sélectionnée en raison d'un problème technique. Détail de l'erreur : " + responseContent, "Erreur de Chargement", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erreur lors de la récupération des détails de la salle : " + ex.Message);
+                MessageBox.Show("Nous avons rencontré un problème lors de la tentative de récupération des informations sur la salle. Détail technique : " + ex.Message, "Erreur de Récupération", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return null;
@@ -387,6 +439,8 @@ namespace UIAdmin
 
         private void modifierCinémaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            lblStatusMessage.Text = "";
+
             if (dgvCine.CurrentRow != null)
             {
                 var selectedRow = dgvCine.CurrentRow;
@@ -409,16 +463,13 @@ namespace UIAdmin
             }
             else
             {
-                MessageBox.Show("Veuillez sélectionner un cinéma à modifier.");
+                lblStatusMessage.Text = "Vous devez sélectionner un cinéma de la liste afin de pouvoir le modifier.";
             }
-        }
-
-        private void modifierChaineToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
         private void btAddChaine_Click(object sender, EventArgs e)
         {
+            lblStatusMessage.Text = "";
+
             var frmAjoutChaine = new frmAjoutChaine();
             var result = frmAjoutChaine.ShowDialog();
             if (result == DialogResult.OK)
@@ -426,6 +477,42 @@ namespace UIAdmin
                 LoadChaines();
             }
         }
+        private async void dgvChaine_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            lblStatusMessage.Text = "";
+
+            if (e.RowIndex >= 0)
+            {
+                var row = dgvChaine.Rows[e.RowIndex];
+                var cellValue = row.Cells[e.ColumnIndex].Value?.ToString();
+
+                if (dgvChaine.Columns[e.ColumnIndex].Name == "ch_nom")
+                {
+                    // Si la cellule est vide, afficher un message d'erreur
+                    if (string.IsNullOrWhiteSpace(cellValue))
+                    {
+                        MessageBox.Show("Le champ ne peut pas être vide.", "Erreur de Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        LoadChaines();
+                        return;
+                    }
+
+                    if (MessageBox.Show("Voulez-vous enregistrer les modifications ?", "Confirmer", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        // Vérifie si l'ID est disponible et valide pour une mise à jour
+                        if (int.TryParse(row.Cells["ch_id"].Value?.ToString(), out int chaineId) && chaineId > 0)
+                        {
+                            ChaineDTO chaineAMettreAJour = new ChaineDTO { ch_id = chaineId, ch_nom = cellValue };
+                            await MettreAJourChaine(chaineAMettreAJour);
+                        }
+                    }
+                    else
+                    {
+                        LoadChaines();
+                    }
+                }
+            }
+        }
+
     }
 }
 

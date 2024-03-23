@@ -1,15 +1,6 @@
-﻿using Microsoft.VisualBasic.Logging;
-using Models;
+﻿using Models;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace UIAdmin
 {
@@ -29,24 +20,21 @@ namespace UIAdmin
         }
         private void btCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            if (MessageBox.Show("Voulez-vous quitter sans enregistrer les modifications ?", "Confirmer", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+            }
         }
 
         private async void btSave_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtNomCinema.Text) || cmbQteRangees.SelectedItem == null || cmbNbrPlace.SelectedItem == null)
+            if (cmbQteRangees.SelectedItem == null || cmbNbrPlace.SelectedItem == null)
             {
-                MessageBox.Show("Veuillez remplir tous les champs requis");
+                lblPlacesParRangee.Text = "Veuillez sélectionner une quantité de rangées et un nombre de places.";
                 return;
             }
 
-            // Le total des places doit être divisible par le nombre de rangées
-            if (_qtePlacesRangee <= 0)
-            {
-                MessageBox.Show("Le nombre de places par rangée n'est pas juste");
-                return;
-            }
             var chaine = new ChaineCinemaEtSalleDTO
             {
                 NomChaine= txtNomChaine.Text,
@@ -65,13 +53,14 @@ namespace UIAdmin
 
             if (string.IsNullOrEmpty(errorMessage))
             {
-                MessageBox.Show("Chaine de cinéma ajoutée avec succès.");
+                MessageBox.Show("La chaîne de cinéma a été ajoutée avec succès dans le système.", "Ajout Réussi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             else
             {
-                MessageBox.Show(errorMessage);
+                MessageBox.Show("Un problème est survenu : " + errorMessage, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
         }
         private async Task<string> AjouterChaine(ChaineCinemaEtSalleDTO chaine)

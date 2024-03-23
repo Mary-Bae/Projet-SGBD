@@ -22,16 +22,9 @@ namespace UIAdmin
         }
         private async void btSave_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtNomCinema.Text) || cmbQteRangees.SelectedItem == null || cmbNbrPlace.SelectedItem == null)
+            if (cmbQteRangees.SelectedItem == null || cmbNbrPlace.SelectedItem == null)
             {
-                MessageBox.Show("Veuillez remplir tous les champs requis");
-                return;
-            }
-
-            // Le total des places doit être divisible par le nombre de rangées
-            if(_qtePlacesRangee <= 0)
-            {
-                MessageBox.Show("Le nombre de places par rangée n'est pas juste");
+                lblPlacesParRangee.Text = "Veuillez sélectionner une quantité de rangées et un nombre de places.";
                 return;
             }
             var cinemaEtSalleDTO = new CinemaEtSalleDTO
@@ -50,13 +43,15 @@ namespace UIAdmin
 
             if (string.IsNullOrEmpty(errorMessage))
             {
-                MessageBox.Show("Cinéma ajouté avec succès.");
+                MessageBox.Show("Le cinéma a été ajouté avec succès à la base de données.", "Ajout Réussi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             else
             {
-                MessageBox.Show(errorMessage);
+                MessageBox.Show("Une erreur est survenue : " + errorMessage, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
         }
 
@@ -88,13 +83,15 @@ namespace UIAdmin
                 return "Une erreur inattendue est survenue.";
             }
 
-
         }
 
         private void btCancel_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("Voulez-vous quitter sans enregistrer les modifications ?", "Confirmer", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
                 this.DialogResult = DialogResult.Cancel;
                 this.Close();
+            }
         }
 
         private void cmbQteRangees_SelectedIndexChanged(object sender, EventArgs e)

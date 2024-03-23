@@ -63,9 +63,9 @@
             this.lblNomChaine.AutoSize = true;
             this.lblNomChaine.Location = new System.Drawing.Point(94, 88);
             this.lblNomChaine.Name = "lblNomChaine";
-            this.lblNomChaine.Size = new System.Drawing.Size(74, 15);
+            this.lblNomChaine.Size = new System.Drawing.Size(85, 15);
             this.lblNomChaine.TabIndex = 1;
-            this.lblNomChaine.Text = "Nom Chaine";
+            this.lblNomChaine.Text = "Nom Chaine  *";
             // 
             // labelTitre
             // 
@@ -85,9 +85,9 @@
             this.lblCinema.ForeColor = System.Drawing.Color.Black;
             this.lblCinema.Location = new System.Drawing.Point(36, 46);
             this.lblCinema.Name = "lblCinema";
-            this.lblCinema.Size = new System.Drawing.Size(78, 15);
+            this.lblCinema.Size = new System.Drawing.Size(89, 15);
             this.lblCinema.TabIndex = 3;
-            this.lblCinema.Text = "Nom Cinéma";
+            this.lblCinema.Text = "Nom Cinéma  *";
             // 
             // txtNomCinema
             // 
@@ -203,9 +203,9 @@
             this.label5.ForeColor = System.Drawing.Color.Black;
             this.label5.Location = new System.Drawing.Point(300, 86);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(103, 15);
+            this.label5.Size = new System.Drawing.Size(114, 15);
             this.label5.TabIndex = 21;
-            this.label5.Text = "Nombre de places";
+            this.label5.Text = "Nombre de places  *";
             // 
             // label4
             // 
@@ -214,9 +214,9 @@
             this.label4.ForeColor = System.Drawing.Color.Black;
             this.label4.Location = new System.Drawing.Point(6, 86);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(111, 15);
+            this.label4.Size = new System.Drawing.Size(122, 15);
             this.label4.TabIndex = 19;
-            this.label4.Text = "Nombre de rangées";
+            this.label4.Text = "Nombre de rangées  *";
             // 
             // cmbNbrPlace
             // 
