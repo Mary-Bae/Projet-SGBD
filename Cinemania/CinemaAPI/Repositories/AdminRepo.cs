@@ -113,7 +113,6 @@ namespace Repositories
         }
         async Task ICinemaRepo.DeleteCinemas(int pId)
         {
-            
             try
             {
                 var parameters = new DynamicParameters();
@@ -121,15 +120,12 @@ namespace Repositories
 
                 await _Connection.ExecuteAsync("[Admin].[Cinema_Delete]", parameters, commandType: CommandType.StoredProcedure);
             }
-
-            //Attention, revoir le try catch ici : Une chaine doit avoir au moins un cinéma !!!
             catch(SqlException ex)
             {
                 if (ex.Number == 0x00000a29)
                     throw new CustomError(ErreurCodeEnum.UK_CHAINE_NOM, ex);
                 throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
             }
-
         }
     
         async Task ICinemaRepo.UpdateCinema(int pId, MajCinemasDTO pData)

@@ -121,7 +121,7 @@ namespace UIAdmin
                 // Supprime chaque cinéma et leurs salles
                 foreach (var cinema in cinemas)
                 {
-                    HttpResponseMessage responseCinema = await client.DeleteAsync($"https://localhost:7013/Admin/Cinemas/DelCinemas/{cinema.ci_id}");
+                    HttpResponseMessage responseCinema = await client.DeleteAsync("https://localhost:7013/Admin/Cinemas/DelCinemas/" + cinema.ci_id);
                     if (!responseCinema.IsSuccessStatusCode)
                     {
                         // Gestion des erreurs pour chaque cinéma, arrêtera le processus
@@ -206,6 +206,7 @@ namespace UIAdmin
 
                         if (response.IsSuccessStatusCode)
                         {
+                            MessageBox.Show("Cinémas supprimé avec succès.", "Suppression Réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             await LoadCinemasByChaine(_currentChaineId);
                             dgvCine.Columns["ci_id"].Visible = false;
                         }
@@ -238,7 +239,7 @@ namespace UIAdmin
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Nous avons rencontré un problème lors de la tentative de récupération des informations sur les salles. Détail technique : " + ex.Message, "Erreur de Récupération", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show( ex.Message, "Erreur de Récupération", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return 0; // Retourne 0 en cas d'erreur
         }
@@ -336,17 +337,23 @@ namespace UIAdmin
                 if (nombreSalles > 1) // Si il y a plus d'une salle, on fait le delete,
                                       // sinon le delete ne se fera pas
                 {
-                    HttpResponseMessage response = await client.DeleteAsync("https://localhost:7013/Admin/Salles/DelSalle/" + salleId);
+                    var confirmResult = MessageBox.Show("Êtes-vous sûr de vouloir supprimer cette salle de cinéma ?", "Confirmer la suppression", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-                    if (response.IsSuccessStatusCode)
+                    if (confirmResult == DialogResult.Yes)
                     {
-                        LoadSallesByCinema(_currentCinemaId);
-                        dgvSalles.Columns["sa_id"].Visible = false;
-                    }
-                    else
-                    {
-                        var responseContent = await response.Content.ReadAsStringAsync();
-                        MessageBox.Show("Nous n'avons pas réussi à supprimer l'élément sélectionné. Détail technique : " + responseContent, "Échec de la Suppression", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        HttpResponseMessage response = await client.DeleteAsync("https://localhost:7013/Admin/Salles/DelSalle/" + salleId);
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            MessageBox.Show("Salle de cinéma supprimée avec succès.", "Suppression Réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            LoadSallesByCinema(_currentCinemaId);
+                            dgvSalles.Columns["sa_id"].Visible = false;
+                        }
+                        else
+                        {
+                            var responseContent = await response.Content.ReadAsStringAsync();
+                            MessageBox.Show("Nous n'avons pas réussi à supprimer l'élément sélectionné. Détail technique : " + responseContent, "Échec de la Suppression", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
                 else
