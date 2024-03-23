@@ -12,7 +12,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Repositories
 {
-    public class AdminRepo : IAdminRepo, ISalleRepo
+    public class AdminRepo : IAdminRepo, ISalleRepo, IFilmRepo
     {
         IDbConnection _Connection;
         public AdminRepo(IDbConnection pConnection)
@@ -293,6 +293,13 @@ namespace Repositories
             var salle = await _Connection.QueryFirstOrDefaultAsync<SalleDTO>("[Admin].[Salle_SelectBySalle]", parameters, commandType: CommandType.StoredProcedure);
 
             return salle;
+        }
+
+        // Films
+        public async Task<List<T>> GetFilms<T>()
+        {
+            var lst = await _Connection.QueryAsync<T>("[Client].[Films_SelectAll]");
+            return lst.ToList();
         }
     }
 }

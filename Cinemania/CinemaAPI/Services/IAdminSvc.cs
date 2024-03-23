@@ -2,7 +2,7 @@
 
 namespace Interfaces
 {
-    public interface IAdminSvc : ICinemasSvc, ISalleSvc
+    public interface IAdminSvc : ICinemasSvc, ISalleSvc, IFilmSvc
     {
         Task<List<T>> GetChaine<T>();
         Task DeleteChaine(int pId);
@@ -28,5 +28,9 @@ namespace Interfaces
         Task UpdateSalle(int pId, MajSalleDTO MajSalle);
         Task AddSalle(AjoutSalleDTO ajoutSalle);
  
+    }
+    public interface IFilmSvc
+    {
+        Task<List<T>> GetFilms<T>();
     }
 }

@@ -48,7 +48,7 @@
             this.modifierSalleDeCinemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabAdmin = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableAdminCinemas = new System.Windows.Forms.TableLayoutPanel();
             this.lblStatusMessage = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
@@ -63,18 +63,35 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.labelTitre = new System.Windows.Forms.Label();
             this.tabProgrammation = new System.Windows.Forms.TabPage();
+            this.tableAdminProgrammation = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.dgvFilms = new System.Windows.Forms.DataGridView();
             this.MenuCinema.SuspendLayout();
             this.MenuChaine.SuspendLayout();
             this.MenuSalle.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabAdmin.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.tableAdminCinemas.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChaine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalles)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            this.tabProgrammation.SuspendLayout();
+            this.tableAdminProgrammation.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
+            this.tableLayoutPanel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFilms)).BeginInit();
             this.SuspendLayout();
             // 
             // MenuCinema
@@ -153,7 +170,7 @@
             // tabAdmin
             // 
             this.tabAdmin.BackColor = System.Drawing.Color.Black;
-            this.tabAdmin.Controls.Add(this.tableLayoutPanel1);
+            this.tabAdmin.Controls.Add(this.tableAdminCinemas);
             this.tabAdmin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.tabAdmin.Location = new System.Drawing.Point(4, 30);
             this.tabAdmin.Name = "tabAdmin";
@@ -162,29 +179,29 @@
             this.tabAdmin.TabIndex = 0;
             this.tabAdmin.Text = "Administration Cinemas";
             // 
-            // tableLayoutPanel1
+            // tableAdminCinemas
             // 
-            this.tableLayoutPanel1.BackColor = System.Drawing.Color.Black;
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.lblStatusMessage, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.dgvChaine, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.dgvCine, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.dgvSalles, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1023, 656);
-            this.tableLayoutPanel1.TabIndex = 0;
+            this.tableAdminCinemas.BackColor = System.Drawing.Color.Black;
+            this.tableAdminCinemas.ColumnCount = 2;
+            this.tableAdminCinemas.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableAdminCinemas.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableAdminCinemas.Controls.Add(this.lblStatusMessage, 0, 3);
+            this.tableAdminCinemas.Controls.Add(this.tableLayoutPanel3, 1, 0);
+            this.tableAdminCinemas.Controls.Add(this.dgvChaine, 0, 1);
+            this.tableAdminCinemas.Controls.Add(this.dgvCine, 0, 2);
+            this.tableAdminCinemas.Controls.Add(this.dgvSalles, 1, 2);
+            this.tableAdminCinemas.Controls.Add(this.tableLayoutPanel2, 1, 1);
+            this.tableAdminCinemas.Controls.Add(this.tableLayoutPanel4, 0, 0);
+            this.tableAdminCinemas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableAdminCinemas.Location = new System.Drawing.Point(3, 3);
+            this.tableAdminCinemas.Name = "tableAdminCinemas";
+            this.tableAdminCinemas.RowCount = 4;
+            this.tableAdminCinemas.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableAdminCinemas.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableAdminCinemas.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableAdminCinemas.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableAdminCinemas.Size = new System.Drawing.Size(1023, 656);
+            this.tableAdminCinemas.TabIndex = 0;
             // 
             // lblStatusMessage
             // 
@@ -466,6 +483,7 @@
             // 
             // tabProgrammation
             // 
+            this.tabProgrammation.Controls.Add(this.tableAdminProgrammation);
             this.tabProgrammation.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.tabProgrammation.Location = new System.Drawing.Point(4, 30);
             this.tabProgrammation.Name = "tabProgrammation";
@@ -474,6 +492,176 @@
             this.tabProgrammation.TabIndex = 1;
             this.tabProgrammation.Text = "Programmation";
             this.tabProgrammation.UseVisualStyleBackColor = true;
+            // 
+            // tableAdminProgrammation
+            // 
+            this.tableAdminProgrammation.BackColor = System.Drawing.Color.Black;
+            this.tableAdminProgrammation.ColumnCount = 2;
+            this.tableAdminProgrammation.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableAdminProgrammation.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableAdminProgrammation.Controls.Add(this.tableLayoutPanel8, 0, 0);
+            this.tableAdminProgrammation.Controls.Add(this.tableLayoutPanel5, 0, 0);
+            this.tableAdminProgrammation.Controls.Add(this.dgvFilms, 0, 1);
+            this.tableAdminProgrammation.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableAdminProgrammation.Location = new System.Drawing.Point(3, 3);
+            this.tableAdminProgrammation.Name = "tableAdminProgrammation";
+            this.tableAdminProgrammation.RowCount = 2;
+            this.tableAdminProgrammation.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableAdminProgrammation.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75F));
+            this.tableAdminProgrammation.Size = new System.Drawing.Size(1023, 656);
+            this.tableAdminProgrammation.TabIndex = 0;
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.BackColor = System.Drawing.Color.Navy;
+            this.tableLayoutPanel5.ColumnCount = 1;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.Controls.Add(this.label2, 0, 1);
+            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 3;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 27.19665F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 72.80334F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(511, 156);
+            this.tableLayoutPanel5.TabIndex = 20;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label2.Font = new System.Drawing.Font("Viner Hand ITC", 48F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.label2.Location = new System.Drawing.Point(3, 38);
+            this.label2.Name = "label2";
+            this.label2.Padding = new System.Windows.Forms.Padding(44, 0, 0, 0);
+            this.label2.Size = new System.Drawing.Size(505, 102);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "CINEMANIA";
+            // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.BackColor = System.Drawing.Color.Navy;
+            this.tableLayoutPanel6.ColumnCount = 1;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 3;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(200, 100);
+            this.tableLayoutPanel6.TabIndex = 0;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label3.Font = new System.Drawing.Font("Lucida Calligraphy", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.label3.Location = new System.Drawing.Point(3, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(187, 123);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Administration cinemas";
+            // 
+            // tableLayoutPanel7
+            // 
+            this.tableLayoutPanel7.BackColor = System.Drawing.Color.Navy;
+            this.tableLayoutPanel7.ColumnCount = 1;
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
+            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
+            this.tableLayoutPanel7.RowCount = 3;
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(200, 100);
+            this.tableLayoutPanel7.TabIndex = 0;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label4.Font = new System.Drawing.Font("Lucida Calligraphy", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.label4.Location = new System.Drawing.Point(3, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(187, 123);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Administration cinemas";
+            // 
+            // tableLayoutPanel10
+            // 
+            this.tableLayoutPanel10.BackColor = System.Drawing.Color.Navy;
+            this.tableLayoutPanel10.ColumnCount = 1;
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel10.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel10.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
+            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
+            this.tableLayoutPanel10.RowCount = 3;
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(200, 100);
+            this.tableLayoutPanel10.TabIndex = 0;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label7.Font = new System.Drawing.Font("Lucida Calligraphy", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.label7.Location = new System.Drawing.Point(3, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(187, 123);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "Administration cinemas";
+            // 
+            // tableLayoutPanel8
+            // 
+            this.tableLayoutPanel8.BackColor = System.Drawing.Color.Navy;
+            this.tableLayoutPanel8.ColumnCount = 1;
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel8.Controls.Add(this.label5, 0, 2);
+            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(511, 0);
+            this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
+            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
+            this.tableLayoutPanel8.RowCount = 4;
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 41.46341F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 58.53659F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 57F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(512, 156);
+            this.tableLayoutPanel8.TabIndex = 21;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label5.Font = new System.Drawing.Font("Lucida Calligraphy", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.label5.Location = new System.Drawing.Point(3, 78);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(457, 57);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Administration cinemas";
+            // 
+            // dgvFilms
+            // 
+            this.dgvFilms.BackgroundColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.dgvFilms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvFilms.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvFilms.Location = new System.Drawing.Point(3, 167);
+            this.dgvFilms.Name = "dgvFilms";
+            this.dgvFilms.RowTemplate.Height = 25;
+            this.dgvFilms.Size = new System.Drawing.Size(505, 486);
+            this.dgvFilms.TabIndex = 22;
             // 
             // frmAdmin
             // 
@@ -491,8 +679,8 @@
             this.MenuSalle.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabAdmin.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.tableAdminCinemas.ResumeLayout(false);
+            this.tableAdminCinemas.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChaine)).EndInit();
@@ -501,6 +689,13 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
+            this.tabProgrammation.ResumeLayout(false);
+            this.tableAdminProgrammation.ResumeLayout(false);
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
+            this.tableLayoutPanel8.ResumeLayout(false);
+            this.tableLayoutPanel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFilms)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -516,7 +711,7 @@
         private ToolStripMenuItem modifierCinémaToolStripMenuItem;
         private TabControl tabControl1;
         private TabPage tabAdmin;
-        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel tableAdminCinemas;
         private DataGridView dgvSalles;
         private Button btAddSalle;
         private Button btAjoutercinema;
@@ -531,5 +726,17 @@
         private TableLayoutPanel tableLayoutPanel4;
         private Label labelTitre;
         private Label lblStatusMessage;
+        private TableLayoutPanel tableAdminProgrammation;
+        private TableLayoutPanel tableLayoutPanel8;
+        private Label label5;
+        private TableLayoutPanel tableLayoutPanel5;
+        private Label label2;
+        private DataGridView dgvFilms;
+        private TableLayoutPanel tableLayoutPanel6;
+        private Label label3;
+        private TableLayoutPanel tableLayoutPanel7;
+        private Label label4;
+        private TableLayoutPanel tableLayoutPanel10;
+        private Label label7;
     }
 }
