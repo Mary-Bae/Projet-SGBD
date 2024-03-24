@@ -12,7 +12,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Repositories
 {
-    public class AdminRepo : IAdminRepo, ISalleRepo, IFilmRepo
+    public class AdminRepo : IAdminRepo, ISalleRepo, IFilmRepo, IProgrammationRepo
     {
         IDbConnection _Connection;
         public AdminRepo(IDbConnection pConnection)
@@ -300,6 +300,28 @@ namespace Repositories
         {
             var lst = await _Connection.QueryAsync<T>("[Client].[Films_SelectAll]");
             return lst.ToList();
+        }
+
+        // Programmation
+        public async Task AddProgrammation(ProgrammationDTO programmation)
+        {
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@FilmId", programmation.FilmId);
+                parameters.Add("@CinemaId", programmation.CinemaId);
+                parameters.Add("@DateProgrammation", programmation.DateProgrammation);
+
+                await _Connection.ExecuteAsync("[Admin].[AjouterProgrammation]", parameters, commandType: CommandType.StoredProcedure);
+            }
+            catch (SqlException ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
+            }
         }
     }
 }

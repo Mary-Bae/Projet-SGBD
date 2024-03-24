@@ -3,7 +3,7 @@ using Models;
 
 namespace Services
 {
-    public class AdminSvc : IAdminSvc, ICinemasSvc, ISalleSvc, IFilmSvc
+    public class AdminSvc : IAdminSvc, ICinemasSvc, ISalleSvc, IFilmSvc, IProgrammationSvc
     {
         IAdminRepo _adminRepo;
         public AdminSvc(IAdminRepo pAdminRepo)
@@ -123,6 +123,14 @@ namespace Services
             IFilmRepo filmRepo = _adminRepo;
             var lst = await filmRepo.GetFilms<T>();
             return lst.ToList<T>();
+        }
+
+        // Programmation
+
+        async Task IProgrammationSvc.AddProgrammation(ProgrammationDTO pData)
+        {
+            IProgrammationRepo programmationRepo = _adminRepo;
+            await programmationRepo.AddProgrammation(pData);
         }
     }
 }

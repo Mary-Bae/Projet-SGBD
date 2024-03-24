@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Net.Http.Json;
 using System.Security.Policy;
 using System.Text;
+using System.Windows.Forms;
 
 namespace UIAdmin
 {
@@ -17,6 +18,7 @@ namespace UIAdmin
             InitializeComponent();
             LoadChaines();
             LoadFilms();
+            ChargerCinemas();
         }
 
         async void LoadChaines()
@@ -65,8 +67,41 @@ namespace UIAdmin
             }
         }
 
-        //Charge les cinemas associés aux chaines à chaque sélection de chaine
-        private async void dgvChaines_SelectionChanged(object sender, EventArgs e)
+        private async void ChargerCinemas()
+        {
+            try
+            {
+                // Faire la requête GET pour récupérer les cinémas depuis votre API
+                HttpResponseMessage response = await client.GetAsync("https://localhost:7013/Admin/Cinemas");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseContent = await response.Content.ReadAsStringAsync();
+                    if (!string.IsNullOrEmpty(responseContent))
+                    {
+                        List<CinemasDTO> data = JsonConvert.DeserializeObject<List<CinemasDTO>>(responseContent);
+                        dgvCine.DataSource = data ?? new List<CinemasDTO>(); // l'opérateur ?? fournira une liste vide en cas de null
+                        foreach (CinemasDTO cinema in data)
+                        {
+                            cmbCinemas.Items.Add(cinema.ci_nom);
+                        }
+                    }
+                    
+                }
+                else
+                {
+                    Console.WriteLine("Erreur lors de la récupération des cinémas : " + response.StatusCode);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Une erreur est survenue : " + ex.Message);
+            }
+        }
+
+
+    //Charge les cinemas associés aux chaines à chaque sélection de chaine
+    private async void dgvChaines_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvChaine.CurrentRow?.DataBoundItem is ChaineDTO selectedChaine)
             {
@@ -519,6 +554,11 @@ namespace UIAdmin
             {
                 lblStatusMessage.Text = "Vous devez sélectionner une salle de la liste pour pouvoir la modifier.";
             }
+        }
+
+        private void CalProgrammation_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            DateTime selectedDate = CalProgrammation.SelectionStart;
         }
     }
 }

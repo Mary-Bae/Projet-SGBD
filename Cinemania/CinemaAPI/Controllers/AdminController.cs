@@ -291,7 +291,20 @@ namespace CinemaAPI.Controllers
             }
         }
 
-
-
+        // Programmation
+        [HttpPost("Programmation/AddProgrammation")]
+        public async Task<IActionResult> AddProgrammation(ProgrammationDTO programmationDTO)
+        {
+            try
+            {
+                IProgrammationSvc programmationSvc = _adminSvc;
+                await programmationSvc.AddProgrammation(programmationDTO);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
