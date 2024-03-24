@@ -316,6 +316,8 @@ namespace Repositories
             }
             catch (SqlException ex)
             {
+                if (ex.Number == 0x00000223)
+                    throw new CustomError(ErreurCodeEnum.UK_CINEMA_NOM, ex);
                 throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
             }
             catch (Exception ex)
