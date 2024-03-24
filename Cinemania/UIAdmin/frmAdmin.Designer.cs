@@ -38,14 +38,15 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MenuCinema = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.supprimerCinémaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.modifierCinémaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuChaine = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.supprimerChaineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuSalle = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.supprimerSalleDeCinemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.modifierSalleDeCinemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabAdmin = new System.Windows.Forms.TabPage();
             this.tableAdminCinemas = new System.Windows.Forms.TableLayoutPanel();
@@ -56,14 +57,19 @@
             this.dgvCine = new System.Windows.Forms.DataGridView();
             this.dgvSalles = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.btUpdateCine = new System.Windows.Forms.Button();
             this.btAddChaine = new System.Windows.Forms.Button();
             this.btAjoutercinema = new System.Windows.Forms.Button();
-            this.btAddSalle = new System.Windows.Forms.Button();
             this.btGetCinemas = new System.Windows.Forms.Button();
+            this.btUpdateSalle = new System.Windows.Forms.Button();
+            this.btAddSalle = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.labelTitre = new System.Windows.Forms.Label();
             this.tabProgrammation = new System.Windows.Forms.TabPage();
             this.tableAdminProgrammation = new System.Windows.Forms.TableLayoutPanel();
+            this.dgvFilms = new System.Windows.Forms.DataGridView();
+            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.label5 = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
@@ -72,9 +78,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.label7 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.dgvFilms = new System.Windows.Forms.DataGridView();
             this.MenuCinema.SuspendLayout();
             this.MenuChaine.SuspendLayout();
             this.MenuSalle.SuspendLayout();
@@ -89,19 +92,18 @@
             this.tableLayoutPanel4.SuspendLayout();
             this.tabProgrammation.SuspendLayout();
             this.tableAdminProgrammation.SuspendLayout();
-            this.tableLayoutPanel5.SuspendLayout();
-            this.tableLayoutPanel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFilms)).BeginInit();
+            this.tableLayoutPanel8.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // MenuCinema
             // 
             this.MenuCinema.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.MenuCinema.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.supprimerCinémaToolStripMenuItem,
-            this.modifierCinémaToolStripMenuItem});
+            this.supprimerCinémaToolStripMenuItem});
             this.MenuCinema.Name = "MenuCinema";
-            this.MenuCinema.Size = new System.Drawing.Size(174, 48);
+            this.MenuCinema.Size = new System.Drawing.Size(174, 26);
             // 
             // supprimerCinémaToolStripMenuItem
             // 
@@ -109,13 +111,6 @@
             this.supprimerCinémaToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.supprimerCinémaToolStripMenuItem.Text = "Supprimer Cinéma";
             this.supprimerCinémaToolStripMenuItem.Click += new System.EventHandler(this.supprimerCinémaToolStripMenuItem_Click);
-            // 
-            // modifierCinémaToolStripMenuItem
-            // 
-            this.modifierCinémaToolStripMenuItem.Name = "modifierCinémaToolStripMenuItem";
-            this.modifierCinémaToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.modifierCinémaToolStripMenuItem.Text = "Modifier Cinéma";
-            this.modifierCinémaToolStripMenuItem.Click += new System.EventHandler(this.modifierCinémaToolStripMenuItem_Click);
             // 
             // MenuChaine
             // 
@@ -136,8 +131,7 @@
             // 
             this.MenuSalle.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.MenuSalle.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.supprimerSalleDeCinemaToolStripMenuItem,
-            this.modifierSalleDeCinemaToolStripMenuItem});
+            this.supprimerSalleDeCinemaToolStripMenuItem});
             this.MenuSalle.Name = "MenuSalle";
             this.MenuSalle.Size = new System.Drawing.Size(214, 48);
             // 
@@ -147,13 +141,6 @@
             this.supprimerSalleDeCinemaToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.supprimerSalleDeCinemaToolStripMenuItem.Text = "Supprimer salle de cinema";
             this.supprimerSalleDeCinemaToolStripMenuItem.Click += new System.EventHandler(this.supprimerSalleDeCinemaToolStripMenuItem_Click);
-            // 
-            // modifierSalleDeCinemaToolStripMenuItem
-            // 
-            this.modifierSalleDeCinemaToolStripMenuItem.Name = "modifierSalleDeCinemaToolStripMenuItem";
-            this.modifierSalleDeCinemaToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
-            this.modifierSalleDeCinemaToolStripMenuItem.Text = "Modifier salle de cinema";
-            this.modifierSalleDeCinemaToolStripMenuItem.Click += new System.EventHandler(this.modifierSalleDeCinemaToolStripMenuItem_Click);
             // 
             // tabControl1
             // 
@@ -248,6 +235,7 @@
             // dgvChaine
             // 
             this.dgvChaine.AllowUserToAddRows = false;
+            this.dgvChaine.AllowUserToResizeRows = false;
             this.dgvChaine.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvChaine.BackgroundColor = System.Drawing.Color.Black;
             this.dgvChaine.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -273,6 +261,7 @@
             this.dgvChaine.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvChaine.EnableHeadersVisualStyles = false;
             this.dgvChaine.Location = new System.Drawing.Point(3, 167);
+            this.dgvChaine.MultiSelect = false;
             this.dgvChaine.Name = "dgvChaine";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.Gray;
@@ -318,6 +307,7 @@
             this.dgvCine.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCine.EnableHeadersVisualStyles = false;
             this.dgvCine.Location = new System.Drawing.Point(3, 331);
+            this.dgvCine.MultiSelect = false;
             this.dgvCine.Name = "dgvCine";
             this.dgvCine.ReadOnly = true;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -363,6 +353,7 @@
             this.dgvSalles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvSalles.EnableHeadersVisualStyles = false;
             this.dgvSalles.Location = new System.Drawing.Point(514, 331);
+            this.dgvSalles.MultiSelect = false;
             this.dgvSalles.Name = "dgvSalles";
             this.dgvSalles.ReadOnly = true;
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -384,29 +375,44 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.btAddChaine, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btAjoutercinema, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btAddSalle, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.btGetCinemas, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.btUpdateCine, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.btAddChaine, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btAjoutercinema, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.btGetCinemas, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btUpdateSalle, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.btAddSalle, 0, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(520, 172);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowCount = 3;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(494, 148);
             this.tableLayoutPanel2.TabIndex = 18;
+            // 
+            // btUpdateCine
+            // 
+            this.btUpdateCine.BackColor = System.Drawing.SystemColors.Info;
+            this.btUpdateCine.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btUpdateCine.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btUpdateCine.Location = new System.Drawing.Point(250, 52);
+            this.btUpdateCine.Name = "btUpdateCine";
+            this.btUpdateCine.Size = new System.Drawing.Size(241, 43);
+            this.btUpdateCine.TabIndex = 19;
+            this.btUpdateCine.Text = "Modifier le cinema";
+            this.btUpdateCine.UseVisualStyleBackColor = false;
+            this.btUpdateCine.Click += new System.EventHandler(this.btUpdateCine_Click);
             // 
             // btAddChaine
             // 
             this.btAddChaine.BackColor = System.Drawing.SystemColors.Info;
-            this.btAddChaine.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btAddChaine.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btAddChaine.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btAddChaine.Location = new System.Drawing.Point(250, 3);
+            this.btAddChaine.Location = new System.Drawing.Point(3, 3);
             this.btAddChaine.Name = "btAddChaine";
-            this.btAddChaine.Size = new System.Drawing.Size(241, 68);
+            this.btAddChaine.Size = new System.Drawing.Size(241, 43);
             this.btAddChaine.TabIndex = 17;
             this.btAddChaine.Text = "Ajout chaine de cinéma";
             this.btAddChaine.UseVisualStyleBackColor = false;
@@ -415,41 +421,54 @@
             // btAjoutercinema
             // 
             this.btAjoutercinema.BackColor = System.Drawing.SystemColors.Info;
-            this.btAjoutercinema.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btAjoutercinema.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btAjoutercinema.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btAjoutercinema.Location = new System.Drawing.Point(3, 3);
+            this.btAjoutercinema.Location = new System.Drawing.Point(3, 52);
             this.btAjoutercinema.Name = "btAjoutercinema";
-            this.btAjoutercinema.Size = new System.Drawing.Size(241, 68);
+            this.btAjoutercinema.Size = new System.Drawing.Size(241, 43);
             this.btAjoutercinema.TabIndex = 14;
             this.btAjoutercinema.Text = "Ajout nouveau cinema ";
             this.btAjoutercinema.UseVisualStyleBackColor = false;
             this.btAjoutercinema.Click += new System.EventHandler(this.btAjoutercinema_Click);
             // 
-            // btAddSalle
-            // 
-            this.btAddSalle.BackColor = System.Drawing.SystemColors.Info;
-            this.btAddSalle.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btAddSalle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btAddSalle.Location = new System.Drawing.Point(3, 77);
-            this.btAddSalle.Name = "btAddSalle";
-            this.btAddSalle.Size = new System.Drawing.Size(241, 68);
-            this.btAddSalle.TabIndex = 16;
-            this.btAddSalle.Text = "Ajout salle de cinema";
-            this.btAddSalle.UseVisualStyleBackColor = false;
-            this.btAddSalle.Click += new System.EventHandler(this.btAddSalle_Click);
-            // 
             // btGetCinemas
             // 
             this.btGetCinemas.BackColor = System.Drawing.SystemColors.Info;
-            this.btGetCinemas.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btGetCinemas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btGetCinemas.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btGetCinemas.Location = new System.Drawing.Point(250, 77);
+            this.btGetCinemas.Location = new System.Drawing.Point(250, 3);
             this.btGetCinemas.Name = "btGetCinemas";
-            this.btGetCinemas.Size = new System.Drawing.Size(241, 68);
+            this.btGetCinemas.Size = new System.Drawing.Size(241, 43);
             this.btGetCinemas.TabIndex = 10;
             this.btGetCinemas.Text = "Visualiser tous les Cinemas";
             this.btGetCinemas.UseVisualStyleBackColor = false;
             this.btGetCinemas.Click += new System.EventHandler(this.btGetCinemas_Click);
+            // 
+            // btUpdateSalle
+            // 
+            this.btUpdateSalle.BackColor = System.Drawing.SystemColors.Info;
+            this.btUpdateSalle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btUpdateSalle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btUpdateSalle.Location = new System.Drawing.Point(250, 101);
+            this.btUpdateSalle.Name = "btUpdateSalle";
+            this.btUpdateSalle.Size = new System.Drawing.Size(241, 44);
+            this.btUpdateSalle.TabIndex = 18;
+            this.btUpdateSalle.Text = "Modifier salle de cinema";
+            this.btUpdateSalle.UseVisualStyleBackColor = false;
+            this.btUpdateSalle.Click += new System.EventHandler(this.btUpdateSalle_Click);
+            // 
+            // btAddSalle
+            // 
+            this.btAddSalle.BackColor = System.Drawing.SystemColors.Info;
+            this.btAddSalle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btAddSalle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btAddSalle.Location = new System.Drawing.Point(3, 101);
+            this.btAddSalle.Name = "btAddSalle";
+            this.btAddSalle.Size = new System.Drawing.Size(241, 44);
+            this.btAddSalle.TabIndex = 16;
+            this.btAddSalle.Text = "Ajout salle de cinema";
+            this.btAddSalle.UseVisualStyleBackColor = false;
+            this.btAddSalle.Click += new System.EventHandler(this.btAddSalle_Click);
             // 
             // tableLayoutPanel4
             // 
@@ -499,9 +518,9 @@
             this.tableAdminProgrammation.ColumnCount = 2;
             this.tableAdminProgrammation.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableAdminProgrammation.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableAdminProgrammation.Controls.Add(this.dgvFilms, 0, 1);
             this.tableAdminProgrammation.Controls.Add(this.tableLayoutPanel8, 0, 0);
             this.tableAdminProgrammation.Controls.Add(this.tableLayoutPanel5, 0, 0);
-            this.tableAdminProgrammation.Controls.Add(this.dgvFilms, 0, 1);
             this.tableAdminProgrammation.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableAdminProgrammation.Location = new System.Drawing.Point(3, 3);
             this.tableAdminProgrammation.Name = "tableAdminProgrammation";
@@ -510,6 +529,80 @@
             this.tableAdminProgrammation.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75F));
             this.tableAdminProgrammation.Size = new System.Drawing.Size(1023, 656);
             this.tableAdminProgrammation.TabIndex = 0;
+            // 
+            // dgvFilms
+            // 
+            this.dgvFilms.AllowUserToAddRows = false;
+            this.dgvFilms.AllowUserToResizeRows = false;
+            this.dgvFilms.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvFilms.BackgroundColor = System.Drawing.Color.Black;
+            this.dgvFilms.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvFilms.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.InfoText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.InfoText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvFilms.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            this.dgvFilms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.Desktop;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFilms.DefaultCellStyle = dataGridViewCellStyle11;
+            this.dgvFilms.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvFilms.EnableHeadersVisualStyles = false;
+            this.dgvFilms.Location = new System.Drawing.Point(3, 167);
+            this.dgvFilms.MultiSelect = false;
+            this.dgvFilms.Name = "dgvFilms";
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvFilms.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            this.dgvFilms.RowHeadersWidth = 51;
+            this.dgvFilms.RowTemplate.Height = 25;
+            this.dgvFilms.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvFilms.Size = new System.Drawing.Size(505, 486);
+            this.dgvFilms.TabIndex = 22;
+            // 
+            // tableLayoutPanel8
+            // 
+            this.tableLayoutPanel8.BackColor = System.Drawing.Color.Navy;
+            this.tableLayoutPanel8.ColumnCount = 1;
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel8.Controls.Add(this.label5, 0, 2);
+            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(511, 0);
+            this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
+            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
+            this.tableLayoutPanel8.RowCount = 4;
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 41.46341F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 58.53659F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 57F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(512, 156);
+            this.tableLayoutPanel8.TabIndex = 21;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label5.Font = new System.Drawing.Font("Lucida Calligraphy", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.label5.Location = new System.Drawing.Point(3, 78);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(457, 57);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Administration cinemas";
             // 
             // tableLayoutPanel5
             // 
@@ -622,47 +715,6 @@
             this.label7.TabIndex = 13;
             this.label7.Text = "Administration cinemas";
             // 
-            // tableLayoutPanel8
-            // 
-            this.tableLayoutPanel8.BackColor = System.Drawing.Color.Navy;
-            this.tableLayoutPanel8.ColumnCount = 1;
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.Controls.Add(this.label5, 0, 2);
-            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(511, 0);
-            this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
-            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
-            this.tableLayoutPanel8.RowCount = 4;
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 41.46341F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 58.53659F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 57F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(512, 156);
-            this.tableLayoutPanel8.TabIndex = 21;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label5.Font = new System.Drawing.Font("Lucida Calligraphy", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.label5.Location = new System.Drawing.Point(3, 78);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(457, 57);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "Administration cinemas";
-            // 
-            // dgvFilms
-            // 
-            this.dgvFilms.BackgroundColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.dgvFilms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvFilms.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvFilms.Location = new System.Drawing.Point(3, 167);
-            this.dgvFilms.Name = "dgvFilms";
-            this.dgvFilms.RowTemplate.Height = 25;
-            this.dgvFilms.Size = new System.Drawing.Size(505, 486);
-            this.dgvFilms.TabIndex = 22;
-            // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -691,11 +743,11 @@
             this.tableLayoutPanel4.PerformLayout();
             this.tabProgrammation.ResumeLayout(false);
             this.tableAdminProgrammation.ResumeLayout(false);
-            this.tableLayoutPanel5.ResumeLayout(false);
-            this.tableLayoutPanel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFilms)).EndInit();
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFilms)).EndInit();
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -707,8 +759,6 @@
         private ToolStripMenuItem supprimerChaineToolStripMenuItem;
         private ContextMenuStrip MenuSalle;
         private ToolStripMenuItem supprimerSalleDeCinemaToolStripMenuItem;
-        private ToolStripMenuItem modifierSalleDeCinemaToolStripMenuItem;
-        private ToolStripMenuItem modifierCinémaToolStripMenuItem;
         private TabControl tabControl1;
         private TabPage tabAdmin;
         private TableLayoutPanel tableAdminCinemas;
@@ -717,7 +767,6 @@
         private Button btAjoutercinema;
         private Button btAddChaine;
         private Button btGetCinemas;
-        private DataGridView dgvChaine;
         private DataGridView dgvCine;
         private TabPage tabProgrammation;
         private Label label1;
@@ -731,12 +780,15 @@
         private Label label5;
         private TableLayoutPanel tableLayoutPanel5;
         private Label label2;
-        private DataGridView dgvFilms;
         private TableLayoutPanel tableLayoutPanel6;
         private Label label3;
         private TableLayoutPanel tableLayoutPanel7;
         private Label label4;
         private TableLayoutPanel tableLayoutPanel10;
         private Label label7;
+        private DataGridView dgvChaine;
+        private DataGridView dgvFilms;
+        private Button btUpdateCine;
+        private Button btUpdateSalle;
     }
 }

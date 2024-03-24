@@ -16,6 +16,7 @@ namespace UIAdmin
         {
             InitializeComponent();
             LoadChaines();
+            LoadFilms();
         }
 
         async void LoadChaines()
@@ -36,14 +37,8 @@ namespace UIAdmin
                         var responseContent = await response.Content.ReadAsStringAsync();
                         var chaines = JsonConvert.DeserializeObject<BindingList<ChaineDTO>>(responseContent);
                         dgvChaine.DataSource = chaines;
-
                         dgvChaine.Columns["ch_id"].Visible = false;
                         dgvChaine.Columns["ch_nom"].HeaderText = "Chaine de Cinéma";
-
-                        foreach (DataGridViewColumn column in dgvChaine.Columns)
-                        {
-                            column.ReadOnly = false;
-                        }
                     }
                 }
                 catch (HttpRequestException)
@@ -53,6 +48,21 @@ namespace UIAdmin
                 }
             }
             if (!success) MessageBox.Show("Impossible de charger les données après plusieurs tentatives.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        async void LoadFilms()
+        {
+            HttpResponseMessage response = await client.GetAsync("https://localhost:7013/Admin/Films");
+            bool success = response.IsSuccessStatusCode;
+            if (success)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                var films = JsonConvert.DeserializeObject<BindingList<FilmsDTO>>(responseContent);
+                dgvFilms.DataSource = films;
+                dgvFilms.Columns["fi_id"].Visible = false;
+                dgvFilms.Columns["fi_nom"].HeaderText = "Titre";
+                dgvFilms.Columns["fi_genre"].HeaderText = "Genre";
+                dgvFilms.Columns["fi_description"].Visible = false; ;
+            }
         }
 
         //Charge les cinemas associés aux chaines à chaque sélection de chaine
@@ -382,34 +392,6 @@ namespace UIAdmin
             return 0; // Retourne 0 en cas d'erreur
         }
 
-        private async void modifierSalleDeCinemaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            lblStatusMessage.Text = "";
-
-            if (dgvSalles.CurrentRow != null)
-            {
-                int salleId = Convert.ToInt32(dgvSalles.CurrentRow.Cells["sa_id"].Value);
-                SalleDTO salleDetails = await GetSalleDetails(salleId);
-
-                if (salleDetails != null)
-                {
-                    // Ouvre le formulaire frmAjoutSalle en mode Modification avec les détails de la salle
-                    var formAjoutSalle = new frmAddUpdSalle(salleDetails.sa_ci_id, frmAddUpdSalle.Mode.Modification, salleDetails);
-                    var result = formAjoutSalle.ShowDialog();
-
-                    if (result == DialogResult.OK)
-                    {
-                        // Rafraîchir la liste des salles pour le cinéma associé
-                        LoadSallesByCinema(salleDetails.sa_ci_id);
-                    }
-                }
-            }
-            else
-            {
-                lblStatusMessage.Text = "Vous devez sélectionner une salle de la liste pour pouvoir la modifier.";
-            }
-        }
-
         //Permet de récuperer les détails de la salle de cinéma pour qu'ils s'affichent dans les textbox lors de l'ouverture de la forme pour la modification de la salle
         private async Task<SalleDTO?> GetSalleDetails(int salleId) 
         {
@@ -435,36 +417,6 @@ namespace UIAdmin
             }
 
             return null;
-        }
-
-        private void modifierCinémaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            lblStatusMessage.Text = "";
-
-            if (dgvCine.CurrentRow != null)
-            {
-                var selectedRow = dgvCine.CurrentRow;
-                var selectedCinema = new MajCinemasDTO
-                {
-                    ci_id = Convert.ToInt32(selectedRow.Cells["ci_id"].Value),
-                    ci_nom = Convert.ToString(selectedRow.Cells["ci_nom"].Value),
-                    ci_adresse = Convert.ToString(selectedRow.Cells["ci_adresse"].Value),
-                    ci_ch_id = _currentChaineId
-                };
-
-                using (var frm = new frmUpdateCinema(selectedCinema))
-                {
-                    var result = frm.ShowDialog();
-                    if (result == DialogResult.OK)
-                    {
-                        Task<List<CinemasDTO>> task = LoadCinemasByChaine(_currentChaineId);
-                    }
-                }
-            }
-            else
-            {
-                lblStatusMessage.Text = "Vous devez sélectionner un cinéma de la liste afin de pouvoir le modifier.";
-            }
         }
         private void btAddChaine_Click(object sender, EventArgs e)
         {
@@ -512,7 +464,62 @@ namespace UIAdmin
                 }
             }
         }
+        private void btUpdateCine_Click(object sender, EventArgs e)
+        {
+            lblStatusMessage.Text = "";
 
+            if (dgvCine.CurrentRow != null)
+            {
+                var selectedRow = dgvCine.CurrentRow;
+                var selectedCinema = new MajCinemasDTO
+                {
+                    ci_id = Convert.ToInt32(selectedRow.Cells["ci_id"].Value),
+                    ci_nom = Convert.ToString(selectedRow.Cells["ci_nom"].Value),
+                    ci_adresse = Convert.ToString(selectedRow.Cells["ci_adresse"].Value),
+                    ci_ch_id = _currentChaineId
+                };
+
+                using (var frm = new frmUpdateCinema(selectedCinema))
+                {
+                    var result = frm.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        Task<List<CinemasDTO>> task = LoadCinemasByChaine(_currentChaineId);
+                    }
+                }
+            }
+            else
+            {
+                lblStatusMessage.Text = "Vous devez sélectionner un cinéma de la liste afin de pouvoir le modifier.";
+            }
+        }
+        private async void btUpdateSalle_Click(object sender, EventArgs e)
+        {
+            lblStatusMessage.Text = "";
+
+            if (dgvSalles.CurrentRow != null)
+            {
+                int salleId = Convert.ToInt32(dgvSalles.CurrentRow.Cells["sa_id"].Value);
+                SalleDTO salleDetails = await GetSalleDetails(salleId);
+
+                if (salleDetails != null)
+                {
+                    // Ouvre le formulaire frmAjoutSalle en mode Modification avec les détails de la salle
+                    var formAjoutSalle = new frmAddUpdSalle(salleDetails.sa_ci_id, frmAddUpdSalle.Mode.Modification, salleDetails);
+                    var result = formAjoutSalle.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        // Rafraîchir la liste des salles pour le cinéma associé
+                        LoadSallesByCinema(salleDetails.sa_ci_id);
+                    }
+                }
+            }
+            else
+            {
+                lblStatusMessage.Text = "Vous devez sélectionner une salle de la liste pour pouvoir la modifier.";
+            }
+        }
     }
 }
 
