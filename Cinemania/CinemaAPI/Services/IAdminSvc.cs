@@ -32,6 +32,7 @@ namespace Interfaces
     public interface IFilmSvc
     {
         Task<List<T>> GetFilms<T>();
+        Task AddFilm(AjoutFilmsDTO ajoutFilm);
     }
     public interface IProgrammationSvc
     {

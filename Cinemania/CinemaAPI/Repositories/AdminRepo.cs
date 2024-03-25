@@ -68,10 +68,21 @@ namespace Repositories
 
         public async Task DeleteChaine(int pId)
         {
+            try
+            {
                 var parameters = new DynamicParameters();
                 parameters.Add("@id", pId);
 
                 await _Connection.ExecuteAsync("[Admin].[Chaine_Delete]", parameters, commandType: CommandType.StoredProcedure);
+            }
+            catch (SqlException ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
+            }
         }
 
         public async Task UpdateChaine(int pId, MajChaineDTO pData)
@@ -124,7 +135,13 @@ namespace Repositories
             {
                 if (ex.Number == 0x00000a29)
                     throw new CustomError(ErreurCodeEnum.UK_CHAINE_NOM, ex);
+                if (ex.Number == 0x00000223)
+                    throw new CustomError(ErreurCodeEnum.FK_CINEMA_PROGRAMMATION, ex);
                 throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
             }
         }
     
@@ -301,6 +318,27 @@ namespace Repositories
             var lst = await _Connection.QueryAsync<T>("[Client].[Films_SelectAll]");
             return lst.ToList();
         }
+        async Task IFilmRepo.AddFilm(AjoutFilmsDTO pData)
+        {
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@FilmNom", pData.fi_nom);
+                parameters.Add("@Genre", pData.fi_genre);
+                parameters.Add("@Description", pData.fi_description);
+
+                await _Connection.ExecuteAsync("[Admin].[Films_AddFilms]", parameters, commandType: CommandType.StoredProcedure);
+
+            }
+            catch (SqlException ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
+            }
+        }
 
         // Programmation
         public async Task AddProgrammation(ProgrammationDTO programmation)
@@ -339,5 +377,6 @@ namespace Repositories
 
             await _Connection.ExecuteAsync("[Admin].[Programmation_Delete]", parameters, commandType: CommandType.StoredProcedure);
         }
+        
     }
 }

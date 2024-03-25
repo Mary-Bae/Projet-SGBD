@@ -186,7 +186,8 @@ namespace UIAdmin
                     if (!responseCinema.IsSuccessStatusCode)
                     {
                         // Gestion des erreurs pour chaque cinéma, arrêtera le processus
-                        MessageBox.Show("Échec de la suppression du cinéma ID : " + cinema.ci_id + ". Processus interrompu.");
+                        string responseContent = await responseCinema.Content.ReadAsStringAsync();
+                        MessageBox.Show(responseContent, "Erreur de Suppression", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }
@@ -274,7 +275,7 @@ namespace UIAdmin
                         else
                         {
                             string responseContent = await response.Content.ReadAsStringAsync();
-                            MessageBox.Show("La suppression du cinéma a échoué. Détail de l'erreur : " + responseContent, "Erreur de Suppression", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(responseContent, "Erreur de Suppression", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }

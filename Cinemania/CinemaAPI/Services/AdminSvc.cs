@@ -124,6 +124,11 @@ namespace Services
             var lst = await filmRepo.GetFilms<T>();
             return lst.ToList<T>();
         }
+        async Task IFilmSvc.AddFilm(AjoutFilmsDTO pData)
+        {
+            IFilmRepo filmRepo = _adminRepo;
+            await filmRepo.AddFilm(pData);
+        }
 
         // Programmation
 
