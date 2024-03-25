@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace UIAdmin
 {
+    
     public static class Utils
     {
+        
         public static int CalculerPlacesParRangee(int totalPlaces, int totalRangees, out string message)
         {
             if (totalPlaces % totalRangees == 0)

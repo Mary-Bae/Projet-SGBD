@@ -75,13 +75,19 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvProgrammation = new System.Windows.Forms.DataGridView();
+            this.MenuProgrammation = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.supprimerProgrammationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.CalProgrammation = new System.Windows.Forms.MonthCalendar();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.btProgram = new System.Windows.Forms.Button();
             this.cmbCine = new System.Windows.Forms.ComboBox();
+            this.CalProgrammation = new System.Windows.Forms.MonthCalendar();
+            this.btAddFilm = new System.Windows.Forms.Button();
+            this.btUpdFilm = new System.Windows.Forms.Button();
             this.dgvFilms = new System.Windows.Forms.DataGridView();
+            this.MenuFilms = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.supprimerFilmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
@@ -93,10 +99,6 @@
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.cmbCinemas = new System.Windows.Forms.ComboBox();
             this.btProgrammer = new System.Windows.Forms.Button();
-            this.MenuFilms = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.MenuProgrammation = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.supprimerProgrammationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.supprimerFilmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuCinema.SuspendLayout();
             this.MenuChaine.SuspendLayout();
             this.MenuSalle.SuspendLayout();
@@ -114,14 +116,14 @@
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProgrammation)).BeginInit();
+            this.MenuProgrammation.SuspendLayout();
             this.tableLayoutPanel12.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
             this.tableLayoutPanel13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFilms)).BeginInit();
+            this.MenuFilms.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
-            this.MenuFilms.SuspendLayout();
-            this.MenuProgrammation.SuspendLayout();
             this.SuspendLayout();
             // 
             // MenuCinema
@@ -606,14 +608,13 @@
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.dgvProgrammation, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.dgvProgrammation, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(595, 182);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(586, 459);
             this.tableLayoutPanel1.TabIndex = 23;
             // 
@@ -645,7 +646,7 @@
             this.dgvProgrammation.DefaultCellStyle = dataGridViewCellStyle11;
             this.dgvProgrammation.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvProgrammation.EnableHeadersVisualStyles = false;
-            this.dgvProgrammation.Location = new System.Drawing.Point(3, 278);
+            this.dgvProgrammation.Location = new System.Drawing.Point(3, 3);
             this.dgvProgrammation.MultiSelect = false;
             this.dgvProgrammation.Name = "dgvProgrammation";
             this.dgvProgrammation.ReadOnly = true;
@@ -660,8 +661,22 @@
             this.dgvProgrammation.RowHeadersWidth = 51;
             this.dgvProgrammation.RowTemplate.Height = 25;
             this.dgvProgrammation.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProgrammation.Size = new System.Drawing.Size(580, 178);
+            this.dgvProgrammation.Size = new System.Drawing.Size(580, 223);
             this.dgvProgrammation.TabIndex = 23;
+            // 
+            // MenuProgrammation
+            // 
+            this.MenuProgrammation.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.supprimerProgrammationToolStripMenuItem});
+            this.MenuProgrammation.Name = "MenuProgrammation";
+            this.MenuProgrammation.Size = new System.Drawing.Size(217, 26);
+            // 
+            // supprimerProgrammationToolStripMenuItem
+            // 
+            this.supprimerProgrammationToolStripMenuItem.Name = "supprimerProgrammationToolStripMenuItem";
+            this.supprimerProgrammationToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.supprimerProgrammationToolStripMenuItem.Text = "Supprimer programmation";
+            this.supprimerProgrammationToolStripMenuItem.Click += new System.EventHandler(this.supprimerProgrammationToolStripMenuItem_Click);
             // 
             // tableLayoutPanel12
             // 
@@ -680,56 +695,47 @@
             // 
             // tableLayoutPanel9
             // 
-            this.tableLayoutPanel9.ColumnCount = 2;
+            this.tableLayoutPanel9.ColumnCount = 4;
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel9.Controls.Add(this.CalProgrammation, 0, 0);
-            this.tableLayoutPanel9.Controls.Add(this.tableLayoutPanel13, 1, 0);
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel9.Controls.Add(this.tableLayoutPanel13, 2, 1);
+            this.tableLayoutPanel9.Controls.Add(this.CalProgrammation, 1, 1);
+            this.tableLayoutPanel9.Controls.Add(this.btAddFilm, 1, 0);
+            this.tableLayoutPanel9.Controls.Add(this.btUpdFilm, 2, 0);
             this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 232);
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
-            this.tableLayoutPanel9.RowCount = 1;
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel9.RowCount = 2;
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
             this.tableLayoutPanel9.Size = new System.Drawing.Size(580, 224);
             this.tableLayoutPanel9.TabIndex = 2;
             // 
-            // CalProgrammation
-            // 
-            this.CalProgrammation.BackColor = System.Drawing.Color.Gray;
-            this.CalProgrammation.Dock = System.Windows.Forms.DockStyle.Top;
-            this.CalProgrammation.ForeColor = System.Drawing.SystemColors.Info;
-            this.CalProgrammation.Location = new System.Drawing.Point(3, 3);
-            this.CalProgrammation.Margin = new System.Windows.Forms.Padding(3);
-            this.CalProgrammation.MinDate = new System.DateTime(2024, 3, 24, 0, 0, 0, 0);
-            this.CalProgrammation.Name = "CalProgrammation";
-            this.CalProgrammation.TabIndex = 0;
-            this.CalProgrammation.TitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.CalProgrammation.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.CalProgrammation_DateSelected);
-            // 
             // tableLayoutPanel13
             // 
-            this.tableLayoutPanel13.ColumnCount = 2;
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel13.Controls.Add(this.btProgram, 1, 0);
+            this.tableLayoutPanel13.ColumnCount = 1;
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel13.Controls.Add(this.btProgram, 0, 1);
             this.tableLayoutPanel13.Controls.Add(this.cmbCine, 0, 0);
-            this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel13.Location = new System.Drawing.Point(235, 3);
+            this.tableLayoutPanel13.Location = new System.Drawing.Point(293, 70);
             this.tableLayoutPanel13.Name = "tableLayoutPanel13";
-            this.tableLayoutPanel13.RowCount = 2;
+            this.tableLayoutPanel13.RowCount = 3;
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutPanel13.Size = new System.Drawing.Size(342, 218);
-            this.tableLayoutPanel13.TabIndex = 1;
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(226, 151);
+            this.tableLayoutPanel13.TabIndex = 21;
             // 
             // btProgram
             // 
             this.btProgram.BackColor = System.Drawing.SystemColors.Info;
             this.btProgram.Dock = System.Windows.Forms.DockStyle.Top;
             this.btProgram.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btProgram.Location = new System.Drawing.Point(174, 3);
+            this.btProgram.Location = new System.Drawing.Point(3, 48);
             this.btProgram.Name = "btProgram";
-            this.btProgram.Size = new System.Drawing.Size(165, 40);
+            this.btProgram.Size = new System.Drawing.Size(220, 39);
             this.btProgram.TabIndex = 18;
             this.btProgram.Text = "Programmer";
             this.btProgram.UseVisualStyleBackColor = false;
@@ -742,8 +748,46 @@
             this.cmbCine.FormattingEnabled = true;
             this.cmbCine.Location = new System.Drawing.Point(3, 3);
             this.cmbCine.Name = "cmbCine";
-            this.cmbCine.Size = new System.Drawing.Size(165, 29);
+            this.cmbCine.Size = new System.Drawing.Size(220, 29);
             this.cmbCine.TabIndex = 19;
+            // 
+            // CalProgrammation
+            // 
+            this.CalProgrammation.BackColor = System.Drawing.Color.Gray;
+            this.CalProgrammation.Dock = System.Windows.Forms.DockStyle.Right;
+            this.CalProgrammation.ForeColor = System.Drawing.SystemColors.Info;
+            this.CalProgrammation.Location = new System.Drawing.Point(61, 70);
+            this.CalProgrammation.Margin = new System.Windows.Forms.Padding(3);
+            this.CalProgrammation.MinDate = new System.DateTime(2024, 3, 24, 0, 0, 0, 0);
+            this.CalProgrammation.Name = "CalProgrammation";
+            this.CalProgrammation.TabIndex = 0;
+            this.CalProgrammation.TitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.CalProgrammation.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.CalProgrammation_DateSelected);
+            // 
+            // btAddFilm
+            // 
+            this.btAddFilm.BackColor = System.Drawing.SystemColors.Info;
+            this.btAddFilm.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btAddFilm.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btAddFilm.Location = new System.Drawing.Point(61, 3);
+            this.btAddFilm.Name = "btAddFilm";
+            this.btAddFilm.Size = new System.Drawing.Size(226, 39);
+            this.btAddFilm.TabIndex = 22;
+            this.btAddFilm.Text = "Ajouter Film";
+            this.btAddFilm.UseVisualStyleBackColor = false;
+            this.btAddFilm.Click += new System.EventHandler(this.btAddFilm_Click);
+            // 
+            // btUpdFilm
+            // 
+            this.btUpdFilm.BackColor = System.Drawing.SystemColors.Info;
+            this.btUpdFilm.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btUpdFilm.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btUpdFilm.Location = new System.Drawing.Point(293, 3);
+            this.btUpdFilm.Name = "btUpdFilm";
+            this.btUpdFilm.Size = new System.Drawing.Size(226, 39);
+            this.btUpdFilm.TabIndex = 23;
+            this.btUpdFilm.Text = "Modifier Film";
+            this.btUpdFilm.UseVisualStyleBackColor = false;
             // 
             // dgvFilms
             // 
@@ -751,7 +795,7 @@
             this.dgvFilms.AllowUserToResizeRows = false;
             this.dgvFilms.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvFilms.BackgroundColor = System.Drawing.Color.Black;
-            this.dgvFilms.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvFilms.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvFilms.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
@@ -789,6 +833,19 @@
             this.dgvFilms.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvFilms.Size = new System.Drawing.Size(580, 223);
             this.dgvFilms.TabIndex = 22;
+            // 
+            // MenuFilms
+            // 
+            this.MenuFilms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.supprimerFilmToolStripMenuItem});
+            this.MenuFilms.Name = "MenuFilms";
+            this.MenuFilms.Size = new System.Drawing.Size(154, 26);
+            // 
+            // supprimerFilmToolStripMenuItem
+            // 
+            this.supprimerFilmToolStripMenuItem.Name = "supprimerFilmToolStripMenuItem";
+            this.supprimerFilmToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.supprimerFilmToolStripMenuItem.Text = "Supprimer film";
             // 
             // tableLayoutPanel8
             // 
@@ -937,33 +994,6 @@
             this.btProgrammer.Text = "Programmer";
             this.btProgrammer.UseVisualStyleBackColor = false;
             // 
-            // MenuFilms
-            // 
-            this.MenuFilms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.supprimerFilmToolStripMenuItem});
-            this.MenuFilms.Name = "MenuFilms";
-            this.MenuFilms.Size = new System.Drawing.Size(154, 26);
-            // 
-            // MenuProgrammation
-            // 
-            this.MenuProgrammation.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.supprimerProgrammationToolStripMenuItem});
-            this.MenuProgrammation.Name = "MenuProgrammation";
-            this.MenuProgrammation.Size = new System.Drawing.Size(217, 48);
-            // 
-            // supprimerProgrammationToolStripMenuItem
-            // 
-            this.supprimerProgrammationToolStripMenuItem.Name = "supprimerProgrammationToolStripMenuItem";
-            this.supprimerProgrammationToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
-            this.supprimerProgrammationToolStripMenuItem.Text = "Supprimer programmation";
-            this.supprimerProgrammationToolStripMenuItem.Click += new System.EventHandler(this.supprimerProgrammationToolStripMenuItem_Click);
-            // 
-            // supprimerFilmToolStripMenuItem
-            // 
-            this.supprimerFilmToolStripMenuItem.Name = "supprimerFilmToolStripMenuItem";
-            this.supprimerFilmToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.supprimerFilmToolStripMenuItem.Text = "Supprimer film";
-            // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -997,15 +1027,15 @@
             this.tableLayoutPanel5.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProgrammation)).EndInit();
+            this.MenuProgrammation.ResumeLayout(false);
             this.tableLayoutPanel12.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel13.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFilms)).EndInit();
+            this.MenuFilms.ResumeLayout(false);
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel8.PerformLayout();
             this.tableLayoutPanel11.ResumeLayout(false);
-            this.MenuFilms.ResumeLayout(false);
-            this.MenuProgrammation.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1057,12 +1087,14 @@
         private TableLayoutPanel tableLayoutPanel11;
         private ComboBox cmbCinemas;
         private Button btProgrammer;
-        private TableLayoutPanel tableLayoutPanel13;
         private Button btProgram;
         private ComboBox cmbCine;
         private ContextMenuStrip MenuProgrammation;
         private ToolStripMenuItem supprimerProgrammationToolStripMenuItem;
         private ContextMenuStrip MenuFilms;
         private ToolStripMenuItem supprimerFilmToolStripMenuItem;
+        private TableLayoutPanel tableLayoutPanel13;
+        private Button btAddFilm;
+        private Button btUpdFilm;
     }
 }

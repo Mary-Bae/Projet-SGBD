@@ -720,6 +720,18 @@ namespace UIAdmin
                     }
             }
         }
+
+        private void btAddFilm_Click(object sender, EventArgs e)
+        {
+            lblStatusProgrammation.Text = "";
+
+            var formAjoutFilm = new frmAddUpdFilm(frmAddUpdFilm.Mode.Ajout);
+            var result = formAjoutFilm.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                LoadFilms();
+            }
+        }
     }
 }
 
