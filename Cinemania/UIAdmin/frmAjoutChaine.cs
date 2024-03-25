@@ -26,7 +26,6 @@ namespace UIAdmin
                 this.Close();
             }
         }
-
         private async void btSave_Click(object sender, EventArgs e)
         {
             if (cmbQteRangees.SelectedItem == null || cmbNbrPlace.SelectedItem == null)
@@ -60,7 +59,6 @@ namespace UIAdmin
             else
             {
                 MessageBox.Show("Un problème est survenu : " + errorMessage, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             }
         }
         private async Task<string> AjouterChaine(ChaineCinemaEtSalleDTO chaine)

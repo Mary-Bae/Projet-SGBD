@@ -317,13 +317,20 @@ namespace Repositories
             catch (SqlException ex)
             {
                 if (ex.Number == 0x00000223)
-                    throw new CustomError(ErreurCodeEnum.UK_CINEMA_NOM, ex);
+                    throw new CustomError(ErreurCodeEnum.FK_Cine_Film_Programmation, ex);
+                if(ex.Number == 0x00000a29)
+                    throw new CustomError(ErreurCodeEnum.UK_Programmation, ex);
                 throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
             }
             catch (Exception ex)
             {
                 throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
             }
+        }
+        public async Task<List<T>> GetProgrammation<T>()
+        {
+            var lst = await _Connection.QueryAsync<T>("[Admin].[ProgrammationAvecNoms]");
+            return lst.ToList();
         }
     }
 }

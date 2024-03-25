@@ -306,5 +306,21 @@ namespace CinemaAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpGet("Programmation")]
+        public async Task<ActionResult> GetProgrammation()
+        {
+            try
+            {
+                List<ProgrammationAvecNomsDTO> lst;
+
+                IProgrammationSvc programmationSvc = _adminSvc;
+                lst = await programmationSvc.GetProgrammation<ProgrammationAvecNomsDTO>();
+                return Ok(lst);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

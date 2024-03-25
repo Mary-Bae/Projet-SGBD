@@ -36,6 +36,7 @@ namespace Interfaces
     public interface IProgrammationSvc
     {
         Task AddProgrammation(ProgrammationDTO programmation);
+        Task<List<T>> GetProgrammation<T>();
     }
 
 }

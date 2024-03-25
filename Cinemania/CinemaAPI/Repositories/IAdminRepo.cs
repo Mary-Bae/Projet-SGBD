@@ -36,6 +36,7 @@ namespace Interfaces
     public interface IProgrammationRepo
     {
         Task AddProgrammation(ProgrammationDTO pData);
+        Task<List<T>> GetProgrammation<T>();
 
     }
 }

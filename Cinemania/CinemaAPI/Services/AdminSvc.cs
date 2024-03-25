@@ -132,5 +132,11 @@ namespace Services
             IProgrammationRepo programmationRepo = _adminRepo;
             await programmationRepo.AddProgrammation(pData);
         }
+        async Task<List<T>> IProgrammationSvc.GetProgrammation<T>()
+        {
+            IProgrammationRepo programmationRepo = _adminRepo;
+            var lst = await programmationRepo.GetProgrammation<T>();
+            return lst.ToList<T>();
+        }
     }
 }

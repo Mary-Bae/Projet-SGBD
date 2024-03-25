@@ -567,7 +567,6 @@ namespace UIAdmin
             }
             else
             {
-                lblStatusProgrammation.Text = "Vous devez sélectionner un film pour gérer la programmation";
                 return -1;
             }
         }
@@ -580,37 +579,24 @@ namespace UIAdmin
             }
             else
             {
-                lblStatusProgrammation.Text = "Vous devez sélectionner un cinéma pour gérer la programmation";
                 return -1;
             }
         }
         private async void btProgrammer_Click(object sender, EventArgs e)
         {
             lblStatusProgrammation.Text = "";
-            //// Vérifier si un film a été sélectionné
-            //if (GetSelectedFilmId() == -1)
-            //{
-            //    MessageBox.Show("Veuillez sélectionner un film.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    return;
-            //}
 
-            //// Vérifier si un cinéma a été sélectionné
-            //if (GetSelectedCinemaId() == -1)
-            //{
-            //    MessageBox.Show("Veuillez sélectionner un cinéma.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    return;
-            //}
+            
 
-            // Vérifier si une date de programmation a été sélectionnée
+            int filmId = GetSelectedFilmId();
+            int cinemaId = GetSelectedCinemaId();
+            DateTime dateProgrammation = CalProgrammation.SelectionStart;
+
             if (CalProgrammation.SelectionStart == DateTime.MinValue)
             {
                 lblStatusProgrammation.Text = "Veuillez sélectionner une date de programmation.";
                 return;
             }
-
-            int filmId = GetSelectedFilmId(); // Méthode pour récupérer l'identifiant du film sélectionné dans le DataGridView
-            int cinemaId = GetSelectedCinemaId(); // Méthode pour récupérer l'identifiant du cinéma sélectionné
-            DateTime dateProgrammation = CalProgrammation.SelectionStart; // Récupérer la date de programmation à partir du contrôle MonthCalendar
 
             var programmationData = new
             {
@@ -623,16 +609,46 @@ namespace UIAdmin
             {
                 string jsonData = JsonConvert.SerializeObject(programmationData);
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await client.PostAsync("https://localhost:7013/Admin/Programmation/AddProgrammation", content);
 
-                if (response.IsSuccessStatusCode)
+                var errorMessage = await AjouterProgrammation(content);
+
+                if (string.IsNullOrEmpty(errorMessage))
+                {
                     MessageBox.Show("La programmation du film a été ajoutée avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
                 else
-                    MessageBox.Show("Une erreur s'est produite lors de l'ajout de la programmation : " + response.StatusCode);
+                {
+                    lblStatusProgrammation.Text = errorMessage;
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Une erreur s'est produite : " + ex.Message);
+                MessageBox.Show("Une erreur s'est produite : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async Task<string> AjouterProgrammation(StringContent content)
+        {
+            try
+            {
+                var response = await client.PostAsync("https://localhost:7013/Admin/Programmation/AddProgrammation", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return string.Empty;
+                }
+                else
+                {
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    var statusCode = response.StatusCode;
+                    Console.WriteLine("Échec de la requête : " + statusCode);
+                    return !string.IsNullOrWhiteSpace(errorContent) ? errorContent : "Échec de la requête avec le statut " + statusCode;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Une erreur est survenue lors de la communication avec l'API : " + ex.Message);
+                return "Une erreur inattendue est survenue.";
             }
         }
     }
