@@ -369,6 +369,13 @@ namespace Repositories
                 throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
             }
         }
+        async Task IFilmRepo.DeleteFilm(int pId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@id", pId);
+
+            await _Connection.ExecuteAsync("[Admin].[Film_Delete]", parameters, commandType: CommandType.StoredProcedure);
+        }
 
         // Programmation
         public async Task AddProgrammation(ProgrammationDTO programmation)

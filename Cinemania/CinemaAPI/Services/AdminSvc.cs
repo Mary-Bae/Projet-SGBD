@@ -151,6 +151,11 @@ namespace Services
             }
             return null;
         }
+        async Task IFilmSvc.DeleteFilm(int pId)
+        {
+            IFilmRepo filmRepo = _adminRepo;
+            await filmRepo.DeleteFilm(pId);
+        }
 
         // Programmation
 

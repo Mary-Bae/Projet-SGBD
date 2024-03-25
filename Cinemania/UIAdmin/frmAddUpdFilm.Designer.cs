@@ -43,42 +43,44 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(39, 124);
+            this.label1.Location = new System.Drawing.Point(45, 165);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 15);
+            this.label1.Size = new System.Drawing.Size(104, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Titre du film  *";
             // 
             // txtTitre
             // 
-            this.txtTitre.Location = new System.Drawing.Point(136, 116);
+            this.txtTitre.Location = new System.Drawing.Point(155, 155);
+            this.txtTitre.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtTitre.Name = "txtTitre";
-            this.txtTitre.Size = new System.Drawing.Size(215, 23);
+            this.txtTitre.Size = new System.Drawing.Size(245, 27);
             this.txtTitre.TabIndex = 1;
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(136, 180);
+            this.txtDescription.Location = new System.Drawing.Point(155, 240);
+            this.txtDescription.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(493, 121);
+            this.txtDescription.Size = new System.Drawing.Size(563, 160);
             this.txtDescription.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(43, 183);
+            this.label2.Location = new System.Drawing.Point(49, 244);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(67, 15);
+            this.label2.Size = new System.Drawing.Size(85, 20);
             this.label2.TabIndex = 2;
             this.label2.Text = "Description";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(426, 119);
+            this.label3.Location = new System.Drawing.Point(487, 159);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 15);
+            this.label3.Size = new System.Drawing.Size(48, 20);
             this.label3.TabIndex = 4;
             this.label3.Text = "Genre";
             // 
@@ -95,9 +97,10 @@
             "Suspens",
             "Thriller",
             "Horreur"});
-            this.cmbGenre.Location = new System.Drawing.Point(483, 116);
+            this.cmbGenre.Location = new System.Drawing.Point(552, 155);
+            this.cmbGenre.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbGenre.Name = "cmbGenre";
-            this.cmbGenre.Size = new System.Drawing.Size(146, 23);
+            this.cmbGenre.Size = new System.Drawing.Size(166, 28);
             this.cmbGenre.TabIndex = 5;
             // 
             // label6
@@ -105,9 +108,9 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label6.ForeColor = System.Drawing.Color.Gray;
-            this.label6.Location = new System.Drawing.Point(43, 28);
+            this.label6.Location = new System.Drawing.Point(49, 37);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(300, 30);
+            this.label6.Size = new System.Drawing.Size(387, 38);
             this.label6.TabIndex = 19;
             this.label6.Text = "Ajout - Modification de film";
             // 
@@ -115,9 +118,10 @@
             // 
             this.btCancel.BackColor = System.Drawing.Color.Silver;
             this.btCancel.ForeColor = System.Drawing.Color.Black;
-            this.btCancel.Location = new System.Drawing.Point(391, 372);
+            this.btCancel.Location = new System.Drawing.Point(469, 477);
+            this.btCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btCancel.Name = "btCancel";
-            this.btCancel.Size = new System.Drawing.Size(118, 33);
+            this.btCancel.Size = new System.Drawing.Size(135, 44);
             this.btCancel.TabIndex = 21;
             this.btCancel.Text = "Annuler";
             this.btCancel.UseVisualStyleBackColor = false;
@@ -126,9 +130,10 @@
             // btSave
             // 
             this.btSave.BackColor = System.Drawing.Color.Silver;
-            this.btSave.Location = new System.Drawing.Point(201, 372);
+            this.btSave.Location = new System.Drawing.Point(252, 477);
+            this.btSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(120, 33);
+            this.btSave.Size = new System.Drawing.Size(137, 44);
             this.btSave.TabIndex = 20;
             this.btSave.Text = "Sauvegarder";
             this.btSave.UseVisualStyleBackColor = false;
@@ -138,17 +143,17 @@
             // 
             this.lblAvertissement.AutoSize = true;
             this.lblAvertissement.ForeColor = System.Drawing.Color.Red;
-            this.lblAvertissement.Location = new System.Drawing.Point(136, 338);
+            this.lblAvertissement.Location = new System.Drawing.Point(155, 434);
             this.lblAvertissement.Name = "lblAvertissement";
-            this.lblAvertissement.Size = new System.Drawing.Size(0, 15);
+            this.lblAvertissement.Size = new System.Drawing.Size(0, 20);
             this.lblAvertissement.TabIndex = 22;
             // 
             // frmAddUpdFilm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(715, 433);
+            this.ClientSize = new System.Drawing.Size(817, 577);
             this.ControlBox = false;
             this.Controls.Add(this.lblAvertissement);
             this.Controls.Add(this.btCancel);
@@ -161,6 +166,7 @@
             this.Controls.Add(this.txtTitre);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmAddUpdFilm";
             this.Text = "frmAjoutFilm";
             this.ResumeLayout(false);

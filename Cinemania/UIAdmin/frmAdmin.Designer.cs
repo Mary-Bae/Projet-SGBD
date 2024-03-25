@@ -840,13 +840,14 @@
             this.MenuFilms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.supprimerFilmToolStripMenuItem});
             this.MenuFilms.Name = "MenuFilms";
-            this.MenuFilms.Size = new System.Drawing.Size(154, 26);
+            this.MenuFilms.Size = new System.Drawing.Size(181, 48);
             // 
             // supprimerFilmToolStripMenuItem
             // 
             this.supprimerFilmToolStripMenuItem.Name = "supprimerFilmToolStripMenuItem";
-            this.supprimerFilmToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.supprimerFilmToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.supprimerFilmToolStripMenuItem.Text = "Supprimer film";
+            this.supprimerFilmToolStripMenuItem.Click += new System.EventHandler(this.supprimerFilmToolStripMenuItem_Click);
             // 
             // tableLayoutPanel8
             // 

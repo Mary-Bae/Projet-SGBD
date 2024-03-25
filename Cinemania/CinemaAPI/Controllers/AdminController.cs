@@ -345,6 +345,21 @@ namespace CinemaAPI.Controllers
             }
         }
 
+        [HttpDelete("Films/DelFilm/{id}")]
+        public async Task<ActionResult> DelFilm(int id)
+        {
+            try
+            {
+                IFilmSvc filmsSvc = _adminSvc;
+                await filmsSvc.DeleteFilm(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         // Programmation
         [HttpPost("Programmation/AddProgrammation")]
         public async Task<IActionResult> AddProgrammation(ProgrammationDTO programmationDTO)

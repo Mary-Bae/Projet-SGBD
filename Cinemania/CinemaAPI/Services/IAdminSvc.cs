@@ -35,6 +35,7 @@ namespace Interfaces
         Task<FilmsDTO> GetFilmByFilmId(int filmId);
         Task AddFilm(AjoutFilmsDTO ajoutFilm);
         Task UpdateFilm(int pId, FilmsDTO MajFilm);
+        Task DeleteFilm(int pId);
     }
     public interface IProgrammationSvc
     {

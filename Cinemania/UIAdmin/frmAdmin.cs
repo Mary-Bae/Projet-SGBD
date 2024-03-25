@@ -409,7 +409,7 @@ namespace UIAdmin
                         {
                             MessageBox.Show("Salle de cinéma supprimée avec succès.", "Suppression Réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             LoadSallesByCinema(_currentCinemaId);
-                            dgvSalles.Columns["sa_id"].Visible = false;
+                           // dgvSalles.Columns["sa_id"].Visible = false;
                         }
                         else
                         {
@@ -785,6 +785,33 @@ namespace UIAdmin
 
             return null;
         }
+
+        private async void supprimerFilmToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lblStatusProgrammation.Text = "";
+            if (dgvFilms.CurrentRow != null)
+            {
+                int filmId = Convert.ToInt32(dgvFilms.CurrentRow.Cells["fi_id"].Value);
+                var confirmResult = MessageBox.Show("Êtes-vous sûr de vouloir supprimer ce film ?", "Confirmer la suppression", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (confirmResult == DialogResult.Yes)
+                {
+                    HttpResponseMessage response = await client.DeleteAsync("https://localhost:7013/Admin/Films/DelFilm/" + filmId);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Film supprimé avec succès.", "Suppression Réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadFilms();
+                    }
+                    else
+                    {
+                        var responseContent = await response.Content.ReadAsStringAsync();
+                        MessageBox.Show(responseContent, "Échec de la Suppression", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+        }
     }
-}
+
 
