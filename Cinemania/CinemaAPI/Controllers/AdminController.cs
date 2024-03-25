@@ -147,6 +147,45 @@ namespace CinemaAPI.Controllers
             }
         }
 
+        [HttpPost("Cinemas/AjouterCinema")]
+        public async Task<IActionResult> AjouterCinemaEtSalle(CinemaEtSalleDTO cinemaEtSalleDTO)
+        {
+            try
+            {
+                ICinemasSvc cinemasSvc = _adminSvc;
+                await cinemasSvc.AjouterCinemaEtSalle(cinemaEtSalleDTO);
+                return Ok();
+            }
+            catch (CustomError ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        
+        [HttpDelete("Cinemas/DelCinemas/{cinemaId}")]
+        public async Task<IActionResult> DeleteCinema(int cinemaId)
+        {
+            try
+            {
+                // Supprime d'abord toutes les salles associées au cinéma
+                ISalleSvc SallesSvc = _adminSvc;
+                await SallesSvc.DeleteSallesByCinemaId(cinemaId);
+
+                // Ensuite, supprime le cinéma
+                ICinemasSvc cinemasSvc = _adminSvc;
+                await cinemasSvc.DeleteCinemas(cinemaId);
+
+                return Ok("Cinéma et toutes les salles associées supprimés avec succès.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Erreur lors de la suppression : " + ex.Message);
+            }
+
+        }
+
+        // Salles
+
         [HttpGet("Salles")]
         public async Task<ActionResult> GetSalles()
         {
@@ -181,36 +220,6 @@ namespace CinemaAPI.Controllers
             }
         }
 
-        [HttpPost("Cinemas/AjouterCinema")]
-        public async Task<IActionResult> AjouterCinemaEtSalle(CinemaEtSalleDTO cinemaEtSalleDTO)
-        {
-            try
-            {
-                ICinemasSvc cinemasSvc = _adminSvc;
-                await cinemasSvc.AjouterCinemaEtSalle(cinemaEtSalleDTO);
-                return Ok();
-            }
-            catch (CustomError ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpDelete("Salles/DelSalle/{id}")]
-        public async Task<ActionResult> DelSalle(int id)
-        {
-            try
-            {
-                ISalleSvc sallesSvc = _adminSvc;
-                await sallesSvc.DeleteSalle(id);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
         [HttpPut("Salles/MajSalle/{id}")]
         public async Task<ActionResult> MajSalle(int id, MajSalleDTO data)
         {
@@ -218,6 +227,21 @@ namespace CinemaAPI.Controllers
             {
                 ISalleSvc SallesSvc = _adminSvc;
                 await SallesSvc.UpdateSalle(id, data);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+      
+        [HttpDelete("Salles/DelSalle/{id}")]
+        public async Task<ActionResult> DelSalle(int id)
+        {
+            try
+            {
+                ISalleSvc sallesSvc = _adminSvc;
+                await sallesSvc.DeleteSalle(id);
                 return Ok();
             }
             catch (Exception ex)
@@ -249,26 +273,85 @@ namespace CinemaAPI.Controllers
             }
         }
 
-        [HttpDelete("Cinemas/DelCinemas/{cinemaId}")]
-        public async Task<IActionResult> DeleteCinema(int cinemaId)
+        // Films
+        [HttpGet("Films")]
+        public async Task<ActionResult> GetFilms()
         {
             try
             {
-                // Supprime d'abord toutes les salles associées au cinéma
-                ISalleSvc SallesSvc = _adminSvc;
-                await SallesSvc.DeleteSallesByCinemaId(cinemaId);
+                List<FilmsDTO> lst;
 
-                // Ensuite, supprime le cinéma
-                ICinemasSvc cinemasSvc = _adminSvc;
-                await cinemasSvc.DeleteCinemas(cinemaId);
-
-                return Ok("Cinéma et toutes les salles associées supprimés avec succès.");
+                IFilmSvc filmSvc = _adminSvc;
+                lst = await filmSvc.GetFilms<FilmsDTO>();
+                return Ok(lst);
             }
             catch (Exception ex)
             {
-                return BadRequest("Erreur lors de la suppression : " + ex.Message);
+                return BadRequest(ex.Message);
             }
+        }
 
+        [HttpPost("Films/AjoutFilm")]
+        public async Task<IActionResult> AjouterFilm(AjoutFilmsDTO ajoutFilmDTO)
+        {
+
+            try
+            {
+                IFilmSvc filmSvc = _adminSvc;
+                await filmSvc.AddFilm(ajoutFilmDTO);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        // Programmation
+        [HttpPost("Programmation/AddProgrammation")]
+        public async Task<IActionResult> AddProgrammation(ProgrammationDTO programmationDTO)
+        {
+            try
+            {
+                IProgrammationSvc programmationSvc = _adminSvc;
+                await programmationSvc.AddProgrammation(programmationDTO);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpGet("Programmation")]
+        public async Task<ActionResult> GetProgrammation()
+        {
+            try
+            {
+                List<ProgrammationAvecNomsDTO> lst;
+
+                IProgrammationSvc programmationSvc = _adminSvc;
+                lst = await programmationSvc.GetProgrammation<ProgrammationAvecNomsDTO>();
+                return Ok(lst);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        
+        [HttpDelete("Programmation/DelProgrammation/{id}")]
+        public async Task<ActionResult> DelProgrammation(int id)
+        {
+            try
+            {
+                IProgrammationSvc programmationSvc = _adminSvc;
+                await programmationSvc.DeleteProgrammation(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

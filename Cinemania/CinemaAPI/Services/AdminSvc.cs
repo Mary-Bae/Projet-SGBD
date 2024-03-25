@@ -3,7 +3,7 @@ using Models;
 
 namespace Services
 {
-    public class AdminSvc : IAdminSvc, ICinemasSvc, ISalleSvc
+    public class AdminSvc : IAdminSvc, ICinemasSvc, ISalleSvc, IFilmSvc, IProgrammationSvc
     {
         IAdminRepo _adminRepo;
         public AdminSvc(IAdminRepo pAdminRepo)
@@ -114,6 +114,39 @@ namespace Services
         {
             ISalleRepo salleRepo = _adminRepo;
             await salleRepo.UpdateSalle(pId, pData);
+        }
+
+        // Films
+
+        async Task<List<T>> IFilmSvc.GetFilms<T>()
+        {
+            IFilmRepo filmRepo = _adminRepo;
+            var lst = await filmRepo.GetFilms<T>();
+            return lst.ToList<T>();
+        }
+        async Task IFilmSvc.AddFilm(AjoutFilmsDTO pData)
+        {
+            IFilmRepo filmRepo = _adminRepo;
+            await filmRepo.AddFilm(pData);
+        }
+
+        // Programmation
+
+        async Task IProgrammationSvc.AddProgrammation(ProgrammationDTO pData)
+        {
+            IProgrammationRepo programmationRepo = _adminRepo;
+            await programmationRepo.AddProgrammation(pData);
+        }
+        async Task<List<T>> IProgrammationSvc.GetProgrammation<T>()
+        {
+            IProgrammationRepo programmationRepo = _adminRepo;
+            var lst = await programmationRepo.GetProgrammation<T>();
+            return lst.ToList<T>();
+        }
+        async Task IProgrammationSvc.DeleteProgrammation(int pId)
+        {
+            IProgrammationRepo programmationRepo = _adminRepo;
+            await programmationRepo.DeleteProgrammation(pId);
         }
     }
 }

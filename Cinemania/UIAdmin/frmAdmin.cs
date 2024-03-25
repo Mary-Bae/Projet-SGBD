@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Net.Http.Json;
 using System.Security.Policy;
 using System.Text;
+using System.Windows.Forms;
 
 namespace UIAdmin
 {
@@ -16,6 +17,9 @@ namespace UIAdmin
         {
             InitializeComponent();
             LoadChaines();
+            LoadFilms();
+            ChargerCinemas();
+            LoadProgrammationData();
         }
 
         async void LoadChaines()
@@ -36,14 +40,39 @@ namespace UIAdmin
                         var responseContent = await response.Content.ReadAsStringAsync();
                         var chaines = JsonConvert.DeserializeObject<BindingList<ChaineDTO>>(responseContent);
                         dgvChaine.DataSource = chaines;
-
                         dgvChaine.Columns["ch_id"].Visible = false;
                         dgvChaine.Columns["ch_nom"].HeaderText = "Chaine de Cinéma";
+                    }
+                }
+                catch (HttpRequestException)
+                {
+                    attempts++;
+                    if (attempts < maxRetries) await Task.Delay(1000); // Attendre 1 seconde avant de réessayer
+                }
+            }
+            if (!success) MessageBox.Show("Impossible de charger les données après plusieurs tentatives.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        async void LoadFilms()
+        {
+            const int maxRetries = 3;
+            int attempts = 0;
+            bool success = false;
 
-                        foreach (DataGridViewColumn column in dgvChaine.Columns)
-                        {
-                            column.ReadOnly = false;
-                        }
+            while (attempts < maxRetries && !success)
+            {
+                try
+                {
+                    HttpResponseMessage response = await client.GetAsync("https://localhost:7013/Admin/Films");
+                    success = response.IsSuccessStatusCode;
+                    if (success)
+                    {
+                        var responseContent = await response.Content.ReadAsStringAsync();
+                        var films = JsonConvert.DeserializeObject<BindingList<FilmsDTO>>(responseContent);
+                        dgvFilms.DataSource = films;
+                        dgvFilms.Columns["fi_id"].Visible = false;
+                        dgvFilms.Columns["fi_nom"].HeaderText = "Titre";
+                        dgvFilms.Columns["fi_genre"].HeaderText = "Genre";
+                        dgvFilms.Columns["fi_description"].Visible = false; ;
                     }
                 }
                 catch (HttpRequestException)
@@ -55,12 +84,44 @@ namespace UIAdmin
             if (!success) MessageBox.Show("Impossible de charger les données après plusieurs tentatives.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        //Charge les cinemas associés aux chaines à chaque sélection de chaine
-        private async void dgvChaines_SelectionChanged(object sender, EventArgs e)
+        private async void ChargerCinemas()
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("https://localhost:7013/Admin/Cinemas");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseContent = await response.Content.ReadAsStringAsync();
+                    if (!string.IsNullOrEmpty(responseContent))
+                    {
+                        List<CinemasDTO> data = JsonConvert.DeserializeObject<List<CinemasDTO>>(responseContent);
+
+                        foreach (CinemasDTO cinema in data)
+                        {
+                            cmbCine.Items.Add(cinema);
+                        }
+
+                        cmbCine.DisplayMember = "ci_nom";
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Erreur lors de la récupération des cinémas : " + response.StatusCode);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Une erreur est survenue : " + ex.Message);
+            }
+        }
+
+    //Charge les cinemas associés aux chaines à chaque sélection de chaine
+    private async void dgvChaines_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvChaine.CurrentRow?.DataBoundItem is ChaineDTO selectedChaine)
             {
-                lblStatusMessage.Text = "";
+                lblStatusAdminCinema.Text = "";
                 int chaineId = selectedChaine.ch_id;
                 await LoadCinemasByChaine(chaineId);
             }
@@ -92,7 +153,7 @@ namespace UIAdmin
 
         private async Task MettreAJourChaine(ChaineDTO chaine)
         {
-            lblStatusMessage.Text = "";
+            lblStatusAdminCinema.Text = "";
 
             StringContent content = new StringContent(JsonConvert.SerializeObject(chaine), Encoding.UTF8, "application/json");
             HttpResponseMessage response = await client.PutAsync("https://localhost:7013/Admin/Chaine/MajChaines/" + chaine.ch_id, content);
@@ -125,7 +186,8 @@ namespace UIAdmin
                     if (!responseCinema.IsSuccessStatusCode)
                     {
                         // Gestion des erreurs pour chaque cinéma, arrêtera le processus
-                        MessageBox.Show("Échec de la suppression du cinéma ID : " + cinema.ci_id + ". Processus interrompu.");
+                        string responseContent = await responseCinema.Content.ReadAsStringAsync();
+                        MessageBox.Show(responseContent, "Erreur de Suppression", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }
@@ -148,19 +210,19 @@ namespace UIAdmin
         {
             if (dgvChaine.CurrentRow != null)
             {
-                lblStatusMessage.Text = "";
+                lblStatusAdminCinema.Text = "";
                 int chaineId = Convert.ToInt32(dgvChaine.CurrentRow.Cells["ch_id"].Value);
                 await SupprimerChaineEtCinemas(chaineId);
             }
             else
             {
-                lblStatusMessage.Text = "Aucune chaîne n'a été sélectionnée. Veuillez choisir la chaîne à supprimer.";
+                lblStatusAdminCinema.Text = "Aucune chaîne n'a été sélectionnée. Veuillez choisir la chaîne à supprimer.";
             }
         }
 
         async private void btGetCinemas_Click(object sender, EventArgs e)
         {
-            lblStatusMessage.Text = "";
+            lblStatusAdminCinema.Text = "";
 
             HttpResponseMessage response = await client.GetAsync("https://localhost:7013/Admin/Cinemas");
 
@@ -186,7 +248,7 @@ namespace UIAdmin
         }
         private async void supprimerCinémaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            lblStatusMessage.Text = "";
+            lblStatusAdminCinema.Text = "";
             if (dgvCine.CurrentRow != null)
             {
                 int cinemaId = Convert.ToInt32(dgvCine.CurrentRow.Cells["ci_id"].Value);
@@ -194,7 +256,7 @@ namespace UIAdmin
 
                 if (nombreCinemas <= 1) // Si c'est le dernier cinéma de la chaîne, empêcher la suppression
                 {
-                    lblStatusMessage.Text = "Vous ne pouvez pas supprimer le dernier cinéma de la chaîne.";
+                    lblStatusAdminCinema.Text = "Vous ne pouvez pas supprimer le dernier cinéma de la chaîne.";
                 }
                 else // S'il y a plus d'un cinéma, demander confirmation avant suppression
                 {
@@ -213,14 +275,14 @@ namespace UIAdmin
                         else
                         {
                             string responseContent = await response.Content.ReadAsStringAsync();
-                            MessageBox.Show("La suppression du cinéma a échoué. Détail de l'erreur : " + responseContent, "Erreur de Suppression", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(responseContent, "Erreur de Suppression", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
             }
             else
             {
-                lblStatusMessage.Text = "Veuillez sélectionner un cinéma à supprimer.";
+                lblStatusAdminCinema.Text = "Veuillez sélectionner un cinéma à supprimer.";
             }
         }
 
@@ -245,7 +307,7 @@ namespace UIAdmin
         }
         private void btAjoutercinema_Click(object sender, EventArgs e)
         {
-            lblStatusMessage.Text = "";
+            lblStatusAdminCinema.Text = "";
 
             if (dgvChaine.CurrentRow != null)
             {
@@ -263,13 +325,13 @@ namespace UIAdmin
             }
             else
             {
-                lblStatusMessage.Text = "Sélectionnez une chaine de cinéma pour pouvoir lui attribuer un nouveau cinéma";
+                lblStatusAdminCinema.Text = "Sélectionnez une chaine de cinéma pour pouvoir lui attribuer un nouveau cinéma";
             }
         }
 
         private void dgvCine_SelectionChanged(object sender, EventArgs e)
         {
-            lblStatusMessage.Text = "";
+            lblStatusAdminCinema.Text = "";
 
             if (dgvCine.CurrentRow?.DataBoundItem is CinemasDTO selectedCinema)
             {
@@ -303,7 +365,7 @@ namespace UIAdmin
         }
         private void btAddSalle_Click(object sender, EventArgs e)
         {
-            lblStatusMessage.Text = "";
+            lblStatusAdminCinema.Text = "";
 
             if (dgvCine.CurrentRow != null)
             {
@@ -320,14 +382,14 @@ namespace UIAdmin
             }
             else
             {
-                lblStatusMessage.Text = "Vous devez sélectionner un cinéma de la liste afin de lui attribuer une salle.";
+                lblStatusAdminCinema.Text = "Vous devez sélectionner un cinéma de la liste afin de lui attribuer une salle.";
 
             }
         }
 
         private async void supprimerSalleDeCinemaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            lblStatusMessage.Text = "";
+            lblStatusAdminCinema.Text = "";
 
             if (dgvSalles.CurrentRow != null)
             {
@@ -358,7 +420,7 @@ namespace UIAdmin
                 }
                 else
                 {
-                    lblStatusMessage.Text = "La dernière salle du cinéma ne peut être supprimée. Chaque cinéma doit conserver au moins une salle.";
+                    lblStatusAdminCinema.Text = "La dernière salle du cinéma ne peut être supprimée. Chaque cinéma doit conserver au moins une salle.";
                 }
             }
         }
@@ -380,34 +442,6 @@ namespace UIAdmin
                 MessageBox.Show("Nous avons rencontré un problème lors de la tentative de récupération des informations sur les salles. Détail technique : " + ex.Message, "Erreur de Récupération", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return 0; // Retourne 0 en cas d'erreur
-        }
-
-        private async void modifierSalleDeCinemaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            lblStatusMessage.Text = "";
-
-            if (dgvSalles.CurrentRow != null)
-            {
-                int salleId = Convert.ToInt32(dgvSalles.CurrentRow.Cells["sa_id"].Value);
-                SalleDTO salleDetails = await GetSalleDetails(salleId);
-
-                if (salleDetails != null)
-                {
-                    // Ouvre le formulaire frmAjoutSalle en mode Modification avec les détails de la salle
-                    var formAjoutSalle = new frmAddUpdSalle(salleDetails.sa_ci_id, frmAddUpdSalle.Mode.Modification, salleDetails);
-                    var result = formAjoutSalle.ShowDialog();
-
-                    if (result == DialogResult.OK)
-                    {
-                        // Rafraîchir la liste des salles pour le cinéma associé
-                        LoadSallesByCinema(salleDetails.sa_ci_id);
-                    }
-                }
-            }
-            else
-            {
-                lblStatusMessage.Text = "Vous devez sélectionner une salle de la liste pour pouvoir la modifier.";
-            }
         }
 
         //Permet de récuperer les détails de la salle de cinéma pour qu'ils s'affichent dans les textbox lors de l'ouverture de la forme pour la modification de la salle
@@ -436,39 +470,9 @@ namespace UIAdmin
 
             return null;
         }
-
-        private void modifierCinémaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            lblStatusMessage.Text = "";
-
-            if (dgvCine.CurrentRow != null)
-            {
-                var selectedRow = dgvCine.CurrentRow;
-                var selectedCinema = new MajCinemasDTO
-                {
-                    ci_id = Convert.ToInt32(selectedRow.Cells["ci_id"].Value),
-                    ci_nom = Convert.ToString(selectedRow.Cells["ci_nom"].Value),
-                    ci_adresse = Convert.ToString(selectedRow.Cells["ci_adresse"].Value),
-                    ci_ch_id = _currentChaineId
-                };
-
-                using (var frm = new frmUpdateCinema(selectedCinema))
-                {
-                    var result = frm.ShowDialog();
-                    if (result == DialogResult.OK)
-                    {
-                        Task<List<CinemasDTO>> task = LoadCinemasByChaine(_currentChaineId);
-                    }
-                }
-            }
-            else
-            {
-                lblStatusMessage.Text = "Vous devez sélectionner un cinéma de la liste afin de pouvoir le modifier.";
-            }
-        }
         private void btAddChaine_Click(object sender, EventArgs e)
         {
-            lblStatusMessage.Text = "";
+            lblStatusAdminCinema.Text = "";
 
             var frmAjoutChaine = new frmAjoutChaine();
             var result = frmAjoutChaine.ShowDialog();
@@ -479,7 +483,7 @@ namespace UIAdmin
         }
         private async void dgvChaine_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            lblStatusMessage.Text = "";
+            lblStatusAdminCinema.Text = "";
 
             if (e.RowIndex >= 0)
             {
@@ -512,7 +516,210 @@ namespace UIAdmin
                 }
             }
         }
+        private void btUpdateCine_Click(object sender, EventArgs e)
+        {
+            lblStatusAdminCinema.Text = "";
 
+            if (dgvCine.CurrentRow != null)
+            {
+                var selectedRow = dgvCine.CurrentRow;
+                var selectedCinema = new MajCinemasDTO
+                {
+                    ci_id = Convert.ToInt32(selectedRow.Cells["ci_id"].Value),
+                    ci_nom = Convert.ToString(selectedRow.Cells["ci_nom"].Value),
+                    ci_adresse = Convert.ToString(selectedRow.Cells["ci_adresse"].Value),
+                    ci_ch_id = _currentChaineId
+                };
+
+                using (var frm = new frmUpdateCinema(selectedCinema))
+                {
+                    var result = frm.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        Task<List<CinemasDTO>> task = LoadCinemasByChaine(_currentChaineId);
+                    }
+                }
+            }
+            else
+            {
+                lblStatusAdminCinema.Text = "Vous devez sélectionner un cinéma de la liste afin de pouvoir le modifier.";
+            }
+        }
+        private async void btUpdateSalle_Click(object sender, EventArgs e)
+        {
+            lblStatusAdminCinema.Text = "";
+
+            if (dgvSalles.CurrentRow != null)
+            {
+                int salleId = Convert.ToInt32(dgvSalles.CurrentRow.Cells["sa_id"].Value);
+                SalleDTO salleDetails = await GetSalleDetails(salleId);
+
+                if (salleDetails != null)
+                {
+                    // Ouvre le formulaire frmAjoutSalle en mode Modification avec les détails de la salle
+                    var formAjoutSalle = new frmAddUpdSalle(salleDetails.sa_ci_id, frmAddUpdSalle.Mode.Modification, salleDetails);
+                    var result = formAjoutSalle.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        // Rafraîchir la liste des salles pour le cinéma associé
+                        LoadSallesByCinema(salleDetails.sa_ci_id);
+                    }
+                }
+            }
+            else
+            {
+                lblStatusAdminCinema.Text = "Vous devez sélectionner une salle de la liste pour pouvoir la modifier.";
+            }
+        }
+        private void CalProgrammation_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            DateTime selectedDate = CalProgrammation.SelectionStart;
+        }
+
+        private int GetSelectedFilmId()
+        {
+            if (dgvFilms.SelectedRows.Count > 0)
+            {
+                return Convert.ToInt32(dgvFilms.SelectedRows[0].Cells["fi_id"].Value);
+            }
+            else
+            {
+                return -1;
+            }
+        }
+        private int GetSelectedCinemaId()
+        {
+            if (cmbCine.SelectedItem != null && cmbCine.SelectedItem is CinemasDTO selectedCinema)
+            {
+                int id = selectedCinema.ci_id;
+                return id;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+        private async void btProgram_Click(object sender, EventArgs e)
+        {
+            lblStatusProgrammation.Text = "";
+
+            int filmId = GetSelectedFilmId();
+            int cinemaId = GetSelectedCinemaId();
+            DateTime dateProgrammation = CalProgrammation.SelectionStart;
+
+            if (CalProgrammation.SelectionStart == DateTime.MinValue)
+            {
+                lblStatusProgrammation.Text = "Veuillez sélectionner une date de programmation.";
+                return;
+            }
+
+            var programmationData = new
+            {
+                filmId = filmId,
+                cinemaId = cinemaId,
+                dateProgrammation = dateProgrammation
+            };
+
+            try
+            {
+                string jsonData = JsonConvert.SerializeObject(programmationData);
+                var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+                var errorMessage = await AjouterProgrammation(content);
+
+                if (string.IsNullOrEmpty(errorMessage))
+                {
+                    MessageBox.Show("La programmation du film a été ajoutée avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadProgrammationData();
+                }
+                else
+                {
+                    lblStatusProgrammation.Text = errorMessage;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Une erreur s'est produite : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private async Task<string> AjouterProgrammation(StringContent content)
+        {
+            try
+            {
+                var response = await client.PostAsync("https://localhost:7013/Admin/Programmation/AddProgrammation", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return string.Empty;
+                }
+                else
+                {
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    var statusCode = response.StatusCode;
+                    Console.WriteLine("Échec de la requête : " + statusCode);
+                    return !string.IsNullOrWhiteSpace(errorContent) ? errorContent : "Échec de la requête avec le statut " + statusCode;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Une erreur est survenue : " + ex.Message);
+                return "Une erreur inattendue est survenue.";
+            }
+        }
+
+        private async void LoadProgrammationData()
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("https://localhost:7013/Admin/Programmation");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseData = await response.Content.ReadAsStringAsync();
+                    List<ProgrammationAvecNomsDTO> programmations = JsonConvert.DeserializeObject<List<ProgrammationAvecNomsDTO>>(responseData);
+
+                    dgvProgrammation.DataSource = programmations;
+                    dgvProgrammation.Columns["pr_id"].Visible = false;
+                    dgvProgrammation.Columns["fi_Nom"].HeaderText = "Film";
+                    dgvProgrammation.Columns["ci_Nom"].HeaderText = "Cinema";
+                    dgvProgrammation.Columns["pr_date"].HeaderText = "Date Programmée";
+                }
+                else
+                {
+                    MessageBox.Show("Une erreur s'est produite lors de la récupération des données de programmation.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Une erreur s'est produite : " + ex.Message);
+            }
+        }
+        private async void supprimerProgrammationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lblStatusProgrammation.Text = "";
+
+            if (dgvProgrammation.CurrentRow != null)
+            {
+                int programmationId = Convert.ToInt32(dgvProgrammation.CurrentRow.Cells["pr_id"].Value);
+                var confirmResult = MessageBox.Show("Êtes-vous sûr de vouloir supprimer cette programmation ?", "Confirmer la suppression", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (confirmResult == DialogResult.Yes)
+                {
+                    HttpResponseMessage response = await client.DeleteAsync("https://localhost:7013/Admin/Programmation/DelProgrammation/" + programmationId);
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            MessageBox.Show("Programmation supprimée avec succès.", "Suppression Réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            LoadProgrammationData();
+                        }
+                        else
+                        {
+                            var responseContent = await response.Content.ReadAsStringAsync();
+                            MessageBox.Show("Nous n'avons pas réussi à supprimer l'élément sélectionné. Détail technique : " + responseContent, "Échec de la Suppression", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+            }
+        }
     }
 }
 

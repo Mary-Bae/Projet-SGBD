@@ -8,10 +8,13 @@ namespace CustomErrors
         UK_CINEMA_NOM,
         UK_SALLE_NUMBER,
         FK_SALLE_CINEMA,
+        FK_CINEMA_PROGRAMMATION,
         ErreurSQL,
         QuantiteMinimaleDePlaces,
         ChampVide,
         NumeroInvalide,
+        FK_Cine_Film_Programmation,
+        UK_Programmation,
         ErreurGenerale
     }
     public class CustomError : Exception
@@ -22,7 +25,6 @@ namespace CustomErrors
         {
             _codeError = (int)pCodeError;
         }
-
         public CustomError(ErreurCodeEnum pCodeError, Exception inner) : base(SetBaseMessage(pCodeError), inner)
         {
             _codeError = (int)pCodeError;
@@ -45,6 +47,9 @@ namespace CustomErrors
                 case ErreurCodeEnum.UK_SALLE_NUMBER:
                     _messageToReturn = "Il ne peut pas y avoir deux fois le même numero de salle pour un cinéma ";
                     break;
+                case ErreurCodeEnum.UK_Programmation:
+                    _messageToReturn = "Deux programmations ne peuvent pas être complètement identiques";
+                        break;
                 case ErreurCodeEnum.FK_SALLE_CINEMA:
                     _messageToReturn = "Une salle de cinema doit appartenir à un cinema ";
                     break;
@@ -62,6 +67,12 @@ namespace CustomErrors
                     break;
                 case ErreurCodeEnum.ChampVide:
                     _messageToReturn = "Les champs obligatoires ne peuvent pas être vide.";
+                    break;
+                case ErreurCodeEnum.FK_Cine_Film_Programmation:
+                    _messageToReturn = "Un cinema et un film doivent être sélectionnés pour permettre une programmation";
+                    break;
+                case ErreurCodeEnum.FK_CINEMA_PROGRAMMATION:
+                    _messageToReturn = "Le cinéma que vous tentez de supprimer a des films de programmés, supprimez d'abord vos programmations avant de supprimer le cinéma";
                     break;
                 default:
                     _messageToReturn = "Erreur non reconnue";

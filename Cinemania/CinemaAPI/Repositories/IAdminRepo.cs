@@ -3,7 +3,7 @@ using Models;
 
 namespace Interfaces
 {
-    public interface IAdminRepo : ICinemaRepo, ISalleRepo
+    public interface IAdminRepo : ICinemaRepo, ISalleRepo, IFilmRepo, IProgrammationRepo
     {
         Task<List<T>> GetChaine<T>();
         Task DeleteChaine(int pId);
@@ -28,5 +28,17 @@ namespace Interfaces
         Task UpdateSalle(int pId, MajSalleDTO pData);
         Task DeleteSallesByCinemaId(int cinemaId);
         Task AddSalle(AjoutSalleDTO pData);
+    }
+    public interface IFilmRepo
+    {
+        Task<List<T>> GetFilms<T>();
+        Task AddFilm(AjoutFilmsDTO pData);
+    }
+    public interface IProgrammationRepo
+    {
+        Task AddProgrammation(ProgrammationDTO pData);
+        Task<List<T>> GetProgrammation<T>();
+        Task DeleteProgrammation(int pId);
+
     }
 }
