@@ -81,7 +81,7 @@ namespace Services
                 };
             }
 
-            return null; // Ou gérer autrement si la salle n'est pas trouvée
+            return null;
         }
         async Task<List<T>> ISalleSvc.GetSalles<T>()
         {
@@ -128,6 +128,28 @@ namespace Services
         {
             IFilmRepo filmRepo = _adminRepo;
             await filmRepo.AddFilm(pData);
+        }
+        async Task IFilmSvc.UpdateFilm(int pId, FilmsDTO pData)
+        {
+            IFilmRepo filmRepo = _adminRepo;
+            await filmRepo.UpdateFilm(pId, pData);
+        }
+        public async Task<FilmsDTO> GetFilmByFilmId(int filmId)
+        {
+            IFilmRepo filmRepo = _adminRepo;
+            var film = await filmRepo.GetFilmByFilmId(filmId);
+
+            if (film != null)
+            {
+                return new FilmsDTO
+                {
+                    fi_id = film.fi_id,
+                    fi_nom = film.fi_nom,
+                    fi_description = film.fi_description,
+                    fi_genre = film.fi_genre,
+                };
+            }
+            return null;
         }
 
         // Programmation

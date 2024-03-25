@@ -318,6 +318,15 @@ namespace Repositories
             var lst = await _Connection.QueryAsync<T>("[Client].[Films_SelectAll]");
             return lst.ToList();
         }
+        public async Task<FilmsDTO> GetFilmByFilmId(int filmId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@id", filmId);
+
+            var film = await _Connection.QueryFirstOrDefaultAsync<FilmsDTO>("[Admin].[Film_SelectByFilm]", parameters, commandType: CommandType.StoredProcedure);
+
+            return film;
+        }
         async Task IFilmRepo.AddFilm(AjoutFilmsDTO pData)
         {
             try
@@ -329,6 +338,27 @@ namespace Repositories
 
                 await _Connection.ExecuteAsync("[Admin].[Films_AddFilms]", parameters, commandType: CommandType.StoredProcedure);
 
+            }
+            catch (SqlException ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
+            }
+        }
+        async Task IFilmRepo.UpdateFilm(int pId, FilmsDTO pData)
+        {
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@id", pId);
+                parameters.Add("@NomFilm", pData.fi_nom);
+                parameters.Add("@Description", pData.fi_description);
+                parameters.Add("@Genre", pData.fi_genre);
+
+                await _Connection.ExecuteAsync("[Admin].[Film_Update]", parameters, commandType: CommandType.StoredProcedure);
             }
             catch (SqlException ex)
             {

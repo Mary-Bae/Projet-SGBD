@@ -88,12 +88,13 @@
             this.cmbGenre.Items.AddRange(new object[] {
             "Famille",
             "Comedie",
-            "Horreur",
-            "Science-Fiction",
-            "Thriller",
             "Aventure",
+            "Action",
+            "Fantastique",
+            "Science-Fiction",
             "Suspens",
-            "Action"});
+            "Thriller",
+            "Horreur"});
             this.cmbGenre.Location = new System.Drawing.Point(483, 116);
             this.cmbGenre.Name = "cmbGenre";
             this.cmbGenre.Size = new System.Drawing.Size(146, 23);

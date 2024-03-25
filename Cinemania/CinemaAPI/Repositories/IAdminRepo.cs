@@ -32,7 +32,9 @@ namespace Interfaces
     public interface IFilmRepo
     {
         Task<List<T>> GetFilms<T>();
+        Task<FilmsDTO> GetFilmByFilmId(int filmId);
         Task AddFilm(AjoutFilmsDTO pData);
+        Task UpdateFilm(int pId, FilmsDTO pData);
     }
     public interface IProgrammationRepo
     {

@@ -788,6 +788,7 @@
             this.btUpdFilm.TabIndex = 23;
             this.btUpdFilm.Text = "Modifier Film";
             this.btUpdFilm.UseVisualStyleBackColor = false;
+            this.btUpdFilm.Click += new System.EventHandler(this.btUpdFilm_Click);
             // 
             // dgvFilms
             // 

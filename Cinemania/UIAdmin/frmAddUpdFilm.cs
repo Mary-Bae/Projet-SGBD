@@ -34,7 +34,7 @@ namespace UIAdmin
         {
             txtTitre.Text = film.fi_nom;
             txtDescription.Text = film.fi_description;
-            cmbGenre.SelectedItem = Convert.ToInt32(film.fi_genre);
+            cmbGenre.SelectedItem = film.fi_genre;
         }
 
         private async Task<string> AjouterFilm(AjoutFilmsDTO Film)
@@ -51,6 +51,22 @@ namespace UIAdmin
                 // Lire le contenu de la réponse pour obtenir le message d'erreur
                 var errorContent = await response.Content.ReadAsStringAsync();
                 return !string.IsNullOrWhiteSpace(errorContent) ? errorContent : "Échec de l'ajout du film.";
+            }
+        }
+        private async Task<string> ModifierFilm(FilmsDTO Film)
+        {
+            var content = new StringContent(JsonConvert.SerializeObject(Film), Encoding.UTF8, "application/json");
+            var response = await client.PutAsync("https://localhost:7013/Admin/Films/MajFilm/" + Film.fi_id, content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return string.Empty; // Opération réussie
+            }
+            else
+            {
+                // Lire le contenu de la réponse pour obtenir le message d'erreur
+                var errorContent = await response.Content.ReadAsStringAsync();
+                return !string.IsNullOrWhiteSpace(errorContent) ? errorContent : "Échec de la modification du film.";
             }
         }
         private void btCancel_Click(object sender, EventArgs e)
@@ -70,29 +86,26 @@ namespace UIAdmin
 
             if (_modeActuel == Mode.Ajout)
             {
-                var filmDTO = new AjoutFilmsDTO
+                var film = new AjoutFilmsDTO
                 {
                     fi_nom = txtTitre.Text,
                     fi_description = txtDescription.Text,
                     fi_genre = cmbGenre.SelectedItem.ToString()
                 };
 
-                resultMessage = await AjouterFilm(filmDTO);
+                resultMessage = await AjouterFilm(film);
             }
             else // Mode.Modification
             {
-                //var salleDTO = new MajSalleDTO
-                //{
-                //    sa_id = _salleSelectionnee.sa_id,
-                //    sa_numeroSalle = Convert.ToInt32(cmbNumSalle.SelectedItem),
-                //    sa_qteRangees = Convert.ToInt32(cmbQteRangees.SelectedItem),
-                //    sa_qtePlace = Convert.ToInt32(cmbNbrPlace.SelectedItem),
-                //    sa_qtePlace_Rangee = _qtePlacesRangee,
-                //    sa_ci_id = _cinemaId
-                //};
+                var film = new FilmsDTO
+                {
+                    fi_id = _filmSelectionne.fi_id,
+                    fi_nom = txtTitre.Text,
+                    fi_description = txtDescription.Text,
+                    fi_genre = cmbGenre.SelectedItem.ToString()
+                };
 
-                //resultMessage = await ModifierSalle(salleDTO);
-                resultMessage = "";
+                resultMessage = await ModifierFilm(film);
             }
 
             if (string.IsNullOrEmpty(resultMessage))

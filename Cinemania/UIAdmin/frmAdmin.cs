@@ -732,6 +732,59 @@ namespace UIAdmin
                 LoadFilms();
             }
         }
+
+        private async void btUpdFilm_Click(object sender, EventArgs e)
+        {
+            lblStatusProgrammation.Text = "";
+
+            if (dgvFilms.CurrentRow != null)
+            {
+                int filmId = Convert.ToInt32(dgvFilms.CurrentRow.Cells["fi_id"].Value);
+                FilmsDTO filmDetails = await GetFilmDetails(filmId);
+
+                if (filmDetails != null)
+                {
+                    // Ouvre le formulaire frmAjoutSalle en mode Modification avec les détails de la salle
+                    var formAjoutFilm = new frmAddUpdFilm(frmAddUpdFilm.Mode.Modification, filmDetails);
+                    var result = formAjoutFilm.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        LoadFilms();
+                    }
+                }
+            }
+            else
+            {
+                lblStatusAdminCinema.Text = "Vous devez sélectionner une salle de la liste pour pouvoir la modifier.";
+            }
+        }
+
+        private async Task<FilmsDTO?> GetFilmDetails(int filmId)
+        {
+            try
+            {
+                var response = await client.GetAsync("https://localhost:7013/Admin/FilmByFilmId/" + filmId);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var filmJson = await response.Content.ReadAsStringAsync();
+                    var filmDetails = JsonConvert.DeserializeObject<FilmsDTO>(filmJson);
+                    return filmDetails;
+                }
+                else
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    MessageBox.Show(responseContent, "Erreur de Chargement", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show( ex.Message, "Erreur de Récupération", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return null;
+        }
     }
 }
 
