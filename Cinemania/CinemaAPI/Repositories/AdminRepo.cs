@@ -332,5 +332,12 @@ namespace Repositories
             var lst = await _Connection.QueryAsync<T>("[Admin].[ProgrammationAvecNoms]");
             return lst.ToList();
         }
+        async Task IProgrammationRepo.DeleteProgrammation(int pId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@id", pId);
+
+            await _Connection.ExecuteAsync("[Admin].[Programmation_Delete]", parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }

@@ -19,6 +19,7 @@ namespace UIAdmin
             LoadChaines();
             LoadFilms();
             ChargerCinemas();
+            LoadProgrammationData();
         }
 
         async void LoadChaines()
@@ -53,18 +54,34 @@ namespace UIAdmin
         }
         async void LoadFilms()
         {
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7013/Admin/Films");
-            bool success = response.IsSuccessStatusCode;
-            if (success)
+            const int maxRetries = 3;
+            int attempts = 0;
+            bool success = false;
+
+            while (attempts < maxRetries && !success)
             {
-                var responseContent = await response.Content.ReadAsStringAsync();
-                var films = JsonConvert.DeserializeObject<BindingList<FilmsDTO>>(responseContent);
-                dgvFilms.DataSource = films;
-                dgvFilms.Columns["fi_id"].Visible = false;
-                dgvFilms.Columns["fi_nom"].HeaderText = "Titre";
-                dgvFilms.Columns["fi_genre"].HeaderText = "Genre";
-                dgvFilms.Columns["fi_description"].Visible = false; ;
+                try
+                {
+                    HttpResponseMessage response = await client.GetAsync("https://localhost:7013/Admin/Films");
+                    success = response.IsSuccessStatusCode;
+                    if (success)
+                    {
+                        var responseContent = await response.Content.ReadAsStringAsync();
+                        var films = JsonConvert.DeserializeObject<BindingList<FilmsDTO>>(responseContent);
+                        dgvFilms.DataSource = films;
+                        dgvFilms.Columns["fi_id"].Visible = false;
+                        dgvFilms.Columns["fi_nom"].HeaderText = "Titre";
+                        dgvFilms.Columns["fi_genre"].HeaderText = "Genre";
+                        dgvFilms.Columns["fi_description"].Visible = false; ;
+                    }
+                }
+                catch (HttpRequestException)
+                {
+                    attempts++;
+                    if (attempts < maxRetries) await Task.Delay(1000); // Attendre 1 seconde avant de réessayer
+                }
             }
+            if (!success) MessageBox.Show("Impossible de charger les données après plusieurs tentatives.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private async void ChargerCinemas()
@@ -82,10 +99,10 @@ namespace UIAdmin
 
                         foreach (CinemasDTO cinema in data)
                         {
-                            cmbCinemas.Items.Add(cinema);
+                            cmbCine.Items.Add(cinema);
                         }
 
-                        cmbCinemas.DisplayMember = "ci_nom";
+                        cmbCine.DisplayMember = "ci_nom";
                     }
                 }
                 else
@@ -572,7 +589,7 @@ namespace UIAdmin
         }
         private int GetSelectedCinemaId()
         {
-            if (cmbCinemas.SelectedItem != null && cmbCinemas.SelectedItem is CinemasDTO selectedCinema)
+            if (cmbCine.SelectedItem != null && cmbCine.SelectedItem is CinemasDTO selectedCinema)
             {
                 int id = selectedCinema.ci_id;
                 return id;
@@ -582,11 +599,9 @@ namespace UIAdmin
                 return -1;
             }
         }
-        private async void btProgrammer_Click(object sender, EventArgs e)
+        private async void btProgram_Click(object sender, EventArgs e)
         {
             lblStatusProgrammation.Text = "";
-
-            
 
             int filmId = GetSelectedFilmId();
             int cinemaId = GetSelectedCinemaId();
@@ -615,6 +630,7 @@ namespace UIAdmin
                 if (string.IsNullOrEmpty(errorMessage))
                 {
                     MessageBox.Show("La programmation du film a été ajoutée avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadProgrammationData();
                 }
                 else
                 {
@@ -626,7 +642,6 @@ namespace UIAdmin
                 MessageBox.Show("Une erreur s'est produite : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private async Task<string> AjouterProgrammation(StringContent content)
         {
             try
@@ -647,8 +662,61 @@ namespace UIAdmin
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Une erreur est survenue lors de la communication avec l'API : " + ex.Message);
+                Console.WriteLine("Une erreur est survenue : " + ex.Message);
                 return "Une erreur inattendue est survenue.";
+            }
+        }
+
+        private async void LoadProgrammationData()
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("https://localhost:7013/Admin/Programmation");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseData = await response.Content.ReadAsStringAsync();
+                    List<ProgrammationAvecNomsDTO> programmations = JsonConvert.DeserializeObject<List<ProgrammationAvecNomsDTO>>(responseData);
+
+                    dgvProgrammation.DataSource = programmations;
+                    dgvProgrammation.Columns["pr_id"].Visible = false;
+                    dgvProgrammation.Columns["fi_Nom"].HeaderText = "Film";
+                    dgvProgrammation.Columns["ci_Nom"].HeaderText = "Cinema";
+                    dgvProgrammation.Columns["pr_date"].HeaderText = "Date Programmée";
+                }
+                else
+                {
+                    MessageBox.Show("Une erreur s'est produite lors de la récupération des données de programmation.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Une erreur s'est produite : " + ex.Message);
+            }
+        }
+        private async void supprimerProgrammationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lblStatusProgrammation.Text = "";
+
+            if (dgvProgrammation.CurrentRow != null)
+            {
+                int programmationId = Convert.ToInt32(dgvProgrammation.CurrentRow.Cells["pr_id"].Value);
+                var confirmResult = MessageBox.Show("Êtes-vous sûr de vouloir supprimer cette programmation ?", "Confirmer la suppression", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (confirmResult == DialogResult.Yes)
+                {
+                    HttpResponseMessage response = await client.DeleteAsync("https://localhost:7013/Admin/Programmation/DelProgrammation/" + programmationId);
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            MessageBox.Show("Programmation supprimée avec succès.", "Suppression Réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            LoadProgrammationData();
+                        }
+                        else
+                        {
+                            var responseContent = await response.Content.ReadAsStringAsync();
+                            MessageBox.Show("Nous n'avons pas réussi à supprimer l'élément sélectionné. Détail technique : " + responseContent, "Échec de la Suppression", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
             }
         }
     }

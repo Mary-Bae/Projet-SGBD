@@ -322,5 +322,20 @@ namespace CinemaAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        
+        [HttpDelete("Programmation/DelProgrammation/{id}")]
+        public async Task<ActionResult> DelProgrammation(int id)
+        {
+            try
+            {
+                IProgrammationSvc programmationSvc = _adminSvc;
+                await programmationSvc.DeleteProgrammation(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

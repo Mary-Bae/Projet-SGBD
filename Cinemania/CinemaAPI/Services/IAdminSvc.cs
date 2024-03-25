@@ -37,6 +37,7 @@ namespace Interfaces
     {
         Task AddProgrammation(ProgrammationDTO programmation);
         Task<List<T>> GetProgrammation<T>();
+        Task DeleteProgrammation(int pId);
     }
 
 }

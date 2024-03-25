@@ -138,5 +138,10 @@ namespace Services
             var lst = await programmationRepo.GetProgrammation<T>();
             return lst.ToList<T>();
         }
+        async Task IProgrammationSvc.DeleteProgrammation(int pId)
+        {
+            IProgrammationRepo programmationRepo = _adminRepo;
+            await programmationRepo.DeleteProgrammation(pId);
+        }
     }
 }
