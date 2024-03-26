@@ -19,6 +19,7 @@ namespace UIAdmin
         private static readonly HttpClient client = new HttpClient();
         private Mode _modeActuel;
         private FilmsDTO _filmSelectionne;
+        private Color _defaultColor = SystemColors.GrayText;
         public frmAddUpdFilm(Mode mode, FilmsDTO? film = null)
         {
             InitializeComponent();
@@ -28,6 +29,10 @@ namespace UIAdmin
             if (_modeActuel == Mode.Modification && _filmSelectionne != null)
             {
                 PreremplirChamps(_filmSelectionne);
+            }
+            else if (_modeActuel == Mode.Ajout)
+            {
+                txtTitre.ForeColor = Color.Black;
             }
         }
         private void PreremplirChamps(FilmsDTO film)
@@ -117,6 +122,51 @@ namespace UIAdmin
             else
             {
                 lblAvertissement.Text = resultMessage; // Afficher le message d'erreur retourné par l'API
+            }
+        }
+
+        private void txtTitre_TextChanged(object sender, EventArgs e)
+        {
+            if (_modeActuel == Mode.Modification)
+            {
+                if (txtTitre.Text != _filmSelectionne.fi_nom)
+                    txtTitre.ForeColor = Color.Black;
+                else
+                    txtTitre.ForeColor = _defaultColor;
+            }
+            else
+            {
+                txtTitre.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtDescription_TextChanged(object sender, EventArgs e)
+        {
+            if (_modeActuel == Mode.Modification)
+            {
+                if (txtDescription.Text != _filmSelectionne.fi_description)
+                    txtDescription.ForeColor = Color.Black;
+                else
+                    txtDescription.ForeColor = _defaultColor;
+            }
+            else
+            {
+                txtDescription.ForeColor = Color.Black;
+            }
+        }
+
+        private void cmbGenre_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_modeActuel == Mode.Modification)
+            {
+                if (!cmbGenre.SelectedItem.Equals(_filmSelectionne.fi_genre))
+                    cmbGenre.ForeColor = Color.Black;
+                else
+                    cmbGenre.ForeColor = _defaultColor;
+            }
+            else
+            {
+                cmbGenre.ForeColor = Color.Black;
             }
         }
     }

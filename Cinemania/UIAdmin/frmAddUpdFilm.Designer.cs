@@ -51,11 +51,12 @@
             // 
             // txtTitre
             // 
-            this.txtTitre.Location = new System.Drawing.Point(155, 155);
+            this.txtTitre.Location = new System.Drawing.Point(155, 158);
             this.txtTitre.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtTitre.Name = "txtTitre";
             this.txtTitre.Size = new System.Drawing.Size(245, 27);
             this.txtTitre.TabIndex = 1;
+            this.txtTitre.TextChanged += new System.EventHandler(this.txtTitre_TextChanged);
             // 
             // txtDescription
             // 
@@ -65,6 +66,7 @@
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(563, 160);
             this.txtDescription.TabIndex = 3;
+            this.txtDescription.TextChanged += new System.EventHandler(this.txtDescription_TextChanged);
             // 
             // label2
             // 
@@ -102,12 +104,13 @@
             this.cmbGenre.Name = "cmbGenre";
             this.cmbGenre.Size = new System.Drawing.Size(166, 28);
             this.cmbGenre.TabIndex = 5;
+            this.cmbGenre.SelectedIndexChanged += new System.EventHandler(this.cmbGenre_SelectedIndexChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.ForeColor = System.Drawing.Color.Gray;
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.label6.Location = new System.Drawing.Point(49, 37);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(387, 38);
@@ -116,9 +119,9 @@
             // 
             // btCancel
             // 
-            this.btCancel.BackColor = System.Drawing.Color.Silver;
+            this.btCancel.BackColor = System.Drawing.Color.Snow;
             this.btCancel.ForeColor = System.Drawing.Color.Black;
-            this.btCancel.Location = new System.Drawing.Point(469, 477);
+            this.btCancel.Location = new System.Drawing.Point(448, 464);
             this.btCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(135, 44);
@@ -129,8 +132,8 @@
             // 
             // btSave
             // 
-            this.btSave.BackColor = System.Drawing.Color.Silver;
-            this.btSave.Location = new System.Drawing.Point(252, 477);
+            this.btSave.BackColor = System.Drawing.Color.Snow;
+            this.btSave.Location = new System.Drawing.Point(231, 464);
             this.btSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btSave.Name = "btSave";
             this.btSave.Size = new System.Drawing.Size(137, 44);
@@ -152,7 +155,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BackColor = System.Drawing.Color.SeaShell;
             this.ClientSize = new System.Drawing.Size(817, 577);
             this.ControlBox = false;
             this.Controls.Add(this.lblAvertissement);

@@ -576,7 +576,6 @@ namespace UIAdmin
         {
             DateTime selectedDate = CalProgrammation.SelectionStart;
         }
-
         private int GetSelectedFilmId()
         {
             if (dgvFilms.SelectedRows.Count > 0)
