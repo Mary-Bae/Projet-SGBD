@@ -635,6 +635,7 @@ namespace UIAdmin
                     MessageBox.Show("La programmation du film a été ajoutée avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadProgrammationData();
                     cmbCine.SelectedIndex = -1;
+                    cmbCine.Text = "Selection cinemas";
                 }
                 else
                 {
