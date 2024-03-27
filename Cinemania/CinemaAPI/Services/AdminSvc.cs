@@ -5,7 +5,8 @@ using System.Linq.Expressions;
 
 namespace Services
 {
-    public class AdminSvc : IAdminSvc, ICinemasSvc, ISalleSvc, IFilmSvc, IProgrammationSvc
+    public class AdminSvc : IAdminSvc, ICinemasSvc, ISalleSvc, IFilmSvc, IProgrammationSvc,
+        ITraductionSvc
     {
         IAdminRepo _adminRepo;
         public AdminSvc(IAdminRepo pAdminRepo)
@@ -216,5 +217,20 @@ namespace Services
             IProgrammationRepo programmationRepo = _adminRepo;
             await programmationRepo.DeleteProgrammation(pId);
         }
+
+        // Traduction
+
+        async Task<List<T>> ITraductionSvc.GetLangues<T>()
+        {
+            ITraductionRepo traductionRepo = _adminRepo;
+            var lst = await traductionRepo.GetLangues<T>();
+            return lst.ToList<T>();
+        }
+        async Task ITraductionSvc.AddTraduction(AddTraductionDTO pData)
+        {
+            ITraductionRepo traductionRepo = _adminRepo;
+            await traductionRepo.AddTraduction(pData);
+        }
+
     }
 }

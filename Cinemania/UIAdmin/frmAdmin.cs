@@ -22,6 +22,7 @@ namespace UIAdmin
             LoadFilms();
             ChargerCinemas();
             LoadProgrammationData();
+            LoadLangues();
             CalProgrammation.MinDate = DateTime.Today;
         }
         async void LoadChaines()
@@ -85,7 +86,6 @@ namespace UIAdmin
             }
             if (!success) MessageBox.Show("Impossible de charger les données après plusieurs tentatives.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-
         private async void ChargerCinemas()
         {
             try
@@ -118,8 +118,40 @@ namespace UIAdmin
             }
         }
 
-    //Charge les cinemas associés aux chaines à chaque sélection de chaine
-    private async void dgvChaines_SelectionChanged(object sender, EventArgs e)
+        async void LoadLangues()
+        {
+            const int maxRetries = 3;
+            int attempts = 0;
+            bool success = false;
+
+            //Recharge les langues en trois tentatives si elles n'arrivent pas à se charger, ca laisse le temps à l'API de se charger
+            while (attempts < maxRetries && !success)
+            {
+                try
+                {
+                    HttpResponseMessage response = await client.GetAsync("https://localhost:7013/Admin/Langues");
+                    success = response.IsSuccessStatusCode;
+                    if (success)
+                    {
+                        var responseContent = await response.Content.ReadAsStringAsync();
+                        var langues = JsonConvert.DeserializeObject<BindingList<LangueDTO>>(responseContent);
+                        dgvLangues.DataSource = langues;
+                        dgvLangues.Columns["la_id"].Visible = false;
+                        dgvLangues.Columns["la_langue"].HeaderText = "trad";
+                        dgvLangues.Columns["la_sousTitre"].HeaderText = "str";
+                    }
+                }
+                catch (HttpRequestException)
+                {
+                    attempts++;
+                    if (attempts < maxRetries) await Task.Delay(1000); // Attendre 1 seconde avant de réessayer
+                }
+            }
+            if (!success) MessageBox.Show("Impossible de charger les données après plusieurs tentatives.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        //Charge les cinemas associés aux chaines à chaque sélection de chaine
+        private async void dgvChaines_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvChaine.CurrentRow?.DataBoundItem is ChaineDTO selectedChaine)
             {
@@ -601,6 +633,17 @@ namespace UIAdmin
                 return -1;
             }
         }
+        private int GetSelectedLangueId()
+        {
+            if (dgvLangues.SelectedRows.Count > 0)
+            {
+                return Convert.ToInt32(dgvLangues.SelectedRows[0].Cells["la_id"].Value);
+            }
+            else
+            {
+                return -1;
+            }
+        }
         private async void btProgram_Click(object sender, EventArgs e)
         {
             lblStatusProgrammation.Text = "";
@@ -814,7 +857,69 @@ namespace UIAdmin
                 }
             }
         }
+
+        private async void btTrad_Click(object sender, EventArgs e)
+        {
+            int filmId = GetSelectedFilmId();
+            int langueId = GetSelectedLangueId();
+
+            if (filmId == -1 || langueId == -1)
+            {
+                MessageBox.Show("Veuillez sélectionner un film et une langue.");
+                return;
+            }
+
+            var traductionData = new
+            {
+                FilmId = filmId,
+                LangueId = langueId
+            };
+
+            try
+            {
+                string jsonData = JsonConvert.SerializeObject(traductionData);
+                var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+                var errorMessage = await AjouterTraduction(content);
+
+                if (string.IsNullOrEmpty(errorMessage))
+                {
+                    MessageBox.Show("Traduction ajoutée avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show(errorMessage, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Une erreur s'est produite : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
+        private async Task<string> AjouterTraduction(StringContent content)
+        {
+            try
+            {
+                var response = await client.PostAsync("https://localhost:7013/Admin/Traduction/AddTraduction", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return string.Empty;
+                }
+                else
+                {
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    return !string.IsNullOrWhiteSpace(errorContent) ? errorContent : "Échec de la requête.";
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Une erreur est survenue : " + ex.Message);
+                return "Une erreur inattendue est survenue.";
+            }
+        }
+    }
     }
 
 

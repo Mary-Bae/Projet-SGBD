@@ -12,7 +12,8 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Repositories
 {
-    public class AdminRepo : IAdminRepo, ISalleRepo, IFilmRepo, IProgrammationRepo
+    public class AdminRepo : IAdminRepo, ISalleRepo, IFilmRepo, IProgrammationRepo,
+        ITraductionRepo
     {
         IDbConnection _Connection;
         public AdminRepo(IDbConnection pConnection)
@@ -402,6 +403,35 @@ namespace Repositories
 
             await _Connection.ExecuteAsync("[Admin].[Programmation_Delete]", parameters, commandType: CommandType.StoredProcedure);
         }
-        
+
+        // Traduction
+        public async Task AddTraduction(AddTraductionDTO trad)
+        {
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@FilmId", trad.FilmId);
+                parameters.Add("@LangueId", trad.LangueId);
+
+                await _Connection.ExecuteAsync("[Admin].[FilmTraduit_AddFilmTraduit]", parameters, commandType: CommandType.StoredProcedure);
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 0x00000a29)
+                    throw new CustomError(ErreurCodeEnum.UK_TRADUCTION, ex);
+                throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
+            }
+        }
+        public async Task<List<T>>GetLangues<T>()
+        {
+            var lst = await _Connection.QueryAsync<T>("[Admin].[Langue_SelectAll]");
+            return lst.ToList();
+        }
+
+
     }
 }

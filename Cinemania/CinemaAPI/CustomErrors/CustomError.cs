@@ -8,6 +8,7 @@ namespace CustomErrors
         UK_CINEMA_NOM,
         UK_SALLE_NUMBER,
         UK_FILM_NOM,
+        UK_TRADUCTION,
         FK_SALLE_CINEMA,
         FK_CINEMA_PROGRAMMATION,
         FK_Film_PROGRAMMATION,
@@ -55,6 +56,9 @@ namespace CustomErrors
                 case ErreurCodeEnum.UK_Programmation:
                     _messageToReturn = "Deux programmations ne peuvent pas être complètement identiques";
                         break;
+                case ErreurCodeEnum.UK_TRADUCTION:
+                    _messageToReturn = "La même traduction pour le même film ne peut pas exister deux fois";
+                    break;
                 case ErreurCodeEnum.FK_SALLE_CINEMA:
                     _messageToReturn = "Une salle de cinema doit appartenir à un cinema ";
                     break;
