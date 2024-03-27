@@ -7,8 +7,10 @@ namespace CustomErrors
         UK_CHAINE_NOM,
         UK_CINEMA_NOM,
         UK_SALLE_NUMBER,
+        UK_FILM_NOM,
         FK_SALLE_CINEMA,
         FK_CINEMA_PROGRAMMATION,
+        FK_Film_PROGRAMMATION,
         ErreurSQL,
         QuantiteMinimaleDePlaces,
         ChampVide,
@@ -44,6 +46,9 @@ namespace CustomErrors
                 case ErreurCodeEnum.UK_CINEMA_NOM:
                     _messageToReturn = "Le cinéma doit être unique ";
                     break;
+                case ErreurCodeEnum.UK_FILM_NOM:
+                    _messageToReturn = "Il ne peut pas y avoir deux fois le même film à l'affiche ";
+                    break;
                 case ErreurCodeEnum.UK_SALLE_NUMBER:
                     _messageToReturn = "Il ne peut pas y avoir deux fois le même numero de salle pour un cinéma ";
                     break;
@@ -52,6 +57,9 @@ namespace CustomErrors
                         break;
                 case ErreurCodeEnum.FK_SALLE_CINEMA:
                     _messageToReturn = "Une salle de cinema doit appartenir à un cinema ";
+                    break;
+                case ErreurCodeEnum.FK_Film_PROGRAMMATION: 
+                    _messageToReturn = "Le film que vous tentez de supprimer a des programmations actifs, supprimez d''abord vos programmations avant de supprimer le film";
                     break;
                 case ErreurCodeEnum.ErreurSQL:
                     _messageToReturn = "Erreur liée à la base de données SQL.";

@@ -28,6 +28,8 @@ namespace UIAdmin
         }
         private async void btSave_Click(object sender, EventArgs e)
         {
+            lblError.Text = "";
+
             if (cmbQteRangees.SelectedItem == null || cmbNbrPlace.SelectedItem == null)
             {
                 lblPlacesParRangee.Text = "Veuillez sélectionner une quantité de rangées et un nombre de places.";
@@ -58,7 +60,7 @@ namespace UIAdmin
             }
             else
             {
-                MessageBox.Show("Un problème est survenu : " + errorMessage, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblError.Text = errorMessage;
             }
         }
         private async Task<string> AjouterChaine(ChaineCinemaEtSalleDTO chaine)
@@ -76,8 +78,6 @@ namespace UIAdmin
                 {
                     // Lire le contenu de la réponse pour obtenir le message d'erreur métier
                     var errorContent = await response.Content.ReadAsStringAsync();
-
-                    // Utilisation de 'statusCode' pour affiner la gestion des erreurs
                     var statusCode = response.StatusCode;
                     Console.WriteLine("Échec de la requête : " + statusCode);
                     return !string.IsNullOrWhiteSpace(errorContent) ? errorContent : "Échec de la requête avec le statut " + statusCode;
@@ -85,7 +85,7 @@ namespace UIAdmin
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Une erreur est survenue lors de la communication avec l'API : " + ex.Message);
+                Console.WriteLine("Une erreur est survenue : " + ex.Message);
                 return "Une erreur inattendue est survenue.";
             }
         }
@@ -101,7 +101,6 @@ namespace UIAdmin
                 lblPlacesParRangee.Text = message;
             }
         }
-
         private void cmbQteRangees_SelectedIndexChanged(object sender, EventArgs e)
         {
             MettreAJourPlacesParRangee();

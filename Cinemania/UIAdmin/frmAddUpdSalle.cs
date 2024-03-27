@@ -4,15 +4,18 @@ using System.Text;
 using System.Threading.Tasks;
 using static UIAdmin.frmAddUpdSalle;
 
+
 namespace UIAdmin
 {
+    
     public partial class frmAddUpdSalle : Form
     {
+        public enum Mode { Ajout, Modification }
+
         private static readonly HttpClient client = new HttpClient();
         private int _qtePlacesRangee = 0;
         private readonly int _cinemaId;
 
-        public enum Mode { Ajout, Modification }
         private Mode _modeActuel;
         private SalleDTO _salleSelectionnee;
         public frmAddUpdSalle(int cinemaId, Mode mode, SalleDTO? salle = null)
@@ -93,7 +96,7 @@ namespace UIAdmin
             }
             else
             {
-                lblAvertissement.Text = resultMessage; // Afficher le message d'erreur retourné par l'API
+                lblAvertissement.Text = resultMessage;
             }
         }
         private async Task<string> AjouterSalle(AjoutSalleDTO Salle)

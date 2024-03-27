@@ -1,6 +1,7 @@
 using Models;
 using Newtonsoft.Json;
 using System.ComponentModel;
+using System.Globalization;
 using System.Net.Http.Json;
 using System.Security.Policy;
 using System.Text;
@@ -13,6 +14,7 @@ namespace UIAdmin
         private static readonly HttpClient client = new HttpClient();
         private int _currentChaineId;
         private int _currentCinemaId;
+        
         public frmAdmin()
         {
             InitializeComponent();
@@ -20,8 +22,8 @@ namespace UIAdmin
             LoadFilms();
             ChargerCinemas();
             LoadProgrammationData();
+            CalProgrammation.MinDate = DateTime.Today;
         }
-
         async void LoadChaines()
         {
             const int maxRetries = 3;
@@ -409,7 +411,7 @@ namespace UIAdmin
                         {
                             MessageBox.Show("Salle de cinéma supprimée avec succès.", "Suppression Réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             LoadSallesByCinema(_currentCinemaId);
-                            dgvSalles.Columns["sa_id"].Visible = false;
+                           // dgvSalles.Columns["sa_id"].Visible = false;
                         }
                         else
                         {
@@ -576,7 +578,6 @@ namespace UIAdmin
         {
             DateTime selectedDate = CalProgrammation.SelectionStart;
         }
-
         private int GetSelectedFilmId()
         {
             if (dgvFilms.SelectedRows.Count > 0)
@@ -632,6 +633,8 @@ namespace UIAdmin
                 {
                     MessageBox.Show("La programmation du film a été ajoutée avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadProgrammationData();
+                    cmbCine.SelectedIndex = -1;
+                    cmbCine.Text = "Selection cinemas";
                 }
                 else
                 {
@@ -720,6 +723,98 @@ namespace UIAdmin
                     }
             }
         }
+
+        private void btAddFilm_Click(object sender, EventArgs e)
+        {
+            lblStatusProgrammation.Text = "";
+
+            var formAjoutFilm = new frmAddUpdFilm(frmAddUpdFilm.Mode.Ajout);
+            var result = formAjoutFilm.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                LoadFilms();
+            }
+        }
+
+        private async void btUpdFilm_Click(object sender, EventArgs e)
+        {
+            lblStatusProgrammation.Text = "";
+
+            if (dgvFilms.CurrentRow != null)
+            {
+                int filmId = Convert.ToInt32(dgvFilms.CurrentRow.Cells["fi_id"].Value);
+                FilmsDTO filmDetails = await GetFilmDetails(filmId);
+
+                if (filmDetails != null)
+                {
+                    // Ouvre le formulaire frmAjoutSalle en mode Modification avec les détails de la salle
+                    var formAjoutFilm = new frmAddUpdFilm(frmAddUpdFilm.Mode.Modification, filmDetails);
+                    var result = formAjoutFilm.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        LoadFilms();
+                    }
+                }
+            }
+            else
+            {
+                lblStatusProgrammation.Text = "Vous devez sélectionner une salle de la liste pour pouvoir la modifier.";
+            }
+        }
+
+        private async Task<FilmsDTO?> GetFilmDetails(int filmId)
+        {
+            try
+            {
+                var response = await client.GetAsync("https://localhost:7013/Admin/FilmByFilmId/" + filmId);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var filmJson = await response.Content.ReadAsStringAsync();
+                    var filmDetails = JsonConvert.DeserializeObject<FilmsDTO>(filmJson);
+                    return filmDetails;
+                }
+                else
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    MessageBox.Show(responseContent, "Erreur de Chargement", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show( ex.Message, "Erreur de Récupération", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return null;
+        }
+
+        private async void supprimerFilmToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lblStatusProgrammation.Text = "";
+            if (dgvFilms.CurrentRow != null)
+            {
+                int filmId = Convert.ToInt32(dgvFilms.CurrentRow.Cells["fi_id"].Value);
+                var confirmResult = MessageBox.Show("Êtes-vous sûr de vouloir supprimer ce film ?", "Confirmer la suppression", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (confirmResult == DialogResult.Yes)
+                {
+                    HttpResponseMessage response = await client.DeleteAsync("https://localhost:7013/Admin/Films/DelFilm/" + filmId);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Film supprimé avec succès.", "Suppression Réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadFilms();
+                    }
+                    else
+                    {
+                        var responseContent = await response.Content.ReadAsStringAsync();
+                        MessageBox.Show(responseContent, "Échec de la Suppression", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+        }
     }
-}
+
 

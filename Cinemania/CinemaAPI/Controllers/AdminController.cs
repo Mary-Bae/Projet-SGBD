@@ -269,7 +269,7 @@ namespace CinemaAPI.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest($"Erreur lors de la récupération des détails de la salle : {ex.Message}");
+                return BadRequest(ex.Message);
             }
         }
 
@@ -284,6 +284,29 @@ namespace CinemaAPI.Controllers
                 IFilmSvc filmSvc = _adminSvc;
                 lst = await filmSvc.GetFilms<FilmsDTO>();
                 return Ok(lst);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("FilmByFilmId/{filmId}")]
+        public async Task<ActionResult<FilmsDTO>> GetFilmByFilmId(int filmId)
+        {
+            try
+            {
+                IFilmSvc filmsSvc = _adminSvc;
+                var film = await filmsSvc.GetFilmByFilmId(filmId);
+
+                if (film != null)
+                {
+                    return Ok(film); // Retourne directement l'objet FilmDTO
+                }
+                else
+                {
+                    return NotFound("Film non trouvé.");
+                }
             }
             catch (Exception ex)
             {
@@ -307,6 +330,36 @@ namespace CinemaAPI.Controllers
             }
         }
 
+        [HttpPut("Films/MajFilm/{id}")]
+        public async Task<ActionResult> MajFilm(int id, FilmsDTO data)
+        {
+            try
+            {
+                IFilmSvc FilmsSvc = _adminSvc;
+                await FilmsSvc.UpdateFilm(id, data);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("Films/DelFilm/{id}")]
+        public async Task<ActionResult> DelFilm(int id)
+        {
+            try
+            {
+                IFilmSvc filmsSvc = _adminSvc;
+                await filmsSvc.DeleteFilm(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         // Programmation
         [HttpPost("Programmation/AddProgrammation")]
         public async Task<IActionResult> AddProgrammation(ProgrammationDTO programmationDTO)
@@ -322,6 +375,7 @@ namespace CinemaAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
         [HttpGet("Programmation")]
         public async Task<ActionResult> GetProgrammation()
         {
