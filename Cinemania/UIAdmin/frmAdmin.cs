@@ -1,6 +1,7 @@
 using Models;
 using Newtonsoft.Json;
 using System.ComponentModel;
+using System.Globalization;
 using System.Net.Http.Json;
 using System.Security.Policy;
 using System.Text;
@@ -13,6 +14,7 @@ namespace UIAdmin
         private static readonly HttpClient client = new HttpClient();
         private int _currentChaineId;
         private int _currentCinemaId;
+        
         public frmAdmin()
         {
             InitializeComponent();
@@ -20,6 +22,7 @@ namespace UIAdmin
             LoadFilms();
             ChargerCinemas();
             LoadProgrammationData();
+            CalProgrammation.MinDate = DateTime.Today;
         }
 
         async void LoadChaines()
@@ -631,6 +634,7 @@ namespace UIAdmin
                 {
                     MessageBox.Show("La programmation du film a été ajoutée avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadProgrammationData();
+                    cmbCine.SelectedIndex = -1;
                 }
                 else
                 {
@@ -755,7 +759,7 @@ namespace UIAdmin
             }
             else
             {
-                lblStatusAdminCinema.Text = "Vous devez sélectionner une salle de la liste pour pouvoir la modifier.";
+                lblStatusProgrammation.Text = "Vous devez sélectionner une salle de la liste pour pouvoir la modifier.";
             }
         }
 

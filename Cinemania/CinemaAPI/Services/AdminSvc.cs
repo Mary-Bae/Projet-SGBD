@@ -1,5 +1,7 @@
 ﻿using Interfaces;
 using Models;
+using CustomErrors;
+using System.Linq.Expressions;
 
 namespace Services
 {
@@ -19,9 +21,16 @@ namespace Services
             return lst.ToList<T>();
         }
 
-        public async Task<bool> AjouterChaineCinemaEtSalle(ChaineCinemaEtSalleDTO chaineCinemaEtSalleDTO)
+        public async Task<bool> AjouterChaineCinemaEtSalle(ChaineCinemaEtSalleDTO pData)
         {
-            return await _adminRepo.AjouterChaineCinemaEtSalle(chaineCinemaEtSalleDTO);
+            if (pData.QtePlace <= 4 || pData.QteRangees <= 0)
+                throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
+            if (pData.QtePlace % pData.QteRangees != 0)
+                throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
+            if (pData.NomChaine == "" || pData.NomChaine == null || pData.NomCinema == "" || pData.NomCinema == null)
+                throw new CustomError(ErreurCodeEnum.ChampVide);
+
+            return await _adminRepo.AjouterChaineCinemaEtSalle(pData);
         }
         async Task IAdminSvc.DeleteChaine(int pId)
         {
@@ -31,6 +40,8 @@ namespace Services
 
         public Task UpdateChaine(int pId, MajChaineDTO pData)
         {
+            if (pData.ch_nom == "" || pData.ch_nom == null)
+                throw new CustomError(ErreurCodeEnum.ChampVide);
             return _adminRepo.UpdateChaine(pId, pData);
         }
 
@@ -53,6 +64,9 @@ namespace Services
         }
         async Task ICinemasSvc.UpdateCinema(int pId, MajCinemasDTO pData)
         {
+            if (pData.ci_nom == "" || pData.ci_nom == null)
+                throw new CustomError(ErreurCodeEnum.ChampVide);
+
             ICinemaRepo cinemasRepo = _adminRepo;
             await cinemasRepo.UpdateCinema(pId, pData);
         }
@@ -91,12 +105,26 @@ namespace Services
         }
         async Task ISalleSvc.AddSalle(AjoutSalleDTO pData)
         {
-            ISalleRepo salleRepo = _adminRepo;
-            await salleRepo.AddSalle(pData);
+            if (pData.sa_qtePlace <= 4 || pData.sa_qteRangees <= 0)
+                throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
+            if (pData.sa_numeroSalle <= 0)
+                throw new CustomError(ErreurCodeEnum.NumeroInvalide);
+            if (pData.sa_qtePlace % pData.sa_qteRangees != 0)
+                throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
+
+                ISalleRepo salleRepo = _adminRepo;
+                await salleRepo.AddSalle(pData);
         }
 
         public async Task<bool> AjouterCinemaEtSalle(CinemaEtSalleDTO cinemaEtSalleDTO)
         {
+            if (cinemaEtSalleDTO.QtePlace <= 4 || cinemaEtSalleDTO.QteRangees <= 0)
+                throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
+            if (cinemaEtSalleDTO.QtePlace % cinemaEtSalleDTO.QteRangees != 0)
+                throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
+            if (cinemaEtSalleDTO.NomCinema == "" || cinemaEtSalleDTO.NomCinema == null)
+                throw new CustomError(ErreurCodeEnum.ChampVide);
+
             return await _adminRepo.AjouterCinemaEtSalle(cinemaEtSalleDTO);
         }
         async Task ISalleSvc.DeleteSalle(int pId)
@@ -112,6 +140,13 @@ namespace Services
 
         async Task ISalleSvc.UpdateSalle(int pId, MajSalleDTO pData)
         {
+            if (pData.sa_qtePlace <= 4 || pData.sa_qteRangees <= 0)
+                throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
+            if (pData.sa_numeroSalle <= 0)
+                throw new CustomError(ErreurCodeEnum.NumeroInvalide);
+            if (pData.sa_qtePlace % pData.sa_qteRangees != 0)
+                throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
+
             ISalleRepo salleRepo = _adminRepo;
             await salleRepo.UpdateSalle(pId, pData);
         }
@@ -126,11 +161,17 @@ namespace Services
         }
         async Task IFilmSvc.AddFilm(AjoutFilmsDTO pData)
         {
+            if (pData.fi_nom == "" || pData.fi_nom == null)
+                throw new CustomError(ErreurCodeEnum.ChampVide);
+
             IFilmRepo filmRepo = _adminRepo;
             await filmRepo.AddFilm(pData);
         }
         async Task IFilmSvc.UpdateFilm(int pId, FilmsDTO pData)
         {
+            if (pData.fi_nom == "" || pData.fi_nom == null)
+                throw new CustomError(ErreurCodeEnum.ChampVide);
+
             IFilmRepo filmRepo = _adminRepo;
             await filmRepo.UpdateFilm(pId, pData);
         }

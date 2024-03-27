@@ -96,7 +96,7 @@ namespace UIAdmin
             }
             else
             {
-                lblAvertissement.Text = resultMessage; // Afficher le message d'erreur retourné par l'API
+                lblAvertissement.Text = resultMessage;
             }
         }
         private async Task<string> AjouterSalle(AjoutSalleDTO Salle)

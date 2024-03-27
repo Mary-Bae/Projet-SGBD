@@ -29,12 +29,6 @@ namespace Repositories
 
         public async Task<bool> AjouterChaineCinemaEtSalle(ChaineCinemaEtSalleDTO pData)
         {
-            if (pData.QtePlace <= 4 || pData.QteRangees <= 0)
-                throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
-            if (pData.QtePlace % pData.QteRangees != 0)
-                throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
-            if(pData.NomChaine == "" || pData.NomChaine == null || pData.NomCinema == "" || pData.NomCinema == null)
-                throw new CustomError(ErreurCodeEnum.ChampVide);
             try
             {
                 // Logique pour appeler la procédure stockée avec les paramètres du DTO
@@ -87,8 +81,6 @@ namespace Repositories
 
         public async Task UpdateChaine(int pId, MajChaineDTO pData)
         {
-            if (pData.ch_nom == "" || pData.ch_nom == null)
-                throw new CustomError(ErreurCodeEnum.ChampVide);
             try
             {
                 var parameters = new DynamicParameters();
@@ -147,8 +139,6 @@ namespace Repositories
     
         async Task ICinemaRepo.UpdateCinema(int pId, MajCinemasDTO pData)
         {
-            if (pData.ci_nom == "" || pData.ci_nom == null)
-                throw new CustomError(ErreurCodeEnum.ChampVide);
             try
             {
                 var parameters = new DynamicParameters();
@@ -190,12 +180,6 @@ namespace Repositories
         }
         async Task ISalleRepo.AddSalle(AjoutSalleDTO pData)
         {
-            if (pData.sa_qtePlace <= 4 || pData.sa_qteRangees <= 0)
-                throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
-            if (pData.sa_numeroSalle <= 0)
-                throw new CustomError(ErreurCodeEnum.NumeroInvalide);
-            if (pData.sa_qtePlace % pData.sa_qteRangees != 0)
-                throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
 
             try {    
             var parameters = new DynamicParameters();
@@ -222,13 +206,7 @@ namespace Repositories
             }
         }
         public async Task<bool> AjouterCinemaEtSalle(CinemaEtSalleDTO cinemaEtSalleDTO)
-        {
-            if (cinemaEtSalleDTO.QtePlace <= 4 || cinemaEtSalleDTO.QteRangees <= 0)
-                throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
-            if (cinemaEtSalleDTO.QtePlace % cinemaEtSalleDTO.QteRangees != 0)
-                throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
-            if (cinemaEtSalleDTO.NomCinema == "" || cinemaEtSalleDTO.NomCinema == null)
-                throw new CustomError(ErreurCodeEnum.ChampVide);
+        {   
             try {
                 var parameters = new DynamicParameters(new
                 {
@@ -270,13 +248,6 @@ namespace Repositories
         }
         async Task ISalleRepo.UpdateSalle(int pId, MajSalleDTO pData)
         {
-            if (pData.sa_qtePlace <= 4 || pData.sa_qteRangees <= 0)
-                throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
-            if (pData.sa_numeroSalle <= 0)
-                throw new CustomError(ErreurCodeEnum.NumeroInvalide);
-            if (pData.sa_qtePlace % pData.sa_qteRangees != 0)
-                throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
-
             try
           {
             var parameters = new DynamicParameters();
@@ -341,6 +312,8 @@ namespace Repositories
             }
             catch (SqlException ex)
             {
+                if (ex.Number == 0x00000a29)
+                    throw new CustomError(ErreurCodeEnum.UK_FILM_NOM, ex);
                 throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
             }
             catch (Exception ex)
@@ -362,6 +335,8 @@ namespace Repositories
             }
             catch (SqlException ex)
             {
+                if (ex.Number == 0x00000a29)
+                    throw new CustomError(ErreurCodeEnum.UK_FILM_NOM, ex);
                 throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
             }
             catch (Exception ex)
@@ -371,10 +346,23 @@ namespace Repositories
         }
         async Task IFilmRepo.DeleteFilm(int pId)
         {
-            var parameters = new DynamicParameters();
-            parameters.Add("@id", pId);
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@id", pId);
 
-            await _Connection.ExecuteAsync("[Admin].[Film_Delete]", parameters, commandType: CommandType.StoredProcedure);
+                await _Connection.ExecuteAsync("[Admin].[Film_Delete]", parameters, commandType: CommandType.StoredProcedure);
+            }
+            catch(SqlException ex)
+            {
+                if (ex.Number == 0x00000223)
+                    throw new CustomError(ErreurCodeEnum.FK_Film_PROGRAMMATION, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
+            }
+
         }
 
         // Programmation

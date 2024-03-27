@@ -22,9 +22,11 @@ namespace UIAdmin
         }
         private async void btSave_Click(object sender, EventArgs e)
         {
+            lblError.Text = "";
+
             if (cmbQteRangees.SelectedItem == null || cmbNbrPlace.SelectedItem == null)
             {
-                lblPlacesParRangee.Text = "Veuillez sélectionner une quantité de rangées et un nombre de places.";
+                lblNombreDePlaces.Text = "Veuillez sélectionner une quantité de rangées et un nombre de places.";
                 return;
             }
             var cinemaEtSalleDTO = new CinemaEtSalleDTO
@@ -50,8 +52,7 @@ namespace UIAdmin
             }
             else
             {
-                MessageBox.Show("Une erreur est survenue : " + errorMessage, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                lblError.Text = errorMessage;
             }
         }
 
@@ -113,7 +114,7 @@ namespace UIAdmin
                 string message;
 
                 _qtePlacesRangee = Utils.CalculerPlacesParRangee(totalPlaces, totalRangees, out message);
-                lblPlacesParRangee.Text = message;
+                lblNombreDePlaces.Text = message;
             }
         }
 

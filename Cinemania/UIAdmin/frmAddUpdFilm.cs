@@ -90,27 +90,52 @@ namespace UIAdmin
             bool isSuccess;
 
             if (_modeActuel == Mode.Ajout)
-            {
-                var film = new AjoutFilmsDTO
+            { 
+                if (cmbGenre.SelectedIndex == -1)
                 {
-                    fi_nom = txtTitre.Text,
-                    fi_description = txtDescription.Text,
-                    fi_genre = cmbGenre.SelectedItem.ToString()
-                };
-
-                resultMessage = await AjouterFilm(film);
+                    var film = new AjoutFilmsDTO
+                    {
+                        fi_nom = txtTitre.Text,
+                        fi_description = txtDescription.Text,
+                        fi_genre = ""
+                    };
+                    resultMessage = await AjouterFilm(film);
+                }
+                else
+                {
+                    var film = new AjoutFilmsDTO
+                    {
+                        fi_nom = txtTitre.Text,
+                        fi_description = txtDescription.Text,
+                        fi_genre = cmbGenre.SelectedItem.ToString()
+                    };
+                    resultMessage = await AjouterFilm(film);
+                }  
             }
             else // Mode.Modification
             {
-                var film = new FilmsDTO
+                if (cmbGenre.SelectedIndex == -1)
                 {
-                    fi_id = _filmSelectionne.fi_id,
-                    fi_nom = txtTitre.Text,
-                    fi_description = txtDescription.Text,
-                    fi_genre = cmbGenre.SelectedItem.ToString()
-                };
-
-                resultMessage = await ModifierFilm(film);
+                    var film = new FilmsDTO
+                    {
+                        fi_id = _filmSelectionne.fi_id,
+                        fi_nom = txtTitre.Text,
+                        fi_description = txtDescription.Text,
+                        fi_genre = ""
+                    };
+                    resultMessage = await ModifierFilm(film);
+                }
+                else
+                {
+                    var film = new FilmsDTO
+                    {
+                        fi_id = _filmSelectionne.fi_id,
+                        fi_nom = txtTitre.Text,
+                        fi_description = txtDescription.Text,
+                        fi_genre = cmbGenre.SelectedItem.ToString()
+                    };
+                    resultMessage = await ModifierFilm(film);
+                }
             }
 
             if (string.IsNullOrEmpty(resultMessage))
@@ -121,7 +146,7 @@ namespace UIAdmin
             }
             else
             {
-                lblAvertissement.Text = resultMessage; // Afficher le message d'erreur retourné par l'API
+                lblAvertissement.Text = resultMessage;
             }
         }
 
