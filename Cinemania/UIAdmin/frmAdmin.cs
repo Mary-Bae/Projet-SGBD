@@ -24,7 +24,6 @@ namespace UIAdmin
             LoadProgrammationData();
             CalProgrammation.MinDate = DateTime.Today;
         }
-
         async void LoadChaines()
         {
             const int maxRetries = 3;
