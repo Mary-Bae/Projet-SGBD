@@ -113,6 +113,8 @@
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.cmbCinemas = new System.Windows.Forms.ComboBox();
             this.btProgrammer = new System.Windows.Forms.Button();
+            this.MenuFilmsTraduit = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.supprimerFilmToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuCinema.SuspendLayout();
             this.MenuChaine.SuspendLayout();
             this.MenuSalle.SuspendLayout();
@@ -143,6 +145,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvFilms)).BeginInit();
             this.tableLayoutPanel8.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
+            this.MenuFilmsTraduit.SuspendLayout();
             this.SuspendLayout();
             // 
             // MenuCinema
@@ -784,7 +787,7 @@
             dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvFilmTrad.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.dgvFilmTrad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvFilmTrad.ContextMenuStrip = this.MenuFilms;
+            this.dgvFilmTrad.ContextMenuStrip = this.MenuFilmsTraduit;
             dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle14.BackColor = System.Drawing.Color.Gray;
             dataGridViewCellStyle14.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -923,7 +926,7 @@
             this.cmbCine.BackColor = System.Drawing.SystemColors.Info;
             this.cmbCine.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.cmbCine.FormattingEnabled = true;
-            this.cmbCine.Location = new System.Drawing.Point(3, 22);
+            this.cmbCine.Location = new System.Drawing.Point(3, 28);
             this.cmbCine.Name = "cmbCine";
             this.cmbCine.Size = new System.Drawing.Size(133, 29);
             this.cmbCine.TabIndex = 19;
@@ -975,7 +978,6 @@
             dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvLangues.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
             this.dgvLangues.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvLangues.ContextMenuStrip = this.MenuFilms;
             dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle17.BackColor = System.Drawing.Color.Gray;
             dataGridViewCellStyle17.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -1212,6 +1214,20 @@
             this.btProgrammer.Text = "Programmer";
             this.btProgrammer.UseVisualStyleBackColor = false;
             // 
+            // MenuFilmsTraduit
+            // 
+            this.MenuFilmsTraduit.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.supprimerFilmToolStripMenuItem1});
+            this.MenuFilmsTraduit.Name = "MenuFilmsTraduit";
+            this.MenuFilmsTraduit.Size = new System.Drawing.Size(181, 48);
+            // 
+            // supprimerFilmToolStripMenuItem1
+            // 
+            this.supprimerFilmToolStripMenuItem1.Name = "supprimerFilmToolStripMenuItem1";
+            this.supprimerFilmToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.supprimerFilmToolStripMenuItem1.Text = "Supprimer Film";
+            this.supprimerFilmToolStripMenuItem1.Click += new System.EventHandler(this.supprimerFilmToolStripMenuItem1_Click);
+            // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1260,6 +1276,7 @@
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel8.PerformLayout();
             this.tableLayoutPanel11.ResumeLayout(false);
+            this.MenuFilmsTraduit.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1328,5 +1345,7 @@
         private TableLayoutPanel tableLayoutPanel16;
         private DataGridView dgvFilmTrad;
         private Label label8;
+        private ContextMenuStrip MenuFilmsTraduit;
+        private ToolStripMenuItem supprimerFilmToolStripMenuItem1;
     }
 }

@@ -714,7 +714,6 @@ namespace UIAdmin
                 return "Une erreur inattendue est survenue.";
             }
         }
-
         private async void LoadProgrammationData()
         {
             try
@@ -947,6 +946,32 @@ namespace UIAdmin
             {
                 Console.WriteLine("Une erreur est survenue : " + ex.Message);
                 return "Une erreur inattendue est survenue.";
+            }
+        }
+
+        private async void supprimerFilmToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            lblStatusProgrammation.Text = "";
+
+            if (dgvFilmTrad.CurrentRow != null)
+            {
+                int filmTradId = Convert.ToInt32(dgvFilmTrad.CurrentRow.Cells["ft_id"].Value);
+                var confirmResult = MessageBox.Show("Êtes-vous sûr de vouloir supprimer ce film ?", "Confirmer la suppression", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (confirmResult == DialogResult.Yes)
+                {
+                    HttpResponseMessage response = await client.DeleteAsync("https://localhost:7013/Admin/Traduction/DelTraduction/" + filmTradId);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Film supprimé avec succès.", "Suppression Réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadFilmsTraduit();
+                    }
+                    else
+                    {
+                        var responseContent = await response.Content.ReadAsStringAsync();
+                        MessageBox.Show("Nous n'avons pas réussi à supprimer l'élément sélectionné. Détail technique : " + responseContent, "Échec de la Suppression", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
         }
     }

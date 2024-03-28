@@ -50,5 +50,6 @@ namespace Interfaces
         Task<List<T>> GetLangues<T>();
         Task<List<T>> GetFilmTraduit<T>();
         Task AddTraduction(AddTraductionDTO pData);
+        Task DeleteTraduction(int pId);
     }
 }

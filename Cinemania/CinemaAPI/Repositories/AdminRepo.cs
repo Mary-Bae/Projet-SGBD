@@ -436,6 +436,13 @@ namespace Repositories
             var lst = await _Connection.QueryAsync<T>("[Admin].[FilmTraduitAvecNoms]");
             return lst.ToList();
         }
+        async Task ITraductionRepo.DeleteTraduction(int pId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@id", pId);
+
+            await _Connection.ExecuteAsync("[Admin].[FilmTraduit_Delete]", parameters, commandType: CommandType.StoredProcedure);
+        }
 
 
     }
