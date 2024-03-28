@@ -47,6 +47,5 @@ namespace UIAdmin
                 comboBox.Items.Add(i);
             }
         }
-
     }
 }

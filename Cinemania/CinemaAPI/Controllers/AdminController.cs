@@ -407,5 +407,55 @@ namespace CinemaAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        //Traduction
+        [HttpPost("Traduction/AddTraduction")]
+        public async Task<IActionResult> AddTraduction(AddTraductionDTO traductionDTO)
+        {
+            try
+            {
+                ITraductionSvc traductionSvc = _adminSvc;
+                await traductionSvc.AddTraduction(traductionDTO);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("Langues")]
+        public async Task<ActionResult> GetLangues()
+        {
+            try
+            {
+                List<LangueDTO> lst;
+
+                ITraductionSvc traductionSvc = _adminSvc;
+                lst = await traductionSvc.GetLangues<LangueDTO>();
+                return Ok(lst);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("FilmTraduit")]
+        public async Task<ActionResult> GetFilmTraduit()
+        {
+            try
+            {
+                List<TraductionAvecNomsDTO> lst;
+
+                ITraductionSvc traductionSvc = _adminSvc;
+                lst = await traductionSvc.GetFilmTraduit<TraductionAvecNomsDTO>();
+                return Ok(lst);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
