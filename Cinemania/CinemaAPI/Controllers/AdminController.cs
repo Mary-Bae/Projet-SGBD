@@ -457,5 +457,20 @@ namespace CinemaAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpDelete("Traduction/DelTraduction/{id}")]
+        public async Task<ActionResult> DelTraduction(int id)
+        {
+            try
+            {
+                ITraductionSvc traductionSvc = _adminSvc;
+                await traductionSvc.DeleteTraduction(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

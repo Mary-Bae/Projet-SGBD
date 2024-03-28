@@ -237,6 +237,10 @@ namespace Services
             ITraductionRepo traductionRepo = _adminRepo;
             await traductionRepo.AddTraduction(pData);
         }
-
+        async Task ITraductionSvc.DeleteTraduction(int pId)
+        {
+            ITraductionRepo traductionRepo = _adminRepo;
+            await traductionRepo.DeleteTraduction(pId);
+        }
     }
 }
