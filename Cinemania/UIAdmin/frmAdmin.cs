@@ -714,7 +714,6 @@ namespace UIAdmin
                 return "Une erreur inattendue est survenue.";
             }
         }
-
         private async void LoadProgrammationData()
         {
             try
