@@ -431,6 +431,11 @@ namespace Repositories
             var lst = await _Connection.QueryAsync<T>("[Admin].[Langue_SelectAll]");
             return lst.ToList();
         }
+        public async Task<List<T>> GetFilmTraduit<T>()
+        {
+            var lst = await _Connection.QueryAsync<T>("[Admin].[FilmTraduitAvecNoms]");
+            return lst.ToList();
+        }
 
 
     }

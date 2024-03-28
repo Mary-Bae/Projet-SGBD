@@ -48,6 +48,7 @@ namespace Interfaces
     public interface ITraductionRepo
     {
         Task<List<T>> GetLangues<T>();
+        Task<List<T>> GetFilmTraduit<T>();
         Task AddTraduction(AddTraductionDTO pData);
     }
 }

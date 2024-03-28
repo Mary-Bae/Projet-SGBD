@@ -21,8 +21,9 @@ namespace UIAdmin
             LoadChaines();
             LoadFilms();
             ChargerCinemas();
-            LoadProgrammationData();
             LoadLangues();
+            LoadProgrammationData();
+            LoadFilmsTraduit();
             CalProgrammation.MinDate = DateTime.Today;
         }
         async void LoadChaines()
@@ -741,6 +742,34 @@ namespace UIAdmin
                 MessageBox.Show("Une erreur s'est produite : " + ex.Message);
             }
         }
+
+        private async void LoadFilmsTraduit()
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("https://localhost:7013/Admin/FilmTraduit");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseData = await response.Content.ReadAsStringAsync();
+                    List<TraductionAvecNomsDTO> programmations = JsonConvert.DeserializeObject<List<TraductionAvecNomsDTO>>(responseData);
+
+                    dgvFilmTrad.DataSource = programmations;
+                    dgvFilmTrad.Columns["ft_id"].Visible = false;
+                    dgvFilmTrad.Columns["fi_nom"].HeaderText = "Film";
+                    dgvFilmTrad.Columns["la_langue"].HeaderText = "Langue";
+                    dgvFilmTrad.Columns["la_sousTitre"].HeaderText = "Sous-Titre";
+                }
+                else
+                {
+                    MessageBox.Show("Une erreur s'est produite lors de la récupération des données de programmation.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Une erreur s'est produite : " + ex.Message);
+            }
+        }
         private async void supprimerProgrammationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             lblStatusProgrammation.Text = "";
@@ -885,6 +914,7 @@ namespace UIAdmin
                 if (string.IsNullOrEmpty(errorMessage))
                 {
                     MessageBox.Show("Traduction ajoutée avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadFilmsTraduit();
                 }
                 else
                 {

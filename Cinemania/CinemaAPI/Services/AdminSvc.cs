@@ -226,6 +226,12 @@ namespace Services
             var lst = await traductionRepo.GetLangues<T>();
             return lst.ToList<T>();
         }
+        async Task<List<T>> ITraductionSvc.GetFilmTraduit<T>()
+        {
+            ITraductionRepo traductionRepo = _adminRepo;
+            var lst = await traductionRepo.GetFilmTraduit<T>();
+            return lst.ToList<T>();
+        }
         async Task ITraductionSvc.AddTraduction(AddTraductionDTO pData)
         {
             ITraductionRepo traductionRepo = _adminRepo;

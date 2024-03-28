@@ -47,6 +47,7 @@ namespace Interfaces
     public interface ITraductionSvc
     {
         Task<List<T>> GetLangues<T>();
+        Task<List<T>> GetFilmTraduit<T>();
         Task AddTraduction(AddTraductionDTO trad);
 
     }

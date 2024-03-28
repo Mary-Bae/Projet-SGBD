@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace Models
 {
+    public class TraductionAvecNomsDTO
+    {
+        public int ft_id { get; set; }
+        public string fi_nom { get; set; }
+        public string la_langue { get; set; }
+        public string la_sousTitre { get; set; }
+    }
     public class TraductionDTO
     {
         public int Id { get; set; }
