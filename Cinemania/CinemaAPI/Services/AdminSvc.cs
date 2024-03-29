@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 namespace Services
 {
     public class AdminSvc : IAdminSvc, ICinemasSvc, ISalleSvc, IFilmSvc, IProgrammationSvc,
-        ITraductionSvc
+        ITraductionSvc, IProgrammationTraduitSvc
     {
         IAdminRepo _adminRepo;
         public AdminSvc(IAdminRepo pAdminRepo)
@@ -206,11 +206,9 @@ namespace Services
             IProgrammationRepo programmationRepo = _adminRepo;
             await programmationRepo.AddProgrammation(pData);
         }
-        async Task<List<T>> IProgrammationSvc.GetProgrammation<T>()
+        async Task<List<T>> IProgrammationSvc.GetProgrammationByFilm<T>(int pId)
         {
-            IProgrammationRepo programmationRepo = _adminRepo;
-            var lst = await programmationRepo.GetProgrammation<T>();
-            return lst.ToList<T>();
+            return await _adminRepo.GetProgrammationByFilm<T>(pId);
         }
         async Task IProgrammationSvc.DeleteProgrammation(int pId)
         {
@@ -226,11 +224,15 @@ namespace Services
             var lst = await traductionRepo.GetLangues<T>();
             return lst.ToList<T>();
         }
-        async Task<List<T>> ITraductionSvc.GetFilmTraduit<T>()
+        async Task<List<T>> ITraductionSvc.GetFilmTraduitByFilm<T>(int pId)
         {
             ITraductionRepo traductionRepo = _adminRepo;
-            var lst = await traductionRepo.GetFilmTraduit<T>();
+            var lst = await traductionRepo.GetFilmTraduitByFilm<T>(pId);
             return lst.ToList<T>();
+        }
+        public async Task<List<T>> GetFilmTraduitByProgrammation<T>(int pId)
+        {
+            return await _adminRepo.GetFilmTraduitByProgrammation<T>(pId);
         }
         async Task ITraductionSvc.AddTraduction(AddTraductionDTO pData)
         {
@@ -241,6 +243,14 @@ namespace Services
         {
             ITraductionRepo traductionRepo = _adminRepo;
             await traductionRepo.DeleteTraduction(pId);
+        }
+
+        // ProgrammationTraduite
+
+        async Task IProgrammationTraduitSvc.AddProgrammationTraduit(ProgrammationTraduiteDTO pData)
+        {
+            IProgrammationTraduitRepo programmationTraduit = _adminRepo;
+            await programmationTraduit.AddProgrammationTraduit(pData);
         }
     }
 }

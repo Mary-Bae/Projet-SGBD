@@ -131,22 +131,6 @@ namespace CinemaAPI.Controllers
             }
         }
 
-        [HttpGet("SallesByCinema/{cinemaId}")]
-        public async Task<ActionResult> GetSallesByCinema(int cinemaId)
-        {
-            try
-            {
-                List<SalleDTO> lst;
-                ISalleSvc sallesSvc = _adminSvc;
-                lst = await sallesSvc.GetSallesByCinema<SalleDTO>(cinemaId);
-                return Ok(lst);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
         [HttpPost("Cinemas/AjouterCinema")]
         public async Task<IActionResult> AjouterCinemaEtSalle(CinemaEtSalleDTO cinemaEtSalleDTO)
         {
@@ -243,6 +227,22 @@ namespace CinemaAPI.Controllers
                 ISalleSvc sallesSvc = _adminSvc;
                 await sallesSvc.DeleteSalle(id);
                 return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("SallesByCinema/{cinemaId}")]
+        public async Task<ActionResult> GetSallesByCinema(int cinemaId)
+        {
+            try
+            {
+                List<SalleDTO> lst;
+                ISalleSvc sallesSvc = _adminSvc;
+                lst = await sallesSvc.GetSallesByCinema<SalleDTO>(cinemaId);
+                return Ok(lst);
             }
             catch (Exception ex)
             {
@@ -376,15 +376,15 @@ namespace CinemaAPI.Controllers
             }
         }
 
-        [HttpGet("Programmation")]
-        public async Task<ActionResult> GetProgrammation()
+        [HttpGet("ProgrammationByFilm/{filmId}")]
+        public async Task<ActionResult> GetProgrammationByFilm(int filmId)
         {
             try
             {
                 List<ProgrammationAvecNomsDTO> lst;
 
                 IProgrammationSvc programmationSvc = _adminSvc;
-                lst = await programmationSvc.GetProgrammation<ProgrammationAvecNomsDTO>();
+                lst = await programmationSvc.GetProgrammationByFilm<ProgrammationAvecNomsDTO>(filmId);
                 return Ok(lst);
             }
             catch (Exception ex)
@@ -441,15 +441,14 @@ namespace CinemaAPI.Controllers
             }
         }
 
-        [HttpGet("FilmTraduit")]
-        public async Task<ActionResult> GetFilmTraduit()
+        [HttpGet("FilmTraduitByFilm/{filmId}")]
+        public async Task<ActionResult> GetFilmTraduitByFilm(int filmId)
         {
             try
             {
                 List<TraductionAvecNomsDTO> lst;
-
                 ITraductionSvc traductionSvc = _adminSvc;
-                lst = await traductionSvc.GetFilmTraduit<TraductionAvecNomsDTO>();
+                lst = await traductionSvc.GetFilmTraduitByFilm<TraductionAvecNomsDTO>(filmId);
                 return Ok(lst);
             }
             catch (Exception ex)
@@ -465,6 +464,38 @@ namespace CinemaAPI.Controllers
             {
                 ITraductionSvc traductionSvc = _adminSvc;
                 await traductionSvc.DeleteTraduction(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("TraductionByProgrammation/{programmationId}")]
+        public async Task<ActionResult> GetFilmTraduitByProgrammation(int programmationId)
+        {
+            try
+            {
+                List<TraductionAvecNomsDTO> lst;
+                ITraductionSvc traductionSvc = _adminSvc;
+                lst = await traductionSvc.GetFilmTraduitByProgrammation<TraductionAvecNomsDTO>(programmationId);
+                return Ok(lst);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        //Programmation Traduite
+        [HttpPost("ProgrammationTraduite/AddProgrammationTraduite")]
+        public async Task<IActionResult> AddProgrammationTraduite(ProgrammationTraduiteDTO pData)
+        {
+            try
+            {
+                IProgrammationTraduitSvc programmationTraduitSvc = _adminSvc;
+                await programmationTraduitSvc.AddProgrammationTraduit(pData);
                 return Ok();
             }
             catch (Exception ex)
