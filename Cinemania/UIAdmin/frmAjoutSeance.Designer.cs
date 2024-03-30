@@ -58,9 +58,9 @@
             // 
             this.btQuitter.BackColor = System.Drawing.Color.Snow;
             this.btQuitter.ForeColor = System.Drawing.Color.Black;
-            this.btQuitter.Location = new System.Drawing.Point(378, 443);
+            this.btQuitter.Location = new System.Drawing.Point(396, 454);
             this.btQuitter.Name = "btQuitter";
-            this.btQuitter.Size = new System.Drawing.Size(118, 33);
+            this.btQuitter.Size = new System.Drawing.Size(118, 40);
             this.btQuitter.TabIndex = 31;
             this.btQuitter.Text = "Quitter";
             this.btQuitter.UseVisualStyleBackColor = false;
@@ -97,7 +97,7 @@
             this.lstProgrTrad.FullRowSelect = true;
             this.lstProgrTrad.Location = new System.Drawing.Point(105, 102);
             this.lstProgrTrad.Name = "lstProgrTrad";
-            this.lstProgrTrad.Size = new System.Drawing.Size(619, 102);
+            this.lstProgrTrad.Size = new System.Drawing.Size(573, 102);
             this.lstProgrTrad.TabIndex = 34;
             this.lstProgrTrad.UseCompatibleStateImageBehavior = false;
             this.lstProgrTrad.View = System.Windows.Forms.View.Details;
@@ -131,7 +131,7 @@
             "18:00",
             "20:00",
             "22:00"});
-            this.cmbHoraire.Location = new System.Drawing.Point(105, 266);
+            this.cmbHoraire.Location = new System.Drawing.Point(557, 248);
             this.cmbHoraire.Name = "cmbHoraire";
             this.cmbHoraire.Size = new System.Drawing.Size(121, 23);
             this.cmbHoraire.TabIndex = 35;
@@ -139,7 +139,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(43, 266);
+            this.label2.Location = new System.Drawing.Point(495, 248);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 15);
             this.label2.TabIndex = 36;
@@ -147,7 +147,7 @@
             // 
             // calDateFin
             // 
-            this.calDateFin.Location = new System.Drawing.Point(497, 266);
+            this.calDateFin.Location = new System.Drawing.Point(193, 245);
             this.calDateFin.Name = "calDateFin";
             this.calDateFin.TabIndex = 37;
             this.calDateFin.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.calDateFin_DateSelected);
@@ -155,7 +155,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(343, 269);
+            this.label3.Location = new System.Drawing.Point(39, 248);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 15);
             this.label3.TabIndex = 38;
@@ -165,11 +165,11 @@
             // 
             this.btSave.BackColor = System.Drawing.Color.Snow;
             this.btSave.ForeColor = System.Drawing.Color.Black;
-            this.btSave.Location = new System.Drawing.Point(188, 443);
+            this.btSave.Location = new System.Drawing.Point(184, 454);
             this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(118, 33);
+            this.btSave.Size = new System.Drawing.Size(122, 40);
             this.btSave.TabIndex = 39;
-            this.btSave.Text = "Créer séance";
+            this.btSave.Text = "Enregistrer Séance";
             this.btSave.UseVisualStyleBackColor = false;
             this.btSave.Click += new System.EventHandler(this.btSave_Click);
             // 
@@ -177,7 +177,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(797, 515);
+            this.ClientSize = new System.Drawing.Size(735, 514);
             this.Controls.Add(this.btSave);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.calDateFin);

@@ -169,7 +169,6 @@ namespace CinemaAPI.Controllers
         }
 
         // Salles
-
         [HttpGet("Salles")]
         public async Task<ActionResult> GetSalles()
         {
@@ -537,7 +536,6 @@ namespace CinemaAPI.Controllers
         }
 
         //Seance
-
         [HttpPost("Seance/AddSeance")]
         public async Task<IActionResult> AddSeance(AddSeanceDTO pData)
         {
@@ -552,6 +550,40 @@ namespace CinemaAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("Seance")]
+        public async Task<ActionResult> GetSeance()
+        {
+            try
+            {
+                List<SeanceDTO> lst;
+
+                ISeanceSvc seanceSvc = _adminSvc;
+                lst = await seanceSvc.GetSeance<SeanceDTO>();
+                return Ok(lst);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        //Projection
+        [HttpPost("Projection/AddProjection")]
+        public async Task<IActionResult> AddProjection(AddProjectionDTO pData)
+        {
+            try
+            {
+                IProjectionSvc projectionSvc = _adminSvc;
+                await projectionSvc.AddProjection(pData);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
 
     }
 }

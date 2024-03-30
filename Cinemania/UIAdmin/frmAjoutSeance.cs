@@ -115,7 +115,6 @@ namespace UIAdmin
                 MessageBox.Show("Veuillez sélectionner une programmation traduite");
             }
         }
-
         private void calDateFin_DateSelected(object sender, DateRangeEventArgs e)
         {
             DateTime selectedDate = calDateFin.SelectionStart;

@@ -16,13 +16,15 @@ namespace UIAdmin
         private int _currentCinemaId;
         private int _currentFilmId;
         private int _currentProgrammationId;
-        
+        private int _selectedSeanceId;
+
         public frmAdmin()
         {
             InitializeComponent();
             LoadChaines();
             LoadFilms();
-            LoadLangues();  
+            LoadLangues();
+            LoadSeances();
         }
         async void LoadChaines()
         {
@@ -117,6 +119,44 @@ namespace UIAdmin
             if (!success) MessageBox.Show("Impossible de charger les données après plusieurs tentatives.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        async void LoadSeances()
+        {
+            const int maxRetries = 3;
+            int attempts = 0;
+            bool success = false;
+
+            //Recharge les chaines en trois tentatives si elles n'arrivent pas à se charger, ca laisse le temps à l'API de se charger
+            while (attempts < maxRetries && !success)
+            {
+                try
+                {
+                    HttpResponseMessage response = await client.GetAsync("https://localhost:7013/Admin/Seance");
+                    success = response.IsSuccessStatusCode;
+                    if (success)
+                    {
+                        var responseContent = await response.Content.ReadAsStringAsync();
+                        var seances = JsonConvert.DeserializeObject<BindingList<SeanceDTO>>(responseContent);
+                        dgvSeance.DataSource = seances;
+                        dgvSeance.Columns["se_id"].Visible = false;
+                        dgvSeance.Columns["ci_id"].Visible = false;
+                        dgvSeance.Columns["ci_nom"].HeaderText = "Cinéma";
+                        dgvSeance.Columns["fi_nom"].HeaderText = "Film";
+                        dgvSeance.Columns["la_langue"].HeaderText = "Langue";
+                        dgvSeance.Columns["la_sousTitre"].HeaderText = "Sous-Titre";
+                        dgvSeance.Columns["pr_date"].HeaderText = "Début de projection";
+                        dgvSeance.Columns["se_dateFin"].HeaderText = "Fin de projection";
+                        dgvSeance.Columns["se_horaire"].HeaderText = "Horaire";
+                    }
+                }
+                catch (HttpRequestException)
+                {
+                    attempts++;
+                    if (attempts < maxRetries) await Task.Delay(1000); // Attendre 1 seconde avant de réessayer
+                }
+            }
+            if (!success) MessageBox.Show("Impossible de charger les données après plusieurs tentatives.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
         //Charge les cinemas associés aux chaines à chaque sélection de chaine
         private async void dgvChaines_SelectionChanged(object sender, EventArgs e)
         {
@@ -151,7 +191,6 @@ namespace UIAdmin
                 return new List<CinemasDTO>();
             }
         }
-
         private async Task MettreAJourChaine(ChaineDTO chaine)
         {
             lblStatusAdminCinema.Text = "";
@@ -220,7 +259,6 @@ namespace UIAdmin
                 lblStatusAdminCinema.Text = "Aucune chaîne n'a été sélectionnée. Veuillez choisir la chaîne à supprimer.";
             }
         }
-
         async private void btGetCinemas_Click(object sender, EventArgs e)
         {
             lblStatusAdminCinema.Text = "";
@@ -286,7 +324,6 @@ namespace UIAdmin
                 lblStatusAdminCinema.Text = "Veuillez sélectionner un cinéma à supprimer.";
             }
         }
-
         private async Task<int> CompterCinemasByChaine(int cinemaId)
         {
             try
@@ -329,7 +366,6 @@ namespace UIAdmin
                 lblStatusAdminCinema.Text = "Sélectionnez une chaine de cinéma pour pouvoir lui attribuer un nouveau cinéma";
             }
         }
-
         private void dgvCine_SelectionChanged(object sender, EventArgs e)
         {
             lblStatusAdminCinema.Text = "";
@@ -387,7 +423,6 @@ namespace UIAdmin
 
             }
         }
-
         private async void supprimerSalleDeCinemaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             lblStatusAdminCinema.Text = "";
@@ -635,7 +670,6 @@ namespace UIAdmin
                     string responseData = await response.Content.ReadAsStringAsync();
                     var filmsTraduits = JsonConvert.DeserializeObject<List<TraductionAvecNomsDTO>>(responseData);
                     dgvFilmTrad.DataSource = filmsTraduits;
-                    dgvFilmTrad.Columns["pt_id"].Visible = false;
                     dgvFilmTrad.Columns["ft_id"].Visible = false;
                     dgvFilmTrad.Columns["fi_nom"].HeaderText = "Film";
                     dgvFilmTrad.Columns["la_langue"].HeaderText = "Langue";
@@ -651,7 +685,6 @@ namespace UIAdmin
                 MessageBox.Show("Une erreur s'est produite : " + ex.Message);
             }
         }
-
         private async void LoadFilmsTraduitByProgram(int programmationId)
         {
             _currentProgrammationId = programmationId;
@@ -708,7 +741,6 @@ namespace UIAdmin
                     }
             }
         }
-
         private void btAddFilm_Click(object sender, EventArgs e)
         {
             lblStatusProgrammation.Text = "";
@@ -720,7 +752,6 @@ namespace UIAdmin
                 LoadFilms();
             }
         }
-
         private async void btUpdFilm_Click(object sender, EventArgs e)
         {
             lblStatusProgrammation.Text = "";
@@ -1002,6 +1033,70 @@ namespace UIAdmin
         {
             var formAjoutSeance = new frmAjoutSeance();
             formAjoutSeance.ShowDialog();
+            LoadSeances();
+        }
+
+        private async void dgvSeance_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvSeance.CurrentRow != null)
+            {
+                _currentCinemaId = Convert.ToInt32(dgvSeance.CurrentRow.Cells["ci_id"].Value);
+                _selectedSeanceId = Convert.ToInt32(dgvSeance.CurrentRow.Cells["se_id"].Value);
+
+                HttpResponseMessage response = await client.GetAsync("https://localhost:7013/Admin/SallesByCinema/" + _currentCinemaId);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    cmbSalles.Items.Clear();
+
+                    string responseContent = await response.Content.ReadAsStringAsync();
+                    List<SalleDTO> salles = JsonConvert.DeserializeObject<List<SalleDTO>>(responseContent);
+
+                    foreach (var salle in salles)
+                    {
+                        cmbSalles.Items.Add(new { Id = salle.sa_id, Nom = salle.sa_numeroSalle.ToString() });
+                    }
+
+                    cmbSalles.DisplayMember = "Nom";
+                    cmbSalles.ValueMember = "Id";
+                }
+                else
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    MessageBox.Show("Échec du chargement des salles du cinéma sélectionné.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private async void btProj_Click(object sender, EventArgs e)
+        {
+            if (_selectedSeanceId == 0 || cmbSalles.SelectedItem == null)
+            {
+                MessageBox.Show("Veuillez sélectionner une séance et une salle.");
+                return;
+            }
+
+            dynamic selectedItem = cmbSalles.SelectedItem;
+            int selectedSalleId = selectedItem.Id;
+
+            var projectionData = new AddProjectionDTO
+            {
+                SeanceId = _selectedSeanceId,
+                SalleId = selectedSalleId
+            };
+
+            var content = new StringContent(JsonConvert.SerializeObject(projectionData), Encoding.UTF8, "application/json");
+            var response = await client.PostAsync("https://localhost:7013/Admin/Projection/AddProjection", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                MessageBox.Show("Projection programmée avec succès.");
+                // Optionnel : rafraîchir les données affichées
+            }
+            else
+            {
+                MessageBox.Show("Erreur lors de la programmation de la projection.");
+            }
         }
     }
     }

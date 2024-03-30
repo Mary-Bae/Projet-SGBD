@@ -2,7 +2,6 @@
 {
     public class TraductionAvecNomsDTO
     {
-        public int pt_id { get; set; }
         public int ft_id { get; set; }
         public string fi_nom { get; set; }
         public string la_langue { get; set; }
