@@ -38,12 +38,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -53,6 +47,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MenuCinema = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.supprimerCinémaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuChaine = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -82,16 +82,6 @@
             this.lblStatusProgrammation = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
-            this.dgvProgrammation = new System.Windows.Forms.DataGridView();
-            this.MenuProgrammation = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.supprimerProgrammationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dgvProgrTrad = new System.Windows.Forms.DataGridView();
-            this.MenuProgrTraduit = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.supprimerProgTraduitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.btProgrammation = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvFilms = new System.Windows.Forms.DataGridView();
@@ -110,6 +100,17 @@
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.dgvProgrTrad = new System.Windows.Forms.DataGridView();
+            this.MenuProgrTraduit = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.supprimerProgTraduitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btProgrammation = new System.Windows.Forms.Button();
+            this.dgvProgrammation = new System.Windows.Forms.DataGridView();
+            this.MenuProgrammation = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.supprimerProgrammationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
@@ -119,7 +120,6 @@
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.cmbCinemas = new System.Windows.Forms.ComboBox();
             this.btProgrammer = new System.Windows.Forms.Button();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.MenuCinema.SuspendLayout();
             this.MenuChaine.SuspendLayout();
             this.MenuSalle.SuspendLayout();
@@ -135,11 +135,6 @@
             this.tabProgrammation.SuspendLayout();
             this.tableAdminProgrammation.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProgrammation)).BeginInit();
-            this.MenuProgrammation.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProgrTrad)).BeginInit();
-            this.MenuProgrTraduit.SuspendLayout();
-            this.tableLayoutPanel15.SuspendLayout();
             this.tableLayoutPanel12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFilms)).BeginInit();
             this.MenuFilms.SuspendLayout();
@@ -150,8 +145,13 @@
             this.tableLayoutPanel17.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLangues)).BeginInit();
             this.tableLayoutPanel8.SuspendLayout();
-            this.tableLayoutPanel11.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProgrTrad)).BeginInit();
+            this.MenuProgrTraduit.SuspendLayout();
+            this.tableLayoutPanel15.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProgrammation)).BeginInit();
+            this.MenuProgrammation.SuspendLayout();
+            this.tableLayoutPanel11.SuspendLayout();
             this.SuspendLayout();
             // 
             // MenuCinema
@@ -652,194 +652,15 @@
             this.label2.TabIndex = 13;
             this.label2.Text = "CINEMANIA";
             // 
-            // dgvProgrammation
-            // 
-            this.dgvProgrammation.AllowUserToAddRows = false;
-            this.dgvProgrammation.AllowUserToResizeRows = false;
-            this.dgvProgrammation.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvProgrammation.BackgroundColor = System.Drawing.Color.Black;
-            this.dgvProgrammation.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dgvProgrammation.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle22.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.InfoText;
-            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.InfoText;
-            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProgrammation.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
-            this.dgvProgrammation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProgrammation.ContextMenuStrip = this.MenuProgrammation;
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle23.BackColor = System.Drawing.Color.Gray;
-            dataGridViewCellStyle23.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.Info;
-            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Info;
-            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.Desktop;
-            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProgrammation.DefaultCellStyle = dataGridViewCellStyle23;
-            this.dgvProgrammation.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvProgrammation.EnableHeadersVisualStyles = false;
-            this.dgvProgrammation.Location = new System.Drawing.Point(3, 4);
-            this.dgvProgrammation.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.dgvProgrammation.MultiSelect = false;
-            this.dgvProgrammation.Name = "dgvProgrammation";
-            this.dgvProgrammation.ReadOnly = true;
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle24.BackColor = System.Drawing.Color.Gray;
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.Info;
-            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Info;
-            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProgrammation.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
-            this.dgvProgrammation.RowHeadersVisible = false;
-            this.dgvProgrammation.RowHeadersWidth = 51;
-            this.dgvProgrammation.RowTemplate.Height = 25;
-            this.dgvProgrammation.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProgrammation.Size = new System.Drawing.Size(666, 300);
-            this.dgvProgrammation.TabIndex = 23;
-            this.dgvProgrammation.SelectionChanged += new System.EventHandler(this.dgvProgrammation_SelectionChanged);
-            // 
-            // MenuProgrammation
-            // 
-            this.MenuProgrammation.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.MenuProgrammation.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.supprimerProgrammationToolStripMenuItem});
-            this.MenuProgrammation.Name = "MenuProgrammation";
-            this.MenuProgrammation.Size = new System.Drawing.Size(257, 28);
-            // 
-            // supprimerProgrammationToolStripMenuItem
-            // 
-            this.supprimerProgrammationToolStripMenuItem.Name = "supprimerProgrammationToolStripMenuItem";
-            this.supprimerProgrammationToolStripMenuItem.Size = new System.Drawing.Size(256, 24);
-            this.supprimerProgrammationToolStripMenuItem.Text = "Supprimer programmation";
-            this.supprimerProgrammationToolStripMenuItem.Click += new System.EventHandler(this.supprimerProgrammationToolStripMenuItem_Click);
-            // 
-            // dgvProgrTrad
-            // 
-            this.dgvProgrTrad.AllowUserToAddRows = false;
-            this.dgvProgrTrad.AllowUserToDeleteRows = false;
-            this.dgvProgrTrad.AllowUserToResizeRows = false;
-            this.dgvProgrTrad.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvProgrTrad.BackgroundColor = System.Drawing.Color.Black;
-            this.dgvProgrTrad.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dgvProgrTrad.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.InfoText;
-            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.InfoText;
-            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProgrTrad.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle19;
-            this.dgvProgrTrad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProgrTrad.ContextMenuStrip = this.MenuProgrTraduit;
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle20.BackColor = System.Drawing.Color.Gray;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.Info;
-            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Info;
-            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.Desktop;
-            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProgrTrad.DefaultCellStyle = dataGridViewCellStyle20;
-            this.dgvProgrTrad.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvProgrTrad.EnableHeadersVisualStyles = false;
-            this.dgvProgrTrad.Location = new System.Drawing.Point(3, 373);
-            this.dgvProgrTrad.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.dgvProgrTrad.MultiSelect = false;
-            this.dgvProgrTrad.Name = "dgvProgrTrad";
-            this.dgvProgrTrad.ReadOnly = true;
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle21.BackColor = System.Drawing.Color.Gray;
-            dataGridViewCellStyle21.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.Info;
-            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Info;
-            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProgrTrad.RowHeadersDefaultCellStyle = dataGridViewCellStyle21;
-            this.dgvProgrTrad.RowHeadersVisible = false;
-            this.dgvProgrTrad.RowHeadersWidth = 5;
-            this.dgvProgrTrad.RowTemplate.Height = 25;
-            this.dgvProgrTrad.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProgrTrad.Size = new System.Drawing.Size(666, 240);
-            this.dgvProgrTrad.TabIndex = 26;
-            // 
-            // MenuProgrTraduit
-            // 
-            this.MenuProgrTraduit.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.MenuProgrTraduit.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
-            this.supprimerProgTraduitToolStripMenuItem});
-            this.MenuProgrTraduit.Name = "MenuProgrTraduit";
-            this.MenuProgrTraduit.Size = new System.Drawing.Size(233, 52);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(232, 24);
-            // 
-            // supprimerProgTraduitToolStripMenuItem
-            // 
-            this.supprimerProgTraduitToolStripMenuItem.Name = "supprimerProgTraduitToolStripMenuItem";
-            this.supprimerProgTraduitToolStripMenuItem.Size = new System.Drawing.Size(232, 24);
-            this.supprimerProgTraduitToolStripMenuItem.Text = "Supprimer Prog Traduit";
-            this.supprimerProgTraduitToolStripMenuItem.Click += new System.EventHandler(this.supprimerProgTraduitToolStripMenuItem_Click);
-            // 
-            // tableLayoutPanel15
-            // 
-            this.tableLayoutPanel15.ColumnCount = 5;
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel15.Controls.Add(this.button1, 3, 0);
-            this.tableLayoutPanel15.Controls.Add(this.btProgrammation, 1, 0);
-            this.tableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel15.Location = new System.Drawing.Point(3, 312);
-            this.tableLayoutPanel15.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tableLayoutPanel15.Name = "tableLayoutPanel15";
-            this.tableLayoutPanel15.RowCount = 1;
-            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel15.Size = new System.Drawing.Size(666, 53);
-            this.tableLayoutPanel15.TabIndex = 27;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.SystemColors.Info;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(434, 4);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(186, 44);
-            this.button1.TabIndex = 25;
-            this.button1.Text = "Traduire Film";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.btTraduire);
-            // 
-            // btProgrammation
-            // 
-            this.btProgrammation.BackColor = System.Drawing.SystemColors.Info;
-            this.btProgrammation.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btProgrammation.Location = new System.Drawing.Point(36, 4);
-            this.btProgrammation.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btProgrammation.Name = "btProgrammation";
-            this.btProgrammation.Size = new System.Drawing.Size(186, 44);
-            this.btProgrammation.TabIndex = 24;
-            this.btProgrammation.Text = "Programmer Film";
-            this.btProgrammation.UseVisualStyleBackColor = false;
-            this.btProgrammation.Click += new System.EventHandler(this.btProgrammation_Click);
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label8.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(680, 191);
+            this.label8.Location = new System.Drawing.Point(680, 192);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(672, 47);
+            this.label8.Size = new System.Drawing.Size(672, 46);
             this.label8.TabIndex = 27;
             this.label8.Text = "Sélectionnez une programmation et un film traduit pour programmer des films avec " +
     "leur traduction";
@@ -1173,6 +994,202 @@
             this.label6.Text = "Sélectionnez un film pour le traduire ou pour programmer son entrée dans un ciném" +
     "a ";
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.dgvProgrTrad, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel15, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.dgvProgrammation, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(680, 241);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(672, 617);
+            this.tableLayoutPanel1.TabIndex = 28;
+            // 
+            // dgvProgrTrad
+            // 
+            this.dgvProgrTrad.AllowUserToAddRows = false;
+            this.dgvProgrTrad.AllowUserToDeleteRows = false;
+            this.dgvProgrTrad.AllowUserToResizeRows = false;
+            this.dgvProgrTrad.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvProgrTrad.BackgroundColor = System.Drawing.Color.Black;
+            this.dgvProgrTrad.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvProgrTrad.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.InfoText;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.InfoText;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProgrTrad.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle19;
+            this.dgvProgrTrad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProgrTrad.ContextMenuStrip = this.MenuProgrTraduit;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.Desktop;
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProgrTrad.DefaultCellStyle = dataGridViewCellStyle20;
+            this.dgvProgrTrad.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvProgrTrad.EnableHeadersVisualStyles = false;
+            this.dgvProgrTrad.Location = new System.Drawing.Point(3, 373);
+            this.dgvProgrTrad.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dgvProgrTrad.MultiSelect = false;
+            this.dgvProgrTrad.Name = "dgvProgrTrad";
+            this.dgvProgrTrad.ReadOnly = true;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle21.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProgrTrad.RowHeadersDefaultCellStyle = dataGridViewCellStyle21;
+            this.dgvProgrTrad.RowHeadersVisible = false;
+            this.dgvProgrTrad.RowHeadersWidth = 5;
+            this.dgvProgrTrad.RowTemplate.Height = 25;
+            this.dgvProgrTrad.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvProgrTrad.Size = new System.Drawing.Size(666, 240);
+            this.dgvProgrTrad.TabIndex = 26;
+            // 
+            // MenuProgrTraduit
+            // 
+            this.MenuProgrTraduit.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.MenuProgrTraduit.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.supprimerProgTraduitToolStripMenuItem});
+            this.MenuProgrTraduit.Name = "MenuProgrTraduit";
+            this.MenuProgrTraduit.Size = new System.Drawing.Size(233, 52);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(232, 24);
+            // 
+            // supprimerProgTraduitToolStripMenuItem
+            // 
+            this.supprimerProgTraduitToolStripMenuItem.Name = "supprimerProgTraduitToolStripMenuItem";
+            this.supprimerProgTraduitToolStripMenuItem.Size = new System.Drawing.Size(232, 24);
+            this.supprimerProgTraduitToolStripMenuItem.Text = "Supprimer Prog Traduit";
+            this.supprimerProgTraduitToolStripMenuItem.Click += new System.EventHandler(this.supprimerProgTraduitToolStripMenuItem_Click);
+            // 
+            // tableLayoutPanel15
+            // 
+            this.tableLayoutPanel15.ColumnCount = 5;
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel15.Controls.Add(this.button1, 3, 0);
+            this.tableLayoutPanel15.Controls.Add(this.btProgrammation, 1, 0);
+            this.tableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel15.Location = new System.Drawing.Point(3, 312);
+            this.tableLayoutPanel15.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tableLayoutPanel15.Name = "tableLayoutPanel15";
+            this.tableLayoutPanel15.RowCount = 1;
+            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel15.Size = new System.Drawing.Size(666, 53);
+            this.tableLayoutPanel15.TabIndex = 27;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.Info;
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button1.Location = new System.Drawing.Point(434, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(186, 44);
+            this.button1.TabIndex = 25;
+            this.button1.Text = "Traduire Film";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.btTraduire);
+            // 
+            // btProgrammation
+            // 
+            this.btProgrammation.BackColor = System.Drawing.SystemColors.Info;
+            this.btProgrammation.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btProgrammation.Location = new System.Drawing.Point(36, 4);
+            this.btProgrammation.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btProgrammation.Name = "btProgrammation";
+            this.btProgrammation.Size = new System.Drawing.Size(186, 44);
+            this.btProgrammation.TabIndex = 24;
+            this.btProgrammation.Text = "Programmer Film";
+            this.btProgrammation.UseVisualStyleBackColor = false;
+            this.btProgrammation.Click += new System.EventHandler(this.btProgrammation_Click);
+            // 
+            // dgvProgrammation
+            // 
+            this.dgvProgrammation.AllowUserToAddRows = false;
+            this.dgvProgrammation.AllowUserToResizeRows = false;
+            this.dgvProgrammation.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvProgrammation.BackgroundColor = System.Drawing.Color.Black;
+            this.dgvProgrammation.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvProgrammation.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.InfoText;
+            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.InfoText;
+            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProgrammation.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
+            this.dgvProgrammation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProgrammation.ContextMenuStrip = this.MenuProgrammation;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle23.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.Desktop;
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProgrammation.DefaultCellStyle = dataGridViewCellStyle23;
+            this.dgvProgrammation.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvProgrammation.EnableHeadersVisualStyles = false;
+            this.dgvProgrammation.Location = new System.Drawing.Point(3, 4);
+            this.dgvProgrammation.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dgvProgrammation.MultiSelect = false;
+            this.dgvProgrammation.Name = "dgvProgrammation";
+            this.dgvProgrammation.ReadOnly = true;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle24.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProgrammation.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
+            this.dgvProgrammation.RowHeadersVisible = false;
+            this.dgvProgrammation.RowHeadersWidth = 51;
+            this.dgvProgrammation.RowTemplate.Height = 25;
+            this.dgvProgrammation.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvProgrammation.Size = new System.Drawing.Size(666, 300);
+            this.dgvProgrammation.TabIndex = 23;
+            this.dgvProgrammation.SelectionChanged += new System.EventHandler(this.dgvProgrammation_SelectionChanged);
+            // 
+            // MenuProgrammation
+            // 
+            this.MenuProgrammation.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.MenuProgrammation.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.supprimerProgrammationToolStripMenuItem});
+            this.MenuProgrammation.Name = "MenuProgrammation";
+            this.MenuProgrammation.Size = new System.Drawing.Size(257, 28);
+            // 
+            // supprimerProgrammationToolStripMenuItem
+            // 
+            this.supprimerProgrammationToolStripMenuItem.Name = "supprimerProgrammationToolStripMenuItem";
+            this.supprimerProgrammationToolStripMenuItem.Size = new System.Drawing.Size(256, 24);
+            this.supprimerProgrammationToolStripMenuItem.Text = "Supprimer programmation";
+            this.supprimerProgrammationToolStripMenuItem.Click += new System.EventHandler(this.supprimerProgrammationToolStripMenuItem_Click);
+            // 
             // tableLayoutPanel6
             // 
             this.tableLayoutPanel6.BackColor = System.Drawing.Color.Navy;
@@ -1291,23 +1308,6 @@
             this.btProgrammer.Text = "Programmer";
             this.btProgrammer.UseVisualStyleBackColor = false;
             // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.dgvProgrTrad, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel15, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.dgvProgrammation, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(680, 241);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(672, 617);
-            this.tableLayoutPanel1.TabIndex = 28;
-            // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -1340,11 +1340,6 @@
             this.tableAdminProgrammation.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProgrammation)).EndInit();
-            this.MenuProgrammation.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProgrTrad)).EndInit();
-            this.MenuProgrTraduit.ResumeLayout(false);
-            this.tableLayoutPanel15.ResumeLayout(false);
             this.tableLayoutPanel12.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFilms)).EndInit();
             this.MenuFilms.ResumeLayout(false);
@@ -1356,8 +1351,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvLangues)).EndInit();
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel8.PerformLayout();
-            this.tableLayoutPanel11.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProgrTrad)).EndInit();
+            this.MenuProgrTraduit.ResumeLayout(false);
+            this.tableLayoutPanel15.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProgrammation)).EndInit();
+            this.MenuProgrammation.ResumeLayout(false);
+            this.tableLayoutPanel11.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
