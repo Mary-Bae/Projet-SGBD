@@ -456,7 +456,6 @@ namespace Repositories
         }
 
         // Programmation Traduite
-
         public async Task AddProgrammationTraduit(ProgrammationTraduiteDTO pData)
         {
             try
@@ -476,7 +475,12 @@ namespace Repositories
                 throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
             }
         }
+        async Task IProgrammationTraduitRepo.DeleteFilmTraduit(int pId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@id", pId);
 
-
+            await _Connection.ExecuteAsync("[Admin].[ProgammationTraduite_Delete]", parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }

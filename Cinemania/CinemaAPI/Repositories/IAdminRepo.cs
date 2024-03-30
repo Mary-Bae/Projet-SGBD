@@ -56,6 +56,6 @@ namespace Interfaces
     public interface IProgrammationTraduitRepo
     {
         Task AddProgrammationTraduit(ProgrammationTraduiteDTO pData);
-
+        Task DeleteFilmTraduit(int pId);
     }
 }

@@ -381,10 +381,10 @@ namespace CinemaAPI.Controllers
         {
             try
             {
-                List<ProgrammationAvecNomsDTO> lst;
+                List<ProgrammationTraduitesDTO> lst;
 
                 IProgrammationSvc programmationSvc = _adminSvc;
-                lst = await programmationSvc.GetProgrammationByFilm<ProgrammationAvecNomsDTO>(filmId);
+                lst = await programmationSvc.GetProgrammationByFilm<ProgrammationTraduitesDTO>(filmId);
                 return Ok(lst);
             }
             catch (Exception ex)
@@ -477,9 +477,9 @@ namespace CinemaAPI.Controllers
         {
             try
             {
-                List<TraductionAvecNomsDTO> lst;
+                List<ProgrammationTraduitesDTO> lst;
                 ITraductionSvc traductionSvc = _adminSvc;
-                lst = await traductionSvc.GetFilmTraduitByProgrammation<TraductionAvecNomsDTO>(programmationId);
+                lst = await traductionSvc.GetFilmTraduitByProgrammation<ProgrammationTraduitesDTO>(programmationId);
                 return Ok(lst);
             }
             catch (Exception ex)
@@ -496,6 +496,21 @@ namespace CinemaAPI.Controllers
             {
                 IProgrammationTraduitSvc programmationTraduitSvc = _adminSvc;
                 await programmationTraduitSvc.AddProgrammationTraduit(pData);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("ProgrammationTraduite/DelFilmTraduit/{id}")]
+        public async Task<ActionResult> DeleteFilmTraduit(int id)
+        {
+            try
+            {
+                IProgrammationTraduitSvc programmationSvc = _adminSvc;
+                await programmationSvc.DeleteFilmTraduit(id);
                 return Ok();
             }
             catch (Exception ex)

@@ -56,6 +56,8 @@ namespace Interfaces
     public interface IProgrammationTraduitSvc
     {
         Task AddProgrammationTraduit(ProgrammationTraduiteDTO pData);
+        Task DeleteFilmTraduit(int pId);
+        
     }
 
 
