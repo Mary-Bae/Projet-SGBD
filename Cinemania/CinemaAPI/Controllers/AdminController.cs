@@ -518,5 +518,23 @@ namespace CinemaAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        //Seance
+
+        [HttpPost("Seance/AddSeance")]
+        public async Task<IActionResult> AddSeance(AddSeanceDTO pData)
+        {
+            try
+            {
+                ISeanceSvc seanceSvc = _adminSvc;
+                await seanceSvc.AddSeance(pData);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }

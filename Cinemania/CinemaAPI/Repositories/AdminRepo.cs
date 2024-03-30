@@ -13,7 +13,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace Repositories
 {
     public class AdminRepo : IAdminRepo, ISalleRepo, IFilmRepo, IProgrammationRepo,
-        ITraductionRepo, IProgrammationTraduitRepo
+        ITraductionRepo, IProgrammationTraduitRepo, ISeanceRepo
     {
         IDbConnection _Connection;
         public AdminRepo(IDbConnection pConnection)
@@ -481,6 +481,29 @@ namespace Repositories
             parameters.Add("@id", pId);
 
             await _Connection.ExecuteAsync("[Admin].[ProgammationTraduite_Delete]", parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        // Seance
+
+        public async Task AddSeance(AddSeanceDTO pData)
+        {
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@Horaire", pData.se_horaire);
+                parameters.Add("@DateFin", pData.se_dateFin);
+                parameters.Add("@ProgrammationTraduitId", pData.se_pt_id);
+
+                await _Connection.ExecuteAsync("[Admin].[Seance_AddSeance]", parameters, commandType: CommandType.StoredProcedure);
+            }
+            catch (SqlException ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
+            }
         }
     }
 }

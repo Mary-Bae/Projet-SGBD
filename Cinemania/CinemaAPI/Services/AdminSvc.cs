@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 namespace Services
 {
     public class AdminSvc : IAdminSvc, ICinemasSvc, ISalleSvc, IFilmSvc, IProgrammationSvc,
-        ITraductionSvc, IProgrammationTraduitSvc
+        ITraductionSvc, IProgrammationTraduitSvc, ISeanceSvc
     {
         IAdminRepo _adminRepo;
         public AdminSvc(IAdminRepo pAdminRepo)
@@ -256,6 +256,14 @@ namespace Services
         {
             IProgrammationTraduitRepo programmationTraduit = _adminRepo;
             await programmationTraduit.DeleteFilmTraduit(pId);
+        }
+
+        // Seance
+
+        async Task ISeanceSvc.AddSeance(AddSeanceDTO pData)
+        {
+            ISeanceRepo seance = _adminRepo;
+            await seance.AddSeance(pData);
         }
     }
 }
