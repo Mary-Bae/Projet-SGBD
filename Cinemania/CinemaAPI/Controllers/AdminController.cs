@@ -519,6 +519,23 @@ namespace CinemaAPI.Controllers
             }
         }
 
+        [HttpGet("ProgrammationTraduite")]
+        public async Task<ActionResult> GetProgrammationTraduite()
+        {
+            try
+            {
+                List<ListProgrammationTraduitesDTO> lst;
+
+                IProgrammationTraduitSvc programmationSvc = _adminSvc;
+                lst = await programmationSvc.GetProgrammationTraduit<ListProgrammationTraduitesDTO>();
+                return Ok(lst);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         //Seance
 
         [HttpPost("Seance/AddSeance")]

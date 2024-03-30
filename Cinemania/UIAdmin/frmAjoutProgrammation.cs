@@ -74,7 +74,7 @@ namespace UIAdmin
         private async void btSave_Click(object sender, EventArgs e)
         {
             int cinemaId = GetSelectedCinemaId(); // Méthode pour récupérer l'ID du cinéma sélectionné
-            DateTime dateProgrammation = CalProgrammation.SelectionStart; // Remplacez par votre contrôle de calendrier
+            DateTime dateProgrammation = CalProgrammation.SelectionStart;
 
             if (dateProgrammation == DateTime.MinValue)
             {

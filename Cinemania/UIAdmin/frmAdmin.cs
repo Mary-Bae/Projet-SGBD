@@ -997,6 +997,12 @@ namespace UIAdmin
                 }
             }
         }
+
+        private void btSeance_Click(object sender, EventArgs e)
+        {
+            var formAjoutSeance = new frmAjoutSeance();
+            formAjoutSeance.ShowDialog();
+        }
     }
     }
 

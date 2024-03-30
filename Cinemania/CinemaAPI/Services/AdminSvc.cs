@@ -257,6 +257,13 @@ namespace Services
             IProgrammationTraduitRepo programmationTraduit = _adminRepo;
             await programmationTraduit.DeleteFilmTraduit(pId);
         }
+        async Task<List<T>> IProgrammationTraduitSvc.GetProgrammationTraduit<T>()
+        {
+            IProgrammationTraduitRepo programmationTraduit = _adminRepo;
+            var lst = await programmationTraduit.GetProgrammationTraduit<T>();
+            return lst.ToList<T>();
+        }
+        
 
         // Seance
 

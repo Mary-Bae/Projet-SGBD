@@ -482,6 +482,11 @@ namespace Repositories
 
             await _Connection.ExecuteAsync("[Admin].[ProgammationTraduite_Delete]", parameters, commandType: CommandType.StoredProcedure);
         }
+        public async Task<List<T>> GetProgrammationTraduit<T>()
+        {
+            var lst = await _Connection.QueryAsync<T>("[Admin].[ProgrammationTraduite_SelectAll]");
+            return lst.ToList();
+        }
 
         // Seance
 
