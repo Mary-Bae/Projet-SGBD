@@ -13,7 +13,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace Repositories
 {
     public class AdminRepo : IAdminRepo, ISalleRepo, IFilmRepo, IProgrammationRepo,
-        ITraductionRepo, IProgrammationTraduitRepo
+        ITraductionRepo, ISeanceRepo, IProjectionRepo
     {
         IDbConnection _Connection;
         public AdminRepo(IDbConnection pConnection)
@@ -27,7 +27,6 @@ namespace Repositories
             var lst = await _Connection.QueryAsync<T>("[Client].[Chaine_SelectAll]");
             return lst.ToList();
         }
-
         public async Task<bool> AjouterChaineCinemaEtSalle(ChaineCinemaEtSalleDTO pData)
         {
             try
@@ -60,7 +59,6 @@ namespace Repositories
                 throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
             }       
         }
-
         public async Task DeleteChaine(int pId)
         {
             try
@@ -79,7 +77,6 @@ namespace Repositories
                 throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
             }
         }
-
         public async Task UpdateChaine(int pId, MajChaineDTO pData)
         {
             try
@@ -137,7 +134,6 @@ namespace Repositories
                 throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
             }
         }
-    
         async Task ICinemaRepo.UpdateCinema(int pId, MajCinemasDTO pData)
         {
             try
@@ -166,7 +162,6 @@ namespace Repositories
         }
 
         // Salles de cinema
-
         public async Task<List<T>> GetSallesByCinema<T>(int pId)
         {
             var parameters = new DynamicParameters();
@@ -240,7 +235,6 @@ namespace Repositories
 
             await _Connection.ExecuteAsync("[Admin].[Salle_Delete]", parameters, commandType: CommandType.StoredProcedure);
         }
-
         public async Task DeleteSallesByCinemaId(int cinemaId)
         {
             var parameters = new DynamicParameters();
@@ -367,29 +361,29 @@ namespace Repositories
         }
 
         // Programmation
-        public async Task AddProgrammation(ProgrammationDTO programmation)
+        public async Task AddProgrammation(AddProgrammationDTO programmation)
         {
             try
             {
                 var parameters = new DynamicParameters();
-                parameters.Add("@FilmId", programmation.FilmId);
-                parameters.Add("@CinemaId", programmation.CinemaId);
+                parameters.Add("@FilmTraduitId", programmation.FilmTraduitId);
                 parameters.Add("@DateProgrammation", programmation.DateProgrammation);
 
                 await _Connection.ExecuteAsync("[Admin].[AjouterProgrammation]", parameters, commandType: CommandType.StoredProcedure);
             }
             catch (SqlException ex)
             {
-                if (ex.Number == 0x00000223)
-                    throw new CustomError(ErreurCodeEnum.FK_Cine_Film_Programmation, ex);
-                if(ex.Number == 0x00000a29)
-                    throw new CustomError(ErreurCodeEnum.UK_Programmation, ex);
                 throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
             }
             catch (Exception ex)
             {
                 throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
             }
+        }
+        public async Task<List<T>> GetProgrammation<T>()
+        {
+            var lst = await _Connection.QueryAsync<T>("[Admin].[Programmation_SelectAll]");
+            return lst.ToList();
         }
         public async Task<List<T>> GetProgrammationByFilm<T>(int pFilmId)
         {
@@ -440,13 +434,6 @@ namespace Repositories
             var lst = await _Connection.QueryAsync<T>("[Admin].[FilmTraduitAvecNoms]", parameters, commandType: CommandType.StoredProcedure);
             return lst.ToList();
         }
-        public async Task<List<T>> GetFilmTraduitByProgrammation<T>(int pIdProgrammation)
-        {
-            var parameters = new DynamicParameters();
-            parameters.Add("@ProgrammationId", pIdProgrammation);
-            var lst = await _Connection.QueryAsync<T>("[Admin].[FilmTraduit_SelectByProgrammation]", parameters, commandType: CommandType.StoredProcedure);
-            return lst.ToList();
-        }
         async Task ITraductionRepo.DeleteTraduction(int pId)
         {
             var parameters = new DynamicParameters();
@@ -455,16 +442,17 @@ namespace Repositories
             await _Connection.ExecuteAsync("[Admin].[FilmTraduit_Delete]", parameters, commandType: CommandType.StoredProcedure);
         }
 
-        // Programmation Traduite
-        public async Task AddProgrammationTraduit(ProgrammationTraduiteDTO pData)
+        // Seance
+        public async Task AddSeance(AddSeanceDTO pData)
         {
             try
             {
                 var parameters = new DynamicParameters();
-                parameters.Add("@ProgrammationId", pData.ProgrammationId);
-                parameters.Add("@FilmTraduitId", pData.FilmTraduitId);
+                parameters.Add("@Horaire", pData.se_horaire);
+                parameters.Add("@DateFin", pData.se_dateFin);
+                parameters.Add("@ProgrammationId", pData.se_pr_id);
 
-                await _Connection.ExecuteAsync("[Admin].[AjouterProgrammationTraduite]", parameters, commandType: CommandType.StoredProcedure);
+                await _Connection.ExecuteAsync("[Admin].[Seance_AddSeance]", parameters, commandType: CommandType.StoredProcedure);
             }
             catch (SqlException ex)
             {
@@ -475,12 +463,36 @@ namespace Repositories
                 throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
             }
         }
-        async Task IProgrammationTraduitRepo.DeleteFilmTraduit(int pId)
+        public async Task<List<T>> GetSeance<T>()
         {
-            var parameters = new DynamicParameters();
-            parameters.Add("@id", pId);
+            var lst = await _Connection.QueryAsync<T>("[Admin].[Seance_SelectAll]");
+            return lst.ToList();
+        }
 
-            await _Connection.ExecuteAsync("[Admin].[ProgammationTraduite_Delete]", parameters, commandType: CommandType.StoredProcedure);
+        // Projection
+        public async Task AddProjection(AddProjectionDTO pData)
+        {
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@SeanceId", pData.SeanceId);
+                parameters.Add("@SalleId", pData.SalleId);
+
+                await _Connection.ExecuteAsync("[Admin].[Projection_AddProjection]", parameters, commandType: CommandType.StoredProcedure);
+            }
+            catch (SqlException ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
+            }
+        }
+        public async Task<List<T>> GetProjections<T>()
+        {
+            var lst = await _Connection.QueryAsync<T>("[Admin].[Projection_SelectAll]");
+            return lst.ToList();
         }
     }
 }

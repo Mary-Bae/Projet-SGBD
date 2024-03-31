@@ -3,7 +3,7 @@
 namespace Interfaces
 {
     public interface IAdminSvc : ICinemasSvc, ISalleSvc, IFilmSvc, IProgrammationSvc,
-        ITraductionSvc, IProgrammationTraduitSvc
+        ITraductionSvc, ISeanceSvc, IProjectionSvc
     {
         Task<List<T>> GetChaine<T>();
         Task DeleteChaine(int pId);
@@ -40,7 +40,8 @@ namespace Interfaces
     }
     public interface IProgrammationSvc
     {
-        Task AddProgrammation(ProgrammationDTO programmation);
+        Task<List<T>> GetProgrammation<T>();
+        Task AddProgrammation(AddProgrammationDTO programmation);
         Task<List<T>> GetProgrammationByFilm<T>(int pIdFilm);
         Task DeleteProgrammation(int pId);
     }
@@ -48,17 +49,21 @@ namespace Interfaces
     {
         Task<List<T>> GetLangues<T>();
         Task<List<T>> GetFilmTraduitByFilm<T>(int pIdFilm);
-        Task<List<T>> GetFilmTraduitByProgrammation<T>(int pIdProgrammation);
         Task AddTraduction(AddTraductionDTO trad);
         Task DeleteTraduction(int pId);
 
     }
-    public interface IProgrammationTraduitSvc
+    public interface ISeanceSvc
     {
-        Task AddProgrammationTraduit(ProgrammationTraduiteDTO pData);
-        Task DeleteFilmTraduit(int pId);
-        
+        Task AddSeance(AddSeanceDTO pData);
+        Task<List<T>> GetSeance<T>();
     }
+    public interface IProjectionSvc
+    {
+        Task AddProjection(AddProjectionDTO pData);
+        Task<List<T>> GetProjections<T>();
+    }
+
 
 
 }

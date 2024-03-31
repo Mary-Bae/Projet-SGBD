@@ -4,7 +4,7 @@ using Models;
 namespace Interfaces
 {
     public interface IAdminRepo : ICinemaRepo, ISalleRepo, IFilmRepo, IProgrammationRepo,
-        ITraductionRepo, IProgrammationTraduitRepo
+        ITraductionRepo, ISeanceRepo, IProjectionRepo
     {
         Task<List<T>> GetChaine<T>();
         Task DeleteChaine(int pId);
@@ -40,22 +40,26 @@ namespace Interfaces
     }
     public interface IProgrammationRepo
     {
-        Task AddProgrammation(ProgrammationDTO pData);
+        Task AddProgrammation(AddProgrammationDTO pData);
+        Task<List<T>> GetProgrammation<T>();
         Task<List<T>> GetProgrammationByFilm<T>(int pFilm);
         Task DeleteProgrammation(int pId);
-
     }
     public interface ITraductionRepo
     {
         Task<List<T>> GetLangues<T>();
         Task<List<T>> GetFilmTraduitByFilm<T>(int pIdFilm);
-        Task<List<T>> GetFilmTraduitByProgrammation<T>(int pIdProgrammation);
         Task AddTraduction(AddTraductionDTO pData);
         Task DeleteTraduction(int pId);
     }
-    public interface IProgrammationTraduitRepo
+    public interface ISeanceRepo
     {
-        Task AddProgrammationTraduit(ProgrammationTraduiteDTO pData);
-        Task DeleteFilmTraduit(int pId);
+        Task AddSeance(AddSeanceDTO pData);
+        Task<List<T>> GetSeance<T>();
+    }
+    public interface IProjectionRepo
+    {
+        Task AddProjection(AddProjectionDTO pData);
+        Task<List<T>> GetProjections<T>();
     }
 }

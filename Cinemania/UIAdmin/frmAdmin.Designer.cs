@@ -53,6 +53,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MenuCinema = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.supprimerCinémaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuChaine = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -82,35 +85,43 @@
             this.lblStatusProgrammation = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.label5 = new System.Windows.Forms.Label();
             this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvFilms = new System.Windows.Forms.DataGridView();
             this.MenuFilms = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.supprimerFilmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
-            this.btAddFilm = new System.Windows.Forms.Button();
-            this.btUpdFilm = new System.Windows.Forms.Button();
-            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.dgvFilmTrad = new System.Windows.Forms.DataGridView();
-            this.MenuFilmsTraduit = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.supprimerFilmTraduit = new System.Windows.Forms.ToolStripMenuItem();
-            this.tableLayoutPanel17 = new System.Windows.Forms.TableLayoutPanel();
-            this.btTrad = new System.Windows.Forms.Button();
-            this.dgvLangues = new System.Windows.Forms.DataGridView();
-            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.dgvProgrTrad = new System.Windows.Forms.DataGridView();
-            this.MenuProgrTraduit = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.supprimerProgTraduitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.btProgrammation = new System.Windows.Forms.Button();
             this.dgvProgrammation = new System.Windows.Forms.DataGridView();
             this.MenuProgrammation = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.supprimerProgrammationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
+            this.btProgrammation = new System.Windows.Forms.Button();
+            this.btTrad = new System.Windows.Forms.Button();
+            this.DateProgrammation = new System.Windows.Forms.DateTimePicker();
+            this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
+            this.btUpdFilm = new System.Windows.Forms.Button();
+            this.btAddFilm = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.dgvLangues = new System.Windows.Forms.DataGridView();
+            this.dgvFilmTrad = new System.Windows.Forms.DataGridView();
+            this.MenuFilmsTraduit = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.supprimerFilmTraduit = new System.Windows.Forms.ToolStripMenuItem();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tabSeance = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel18 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel21 = new System.Windows.Forms.TableLayoutPanel();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel19 = new System.Windows.Forms.TableLayoutPanel();
+            this.dgvProjection = new System.Windows.Forms.DataGridView();
+            this.btProj = new System.Windows.Forms.Button();
+            this.dgvSeance = new System.Windows.Forms.DataGridView();
+            this.tableLayoutPanel22 = new System.Windows.Forms.TableLayoutPanel();
+            this.btSeance = new System.Windows.Forms.Button();
+            this.cmbSalles = new System.Windows.Forms.ComboBox();
+            this.cmbCine = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
@@ -135,22 +146,26 @@
             this.tabProgrammation.SuspendLayout();
             this.tableAdminProgrammation.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
+            this.tableLayoutPanel8.SuspendLayout();
             this.tableLayoutPanel12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFilms)).BeginInit();
             this.MenuFilms.SuspendLayout();
-            this.tableLayoutPanel14.SuspendLayout();
-            this.tableLayoutPanel9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFilmTrad)).BeginInit();
-            this.MenuFilmsTraduit.SuspendLayout();
-            this.tableLayoutPanel17.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLangues)).BeginInit();
-            this.tableLayoutPanel8.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProgrTrad)).BeginInit();
-            this.MenuProgrTraduit.SuspendLayout();
-            this.tableLayoutPanel15.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProgrammation)).BeginInit();
             this.MenuProgrammation.SuspendLayout();
+            this.tableLayoutPanel15.SuspendLayout();
+            this.tableLayoutPanel14.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLangues)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFilmTrad)).BeginInit();
+            this.MenuFilmsTraduit.SuspendLayout();
+            this.tabSeance.SuspendLayout();
+            this.tableLayoutPanel16.SuspendLayout();
+            this.tableLayoutPanel18.SuspendLayout();
+            this.tableLayoutPanel21.SuspendLayout();
+            this.tableLayoutPanel19.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProjection)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSeance)).BeginInit();
+            this.tableLayoutPanel22.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -160,12 +175,12 @@
             this.MenuCinema.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.supprimerCinémaToolStripMenuItem});
             this.MenuCinema.Name = "MenuCinema";
-            this.MenuCinema.Size = new System.Drawing.Size(202, 28);
+            this.MenuCinema.Size = new System.Drawing.Size(174, 26);
             // 
             // supprimerCinémaToolStripMenuItem
             // 
             this.supprimerCinémaToolStripMenuItem.Name = "supprimerCinémaToolStripMenuItem";
-            this.supprimerCinémaToolStripMenuItem.Size = new System.Drawing.Size(201, 24);
+            this.supprimerCinémaToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.supprimerCinémaToolStripMenuItem.Text = "Supprimer Cinéma";
             this.supprimerCinémaToolStripMenuItem.Click += new System.EventHandler(this.supprimerCinémaToolStripMenuItem_Click);
             // 
@@ -175,12 +190,12 @@
             this.MenuChaine.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.supprimerChaineToolStripMenuItem});
             this.MenuChaine.Name = "MenuChaine";
-            this.MenuChaine.Size = new System.Drawing.Size(197, 28);
+            this.MenuChaine.Size = new System.Drawing.Size(170, 26);
             // 
             // supprimerChaineToolStripMenuItem
             // 
             this.supprimerChaineToolStripMenuItem.Name = "supprimerChaineToolStripMenuItem";
-            this.supprimerChaineToolStripMenuItem.Size = new System.Drawing.Size(196, 24);
+            this.supprimerChaineToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.supprimerChaineToolStripMenuItem.Text = "Supprimer Chaine";
             this.supprimerChaineToolStripMenuItem.Click += new System.EventHandler(this.supprimerChaineToolStripMenuItem_Click);
             // 
@@ -190,12 +205,12 @@
             this.MenuSalle.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.supprimerSalleDeCinemaToolStripMenuItem});
             this.MenuSalle.Name = "MenuSalle";
-            this.MenuSalle.Size = new System.Drawing.Size(255, 28);
+            this.MenuSalle.Size = new System.Drawing.Size(214, 26);
             // 
             // supprimerSalleDeCinemaToolStripMenuItem
             // 
             this.supprimerSalleDeCinemaToolStripMenuItem.Name = "supprimerSalleDeCinemaToolStripMenuItem";
-            this.supprimerSalleDeCinemaToolStripMenuItem.Size = new System.Drawing.Size(254, 24);
+            this.supprimerSalleDeCinemaToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.supprimerSalleDeCinemaToolStripMenuItem.Text = "Supprimer salle de cinema";
             this.supprimerSalleDeCinemaToolStripMenuItem.Click += new System.EventHandler(this.supprimerSalleDeCinemaToolStripMenuItem_Click);
             // 
@@ -203,13 +218,13 @@
             // 
             this.tabControl1.Controls.Add(this.tabAdmin);
             this.tabControl1.Controls.Add(this.tabProgrammation);
+            this.tabControl1.Controls.Add(this.tabSeance);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1369, 1008);
+            this.tabControl1.Size = new System.Drawing.Size(1198, 756);
             this.tabControl1.TabIndex = 3;
             // 
             // tabAdmin
@@ -217,11 +232,10 @@
             this.tabAdmin.BackColor = System.Drawing.Color.Black;
             this.tabAdmin.Controls.Add(this.tableAdminCinemas);
             this.tabAdmin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tabAdmin.Location = new System.Drawing.Point(4, 37);
-            this.tabAdmin.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabAdmin.Location = new System.Drawing.Point(4, 30);
             this.tabAdmin.Name = "tabAdmin";
-            this.tabAdmin.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabAdmin.Size = new System.Drawing.Size(1361, 967);
+            this.tabAdmin.Padding = new System.Windows.Forms.Padding(3);
+            this.tabAdmin.Size = new System.Drawing.Size(1190, 722);
             this.tabAdmin.TabIndex = 0;
             this.tabAdmin.Text = "Administration Cinemas";
             // 
@@ -239,15 +253,14 @@
             this.tableAdminCinemas.Controls.Add(this.tableLayoutPanel2, 1, 1);
             this.tableAdminCinemas.Controls.Add(this.tableLayoutPanel4, 0, 0);
             this.tableAdminCinemas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableAdminCinemas.Location = new System.Drawing.Point(3, 4);
-            this.tableAdminCinemas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tableAdminCinemas.Location = new System.Drawing.Point(3, 3);
             this.tableAdminCinemas.Name = "tableAdminCinemas";
             this.tableAdminCinemas.RowCount = 4;
             this.tableAdminCinemas.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableAdminCinemas.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableAdminCinemas.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableAdminCinemas.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableAdminCinemas.Size = new System.Drawing.Size(1355, 959);
+            this.tableAdminCinemas.Size = new System.Drawing.Size(1184, 716);
             this.tableAdminCinemas.TabIndex = 0;
             // 
             // lblStatusAdminCinema
@@ -257,10 +270,10 @@
             this.lblStatusAdminCinema.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblStatusAdminCinema.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblStatusAdminCinema.ForeColor = System.Drawing.Color.Red;
-            this.lblStatusAdminCinema.Location = new System.Drawing.Point(0, 861);
+            this.lblStatusAdminCinema.Location = new System.Drawing.Point(0, 643);
             this.lblStatusAdminCinema.Margin = new System.Windows.Forms.Padding(0);
             this.lblStatusAdminCinema.Name = "lblStatusAdminCinema";
-            this.lblStatusAdminCinema.Size = new System.Drawing.Size(677, 28);
+            this.lblStatusAdminCinema.Size = new System.Drawing.Size(592, 21);
             this.lblStatusAdminCinema.TabIndex = 20;
             // 
             // tableLayoutPanel3
@@ -270,13 +283,13 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Controls.Add(this.label1, 0, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(677, 0);
-            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0, 0, 0, 11);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(592, 0);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(678, 180);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(592, 135);
             this.tableLayoutPanel3.TabIndex = 13;
             // 
             // label1
@@ -285,9 +298,9 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Left;
             this.label1.Font = new System.Drawing.Font("Lucida Calligraphy", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.label1.Location = new System.Drawing.Point(3, 108);
+            this.label1.Location = new System.Drawing.Point(3, 81);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(570, 72);
+            this.label1.Size = new System.Drawing.Size(462, 54);
             this.label1.TabIndex = 13;
             this.label1.Text = "Administration Cinemas";
             // 
@@ -319,8 +332,7 @@
             this.dgvChaine.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvChaine.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvChaine.EnableHeadersVisualStyles = false;
-            this.dgvChaine.Location = new System.Drawing.Point(3, 195);
-            this.dgvChaine.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dgvChaine.Location = new System.Drawing.Point(3, 146);
             this.dgvChaine.MultiSelect = false;
             this.dgvChaine.Name = "dgvChaine";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -335,7 +347,7 @@
             this.dgvChaine.RowHeadersWidth = 51;
             this.dgvChaine.RowTemplate.Height = 25;
             this.dgvChaine.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvChaine.Size = new System.Drawing.Size(671, 279);
+            this.dgvChaine.Size = new System.Drawing.Size(586, 208);
             this.dgvChaine.TabIndex = 13;
             this.dgvChaine.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvChaine_CellEndEdit);
             this.dgvChaine.CurrentCellChanged += new System.EventHandler(this.dgvChaines_SelectionChanged);
@@ -367,8 +379,7 @@
             this.dgvCine.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvCine.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCine.EnableHeadersVisualStyles = false;
-            this.dgvCine.Location = new System.Drawing.Point(3, 482);
-            this.dgvCine.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dgvCine.Location = new System.Drawing.Point(3, 360);
             this.dgvCine.MultiSelect = false;
             this.dgvCine.Name = "dgvCine";
             this.dgvCine.ReadOnly = true;
@@ -384,7 +395,7 @@
             this.dgvCine.RowHeadersWidth = 51;
             this.dgvCine.RowTemplate.Height = 25;
             this.dgvCine.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCine.Size = new System.Drawing.Size(671, 375);
+            this.dgvCine.Size = new System.Drawing.Size(586, 280);
             this.dgvCine.TabIndex = 11;
             this.dgvCine.CurrentCellChanged += new System.EventHandler(this.dgvCine_SelectionChanged);
             // 
@@ -415,8 +426,7 @@
             this.dgvSalles.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvSalles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvSalles.EnableHeadersVisualStyles = false;
-            this.dgvSalles.Location = new System.Drawing.Point(680, 482);
-            this.dgvSalles.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dgvSalles.Location = new System.Drawing.Point(595, 360);
             this.dgvSalles.MultiSelect = false;
             this.dgvSalles.Name = "dgvSalles";
             this.dgvSalles.ReadOnly = true;
@@ -432,7 +442,7 @@
             this.dgvSalles.RowHeadersWidth = 51;
             this.dgvSalles.RowTemplate.Height = 25;
             this.dgvSalles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSalles.Size = new System.Drawing.Size(672, 375);
+            this.dgvSalles.Size = new System.Drawing.Size(586, 280);
             this.dgvSalles.TabIndex = 15;
             // 
             // tableLayoutPanel2
@@ -447,14 +457,14 @@
             this.tableLayoutPanel2.Controls.Add(this.btUpdateSalle, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.btAddSalle, 0, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(687, 202);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(10, 11, 10, 11);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(601, 151);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(658, 265);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(574, 198);
             this.tableLayoutPanel2.TabIndex = 18;
             // 
             // btUpdateCine
@@ -462,10 +472,9 @@
             this.btUpdateCine.BackColor = System.Drawing.SystemColors.Info;
             this.btUpdateCine.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btUpdateCine.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btUpdateCine.Location = new System.Drawing.Point(332, 92);
-            this.btUpdateCine.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btUpdateCine.Location = new System.Drawing.Point(290, 68);
             this.btUpdateCine.Name = "btUpdateCine";
-            this.btUpdateCine.Size = new System.Drawing.Size(323, 80);
+            this.btUpdateCine.Size = new System.Drawing.Size(281, 60);
             this.btUpdateCine.TabIndex = 19;
             this.btUpdateCine.Text = "Modifier le cinema";
             this.btUpdateCine.UseVisualStyleBackColor = false;
@@ -476,10 +485,9 @@
             this.btAddChaine.BackColor = System.Drawing.SystemColors.Info;
             this.btAddChaine.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btAddChaine.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btAddChaine.Location = new System.Drawing.Point(3, 4);
-            this.btAddChaine.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btAddChaine.Location = new System.Drawing.Point(3, 3);
             this.btAddChaine.Name = "btAddChaine";
-            this.btAddChaine.Size = new System.Drawing.Size(323, 80);
+            this.btAddChaine.Size = new System.Drawing.Size(281, 59);
             this.btAddChaine.TabIndex = 17;
             this.btAddChaine.Text = "Ajout chaine de cinéma";
             this.btAddChaine.UseVisualStyleBackColor = false;
@@ -490,10 +498,9 @@
             this.btAjoutercinema.BackColor = System.Drawing.SystemColors.Info;
             this.btAjoutercinema.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btAjoutercinema.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btAjoutercinema.Location = new System.Drawing.Point(3, 92);
-            this.btAjoutercinema.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btAjoutercinema.Location = new System.Drawing.Point(3, 68);
             this.btAjoutercinema.Name = "btAjoutercinema";
-            this.btAjoutercinema.Size = new System.Drawing.Size(323, 80);
+            this.btAjoutercinema.Size = new System.Drawing.Size(281, 60);
             this.btAjoutercinema.TabIndex = 14;
             this.btAjoutercinema.Text = "Ajout nouveau cinema ";
             this.btAjoutercinema.UseVisualStyleBackColor = false;
@@ -504,10 +511,9 @@
             this.btGetCinemas.BackColor = System.Drawing.SystemColors.Info;
             this.btGetCinemas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btGetCinemas.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btGetCinemas.Location = new System.Drawing.Point(332, 4);
-            this.btGetCinemas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btGetCinemas.Location = new System.Drawing.Point(290, 3);
             this.btGetCinemas.Name = "btGetCinemas";
-            this.btGetCinemas.Size = new System.Drawing.Size(323, 80);
+            this.btGetCinemas.Size = new System.Drawing.Size(281, 59);
             this.btGetCinemas.TabIndex = 10;
             this.btGetCinemas.Text = "Visualiser tous les Cinemas";
             this.btGetCinemas.UseVisualStyleBackColor = false;
@@ -518,10 +524,9 @@
             this.btUpdateSalle.BackColor = System.Drawing.SystemColors.Info;
             this.btUpdateSalle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btUpdateSalle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btUpdateSalle.Location = new System.Drawing.Point(332, 180);
-            this.btUpdateSalle.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btUpdateSalle.Location = new System.Drawing.Point(290, 134);
             this.btUpdateSalle.Name = "btUpdateSalle";
-            this.btUpdateSalle.Size = new System.Drawing.Size(323, 81);
+            this.btUpdateSalle.Size = new System.Drawing.Size(281, 61);
             this.btUpdateSalle.TabIndex = 18;
             this.btUpdateSalle.Text = "Modifier salle de cinema";
             this.btUpdateSalle.UseVisualStyleBackColor = false;
@@ -532,10 +537,9 @@
             this.btAddSalle.BackColor = System.Drawing.SystemColors.Info;
             this.btAddSalle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btAddSalle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btAddSalle.Location = new System.Drawing.Point(3, 180);
-            this.btAddSalle.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btAddSalle.Location = new System.Drawing.Point(3, 134);
             this.btAddSalle.Name = "btAddSalle";
-            this.btAddSalle.Size = new System.Drawing.Size(323, 81);
+            this.btAddSalle.Size = new System.Drawing.Size(281, 61);
             this.btAddSalle.TabIndex = 16;
             this.btAddSalle.Text = "Ajout salle de cinema";
             this.btAddSalle.UseVisualStyleBackColor = false;
@@ -549,13 +553,13 @@
             this.tableLayoutPanel4.Controls.Add(this.labelTitre, 0, 1);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0, 0, 0, 11);
+            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(677, 180);
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(592, 135);
             this.tableLayoutPanel4.TabIndex = 19;
             // 
             // labelTitre
@@ -564,10 +568,10 @@
             this.labelTitre.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelTitre.Font = new System.Drawing.Font("Viner Hand ITC", 48F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
             this.labelTitre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.labelTitre.Location = new System.Drawing.Point(3, 54);
+            this.labelTitre.Location = new System.Drawing.Point(3, 40);
             this.labelTitre.Name = "labelTitre";
-            this.labelTitre.Padding = new System.Windows.Forms.Padding(50, 0, 0, 0);
-            this.labelTitre.Size = new System.Drawing.Size(671, 126);
+            this.labelTitre.Padding = new System.Windows.Forms.Padding(44, 0, 0, 0);
+            this.labelTitre.Size = new System.Drawing.Size(586, 95);
             this.labelTitre.TabIndex = 13;
             this.labelTitre.Text = "CINEMANIA";
             // 
@@ -575,38 +579,32 @@
             // 
             this.tabProgrammation.Controls.Add(this.tableAdminProgrammation);
             this.tabProgrammation.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tabProgrammation.Location = new System.Drawing.Point(4, 37);
-            this.tabProgrammation.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabProgrammation.Location = new System.Drawing.Point(4, 30);
             this.tabProgrammation.Name = "tabProgrammation";
-            this.tabProgrammation.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabProgrammation.Size = new System.Drawing.Size(1361, 967);
+            this.tabProgrammation.Padding = new System.Windows.Forms.Padding(3);
+            this.tabProgrammation.Size = new System.Drawing.Size(1190, 722);
             this.tabProgrammation.TabIndex = 1;
-            this.tabProgrammation.Text = "Programmation";
+            this.tabProgrammation.Text = "Programmation et traduction de films";
             this.tabProgrammation.UseVisualStyleBackColor = true;
             // 
             // tableAdminProgrammation
             // 
             this.tableAdminProgrammation.BackColor = System.Drawing.Color.Black;
-            this.tableAdminProgrammation.ColumnCount = 2;
-            this.tableAdminProgrammation.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableAdminProgrammation.ColumnCount = 1;
             this.tableAdminProgrammation.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableAdminProgrammation.Controls.Add(this.lblStatusProgrammation, 0, 3);
             this.tableAdminProgrammation.Controls.Add(this.tableLayoutPanel5, 0, 0);
-            this.tableAdminProgrammation.Controls.Add(this.label8, 1, 1);
             this.tableAdminProgrammation.Controls.Add(this.tableLayoutPanel12, 0, 2);
-            this.tableAdminProgrammation.Controls.Add(this.tableLayoutPanel8, 1, 0);
             this.tableAdminProgrammation.Controls.Add(this.label6, 0, 1);
-            this.tableAdminProgrammation.Controls.Add(this.tableLayoutPanel1, 1, 2);
             this.tableAdminProgrammation.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableAdminProgrammation.Location = new System.Drawing.Point(3, 4);
-            this.tableAdminProgrammation.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tableAdminProgrammation.Location = new System.Drawing.Point(3, 3);
             this.tableAdminProgrammation.Name = "tableAdminProgrammation";
             this.tableAdminProgrammation.RowCount = 4;
             this.tableAdminProgrammation.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableAdminProgrammation.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tableAdminProgrammation.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 65F));
             this.tableAdminProgrammation.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableAdminProgrammation.Size = new System.Drawing.Size(1355, 959);
+            this.tableAdminProgrammation.Size = new System.Drawing.Size(1184, 716);
             this.tableAdminProgrammation.TabIndex = 0;
             // 
             // lblStatusProgrammation
@@ -616,71 +614,89 @@
             this.lblStatusProgrammation.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblStatusProgrammation.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblStatusProgrammation.ForeColor = System.Drawing.Color.Red;
-            this.lblStatusProgrammation.Location = new System.Drawing.Point(0, 861);
+            this.lblStatusProgrammation.Location = new System.Drawing.Point(0, 643);
             this.lblStatusProgrammation.Margin = new System.Windows.Forms.Padding(0);
             this.lblStatusProgrammation.Name = "lblStatusProgrammation";
-            this.lblStatusProgrammation.Size = new System.Drawing.Size(677, 28);
+            this.lblStatusProgrammation.Size = new System.Drawing.Size(1184, 21);
             this.lblStatusProgrammation.TabIndex = 24;
             // 
             // tableLayoutPanel5
             // 
             this.tableLayoutPanel5.BackColor = System.Drawing.Color.Navy;
-            this.tableLayoutPanel5.ColumnCount = 1;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.ColumnCount = 2;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel5.Controls.Add(this.label2, 0, 1);
+            this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel8, 1, 1);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0, 0, 0, 11);
+            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 2;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(677, 180);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(1184, 135);
             this.tableLayoutPanel5.TabIndex = 20;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Font = new System.Drawing.Font("Viner Hand ITC", 48F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.label2.Location = new System.Drawing.Point(3, 54);
+            this.label2.Location = new System.Drawing.Point(3, 40);
             this.label2.Name = "label2";
-            this.label2.Padding = new System.Windows.Forms.Padding(50, 0, 0, 0);
-            this.label2.Size = new System.Drawing.Size(671, 126);
+            this.label2.Padding = new System.Windows.Forms.Padding(44, 0, 0, 0);
+            this.label2.Size = new System.Drawing.Size(501, 95);
             this.label2.TabIndex = 13;
             this.label2.Text = "CINEMANIA";
             // 
-            // label8
+            // tableLayoutPanel8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(680, 192);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(672, 46);
-            this.label8.TabIndex = 27;
-            this.label8.Text = "Sélectionnez une programmation et un film traduit pour programmer des films avec " +
-    "leur traduction";
+            this.tableLayoutPanel8.BackColor = System.Drawing.Color.Navy;
+            this.tableLayoutPanel8.ColumnCount = 1;
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel8.Controls.Add(this.label5, 0, 1);
+            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(592, 40);
+            this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
+            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
+            this.tableLayoutPanel8.RowCount = 2;
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55F));
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(592, 87);
+            this.tableLayoutPanel8.TabIndex = 21;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label5.Font = new System.Drawing.Font("Lucida Calligraphy", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.label5.Location = new System.Drawing.Point(3, 39);
+            this.label5.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(413, 45);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Administration Films";
             // 
             // tableLayoutPanel12
             // 
-            this.tableLayoutPanel12.ColumnCount = 1;
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel12.ColumnCount = 2;
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
             this.tableLayoutPanel12.Controls.Add(this.dgvFilms, 0, 0);
+            this.tableLayoutPanel12.Controls.Add(this.dgvProgrammation, 1, 2);
+            this.tableLayoutPanel12.Controls.Add(this.tableLayoutPanel15, 1, 1);
             this.tableLayoutPanel12.Controls.Add(this.tableLayoutPanel14, 0, 1);
-            this.tableLayoutPanel12.Controls.Add(this.tableLayoutPanel9, 0, 2);
+            this.tableLayoutPanel12.Controls.Add(this.tableLayoutPanel1, 1, 0);
             this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel12.Location = new System.Drawing.Point(3, 242);
-            this.tableLayoutPanel12.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tableLayoutPanel12.Location = new System.Drawing.Point(3, 181);
             this.tableLayoutPanel12.Name = "tableLayoutPanel12";
             this.tableLayoutPanel12.RowCount = 3;
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel12.Size = new System.Drawing.Size(671, 615);
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(1178, 459);
             this.tableLayoutPanel12.TabIndex = 25;
             // 
             // dgvFilms
@@ -711,8 +727,7 @@
             this.dgvFilms.DefaultCellStyle = dataGridViewCellStyle11;
             this.dgvFilms.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvFilms.EnableHeadersVisualStyles = false;
-            this.dgvFilms.Location = new System.Drawing.Point(3, 4);
-            this.dgvFilms.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dgvFilms.Location = new System.Drawing.Point(3, 3);
             this.dgvFilms.MultiSelect = false;
             this.dgvFilms.Name = "dgvFilms";
             dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -727,7 +742,7 @@
             this.dgvFilms.RowHeadersWidth = 51;
             this.dgvFilms.RowTemplate.Height = 25;
             this.dgvFilms.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvFilms.Size = new System.Drawing.Size(665, 299);
+            this.dgvFilms.Size = new System.Drawing.Size(229, 177);
             this.dgvFilms.TabIndex = 22;
             this.dgvFilms.SelectionChanged += new System.EventHandler(this.dgvFilms_SelectionChanged);
             // 
@@ -737,87 +752,23 @@
             this.MenuFilms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.supprimerFilmToolStripMenuItem});
             this.MenuFilms.Name = "MenuFilms";
-            this.MenuFilms.Size = new System.Drawing.Size(178, 28);
+            this.MenuFilms.Size = new System.Drawing.Size(154, 26);
             // 
             // supprimerFilmToolStripMenuItem
             // 
             this.supprimerFilmToolStripMenuItem.Name = "supprimerFilmToolStripMenuItem";
-            this.supprimerFilmToolStripMenuItem.Size = new System.Drawing.Size(177, 24);
+            this.supprimerFilmToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.supprimerFilmToolStripMenuItem.Text = "Supprimer film";
             this.supprimerFilmToolStripMenuItem.Click += new System.EventHandler(this.supprimerFilmToolStripMenuItem_Click);
             // 
-            // tableLayoutPanel14
+            // dgvProgrammation
             // 
-            this.tableLayoutPanel14.ColumnCount = 5;
-            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel14.Controls.Add(this.btAddFilm, 1, 0);
-            this.tableLayoutPanel14.Controls.Add(this.btUpdFilm, 3, 0);
-            this.tableLayoutPanel14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel14.Location = new System.Drawing.Point(3, 311);
-            this.tableLayoutPanel14.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tableLayoutPanel14.Name = "tableLayoutPanel14";
-            this.tableLayoutPanel14.RowCount = 1;
-            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel14.Size = new System.Drawing.Size(665, 53);
-            this.tableLayoutPanel14.TabIndex = 27;
-            // 
-            // btAddFilm
-            // 
-            this.btAddFilm.BackColor = System.Drawing.SystemColors.Info;
-            this.btAddFilm.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btAddFilm.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btAddFilm.Location = new System.Drawing.Point(36, 4);
-            this.btAddFilm.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btAddFilm.Name = "btAddFilm";
-            this.btAddFilm.Size = new System.Drawing.Size(193, 44);
-            this.btAddFilm.TabIndex = 22;
-            this.btAddFilm.Text = "Ajouter Film";
-            this.btAddFilm.UseVisualStyleBackColor = false;
-            this.btAddFilm.Click += new System.EventHandler(this.btAddFilm_Click);
-            // 
-            // btUpdFilm
-            // 
-            this.btUpdFilm.BackColor = System.Drawing.SystemColors.Info;
-            this.btUpdFilm.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btUpdFilm.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btUpdFilm.Location = new System.Drawing.Point(434, 4);
-            this.btUpdFilm.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btUpdFilm.Name = "btUpdFilm";
-            this.btUpdFilm.Size = new System.Drawing.Size(193, 44);
-            this.btUpdFilm.TabIndex = 23;
-            this.btUpdFilm.Text = "Modifier Film";
-            this.btUpdFilm.UseVisualStyleBackColor = false;
-            this.btUpdFilm.Click += new System.EventHandler(this.btUpdFilm_Click);
-            // 
-            // tableLayoutPanel9
-            // 
-            this.tableLayoutPanel9.ColumnCount = 2;
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutPanel9.Controls.Add(this.dgvFilmTrad, 1, 0);
-            this.tableLayoutPanel9.Controls.Add(this.tableLayoutPanel17, 0, 0);
-            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 372);
-            this.tableLayoutPanel9.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
-            this.tableLayoutPanel9.RowCount = 1;
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(665, 239);
-            this.tableLayoutPanel9.TabIndex = 28;
-            // 
-            // dgvFilmTrad
-            // 
-            this.dgvFilmTrad.AllowUserToAddRows = false;
-            this.dgvFilmTrad.AllowUserToDeleteRows = false;
-            this.dgvFilmTrad.AllowUserToResizeRows = false;
-            this.dgvFilmTrad.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvFilmTrad.BackgroundColor = System.Drawing.Color.Black;
-            this.dgvFilmTrad.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dgvFilmTrad.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            this.dgvProgrammation.AllowUserToAddRows = false;
+            this.dgvProgrammation.AllowUserToResizeRows = false;
+            this.dgvProgrammation.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvProgrammation.BackgroundColor = System.Drawing.Color.Black;
+            this.dgvProgrammation.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvProgrammation.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             dataGridViewCellStyle13.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -825,9 +776,9 @@
             dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.InfoText;
             dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvFilmTrad.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
-            this.dgvFilmTrad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvFilmTrad.ContextMenuStrip = this.MenuFilmsTraduit;
+            this.dgvProgrammation.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            this.dgvProgrammation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProgrammation.ContextMenuStrip = this.MenuProgrammation;
             dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle14.BackColor = System.Drawing.Color.Gray;
             dataGridViewCellStyle14.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -835,14 +786,13 @@
             dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Info;
             dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.Desktop;
             dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFilmTrad.DefaultCellStyle = dataGridViewCellStyle14;
-            this.dgvFilmTrad.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvFilmTrad.EnableHeadersVisualStyles = false;
-            this.dgvFilmTrad.Location = new System.Drawing.Point(202, 4);
-            this.dgvFilmTrad.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.dgvFilmTrad.MultiSelect = false;
-            this.dgvFilmTrad.Name = "dgvFilmTrad";
-            this.dgvFilmTrad.ReadOnly = true;
+            this.dgvProgrammation.DefaultCellStyle = dataGridViewCellStyle14;
+            this.dgvProgrammation.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvProgrammation.EnableHeadersVisualStyles = false;
+            this.dgvProgrammation.Location = new System.Drawing.Point(238, 277);
+            this.dgvProgrammation.MultiSelect = false;
+            this.dgvProgrammation.Name = "dgvProgrammation";
+            this.dgvProgrammation.ReadOnly = true;
             dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle15.BackColor = System.Drawing.Color.Gray;
             dataGridViewCellStyle15.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -850,58 +800,143 @@
             dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Info;
             dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvFilmTrad.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
-            this.dgvFilmTrad.RowHeadersVisible = false;
-            this.dgvFilmTrad.RowHeadersWidth = 5;
-            this.dgvFilmTrad.RowTemplate.Height = 25;
-            this.dgvFilmTrad.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvFilmTrad.Size = new System.Drawing.Size(460, 231);
-            this.dgvFilmTrad.TabIndex = 28;
+            this.dgvProgrammation.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            this.dgvProgrammation.RowHeadersVisible = false;
+            this.dgvProgrammation.RowHeadersWidth = 51;
+            this.dgvProgrammation.RowTemplate.Height = 25;
+            this.dgvProgrammation.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvProgrammation.Size = new System.Drawing.Size(937, 179);
+            this.dgvProgrammation.TabIndex = 23;
+            this.dgvProgrammation.SelectionChanged += new System.EventHandler(this.dgvProgrammation_SelectionChanged);
             // 
-            // MenuFilmsTraduit
+            // MenuProgrammation
             // 
-            this.MenuFilmsTraduit.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.MenuFilmsTraduit.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.supprimerFilmTraduit});
-            this.MenuFilmsTraduit.Name = "MenuFilmsTraduit";
-            this.MenuFilmsTraduit.Size = new System.Drawing.Size(180, 28);
+            this.MenuProgrammation.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.MenuProgrammation.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.supprimerProgrammationToolStripMenuItem});
+            this.MenuProgrammation.Name = "MenuProgrammation";
+            this.MenuProgrammation.Size = new System.Drawing.Size(217, 26);
             // 
-            // supprimerFilmTraduit
+            // supprimerProgrammationToolStripMenuItem
             // 
-            this.supprimerFilmTraduit.Name = "supprimerFilmTraduit";
-            this.supprimerFilmTraduit.Size = new System.Drawing.Size(179, 24);
-            this.supprimerFilmTraduit.Text = "Supprimer Film";
-            this.supprimerFilmTraduit.Click += new System.EventHandler(this.supprimerFilmTraduit_Click);
+            this.supprimerProgrammationToolStripMenuItem.Name = "supprimerProgrammationToolStripMenuItem";
+            this.supprimerProgrammationToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.supprimerProgrammationToolStripMenuItem.Text = "Supprimer programmation";
+            this.supprimerProgrammationToolStripMenuItem.Click += new System.EventHandler(this.supprimerProgrammationToolStripMenuItem_Click);
             // 
-            // tableLayoutPanel17
+            // tableLayoutPanel15
             // 
-            this.tableLayoutPanel17.ColumnCount = 1;
-            this.tableLayoutPanel17.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel17.Controls.Add(this.btTrad, 0, 1);
-            this.tableLayoutPanel17.Controls.Add(this.dgvLangues, 0, 0);
-            this.tableLayoutPanel17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel17.Location = new System.Drawing.Point(3, 4);
-            this.tableLayoutPanel17.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tableLayoutPanel17.Name = "tableLayoutPanel17";
-            this.tableLayoutPanel17.RowCount = 2;
-            this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel17.Size = new System.Drawing.Size(193, 231);
-            this.tableLayoutPanel17.TabIndex = 27;
+            this.tableLayoutPanel15.ColumnCount = 4;
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel15.Controls.Add(this.btProgrammation, 1, 1);
+            this.tableLayoutPanel15.Controls.Add(this.btTrad, 0, 0);
+            this.tableLayoutPanel15.Controls.Add(this.DateProgrammation, 1, 0);
+            this.tableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel15.Location = new System.Drawing.Point(238, 186);
+            this.tableLayoutPanel15.Name = "tableLayoutPanel15";
+            this.tableLayoutPanel15.RowCount = 2;
+            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel15.Size = new System.Drawing.Size(937, 85);
+            this.tableLayoutPanel15.TabIndex = 41;
+            // 
+            // btProgrammation
+            // 
+            this.btProgrammation.BackColor = System.Drawing.SystemColors.Info;
+            this.btProgrammation.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btProgrammation.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btProgrammation.Location = new System.Drawing.Point(190, 45);
+            this.btProgrammation.Name = "btProgrammation";
+            this.btProgrammation.Size = new System.Drawing.Size(181, 33);
+            this.btProgrammation.TabIndex = 24;
+            this.btProgrammation.Text = "Programmer Film";
+            this.btProgrammation.UseVisualStyleBackColor = false;
+            this.btProgrammation.Click += new System.EventHandler(this.btProgrammation_Click);
             // 
             // btTrad
             // 
             this.btTrad.BackColor = System.Drawing.SystemColors.Info;
             this.btTrad.Dock = System.Windows.Forms.DockStyle.Top;
             this.btTrad.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btTrad.Location = new System.Drawing.Point(3, 165);
-            this.btTrad.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btTrad.Location = new System.Drawing.Point(3, 3);
             this.btTrad.Name = "btTrad";
-            this.btTrad.Size = new System.Drawing.Size(187, 47);
+            this.btTrad.Size = new System.Drawing.Size(181, 35);
             this.btTrad.TabIndex = 26;
             this.btTrad.Text = "Choix Langues";
             this.btTrad.UseVisualStyleBackColor = false;
             this.btTrad.Click += new System.EventHandler(this.btTrad_Click);
+            // 
+            // DateProgrammation
+            // 
+            this.DateProgrammation.CalendarMonthBackground = System.Drawing.SystemColors.Info;
+            this.DateProgrammation.Dock = System.Windows.Forms.DockStyle.Top;
+            this.DateProgrammation.Location = new System.Drawing.Point(190, 3);
+            this.DateProgrammation.Name = "DateProgrammation";
+            this.DateProgrammation.Size = new System.Drawing.Size(181, 29);
+            this.DateProgrammation.TabIndex = 41;
+            // 
+            // tableLayoutPanel14
+            // 
+            this.tableLayoutPanel14.ColumnCount = 1;
+            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel14.Controls.Add(this.btUpdFilm, 0, 1);
+            this.tableLayoutPanel14.Controls.Add(this.btAddFilm, 0, 0);
+            this.tableLayoutPanel14.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel14.Location = new System.Drawing.Point(3, 186);
+            this.tableLayoutPanel14.Name = "tableLayoutPanel14";
+            this.tableLayoutPanel14.RowCount = 2;
+            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel14.Size = new System.Drawing.Size(229, 85);
+            this.tableLayoutPanel14.TabIndex = 27;
+            // 
+            // btUpdFilm
+            // 
+            this.btUpdFilm.BackColor = System.Drawing.SystemColors.Info;
+            this.btUpdFilm.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btUpdFilm.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btUpdFilm.Location = new System.Drawing.Point(3, 45);
+            this.btUpdFilm.Name = "btUpdFilm";
+            this.btUpdFilm.Size = new System.Drawing.Size(223, 33);
+            this.btUpdFilm.TabIndex = 23;
+            this.btUpdFilm.Text = "Modifier Film";
+            this.btUpdFilm.UseVisualStyleBackColor = false;
+            this.btUpdFilm.Click += new System.EventHandler(this.btUpdFilm_Click);
+            // 
+            // btAddFilm
+            // 
+            this.btAddFilm.BackColor = System.Drawing.SystemColors.Info;
+            this.btAddFilm.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btAddFilm.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btAddFilm.Location = new System.Drawing.Point(3, 3);
+            this.btAddFilm.Name = "btAddFilm";
+            this.btAddFilm.Size = new System.Drawing.Size(223, 33);
+            this.btAddFilm.TabIndex = 22;
+            this.btAddFilm.Text = "Ajouter Film";
+            this.btAddFilm.UseVisualStyleBackColor = false;
+            this.btAddFilm.Click += new System.EventHandler(this.btAddFilm_Click);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.tableLayoutPanel1.Controls.Add(this.dgvLangues, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.dgvFilmTrad, 1, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(238, 3);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(937, 177);
+            this.tableLayoutPanel1.TabIndex = 43;
             // 
             // dgvLangues
             // 
@@ -931,8 +966,7 @@
             this.dgvLangues.DefaultCellStyle = dataGridViewCellStyle17;
             this.dgvLangues.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLangues.EnableHeadersVisualStyles = false;
-            this.dgvLangues.Location = new System.Drawing.Point(3, 4);
-            this.dgvLangues.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dgvLangues.Location = new System.Drawing.Point(3, 3);
             this.dgvLangues.MultiSelect = false;
             this.dgvLangues.Name = "dgvLangues";
             this.dgvLangues.ReadOnly = true;
@@ -948,37 +982,71 @@
             this.dgvLangues.RowHeadersWidth = 5;
             this.dgvLangues.RowTemplate.Height = 25;
             this.dgvLangues.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLangues.Size = new System.Drawing.Size(187, 153);
+            this.dgvLangues.Size = new System.Drawing.Size(181, 171);
             this.dgvLangues.TabIndex = 25;
             // 
-            // tableLayoutPanel8
+            // dgvFilmTrad
             // 
-            this.tableLayoutPanel8.BackColor = System.Drawing.Color.Navy;
-            this.tableLayoutPanel8.ColumnCount = 1;
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.Controls.Add(this.label5, 0, 1);
-            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(677, 0);
-            this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(0, 0, 0, 11);
-            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
-            this.tableLayoutPanel8.RowCount = 2;
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(678, 180);
-            this.tableLayoutPanel8.TabIndex = 21;
+            this.dgvFilmTrad.AllowUserToAddRows = false;
+            this.dgvFilmTrad.AllowUserToDeleteRows = false;
+            this.dgvFilmTrad.AllowUserToResizeRows = false;
+            this.dgvFilmTrad.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvFilmTrad.BackgroundColor = System.Drawing.Color.Black;
+            this.dgvFilmTrad.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvFilmTrad.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.InfoText;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.InfoText;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvFilmTrad.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle19;
+            this.dgvFilmTrad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvFilmTrad.ContextMenuStrip = this.MenuFilmsTraduit;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.Desktop;
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFilmTrad.DefaultCellStyle = dataGridViewCellStyle20;
+            this.dgvFilmTrad.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvFilmTrad.EnableHeadersVisualStyles = false;
+            this.dgvFilmTrad.Location = new System.Drawing.Point(190, 3);
+            this.dgvFilmTrad.MultiSelect = false;
+            this.dgvFilmTrad.Name = "dgvFilmTrad";
+            this.dgvFilmTrad.ReadOnly = true;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle21.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvFilmTrad.RowHeadersDefaultCellStyle = dataGridViewCellStyle21;
+            this.dgvFilmTrad.RowHeadersVisible = false;
+            this.dgvFilmTrad.RowHeadersWidth = 5;
+            this.dgvFilmTrad.RowTemplate.Height = 25;
+            this.dgvFilmTrad.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvFilmTrad.Size = new System.Drawing.Size(744, 171);
+            this.dgvFilmTrad.TabIndex = 28;
             // 
-            // label5
+            // MenuFilmsTraduit
             // 
-            this.label5.AutoSize = true;
-            this.label5.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label5.Font = new System.Drawing.Font("Lucida Calligraphy", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.label5.Location = new System.Drawing.Point(3, 108);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(509, 72);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "Administration Films";
+            this.MenuFilmsTraduit.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.MenuFilmsTraduit.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.supprimerFilmTraduit});
+            this.MenuFilmsTraduit.Name = "MenuFilmsTraduit";
+            this.MenuFilmsTraduit.Size = new System.Drawing.Size(156, 26);
+            // 
+            // supprimerFilmTraduit
+            // 
+            this.supprimerFilmTraduit.Name = "supprimerFilmTraduit";
+            this.supprimerFilmTraduit.Size = new System.Drawing.Size(155, 22);
+            this.supprimerFilmTraduit.Text = "Supprimer Film";
+            this.supprimerFilmTraduit.Click += new System.EventHandler(this.supprimerFilmTraduit_Click);
             // 
             // label6
             // 
@@ -987,153 +1055,145 @@
             this.label6.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(3, 215);
+            this.label6.Location = new System.Drawing.Point(3, 161);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(671, 23);
+            this.label6.Size = new System.Drawing.Size(1178, 17);
             this.label6.TabIndex = 27;
             this.label6.Text = "Sélectionnez un film pour le traduire ou pour programmer son entrée dans un ciném" +
     "a ";
             // 
-            // tableLayoutPanel1
+            // tabSeance
             // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.dgvProgrTrad, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel15, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.dgvProgrammation, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(680, 241);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(672, 617);
-            this.tableLayoutPanel1.TabIndex = 28;
+            this.tabSeance.Controls.Add(this.tableLayoutPanel16);
+            this.tabSeance.Location = new System.Drawing.Point(4, 30);
+            this.tabSeance.Name = "tabSeance";
+            this.tabSeance.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSeance.Size = new System.Drawing.Size(1190, 722);
+            this.tabSeance.TabIndex = 2;
+            this.tabSeance.Text = "Séances et Projection";
+            this.tabSeance.UseVisualStyleBackColor = true;
             // 
-            // dgvProgrTrad
+            // tableLayoutPanel16
             // 
-            this.dgvProgrTrad.AllowUserToAddRows = false;
-            this.dgvProgrTrad.AllowUserToDeleteRows = false;
-            this.dgvProgrTrad.AllowUserToResizeRows = false;
-            this.dgvProgrTrad.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvProgrTrad.BackgroundColor = System.Drawing.Color.Black;
-            this.dgvProgrTrad.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dgvProgrTrad.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.InfoText;
-            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.InfoText;
-            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProgrTrad.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle19;
-            this.dgvProgrTrad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProgrTrad.ContextMenuStrip = this.MenuProgrTraduit;
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle20.BackColor = System.Drawing.Color.Gray;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.Info;
-            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Info;
-            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.Desktop;
-            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProgrTrad.DefaultCellStyle = dataGridViewCellStyle20;
-            this.dgvProgrTrad.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvProgrTrad.EnableHeadersVisualStyles = false;
-            this.dgvProgrTrad.Location = new System.Drawing.Point(3, 373);
-            this.dgvProgrTrad.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.dgvProgrTrad.MultiSelect = false;
-            this.dgvProgrTrad.Name = "dgvProgrTrad";
-            this.dgvProgrTrad.ReadOnly = true;
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle21.BackColor = System.Drawing.Color.Gray;
-            dataGridViewCellStyle21.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.Info;
-            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Info;
-            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProgrTrad.RowHeadersDefaultCellStyle = dataGridViewCellStyle21;
-            this.dgvProgrTrad.RowHeadersVisible = false;
-            this.dgvProgrTrad.RowHeadersWidth = 5;
-            this.dgvProgrTrad.RowTemplate.Height = 25;
-            this.dgvProgrTrad.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProgrTrad.Size = new System.Drawing.Size(666, 240);
-            this.dgvProgrTrad.TabIndex = 26;
+            this.tableLayoutPanel16.BackColor = System.Drawing.Color.Black;
+            this.tableLayoutPanel16.ColumnCount = 1;
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel16.Controls.Add(this.label9, 0, 2);
+            this.tableLayoutPanel16.Controls.Add(this.tableLayoutPanel18, 0, 0);
+            this.tableLayoutPanel16.Controls.Add(this.tableLayoutPanel19, 0, 1);
+            this.tableLayoutPanel16.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel16.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel16.Name = "tableLayoutPanel16";
+            this.tableLayoutPanel16.RowCount = 3;
+            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel16.Size = new System.Drawing.Size(1184, 716);
+            this.tableLayoutPanel16.TabIndex = 1;
             // 
-            // MenuProgrTraduit
+            // label9
             // 
-            this.MenuProgrTraduit.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.MenuProgrTraduit.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
-            this.supprimerProgTraduitToolStripMenuItem});
-            this.MenuProgrTraduit.Name = "MenuProgrTraduit";
-            this.MenuProgrTraduit.Size = new System.Drawing.Size(233, 52);
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.Black;
+            this.label9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label9.ForeColor = System.Drawing.Color.Red;
+            this.label9.Location = new System.Drawing.Point(0, 644);
+            this.label9.Margin = new System.Windows.Forms.Padding(0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(1184, 21);
+            this.label9.TabIndex = 24;
             // 
-            // toolStripMenuItem1
+            // tableLayoutPanel18
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(232, 24);
+            this.tableLayoutPanel18.BackColor = System.Drawing.Color.Navy;
+            this.tableLayoutPanel18.ColumnCount = 1;
+            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel18.Controls.Add(this.tableLayoutPanel21, 0, 0);
+            this.tableLayoutPanel18.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel18.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel18.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
+            this.tableLayoutPanel18.Name = "tableLayoutPanel18";
+            this.tableLayoutPanel18.RowCount = 1;
+            this.tableLayoutPanel18.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel18.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel18.Size = new System.Drawing.Size(1184, 135);
+            this.tableLayoutPanel18.TabIndex = 20;
             // 
-            // supprimerProgTraduitToolStripMenuItem
+            // tableLayoutPanel21
             // 
-            this.supprimerProgTraduitToolStripMenuItem.Name = "supprimerProgTraduitToolStripMenuItem";
-            this.supprimerProgTraduitToolStripMenuItem.Size = new System.Drawing.Size(232, 24);
-            this.supprimerProgTraduitToolStripMenuItem.Text = "Supprimer Prog Traduit";
-            this.supprimerProgTraduitToolStripMenuItem.Click += new System.EventHandler(this.supprimerProgTraduitToolStripMenuItem_Click);
+            this.tableLayoutPanel21.ColumnCount = 2;
+            this.tableLayoutPanel21.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel21.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel21.Controls.Add(this.label12, 1, 1);
+            this.tableLayoutPanel21.Controls.Add(this.label10, 0, 1);
+            this.tableLayoutPanel21.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel21.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel21.Name = "tableLayoutPanel21";
+            this.tableLayoutPanel21.RowCount = 3;
+            this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 63F));
+            this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
+            this.tableLayoutPanel21.Size = new System.Drawing.Size(1178, 129);
+            this.tableLayoutPanel21.TabIndex = 0;
             // 
-            // tableLayoutPanel15
+            // label12
             // 
-            this.tableLayoutPanel15.ColumnCount = 5;
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel15.Controls.Add(this.button1, 3, 0);
-            this.tableLayoutPanel15.Controls.Add(this.btProgrammation, 1, 0);
-            this.tableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel15.Location = new System.Drawing.Point(3, 312);
-            this.tableLayoutPanel15.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tableLayoutPanel15.Name = "tableLayoutPanel15";
-            this.tableLayoutPanel15.RowCount = 1;
-            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel15.Size = new System.Drawing.Size(666, 53);
-            this.tableLayoutPanel15.TabIndex = 27;
+            this.label12.AutoSize = true;
+            this.label12.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label12.Font = new System.Drawing.Font("Lucida Calligraphy", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.label12.Location = new System.Drawing.Point(592, 78);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(583, 41);
+            this.label12.TabIndex = 13;
+            this.label12.Text = "Administration Séances";
             // 
-            // button1
+            // label10
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.Info;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(434, 4);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(186, 44);
-            this.button1.TabIndex = 25;
-            this.button1.Text = "Traduire Film";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.btTraduire);
+            this.label10.AutoSize = true;
+            this.label10.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label10.Font = new System.Drawing.Font("Viner Hand ITC", 48F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.label10.Location = new System.Drawing.Point(0, 38);
+            this.label10.Margin = new System.Windows.Forms.Padding(0);
+            this.label10.Name = "label10";
+            this.label10.Padding = new System.Windows.Forms.Padding(44, 0, 0, 0);
+            this.label10.Size = new System.Drawing.Size(501, 81);
+            this.label10.TabIndex = 13;
+            this.label10.Text = "CINEMANIA";
             // 
-            // btProgrammation
+            // tableLayoutPanel19
             // 
-            this.btProgrammation.BackColor = System.Drawing.SystemColors.Info;
-            this.btProgrammation.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btProgrammation.Location = new System.Drawing.Point(36, 4);
-            this.btProgrammation.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btProgrammation.Name = "btProgrammation";
-            this.btProgrammation.Size = new System.Drawing.Size(186, 44);
-            this.btProgrammation.TabIndex = 24;
-            this.btProgrammation.Text = "Programmer Film";
-            this.btProgrammation.UseVisualStyleBackColor = false;
-            this.btProgrammation.Click += new System.EventHandler(this.btProgrammation_Click);
+            this.tableLayoutPanel19.ColumnCount = 3;
+            this.tableLayoutPanel19.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
+            this.tableLayoutPanel19.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel19.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel19.Controls.Add(this.dgvProjection, 0, 2);
+            this.tableLayoutPanel19.Controls.Add(this.btProj, 1, 0);
+            this.tableLayoutPanel19.Controls.Add(this.dgvSeance, 0, 1);
+            this.tableLayoutPanel19.Controls.Add(this.tableLayoutPanel22, 0, 0);
+            this.tableLayoutPanel19.Controls.Add(this.cmbSalles, 2, 1);
+            this.tableLayoutPanel19.Controls.Add(this.cmbCine, 1, 1);
+            this.tableLayoutPanel19.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel19.Location = new System.Drawing.Point(3, 146);
+            this.tableLayoutPanel19.Name = "tableLayoutPanel19";
+            this.tableLayoutPanel19.RowCount = 3;
+            this.tableLayoutPanel19.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel19.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45F));
+            this.tableLayoutPanel19.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45F));
+            this.tableLayoutPanel19.Size = new System.Drawing.Size(1178, 495);
+            this.tableLayoutPanel19.TabIndex = 25;
             // 
-            // dgvProgrammation
+            // dgvProjection
             // 
-            this.dgvProgrammation.AllowUserToAddRows = false;
-            this.dgvProgrammation.AllowUserToResizeRows = false;
-            this.dgvProgrammation.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvProgrammation.BackgroundColor = System.Drawing.Color.Black;
-            this.dgvProgrammation.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dgvProgrammation.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            this.dgvProjection.AllowUserToAddRows = false;
+            this.dgvProjection.AllowUserToResizeRows = false;
+            this.dgvProjection.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvProjection.BackgroundColor = System.Drawing.Color.Black;
+            this.dgvProjection.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvProjection.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             dataGridViewCellStyle22.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -1141,9 +1201,8 @@
             dataGridViewCellStyle22.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.InfoText;
             dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProgrammation.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
-            this.dgvProgrammation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProgrammation.ContextMenuStrip = this.MenuProgrammation;
+            this.dgvProjection.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
+            this.dgvProjection.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle23.BackColor = System.Drawing.Color.Gray;
             dataGridViewCellStyle23.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -1151,14 +1210,12 @@
             dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Info;
             dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.Desktop;
             dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProgrammation.DefaultCellStyle = dataGridViewCellStyle23;
-            this.dgvProgrammation.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvProgrammation.EnableHeadersVisualStyles = false;
-            this.dgvProgrammation.Location = new System.Drawing.Point(3, 4);
-            this.dgvProgrammation.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.dgvProgrammation.MultiSelect = false;
-            this.dgvProgrammation.Name = "dgvProgrammation";
-            this.dgvProgrammation.ReadOnly = true;
+            this.dgvProjection.DefaultCellStyle = dataGridViewCellStyle23;
+            this.dgvProjection.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvProjection.EnableHeadersVisualStyles = false;
+            this.dgvProjection.Location = new System.Drawing.Point(3, 274);
+            this.dgvProjection.MultiSelect = false;
+            this.dgvProjection.Name = "dgvProjection";
             dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle24.BackColor = System.Drawing.Color.Gray;
             dataGridViewCellStyle24.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -1166,29 +1223,118 @@
             dataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Info;
             dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProgrammation.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
-            this.dgvProgrammation.RowHeadersVisible = false;
-            this.dgvProgrammation.RowHeadersWidth = 51;
-            this.dgvProgrammation.RowTemplate.Height = 25;
-            this.dgvProgrammation.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProgrammation.Size = new System.Drawing.Size(666, 300);
-            this.dgvProgrammation.TabIndex = 23;
-            this.dgvProgrammation.SelectionChanged += new System.EventHandler(this.dgvProgrammation_SelectionChanged);
+            this.dgvProjection.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
+            this.dgvProjection.RowHeadersVisible = false;
+            this.dgvProjection.RowHeadersWidth = 51;
+            this.dgvProjection.RowTemplate.Height = 25;
+            this.dgvProjection.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvProjection.Size = new System.Drawing.Size(779, 218);
+            this.dgvProjection.TabIndex = 24;
             // 
-            // MenuProgrammation
+            // btProj
             // 
-            this.MenuProgrammation.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.MenuProgrammation.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.supprimerProgrammationToolStripMenuItem});
-            this.MenuProgrammation.Name = "MenuProgrammation";
-            this.MenuProgrammation.Size = new System.Drawing.Size(257, 28);
+            this.btProj.BackColor = System.Drawing.SystemColors.Info;
+            this.btProj.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btProj.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btProj.Location = new System.Drawing.Point(788, 9);
+            this.btProj.Name = "btProj";
+            this.btProj.Size = new System.Drawing.Size(190, 37);
+            this.btProj.TabIndex = 27;
+            this.btProj.Text = "Programmer Projection";
+            this.btProj.UseVisualStyleBackColor = false;
+            this.btProj.Click += new System.EventHandler(this.btProj_Click);
             // 
-            // supprimerProgrammationToolStripMenuItem
+            // dgvSeance
             // 
-            this.supprimerProgrammationToolStripMenuItem.Name = "supprimerProgrammationToolStripMenuItem";
-            this.supprimerProgrammationToolStripMenuItem.Size = new System.Drawing.Size(256, 24);
-            this.supprimerProgrammationToolStripMenuItem.Text = "Supprimer programmation";
-            this.supprimerProgrammationToolStripMenuItem.Click += new System.EventHandler(this.supprimerProgrammationToolStripMenuItem_Click);
+            this.dgvSeance.AllowUserToAddRows = false;
+            this.dgvSeance.AllowUserToResizeRows = false;
+            this.dgvSeance.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvSeance.BackgroundColor = System.Drawing.Color.Black;
+            this.dgvSeance.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvSeance.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle25.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.InfoText;
+            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.InfoText;
+            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvSeance.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle25;
+            this.dgvSeance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle26.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle26.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.Desktop;
+            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvSeance.DefaultCellStyle = dataGridViewCellStyle26;
+            this.dgvSeance.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvSeance.EnableHeadersVisualStyles = false;
+            this.dgvSeance.Location = new System.Drawing.Point(3, 52);
+            this.dgvSeance.MultiSelect = false;
+            this.dgvSeance.Name = "dgvSeance";
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle27.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle27.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle27.ForeColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvSeance.RowHeadersDefaultCellStyle = dataGridViewCellStyle27;
+            this.dgvSeance.RowHeadersVisible = false;
+            this.dgvSeance.RowHeadersWidth = 51;
+            this.dgvSeance.RowTemplate.Height = 25;
+            this.dgvSeance.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvSeance.Size = new System.Drawing.Size(779, 216);
+            this.dgvSeance.TabIndex = 22;
+            this.dgvSeance.SelectionChanged += new System.EventHandler(this.dgvSeance_SelectionChanged);
+            // 
+            // tableLayoutPanel22
+            // 
+            this.tableLayoutPanel22.ColumnCount = 2;
+            this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
+            this.tableLayoutPanel22.Controls.Add(this.btSeance, 0, 0);
+            this.tableLayoutPanel22.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel22.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel22.Name = "tableLayoutPanel22";
+            this.tableLayoutPanel22.RowCount = 1;
+            this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel22.Size = new System.Drawing.Size(779, 43);
+            this.tableLayoutPanel22.TabIndex = 23;
+            // 
+            // btSeance
+            // 
+            this.btSeance.BackColor = System.Drawing.SystemColors.Info;
+            this.btSeance.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btSeance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btSeance.Location = new System.Drawing.Point(3, 3);
+            this.btSeance.Name = "btSeance";
+            this.btSeance.Size = new System.Drawing.Size(188, 37);
+            this.btSeance.TabIndex = 26;
+            this.btSeance.Text = "Programmer Séance";
+            this.btSeance.UseVisualStyleBackColor = false;
+            this.btSeance.Click += new System.EventHandler(this.btSeance_Click);
+            // 
+            // cmbSalles
+            // 
+            this.cmbSalles.Dock = System.Windows.Forms.DockStyle.Left;
+            this.cmbSalles.FormattingEnabled = true;
+            this.cmbSalles.Location = new System.Drawing.Point(984, 52);
+            this.cmbSalles.Name = "cmbSalles";
+            this.cmbSalles.Size = new System.Drawing.Size(121, 29);
+            this.cmbSalles.TabIndex = 28;
+            // 
+            // cmbCine
+            // 
+            this.cmbCine.Dock = System.Windows.Forms.DockStyle.Top;
+            this.cmbCine.FormattingEnabled = true;
+            this.cmbCine.Location = new System.Drawing.Point(788, 52);
+            this.cmbCine.Name = "cmbCine";
+            this.cmbCine.Size = new System.Drawing.Size(190, 29);
+            this.cmbCine.TabIndex = 29;
+            this.cmbCine.SelectedIndexChanged += new System.EventHandler(this.cmbCine_SelectedIndexChanged);
             // 
             // tableLayoutPanel6
             // 
@@ -1293,7 +1439,7 @@
             this.cmbCinemas.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.cmbCinemas.Location = new System.Drawing.Point(3, 3);
             this.cmbCinemas.Name = "cmbCinemas";
-            this.cmbCinemas.Size = new System.Drawing.Size(94, 28);
+            this.cmbCinemas.Size = new System.Drawing.Size(94, 23);
             this.cmbCinemas.TabIndex = 2;
             // 
             // btProgrammer
@@ -1310,13 +1456,12 @@
             // 
             // frmAdmin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1369, 1008);
+            this.ClientSize = new System.Drawing.Size(1198, 756);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmAdmin";
             this.Text = "Administration";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -1340,23 +1485,29 @@
             this.tableAdminProgrammation.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
+            this.tableLayoutPanel8.ResumeLayout(false);
+            this.tableLayoutPanel8.PerformLayout();
             this.tableLayoutPanel12.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFilms)).EndInit();
             this.MenuFilms.ResumeLayout(false);
-            this.tableLayoutPanel14.ResumeLayout(false);
-            this.tableLayoutPanel9.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFilmTrad)).EndInit();
-            this.MenuFilmsTraduit.ResumeLayout(false);
-            this.tableLayoutPanel17.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLangues)).EndInit();
-            this.tableLayoutPanel8.ResumeLayout(false);
-            this.tableLayoutPanel8.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProgrTrad)).EndInit();
-            this.MenuProgrTraduit.ResumeLayout(false);
-            this.tableLayoutPanel15.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProgrammation)).EndInit();
             this.MenuProgrammation.ResumeLayout(false);
+            this.tableLayoutPanel15.ResumeLayout(false);
+            this.tableLayoutPanel14.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLangues)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFilmTrad)).EndInit();
+            this.MenuFilmsTraduit.ResumeLayout(false);
+            this.tabSeance.ResumeLayout(false);
+            this.tableLayoutPanel16.ResumeLayout(false);
+            this.tableLayoutPanel16.PerformLayout();
+            this.tableLayoutPanel18.ResumeLayout(false);
+            this.tableLayoutPanel21.ResumeLayout(false);
+            this.tableLayoutPanel21.PerformLayout();
+            this.tableLayoutPanel19.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProjection)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSeance)).EndInit();
+            this.tableLayoutPanel22.ResumeLayout(false);
             this.tableLayoutPanel11.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -1414,21 +1565,29 @@
         private Button btUpdFilm;
         private DataGridView dgvLangues;
         private Button btTrad;
-        private DataGridView dgvProgrTrad;
         private ContextMenuStrip MenuFilmsTraduit;
         private ToolStripMenuItem supprimerFilmTraduit;
-        private Label label8;
         private Button btProgrammation;
         private Label label6;
         private TableLayoutPanel tableLayoutPanel14;
-        private TableLayoutPanel tableLayoutPanel9;
         private DataGridView dgvFilmTrad;
-        private TableLayoutPanel tableLayoutPanel17;
+        private TabPage tabSeance;
+        private TableLayoutPanel tableLayoutPanel16;
+        private Label label9;
+        private TableLayoutPanel tableLayoutPanel18;
+        private Label label10;
+        private TableLayoutPanel tableLayoutPanel19;
+        private DataGridView dgvSeance;
+        private Button btSeance;
+        private Label label12;
+        private TableLayoutPanel tableLayoutPanel21;
+        private Button btProj;
+        private TableLayoutPanel tableLayoutPanel22;
+        private DataGridView dgvProjection;
         private TableLayoutPanel tableLayoutPanel15;
-        private Button button1;
-        private ContextMenuStrip MenuProgrTraduit;
-        private ToolStripMenuItem toolStripMenuItem1;
-        private ToolStripMenuItem supprimerProgTraduitToolStripMenuItem;
+        private ComboBox cmbSalles;
+        private ComboBox cmbCine;
+        private DateTimePicker DateProgrammation;
         private TableLayoutPanel tableLayoutPanel1;
     }
 }
