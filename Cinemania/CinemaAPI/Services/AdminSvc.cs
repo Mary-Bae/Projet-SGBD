@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 namespace Services
 {
     public class AdminSvc : IAdminSvc, ICinemasSvc, ISalleSvc, IFilmSvc, IProgrammationSvc,
-        ITraductionSvc, IProgrammationTraduitSvc, ISeanceSvc, IProjectionSvc
+        ITraductionSvc, ISeanceSvc, IProjectionSvc
     {
         IAdminRepo _adminRepo;
         public AdminSvc(IAdminRepo pAdminRepo)
@@ -193,10 +193,16 @@ namespace Services
         }
 
         // Programmation
-        async Task IProgrammationSvc.AddProgrammation(ProgrammationDTO pData)
+        async Task IProgrammationSvc.AddProgrammation(AddProgrammationDTO pData)
         {
             IProgrammationRepo programmationRepo = _adminRepo;
             await programmationRepo.AddProgrammation(pData);
+        }
+        async Task<List<T>> IProgrammationSvc.GetProgrammation<T>()
+        {
+            IProgrammationRepo programmationRepo = _adminRepo;
+            var lst = await programmationRepo.GetProgrammation<T>();
+            return lst.ToList<T>();
         }
         async Task<List<T>> IProgrammationSvc.GetProgrammationByFilm<T>(int pId)
         {
@@ -221,10 +227,6 @@ namespace Services
             var lst = await traductionRepo.GetFilmTraduitByFilm<T>(pId);
             return lst.ToList<T>();
         }
-        public async Task<List<T>> GetFilmTraduitByProgrammation<T>(int pId)
-        {
-            return await _adminRepo.GetFilmTraduitByProgrammation<T>(pId);
-        }
         async Task ITraductionSvc.AddTraduction(AddTraductionDTO pData)
         {
             ITraductionRepo traductionRepo = _adminRepo;
@@ -234,24 +236,6 @@ namespace Services
         {
             ITraductionRepo traductionRepo = _adminRepo;
             await traductionRepo.DeleteTraduction(pId);
-        }
-
-        // ProgrammationTraduite
-        async Task IProgrammationTraduitSvc.AddProgrammationTraduit(ProgrammationTraduiteDTO pData)
-        {
-            IProgrammationTraduitRepo programmationTraduit = _adminRepo;
-            await programmationTraduit.AddProgrammationTraduit(pData);
-        }
-        async Task IProgrammationTraduitSvc.DeleteFilmTraduit(int pId)
-        {
-            IProgrammationTraduitRepo programmationTraduit = _adminRepo;
-            await programmationTraduit.DeleteFilmTraduit(pId);
-        }
-        async Task<List<T>> IProgrammationTraduitSvc.GetProgrammationTraduit<T>()
-        {
-            IProgrammationTraduitRepo programmationTraduit = _adminRepo;
-            var lst = await programmationTraduit.GetProgrammationTraduit<T>();
-            return lst.ToList<T>();
         }
 
         // Seance
@@ -272,6 +256,12 @@ namespace Services
         {
             IProjectionRepo projectionRepo = _adminRepo;
             await projectionRepo.AddProjection(pData);
+        }
+        async Task<List<T>> IProjectionSvc.GetProjections<T>()
+        {
+            IProjectionRepo projectionRepo = _adminRepo;
+            var lst = await projectionRepo.GetProjections<T>();
+            return lst.ToList<T>();
         }
     }
 }

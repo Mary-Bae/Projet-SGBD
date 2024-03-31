@@ -31,9 +31,7 @@
             this.lblAvertissement = new System.Windows.Forms.Label();
             this.btQuitter = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lstProgrTrad = new System.Windows.Forms.ListView();
-            this.Cinema = new System.Windows.Forms.ColumnHeader();
+            this.lstProgrammation = new System.Windows.Forms.ListView();
             this.Film = new System.Windows.Forms.ColumnHeader();
             this.Langue = new System.Windows.Forms.ColumnHeader();
             this.sousTitre = new System.Windows.Forms.ColumnHeader();
@@ -58,7 +56,7 @@
             // 
             this.btQuitter.BackColor = System.Drawing.Color.Snow;
             this.btQuitter.ForeColor = System.Drawing.Color.Black;
-            this.btQuitter.Location = new System.Drawing.Point(396, 454);
+            this.btQuitter.Location = new System.Drawing.Point(399, 411);
             this.btQuitter.Name = "btQuitter";
             this.btQuitter.Size = new System.Drawing.Size(118, 40);
             this.btQuitter.TabIndex = 31;
@@ -77,39 +75,27 @@
             this.label6.TabIndex = 29;
             this.label6.Text = "Ajout - Modification de seance";
             // 
-            // label1
+            // lstProgrammation
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(43, 102);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(30, 15);
-            this.label1.TabIndex = 33;
-            this.label1.Text = "Film";
-            // 
-            // lstProgrTrad
-            // 
-            this.lstProgrTrad.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Cinema,
+            this.lstProgrammation.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Film,
             this.Langue,
             this.sousTitre,
             this.date});
-            this.lstProgrTrad.FullRowSelect = true;
-            this.lstProgrTrad.Location = new System.Drawing.Point(105, 102);
-            this.lstProgrTrad.Name = "lstProgrTrad";
-            this.lstProgrTrad.Size = new System.Drawing.Size(573, 102);
-            this.lstProgrTrad.TabIndex = 34;
-            this.lstProgrTrad.UseCompatibleStateImageBehavior = false;
-            this.lstProgrTrad.View = System.Windows.Forms.View.Details;
-            this.lstProgrTrad.Resize += new System.EventHandler(this.lstProgrTrad_Resize);
-            // 
-            // Cinema
-            // 
-            this.Cinema.Text = "Cinema";
+            this.lstProgrammation.FullRowSelect = true;
+            this.lstProgrammation.Location = new System.Drawing.Point(43, 100);
+            this.lstProgrammation.MultiSelect = false;
+            this.lstProgrammation.Name = "lstProgrammation";
+            this.lstProgrammation.Size = new System.Drawing.Size(375, 221);
+            this.lstProgrammation.TabIndex = 34;
+            this.lstProgrammation.UseCompatibleStateImageBehavior = false;
+            this.lstProgrammation.View = System.Windows.Forms.View.Details;
+            this.lstProgrammation.Resize += new System.EventHandler(this.lstProgrammation_Resize);
             // 
             // Film
             // 
             this.Film.Text = "Film";
+            this.Film.Width = 120;
             // 
             // Langue
             // 
@@ -118,10 +104,12 @@
             // sousTitre
             // 
             this.sousTitre.Text = "Sous-Titre";
+            this.sousTitre.Width = 80;
             // 
             // date
             // 
-            this.date.Text = "Date Programmée";
+            this.date.Text = "Date Début";
+            this.date.Width = 120;
             // 
             // cmbHoraire
             // 
@@ -131,7 +119,7 @@
             "18:00",
             "20:00",
             "22:00"});
-            this.cmbHoraire.Location = new System.Drawing.Point(557, 248);
+            this.cmbHoraire.Location = new System.Drawing.Point(533, 100);
             this.cmbHoraire.Name = "cmbHoraire";
             this.cmbHoraire.Size = new System.Drawing.Size(121, 23);
             this.cmbHoraire.TabIndex = 35;
@@ -139,7 +127,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(495, 248);
+            this.label2.Location = new System.Drawing.Point(471, 100);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 15);
             this.label2.TabIndex = 36;
@@ -147,7 +135,7 @@
             // 
             // calDateFin
             // 
-            this.calDateFin.Location = new System.Drawing.Point(193, 245);
+            this.calDateFin.Location = new System.Drawing.Point(471, 197);
             this.calDateFin.Name = "calDateFin";
             this.calDateFin.TabIndex = 37;
             this.calDateFin.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.calDateFin_DateSelected);
@@ -155,7 +143,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(39, 248);
+            this.label3.Location = new System.Drawing.Point(471, 167);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 15);
             this.label3.TabIndex = 38;
@@ -165,7 +153,7 @@
             // 
             this.btSave.BackColor = System.Drawing.Color.Snow;
             this.btSave.ForeColor = System.Drawing.Color.Black;
-            this.btSave.Location = new System.Drawing.Point(184, 454);
+            this.btSave.Location = new System.Drawing.Point(202, 411);
             this.btSave.Name = "btSave";
             this.btSave.Size = new System.Drawing.Size(122, 40);
             this.btSave.TabIndex = 39;
@@ -183,8 +171,7 @@
             this.Controls.Add(this.calDateFin);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmbHoraire);
-            this.Controls.Add(this.lstProgrTrad);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lstProgrammation);
             this.Controls.Add(this.lblAvertissement);
             this.Controls.Add(this.btQuitter);
             this.Controls.Add(this.label6);
@@ -200,9 +187,7 @@
         private Label lblAvertissement;
         private Button btQuitter;
         private Label label6;
-        private Label label1;
-        private ListView lstProgrTrad;
-        private ColumnHeader Cinema;
+        private ListView lstProgrammation;
         private ColumnHeader Film;
         private ColumnHeader Langue;
         private ColumnHeader sousTitre;

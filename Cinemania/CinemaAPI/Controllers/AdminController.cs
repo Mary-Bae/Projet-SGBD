@@ -361,7 +361,7 @@ namespace CinemaAPI.Controllers
 
         // Programmation
         [HttpPost("Programmation/AddProgrammation")]
-        public async Task<IActionResult> AddProgrammation(ProgrammationDTO programmationDTO)
+        public async Task<IActionResult> AddProgrammation(AddProgrammationDTO programmationDTO)
         {
             try
             {
@@ -375,15 +375,32 @@ namespace CinemaAPI.Controllers
             }
         }
 
+        [HttpGet("Programmation")]
+        public async Task<ActionResult> GetProgrammation()
+        {
+            try
+            {
+                List<ProgrammationAvecNomsDTO> lst;
+
+                IProgrammationSvc programmationSvc = _adminSvc;
+                lst = await programmationSvc.GetProgrammation<ProgrammationAvecNomsDTO>();
+                return Ok(lst);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet("ProgrammationByFilm/{filmId}")]
         public async Task<ActionResult> GetProgrammationByFilm(int filmId)
         {
             try
             {
-                List<ProgrammationTraduitesDTO> lst;
+                List<ProgrammationAvecNomsDTO> lst;
 
                 IProgrammationSvc programmationSvc = _adminSvc;
-                lst = await programmationSvc.GetProgrammationByFilm<ProgrammationTraduitesDTO>(filmId);
+                lst = await programmationSvc.GetProgrammationByFilm<ProgrammationAvecNomsDTO>(filmId);
                 return Ok(lst);
             }
             catch (Exception ex)
@@ -471,70 +488,6 @@ namespace CinemaAPI.Controllers
             }
         }
 
-        [HttpGet("TraductionByProgrammation/{programmationId}")]
-        public async Task<ActionResult> GetFilmTraduitByProgrammation(int programmationId)
-        {
-            try
-            {
-                List<ProgrammationTraduitesDTO> lst;
-                ITraductionSvc traductionSvc = _adminSvc;
-                lst = await traductionSvc.GetFilmTraduitByProgrammation<ProgrammationTraduitesDTO>(programmationId);
-                return Ok(lst);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        //Programmation Traduite
-        [HttpPost("ProgrammationTraduite/AddProgrammationTraduite")]
-        public async Task<IActionResult> AddProgrammationTraduite(ProgrammationTraduiteDTO pData)
-        {
-            try
-            {
-                IProgrammationTraduitSvc programmationTraduitSvc = _adminSvc;
-                await programmationTraduitSvc.AddProgrammationTraduit(pData);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpDelete("ProgrammationTraduite/DelFilmTraduit/{id}")]
-        public async Task<ActionResult> DeleteFilmTraduit(int id)
-        {
-            try
-            {
-                IProgrammationTraduitSvc programmationSvc = _adminSvc;
-                await programmationSvc.DeleteFilmTraduit(id);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpGet("ProgrammationTraduite")]
-        public async Task<ActionResult> GetProgrammationTraduite()
-        {
-            try
-            {
-                List<ListProgrammationTraduitesDTO> lst;
-
-                IProgrammationTraduitSvc programmationSvc = _adminSvc;
-                lst = await programmationSvc.GetProgrammationTraduit<ListProgrammationTraduitesDTO>();
-                return Ok(lst);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
         //Seance
         [HttpPost("Seance/AddSeance")]
         public async Task<IActionResult> AddSeance(AddSeanceDTO pData)
@@ -577,6 +530,23 @@ namespace CinemaAPI.Controllers
                 IProjectionSvc projectionSvc = _adminSvc;
                 await projectionSvc.AddProjection(pData);
                 return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("Projection")]
+        public async Task<ActionResult> GetProjections()
+        {
+            try
+            {
+                List<ProjectionDTO> lst;
+
+                IProjectionSvc projectionSvc = _adminSvc;
+                lst = await projectionSvc.GetProjections<ProjectionDTO>();
+                return Ok(lst);
             }
             catch (Exception ex)
             {

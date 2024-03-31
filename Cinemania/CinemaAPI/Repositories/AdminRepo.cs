@@ -13,7 +13,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace Repositories
 {
     public class AdminRepo : IAdminRepo, ISalleRepo, IFilmRepo, IProgrammationRepo,
-        ITraductionRepo, IProgrammationTraduitRepo, ISeanceRepo, IProjectionRepo
+        ITraductionRepo, ISeanceRepo, IProjectionRepo
     {
         IDbConnection _Connection;
         public AdminRepo(IDbConnection pConnection)
@@ -361,29 +361,29 @@ namespace Repositories
         }
 
         // Programmation
-        public async Task AddProgrammation(ProgrammationDTO programmation)
+        public async Task AddProgrammation(AddProgrammationDTO programmation)
         {
             try
             {
                 var parameters = new DynamicParameters();
-                parameters.Add("@FilmId", programmation.FilmId);
-                parameters.Add("@CinemaId", programmation.CinemaId);
+                parameters.Add("@FilmTraduitId", programmation.FilmTraduitId);
                 parameters.Add("@DateProgrammation", programmation.DateProgrammation);
 
                 await _Connection.ExecuteAsync("[Admin].[AjouterProgrammation]", parameters, commandType: CommandType.StoredProcedure);
             }
             catch (SqlException ex)
             {
-                if (ex.Number == 0x00000223)
-                    throw new CustomError(ErreurCodeEnum.FK_Cine_Film_Programmation, ex);
-                if(ex.Number == 0x00000a29)
-                    throw new CustomError(ErreurCodeEnum.UK_Programmation, ex);
                 throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
             }
             catch (Exception ex)
             {
                 throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
             }
+        }
+        public async Task<List<T>> GetProgrammation<T>()
+        {
+            var lst = await _Connection.QueryAsync<T>("[Admin].[Programmation_SelectAll]");
+            return lst.ToList();
         }
         public async Task<List<T>> GetProgrammationByFilm<T>(int pFilmId)
         {
@@ -434,52 +434,12 @@ namespace Repositories
             var lst = await _Connection.QueryAsync<T>("[Admin].[FilmTraduitAvecNoms]", parameters, commandType: CommandType.StoredProcedure);
             return lst.ToList();
         }
-        public async Task<List<T>> GetFilmTraduitByProgrammation<T>(int pIdProgrammation)
-        {
-            var parameters = new DynamicParameters();
-            parameters.Add("@ProgrammationId", pIdProgrammation);
-            var lst = await _Connection.QueryAsync<T>("[Admin].[FilmTraduit_SelectByProgrammation]", parameters, commandType: CommandType.StoredProcedure);
-            return lst.ToList();
-        }
         async Task ITraductionRepo.DeleteTraduction(int pId)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@id", pId);
 
             await _Connection.ExecuteAsync("[Admin].[FilmTraduit_Delete]", parameters, commandType: CommandType.StoredProcedure);
-        }
-
-        // Programmation Traduite
-        public async Task AddProgrammationTraduit(ProgrammationTraduiteDTO pData)
-        {
-            try
-            {
-                var parameters = new DynamicParameters();
-                parameters.Add("@ProgrammationId", pData.ProgrammationId);
-                parameters.Add("@FilmTraduitId", pData.FilmTraduitId);
-
-                await _Connection.ExecuteAsync("[Admin].[AjouterProgrammationTraduite]", parameters, commandType: CommandType.StoredProcedure);
-            }
-            catch (SqlException ex)
-            {
-                throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
-            }
-            catch (Exception ex)
-            {
-                throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
-            }
-        }
-        async Task IProgrammationTraduitRepo.DeleteFilmTraduit(int pId)
-        {
-            var parameters = new DynamicParameters();
-            parameters.Add("@id", pId);
-
-            await _Connection.ExecuteAsync("[Admin].[ProgammationTraduite_Delete]", parameters, commandType: CommandType.StoredProcedure);
-        }
-        public async Task<List<T>> GetProgrammationTraduit<T>()
-        {
-            var lst = await _Connection.QueryAsync<T>("[Admin].[ProgrammationTraduite_SelectAll]");
-            return lst.ToList();
         }
 
         // Seance
@@ -490,7 +450,7 @@ namespace Repositories
                 var parameters = new DynamicParameters();
                 parameters.Add("@Horaire", pData.se_horaire);
                 parameters.Add("@DateFin", pData.se_dateFin);
-                parameters.Add("@ProgrammationTraduitId", pData.se_pt_id);
+                parameters.Add("@ProgrammationId", pData.se_pr_id);
 
                 await _Connection.ExecuteAsync("[Admin].[Seance_AddSeance]", parameters, commandType: CommandType.StoredProcedure);
             }
@@ -528,6 +488,11 @@ namespace Repositories
             {
                 throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
             }
+        }
+        public async Task<List<T>> GetProjections<T>()
+        {
+            var lst = await _Connection.QueryAsync<T>("[Admin].[Projection_SelectAll]");
+            return lst.ToList();
         }
     }
 }
