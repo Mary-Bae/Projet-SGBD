@@ -964,7 +964,7 @@ namespace UIAdmin
                     else
                     {
                         var responseContent = await response.Content.ReadAsStringAsync();
-                        MessageBox.Show("Nous n'avons pas réussi à supprimer l'élément sélectionné. Détail technique : " + responseContent, "Échec de la Suppression", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(responseContent, "Échec de la Suppression", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }

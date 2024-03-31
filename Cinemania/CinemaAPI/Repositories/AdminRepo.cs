@@ -394,10 +394,22 @@ namespace Repositories
         }
         async Task IProgrammationRepo.DeleteProgrammation(int pId)
         {
-            var parameters = new DynamicParameters();
-            parameters.Add("@id", pId);
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@id", pId);
 
-            await _Connection.ExecuteAsync("[Admin].[Programmation_Delete]", parameters, commandType: CommandType.StoredProcedure);
+                await _Connection.ExecuteAsync("[Admin].[Programmation_Delete]", parameters, commandType: CommandType.StoredProcedure);
+            }
+            catch (SqlException ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
+            }
+
         }
 
         // Traduction
@@ -436,10 +448,23 @@ namespace Repositories
         }
         async Task ITraductionRepo.DeleteTraduction(int pId)
         {
-            var parameters = new DynamicParameters();
-            parameters.Add("@id", pId);
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@id", pId);
 
-            await _Connection.ExecuteAsync("[Admin].[FilmTraduit_Delete]", parameters, commandType: CommandType.StoredProcedure);
+                await _Connection.ExecuteAsync("[Admin].[FilmTraduit_Delete]", parameters, commandType: CommandType.StoredProcedure);
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 0x00000223)
+                    throw new CustomError(ErreurCodeEnum.FK_PROGRAMMATION_FILMTRADUIT, ex);
+                throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
+            }
         }
 
         // Seance

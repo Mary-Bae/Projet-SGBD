@@ -1039,13 +1039,13 @@
             this.MenuFilmsTraduit.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.supprimerFilmTraduit});
             this.MenuFilmsTraduit.Name = "MenuFilmsTraduit";
-            this.MenuFilmsTraduit.Size = new System.Drawing.Size(156, 26);
+            this.MenuFilmsTraduit.Size = new System.Drawing.Size(189, 26);
             // 
             // supprimerFilmTraduit
             // 
             this.supprimerFilmTraduit.Name = "supprimerFilmTraduit";
-            this.supprimerFilmTraduit.Size = new System.Drawing.Size(155, 22);
-            this.supprimerFilmTraduit.Text = "Supprimer Film";
+            this.supprimerFilmTraduit.Size = new System.Drawing.Size(188, 22);
+            this.supprimerFilmTraduit.Text = "Supprimer Traduction";
             this.supprimerFilmTraduit.Click += new System.EventHandler(this.supprimerFilmTraduit_Click);
             // 
             // label6

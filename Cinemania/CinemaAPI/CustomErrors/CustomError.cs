@@ -12,6 +12,7 @@ namespace CustomErrors
         FK_SALLE_CINEMA,
         FK_CINEMA_PROGRAMMATION,
         FK_Film_PROGRAMMATION,
+        FK_PROGRAMMATION_FILMTRADUIT,
         ErreurSQL,
         QuantiteMinimaleDePlaces,
         ChampVide,
@@ -61,6 +62,9 @@ namespace CustomErrors
                     break;
                 case ErreurCodeEnum.FK_SALLE_CINEMA:
                     _messageToReturn = "Une salle de cinema doit appartenir à un cinema ";
+                    break;
+                case ErreurCodeEnum.FK_PROGRAMMATION_FILMTRADUIT:
+                    _messageToReturn = "Une traduction de film ne peut pas être supprimée en ayant toujours des programmations actifs. Supprimez d'abord vos programmations";
                     break;
                 case ErreurCodeEnum.FK_Film_PROGRAMMATION: 
                     _messageToReturn = "Le film que vous tentez de supprimer a des programmations actifs, supprimez d''abord vos programmations avant de supprimer le film";
