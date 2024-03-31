@@ -125,8 +125,6 @@ namespace Repositories
             {
                 if (ex.Number == 0x00000a29)
                     throw new CustomError(ErreurCodeEnum.UK_CHAINE_NOM, ex);
-                if (ex.Number == 0x00000223)
-                    throw new CustomError(ErreurCodeEnum.FK_CINEMA_PROGRAMMATION, ex);
                 throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
             }
             catch (Exception ex)
@@ -350,8 +348,7 @@ namespace Repositories
             }
             catch(SqlException ex)
             {
-                if (ex.Number == 0x00000223)
-                    throw new CustomError(ErreurCodeEnum.FK_Film_PROGRAMMATION, ex);
+                throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
             }
             catch (Exception ex)
             {
@@ -373,6 +370,8 @@ namespace Repositories
             }
             catch (SqlException ex)
             {
+                if (ex.Number == 0x00000a43)
+                    throw new CustomError(ErreurCodeEnum.UK_PROGRAMMATION, ex);
                 throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
             }
             catch (Exception ex)
@@ -403,6 +402,8 @@ namespace Repositories
             }
             catch (SqlException ex)
             {
+                if (ex.Number == 0x00000223)
+                    throw new CustomError(ErreurCodeEnum.FK_SEANCE_PROGRAMMATION, ex);
                 throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
             }
             catch (Exception ex)

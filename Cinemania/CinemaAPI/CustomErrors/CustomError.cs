@@ -9,10 +9,10 @@ namespace CustomErrors
         UK_SALLE_NUMBER,
         UK_FILM_NOM,
         UK_TRADUCTION,
+        UK_PROGRAMMATION,
         FK_SALLE_CINEMA,
-        FK_CINEMA_PROGRAMMATION,
-        FK_Film_PROGRAMMATION,
         FK_PROGRAMMATION_FILMTRADUIT,
+        FK_SEANCE_PROGRAMMATION,
         ErreurSQL,
         QuantiteMinimaleDePlaces,
         ChampVide,
@@ -60,14 +60,14 @@ namespace CustomErrors
                 case ErreurCodeEnum.UK_TRADUCTION:
                     _messageToReturn = "La même traduction pour le même film ne peut pas exister deux fois";
                     break;
+                case ErreurCodeEnum.UK_PROGRAMMATION:
+                    _messageToReturn = "La même programmation pour le même film ne peut pas exister deux fois";
+                    break;
                 case ErreurCodeEnum.FK_SALLE_CINEMA:
                     _messageToReturn = "Une salle de cinema doit appartenir à un cinema ";
                     break;
                 case ErreurCodeEnum.FK_PROGRAMMATION_FILMTRADUIT:
                     _messageToReturn = "Une traduction de film ne peut pas être supprimée en ayant toujours des programmations actifs. Supprimez d'abord vos programmations";
-                    break;
-                case ErreurCodeEnum.FK_Film_PROGRAMMATION: 
-                    _messageToReturn = "Le film que vous tentez de supprimer a des programmations actifs, supprimez d''abord vos programmations avant de supprimer le film";
                     break;
                 case ErreurCodeEnum.ErreurSQL:
                     _messageToReturn = "Erreur liée à la base de données SQL.";
@@ -87,8 +87,8 @@ namespace CustomErrors
                 case ErreurCodeEnum.FK_Cine_Film_Programmation:
                     _messageToReturn = "Un cinema et un film doivent être sélectionnés pour permettre une programmation";
                     break;
-                case ErreurCodeEnum.FK_CINEMA_PROGRAMMATION:
-                    _messageToReturn = "Le cinéma que vous tentez de supprimer a des films de programmés, supprimez d'abord vos programmations avant de supprimer le cinéma";
+                case ErreurCodeEnum.FK_SEANCE_PROGRAMMATION:
+                    _messageToReturn = "Vous ne pouvez pas supprimer une programmation liée à une séance active, pour pouvoir supprimer la programmation, supprimez les séances associées avant.";
                     break;
                 default:
                     _messageToReturn = "Erreur non reconnue";
