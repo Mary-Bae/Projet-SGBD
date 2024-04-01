@@ -168,10 +168,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtTitre);
             this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmAddUpdFilm";
-            this.Text = "frmAjoutFilm";
+            this.Text = "Ajout Film";
             this.ResumeLayout(false);
             this.PerformLayout();
 

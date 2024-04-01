@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblAvertissement = new System.Windows.Forms.Label();
             this.btQuitter = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.lstProgrammation = new System.Windows.Forms.ListView();
@@ -41,16 +40,9 @@
             this.calDateFin = new System.Windows.Forms.MonthCalendar();
             this.label3 = new System.Windows.Forms.Label();
             this.btSave = new System.Windows.Forms.Button();
+            this.lblError = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // lblAvertissement
-            // 
-            this.lblAvertissement.AutoSize = true;
-            this.lblAvertissement.ForeColor = System.Drawing.Color.Red;
-            this.lblAvertissement.Location = new System.Drawing.Point(202, 347);
-            this.lblAvertissement.Name = "lblAvertissement";
-            this.lblAvertissement.Size = new System.Drawing.Size(0, 15);
-            this.lblAvertissement.TabIndex = 32;
             // 
             // btQuitter
             // 
@@ -58,7 +50,7 @@
             this.btQuitter.ForeColor = System.Drawing.Color.Black;
             this.btQuitter.Location = new System.Drawing.Point(399, 411);
             this.btQuitter.Name = "btQuitter";
-            this.btQuitter.Size = new System.Drawing.Size(118, 40);
+            this.btQuitter.Size = new System.Drawing.Size(153, 40);
             this.btQuitter.TabIndex = 31;
             this.btQuitter.Text = "Quitter";
             this.btQuitter.UseVisualStyleBackColor = false;
@@ -71,9 +63,9 @@
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.label6.Location = new System.Drawing.Point(43, 30);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(330, 30);
+            this.label6.Size = new System.Drawing.Size(179, 30);
             this.label6.TabIndex = 29;
-            this.label6.Text = "Ajout - Modification de seance";
+            this.label6.Text = "Ajout de Séance";
             // 
             // lstProgrammation
             // 
@@ -83,7 +75,7 @@
             this.sousTitre,
             this.date});
             this.lstProgrammation.FullRowSelect = true;
-            this.lstProgrammation.Location = new System.Drawing.Point(43, 100);
+            this.lstProgrammation.Location = new System.Drawing.Point(43, 108);
             this.lstProgrammation.MultiSelect = false;
             this.lstProgrammation.Name = "lstProgrammation";
             this.lstProgrammation.Size = new System.Drawing.Size(375, 221);
@@ -119,7 +111,7 @@
             "18:00",
             "20:00",
             "22:00"});
-            this.cmbHoraire.Location = new System.Drawing.Point(533, 100);
+            this.cmbHoraire.Location = new System.Drawing.Point(533, 108);
             this.cmbHoraire.Name = "cmbHoraire";
             this.cmbHoraire.Size = new System.Drawing.Size(121, 23);
             this.cmbHoraire.TabIndex = 35;
@@ -127,64 +119,83 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(471, 100);
+            this.label2.Location = new System.Drawing.Point(471, 108);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(46, 15);
+            this.label2.Size = new System.Drawing.Size(54, 15);
             this.label2.TabIndex = 36;
-            this.label2.Text = "Horaire";
+            this.label2.Text = "Horaire *";
             // 
             // calDateFin
             // 
-            this.calDateFin.Location = new System.Drawing.Point(471, 197);
+            this.calDateFin.Location = new System.Drawing.Point(471, 205);
             this.calDateFin.Name = "calDateFin";
             this.calDateFin.TabIndex = 37;
-            this.calDateFin.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.calDateFin_DateSelected);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(471, 167);
+            this.label3.Location = new System.Drawing.Point(471, 157);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(131, 15);
+            this.label3.Size = new System.Drawing.Size(139, 15);
             this.label3.TabIndex = 38;
-            this.label3.Text = "Date de fin de la séance";
+            this.label3.Text = "Date de fin de la séance *";
             // 
             // btSave
             // 
             this.btSave.BackColor = System.Drawing.Color.Snow;
             this.btSave.ForeColor = System.Drawing.Color.Black;
-            this.btSave.Location = new System.Drawing.Point(202, 411);
+            this.btSave.Location = new System.Drawing.Point(171, 411);
             this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(122, 40);
+            this.btSave.Size = new System.Drawing.Size(153, 40);
             this.btSave.TabIndex = 39;
             this.btSave.Text = "Enregistrer Séance";
             this.btSave.UseVisualStyleBackColor = false;
             this.btSave.Click += new System.EventHandler(this.btSave_Click);
             // 
+            // lblError
+            // 
+            this.lblError.AutoSize = true;
+            this.lblError.ForeColor = System.Drawing.Color.Red;
+            this.lblError.Location = new System.Drawing.Point(50, 372);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(0, 15);
+            this.lblError.TabIndex = 40;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(471, 181);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(175, 15);
+            this.label1.TabIndex = 41;
+            this.label1.Text = "minimum 1 mois après le début";
+            // 
             // frmAjoutSeance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.SeaShell;
             this.ClientSize = new System.Drawing.Size(735, 514);
+            this.ControlBox = false;
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblError);
             this.Controls.Add(this.btSave);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.calDateFin);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmbHoraire);
             this.Controls.Add(this.lstProgrammation);
-            this.Controls.Add(this.lblAvertissement);
             this.Controls.Add(this.btQuitter);
             this.Controls.Add(this.label6);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "frmAjoutSeance";
-            this.Text = "frmAjoutSeance";
+            this.Text = "Ajout Seance";
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private Label lblAvertissement;
         private Button btQuitter;
         private Label label6;
         private ListView lstProgrammation;
@@ -197,5 +208,7 @@
         private MonthCalendar calDateFin;
         private Label label3;
         private Button btSave;
+        private Label lblError;
+        private Label label1;
     }
 }

@@ -169,7 +169,7 @@ namespace Services
             IFilmRepo filmRepo = _adminRepo;
             await filmRepo.UpdateFilm(pId, pData);
         }
-        public async Task<FilmsDTO> GetFilmByFilmId(int filmId)
+        public async Task<FilmsDTO?> GetFilmByFilmId(int filmId)
         {
             IFilmRepo filmRepo = _adminRepo;
             var film = await filmRepo.GetFilmByFilmId(filmId);
@@ -241,6 +241,15 @@ namespace Services
         // Seance
         async Task ISeanceSvc.AddSeance(AddSeanceDTO pData)
         {
+            var programmation = await _adminRepo.GetProgrammationById<ProgrammationDTO>(pData.se_pr_id);
+
+            if (pData == null || string.IsNullOrWhiteSpace(pData.se_horaire) || programmation == null)
+                throw new CustomError(ErreurCodeEnum.ChampsSelectionnes);
+
+            // Vérification de la date de fin de la séance par rapport à la date de début de la programmation
+            if (pData.se_dateFin < programmation.pr_date.AddMonths(1))
+                throw new CustomError(ErreurCodeEnum.DateSeance);            
+
             ISeanceRepo seance = _adminRepo;
             await seance.AddSeance(pData);
         }

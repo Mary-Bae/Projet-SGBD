@@ -391,6 +391,13 @@ namespace Repositories
             var lst = await _Connection.QueryAsync<T>("[Admin].[ProgrammationAvecNoms]", parameters, commandType: CommandType.StoredProcedure);
             return lst.ToList();
         }
+        public async Task<T> GetProgrammationById<T>(int pId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@ProgrammationId", pId);
+            return await _Connection.QuerySingleOrDefaultAsync<T>("[Admin].[Programmation_SelectProgrammationById]", parameters, commandType: CommandType.StoredProcedure);
+            
+        }
         async Task IProgrammationRepo.DeleteProgrammation(int pId)
         {
             try
@@ -482,6 +489,8 @@ namespace Repositories
             }
             catch (SqlException ex)
             {
+                if (ex.Number == 0x00000a29)
+                    throw new CustomError(ErreurCodeEnum.UK_SEANCE, ex);
                 throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
             }
             catch (Exception ex)

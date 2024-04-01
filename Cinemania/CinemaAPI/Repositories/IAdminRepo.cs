@@ -43,6 +43,7 @@ namespace Interfaces
         Task AddProgrammation(AddProgrammationDTO pData);
         Task<List<T>> GetProgrammation<T>();
         Task<List<T>> GetProgrammationByFilm<T>(int pFilm);
+        Task<T> GetProgrammationById<T>(int pData);
         Task DeleteProgrammation(int pId);
     }
     public interface ITraductionRepo

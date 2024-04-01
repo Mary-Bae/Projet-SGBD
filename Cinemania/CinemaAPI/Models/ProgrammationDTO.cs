@@ -13,4 +13,9 @@
         public string la_sousTitre { get; set; }
         public DateTime pr_date { get; set; }
     }
+    public class ProgrammationDTO
+    {
+        public int pr_id { get; set; }
+        public DateTime pr_date { get; set; }
+    }
 }

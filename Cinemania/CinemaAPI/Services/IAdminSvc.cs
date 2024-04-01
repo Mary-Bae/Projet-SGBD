@@ -33,7 +33,7 @@ namespace Interfaces
     public interface IFilmSvc
     {
         Task<List<T>> GetFilms<T>();
-        Task<FilmsDTO> GetFilmByFilmId(int filmId);
+        Task<FilmsDTO?>GetFilmByFilmId(int filmId);
         Task AddFilm(AjoutFilmsDTO ajoutFilm);
         Task UpdateFilm(int pId, FilmsDTO MajFilm);
         Task DeleteFilm(int pId);

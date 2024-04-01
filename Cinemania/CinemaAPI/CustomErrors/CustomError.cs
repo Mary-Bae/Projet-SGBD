@@ -17,8 +17,11 @@ namespace CustomErrors
         QuantiteMinimaleDePlaces,
         ChampVide,
         NumeroInvalide,
+        ChampsSelectionnes,
+        DateSeance,
         FK_Cine_Film_Programmation,
         UK_Programmation,
+        UK_SEANCE,
         ErreurGenerale
     }
     public class CustomError : Exception
@@ -63,6 +66,9 @@ namespace CustomErrors
                 case ErreurCodeEnum.UK_PROGRAMMATION:
                     _messageToReturn = "La même programmation pour le même film ne peut pas exister deux fois";
                     break;
+                case ErreurCodeEnum.UK_SEANCE:
+                    _messageToReturn = "La même séance ne peut pas être programée deux fois pour le même film avec la même traduction à la même heure";
+                    break;
                 case ErreurCodeEnum.FK_SALLE_CINEMA:
                     _messageToReturn = "Une salle de cinema doit appartenir à un cinema ";
                     break;
@@ -83,6 +89,12 @@ namespace CustomErrors
                     break;
                 case ErreurCodeEnum.ChampVide:
                     _messageToReturn = "Les champs obligatoires ne peuvent pas être vide.";
+                    break;
+                case ErreurCodeEnum.ChampsSelectionnes:
+                  _messageToReturn = "Tous les champs requis doivent être sélectionnés.";
+                    break;
+                case ErreurCodeEnum.DateSeance:
+                    _messageToReturn = "La date de fin de la séance doit être d'au moins un mois après le début de la programmation.";
                     break;
                 case ErreurCodeEnum.FK_Cine_Film_Programmation:
                     _messageToReturn = "Un cinema et un film doivent être sélectionnés pour permettre une programmation";
