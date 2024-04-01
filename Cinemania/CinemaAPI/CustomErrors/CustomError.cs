@@ -10,15 +10,18 @@ namespace CustomErrors
         UK_FILM_NOM,
         UK_TRADUCTION,
         UK_PROGRAMMATION,
+        UK_PROJECTION,
         FK_SALLE_CINEMA,
         FK_PROGRAMMATION_FILMTRADUIT,
         FK_SEANCE_PROGRAMMATION,
+        FK_PROJECTION_SEANCE,
         ErreurSQL,
         QuantiteMinimaleDePlaces,
         ChampVide,
         NumeroInvalide,
         ChampsSelectionnes,
         DateSeance,
+        ConflitProjection,
         FK_Cine_Film_Programmation,
         UK_Programmation,
         UK_SEANCE,
@@ -60,6 +63,9 @@ namespace CustomErrors
                 case ErreurCodeEnum.UK_Programmation:
                     _messageToReturn = "Deux programmations ne peuvent pas être complètement identiques";
                         break;
+                case ErreurCodeEnum.UK_PROJECTION:
+                    _messageToReturn = "Deux projections identiques se passant à la même heure ne peuvent pas coexister dans la même salle de cinéma";
+                    break;
                 case ErreurCodeEnum.UK_TRADUCTION:
                     _messageToReturn = "La même traduction pour le même film ne peut pas exister deux fois";
                     break;
@@ -74,6 +80,9 @@ namespace CustomErrors
                     break;
                 case ErreurCodeEnum.FK_PROGRAMMATION_FILMTRADUIT:
                     _messageToReturn = "Une traduction de film ne peut pas être supprimée en ayant toujours des programmations actifs. Supprimez d'abord vos programmations";
+                    break;
+                case ErreurCodeEnum.FK_PROJECTION_SEANCE:
+                    _messageToReturn = "Une séance ne peut pas être supprimée tant qu'il y a des projections en cours. Supprimez d'abord les projections de la séance sélectionnée avant de pouvoir supprimer la séance";
                     break;
                 case ErreurCodeEnum.ErreurSQL:
                     _messageToReturn = "Erreur liée à la base de données SQL.";
@@ -101,6 +110,9 @@ namespace CustomErrors
                     break;
                 case ErreurCodeEnum.FK_SEANCE_PROGRAMMATION:
                     _messageToReturn = "Vous ne pouvez pas supprimer une programmation liée à une séance active, pour pouvoir supprimer la programmation, supprimez les séances associées avant.";
+                    break;
+                case ErreurCodeEnum.ConflitProjection:
+                    _messageToReturn = "Conflit d'horaire et de periode pour une projection dans la même salle de cinéma. Choisissez un autre horaire/date de projection ou une autre salle";
                     break;
                 default:
                     _messageToReturn = "Erreur non reconnue";

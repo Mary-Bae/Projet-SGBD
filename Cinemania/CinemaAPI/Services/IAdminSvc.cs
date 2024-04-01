@@ -57,6 +57,7 @@ namespace Interfaces
     {
         Task AddSeance(AddSeanceDTO pData);
         Task<List<T>> GetSeance<T>();
+        Task DeleteSeance(int pId);
     }
     public interface IProjectionSvc
     {

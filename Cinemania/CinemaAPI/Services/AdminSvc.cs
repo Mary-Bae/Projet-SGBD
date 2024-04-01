@@ -2,6 +2,8 @@
 using Models;
 using CustomErrors;
 using System.Linq.Expressions;
+using Dapper;
+using Microsoft.Data.SqlClient;
 
 namespace Services
 {
@@ -259,12 +261,19 @@ namespace Services
             var lst = await seanceRepo.GetSeance<T>();
             return lst.ToList<T>();
         }
+        async Task ISeanceSvc.DeleteSeance(int pId)
+        {
+            ISeanceRepo seanceRepo = _adminRepo;
+            await seanceRepo.DeleteSeance(pId);
+        }
 
         // Projection
         async Task IProjectionSvc.AddProjection(AddProjectionDTO pData)
         {
-            IProjectionRepo projectionRepo = _adminRepo;
-            await projectionRepo.AddProjection(pData);
+            if (pData == null || pData.SalleId == 0 || pData.SeanceId == 0)
+                throw new CustomError(ErreurCodeEnum.ChampsSelectionnes);
+            IProjectionRepo projection = _adminRepo;
+            await projection.AddProjection(pData);
         }
         async Task<List<T>> IProjectionSvc.GetProjections<T>()
         {

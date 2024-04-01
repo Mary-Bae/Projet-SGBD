@@ -27,9 +27,7 @@ namespace UIAdmin
             _salleSelectionnee = salle;
 
             if (_modeActuel == Mode.Modification && _salleSelectionnee != null)
-            {
                 PreremplirChamps(_salleSelectionnee);
-            }
         }
 
         private void InitialiserComboBoxes()

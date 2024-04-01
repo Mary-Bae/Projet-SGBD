@@ -503,6 +503,26 @@ namespace Repositories
             var lst = await _Connection.QueryAsync<T>("[Admin].[Seance_SelectAll]");
             return lst.ToList();
         }
+        async Task ISeanceRepo.DeleteSeance(int pId)
+        {
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@id", pId);
+
+                await _Connection.ExecuteAsync("[Admin].[Seance_Delete]", parameters, commandType: CommandType.StoredProcedure);
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 0x00000223)
+                    throw new CustomError(ErreurCodeEnum.FK_PROJECTION_SEANCE, ex);
+                throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
+            }
+        }
 
         // Projection
         public async Task AddProjection(AddProjectionDTO pData)
@@ -517,6 +537,10 @@ namespace Repositories
             }
             catch (SqlException ex)
             {
+                if (ex.Number == 0x00000a29)
+                    throw new CustomError(ErreurCodeEnum.UK_PROJECTION, ex);
+                if (ex.Number == 0x0000c350)
+                    throw new CustomError(ErreurCodeEnum.ConflitProjection, ex);
                 throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
             }
             catch (Exception ex)

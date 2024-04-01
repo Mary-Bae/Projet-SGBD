@@ -521,6 +521,21 @@ namespace CinemaAPI.Controllers
             }
         }
 
+        [HttpDelete("Seance/DelSeance/{id}")]
+        public async Task<ActionResult> DelSeance(int id)
+        {
+            try
+            {
+                ISeanceSvc seanceSvc = _adminSvc;
+                await seanceSvc.DeleteSeance(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         //Projection
         [HttpPost("Projection/AddProjection")]
         public async Task<IActionResult> AddProjection(AddProjectionDTO pData)

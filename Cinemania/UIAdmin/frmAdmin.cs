@@ -378,7 +378,7 @@ namespace UIAdmin
             }
             return 0; // Retourne 0 en cas d'erreur
         }
-        private void btAjoutercinema_Click(object sender, EventArgs e)
+        private async void btAjoutercinema_Click(object sender, EventArgs e)
         {
             lblStatusAdminCinema.Text = "";
 
@@ -391,10 +391,7 @@ namespace UIAdmin
 
                 var result = formAjoutCinema.ShowDialog();
                 if (result == DialogResult.OK)
-                {
-                    // Raffraichir les cinemas après le rajout
-                    Task<List<CinemasDTO>> task = LoadCinemasByChaine(chaineId);
-                }
+                    await LoadCinemasByChaine(chaineId);
             }
             else
             {
@@ -447,10 +444,7 @@ namespace UIAdmin
 
                 var result = formAjoutSalle.ShowDialog();
                 if (result == DialogResult.OK)
-                {
-                    // Rafraîchir la liste des salles pour le cinéma sélectionné
                     LoadSallesByCinema(cinemaId);
-                }
             }
             else
             {
@@ -745,7 +739,7 @@ namespace UIAdmin
             if (dgvFilms.CurrentRow != null)
             {
                 int filmId = Convert.ToInt32(dgvFilms.CurrentRow.Cells["fi_id"].Value);
-                FilmsDTO filmDetails = await GetFilmDetails(filmId);
+                FilmsDTO? filmDetails = await GetFilmDetails(filmId);
 
                 if (filmDetails != null)
                 {
@@ -871,7 +865,7 @@ namespace UIAdmin
                 if (string.IsNullOrEmpty(errorMessage))
                 {
                     MessageBox.Show("Traduction ajoutée avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadFilmsTraduitsData(_currentFilmId);
+                    await LoadFilmsTraduitsData(_currentFilmId);
                 }
                 else
                 {
@@ -955,13 +949,13 @@ namespace UIAdmin
                 lblStatusProgrammation.Text = "Sélectionnez un film traduit dans la liste pour pouvoir créer une programmation";
             }
         }
-        private void dgvFilms_SelectionChanged(object sender, EventArgs e)
+        private async void dgvFilms_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvFilms.CurrentRow != null)
             {
                 _currentFilmId = Convert.ToInt32(dgvFilms.CurrentRow.Cells["fi_id"].Value);
                 LoadProgrammationData(_currentFilmId);
-                LoadFilmsTraduitsData(_currentFilmId);
+                await LoadFilmsTraduitsData(_currentFilmId);
             }
         }
         private void dgvProgrammation_SelectionChanged(object sender, EventArgs e)
@@ -986,7 +980,7 @@ namespace UIAdmin
                     if (response.IsSuccessStatusCode)
                     {
                         MessageBox.Show("Film supprimé avec succès.", "Suppression Réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LoadFilmsTraduitsData(_currentFilmId);
+                        await LoadFilmsTraduitsData(_currentFilmId);
                     }
                     else
                     {
@@ -1033,14 +1027,17 @@ namespace UIAdmin
         }
         private async void btProj_Click(object sender, EventArgs e)
         {
+            lblStatusSeance.Text = "";
+
             if (_selectedSeanceId == 0 || cmbSalles.SelectedItem == null)
             {
-                MessageBox.Show("Veuillez sélectionner une séance et une salle.");
+                lblStatusSeance.Text = "Veuillez sélectionner une séance et une salle de cinema.";
                 return;
             }
 
             dynamic selectedSalle = cmbSalles.SelectedItem;
             int selectedSalleId = selectedSalle.sa_id;
+
 
             var projectionData = new AddProjectionDTO
             {
@@ -1053,12 +1050,13 @@ namespace UIAdmin
 
             if (response.IsSuccessStatusCode)
             {
-                MessageBox.Show("Projection programmée avec succès.");
+                MessageBox.Show("Projection programmée avec succès.", "Ajout Réussi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 LoadProjections();
             }
             else
             {
-                MessageBox.Show("Erreur lors de la programmation de la projection.");
+                var responseContent = await response.Content.ReadAsStringAsync();
+                MessageBox.Show(responseContent, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private async void cmbCine_SelectedIndexChanged(object sender, EventArgs e)
@@ -1095,6 +1093,35 @@ namespace UIAdmin
             if (dgvSeance.CurrentRow != null)
             {
                 _selectedSeanceId = Convert.ToInt32(dgvSeance.CurrentRow.Cells["se_id"].Value);
+            }
+        }
+        private async void supprimerSeanceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvSeance.CurrentRow != null)
+            {
+                lblStatusProgrammation.Text = "";
+
+                int seanceId = Convert.ToInt32(dgvSeance.CurrentRow.Cells["se_id"].Value);
+                var confirmResult = MessageBox.Show("Êtes-vous sûr de vouloir supprimer cette seance ?", "Confirmer la suppression", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (confirmResult == DialogResult.Yes)
+                {
+                    HttpResponseMessage response = await client.DeleteAsync("https://localhost:7013/Admin/Seance/DelSeance/" + seanceId);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Seance supprimée avec succès.", "Suppression Réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadSeances();
+                    }
+                    else
+                    {
+                        var responseContent = await response.Content.ReadAsStringAsync();
+                        MessageBox.Show(responseContent, "Échec de la Suppression", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                lblStatusAdminCinema.Text = "Aucune séance n'a été sélectionnée. Veuillez choisir la séance à supprimer.";
             }
         }
     }
