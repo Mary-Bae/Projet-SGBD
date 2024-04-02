@@ -479,7 +479,7 @@ namespace UIAdmin
                         else
                         {
                             var responseContent = await response.Content.ReadAsStringAsync();
-                            MessageBox.Show("Nous n'avons pas réussi à supprimer l'élément sélectionné. Détail technique : " + responseContent, "Échec de la Suppression", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(responseContent, "Échec de la Suppression", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
@@ -1124,7 +1124,34 @@ namespace UIAdmin
                 lblStatusAdminCinema.Text = "Aucune séance n'a été sélectionnée. Veuillez choisir la séance à supprimer.";
             }
         }
+        private async void supprimerProjectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvProjection.CurrentRow != null)
+            {
+                lblStatusProgrammation.Text = "";
+
+                int projectionId = Convert.ToInt32(dgvProjection.CurrentRow.Cells["pro_id"].Value);
+                var confirmResult = MessageBox.Show("Êtes-vous sûr de vouloir supprimer cette Projection ?", "Confirmer la suppression", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (confirmResult == DialogResult.Yes)
+                {
+                    HttpResponseMessage response = await client.DeleteAsync("https://localhost:7013/Admin/Projection/DelProjection/" + projectionId);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Projection supprimée avec succès.", "Suppression Réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadProjections();
+                    }
+                    else
+                    {
+                        var responseContent = await response.Content.ReadAsStringAsync();
+                        MessageBox.Show(responseContent, "Échec de la Suppression", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                lblStatusAdminCinema.Text = "Aucune projection n'a été sélectionnée. Veuillez choisir la projection à supprimer.";
+            }
+        }
     }
 }
-
-

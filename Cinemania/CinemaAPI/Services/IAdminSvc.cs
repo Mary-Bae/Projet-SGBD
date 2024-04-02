@@ -63,6 +63,7 @@ namespace Interfaces
     {
         Task AddProjection(AddProjectionDTO pData);
         Task<List<T>> GetProjections<T>();
+        Task DeleteProjection(int pId);
     }
 
 

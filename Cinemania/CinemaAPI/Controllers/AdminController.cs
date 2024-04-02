@@ -569,6 +569,21 @@ namespace CinemaAPI.Controllers
             }
         }
 
+        [HttpDelete("Projection/DelProjection/{id}")]
+        public async Task<ActionResult> DelProjection(int id)
+        {
+            try
+            {
+                IProjectionSvc projectionSvc = _adminSvc;
+                await projectionSvc.DeleteProjection(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
 
     }
 }

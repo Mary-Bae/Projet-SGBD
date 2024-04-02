@@ -281,5 +281,10 @@ namespace Services
             var lst = await projectionRepo.GetProjections<T>();
             return lst.ToList<T>();
         }
+        async Task IProjectionSvc.DeleteProjection(int pId)
+        {
+            IProjectionRepo projectionRepo = _adminRepo;
+            await projectionRepo.DeleteProjection(pId);
+        }
     }
 }

@@ -15,6 +15,7 @@ namespace CustomErrors
         FK_PROGRAMMATION_FILMTRADUIT,
         FK_SEANCE_PROGRAMMATION,
         FK_PROJECTION_SEANCE,
+        FK_SALLE_PROJECTION,
         ErreurSQL,
         QuantiteMinimaleDePlaces,
         ChampVide,
@@ -84,6 +85,10 @@ namespace CustomErrors
                 case ErreurCodeEnum.FK_PROJECTION_SEANCE:
                     _messageToReturn = "Une séance ne peut pas être supprimée tant qu'il y a des projections en cours. Supprimez d'abord les projections de la séance sélectionnée avant de pouvoir supprimer la séance";
                     break;
+                case ErreurCodeEnum.FK_SALLE_PROJECTION:
+                    _messageToReturn = "Une salle de cinéma ne peut pas être supprimée tant qu'il y a des projections en cours. Supprimez d'abord les projections qui ont lieu dans cette salle avant de supprimer le cinéma et la salle en elle-même";
+                    break;
+
                 case ErreurCodeEnum.ErreurSQL:
                     _messageToReturn = "Erreur liée à la base de données SQL.";
                     break;

@@ -133,6 +133,8 @@
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.cmbCinemas = new System.Windows.Forms.ComboBox();
             this.btProgrammer = new System.Windows.Forms.Button();
+            this.MenuProjection = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.supprimerProjectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuCinema.SuspendLayout();
             this.MenuChaine.SuspendLayout();
             this.MenuSalle.SuspendLayout();
@@ -170,6 +172,7 @@
             this.MenuSeance.SuspendLayout();
             this.tableLayoutPanel22.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
+            this.MenuProjection.SuspendLayout();
             this.SuspendLayout();
             // 
             // MenuCinema
@@ -1206,6 +1209,7 @@
             dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvProjection.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
             this.dgvProjection.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProjection.ContextMenuStrip = this.MenuProjection;
             dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle23.BackColor = System.Drawing.Color.Gray;
             dataGridViewCellStyle23.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -1474,6 +1478,21 @@
             this.btProgrammer.Text = "Programmer";
             this.btProgrammer.UseVisualStyleBackColor = false;
             // 
+            // MenuProjection
+            // 
+            this.MenuProjection.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.supprimerProjectionToolStripMenuItem});
+            this.MenuProjection.Name = "MenuProjection";
+            this.MenuProjection.Size = new System.Drawing.Size(187, 48);
+            this.MenuProjection.Text = "MenuProjection";
+            // 
+            // supprimerProjectionToolStripMenuItem
+            // 
+            this.supprimerProjectionToolStripMenuItem.Name = "supprimerProjectionToolStripMenuItem";
+            this.supprimerProjectionToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.supprimerProjectionToolStripMenuItem.Text = "Supprimer projection";
+            this.supprimerProjectionToolStripMenuItem.Click += new System.EventHandler(this.supprimerProjectionToolStripMenuItem_Click);
+            // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1530,6 +1549,7 @@
             this.MenuSeance.ResumeLayout(false);
             this.tableLayoutPanel22.ResumeLayout(false);
             this.tableLayoutPanel11.ResumeLayout(false);
+            this.MenuProjection.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1612,5 +1632,7 @@
         private TableLayoutPanel tableLayoutPanel1;
         private ContextMenuStrip MenuSeance;
         private ToolStripMenuItem supprimerSeanceToolStripMenuItem;
+        private ContextMenuStrip MenuProjection;
+        private ToolStripMenuItem supprimerProjectionToolStripMenuItem;
     }
 }
