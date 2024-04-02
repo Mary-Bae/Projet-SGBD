@@ -50,6 +50,7 @@ namespace CinemaAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+       
         [HttpPut("Chaine/MajChaines/{id}")]
         public async Task<ActionResult> MajChaine(int id, MajChaineDTO data)
         {

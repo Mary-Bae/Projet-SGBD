@@ -116,6 +116,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.tableLayoutPanel19 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvProjection = new System.Windows.Forms.DataGridView();
+            this.MenuProjection = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.supprimerProjectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btProj = new System.Windows.Forms.Button();
             this.dgvSeance = new System.Windows.Forms.DataGridView();
             this.MenuSeance = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -133,8 +135,6 @@
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.cmbCinemas = new System.Windows.Forms.ComboBox();
             this.btProgrammer = new System.Windows.Forms.Button();
-            this.MenuProjection = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.supprimerProjectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuCinema.SuspendLayout();
             this.MenuChaine.SuspendLayout();
             this.MenuSalle.SuspendLayout();
@@ -168,11 +168,11 @@
             this.tableLayoutPanel21.SuspendLayout();
             this.tableLayoutPanel19.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProjection)).BeginInit();
+            this.MenuProjection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSeance)).BeginInit();
             this.MenuSeance.SuspendLayout();
             this.tableLayoutPanel22.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
-            this.MenuProjection.SuspendLayout();
             this.SuspendLayout();
             // 
             // MenuCinema
@@ -1238,6 +1238,21 @@
             this.dgvProjection.Size = new System.Drawing.Size(779, 218);
             this.dgvProjection.TabIndex = 24;
             // 
+            // MenuProjection
+            // 
+            this.MenuProjection.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.supprimerProjectionToolStripMenuItem});
+            this.MenuProjection.Name = "MenuProjection";
+            this.MenuProjection.Size = new System.Drawing.Size(187, 26);
+            this.MenuProjection.Text = "MenuProjection";
+            // 
+            // supprimerProjectionToolStripMenuItem
+            // 
+            this.supprimerProjectionToolStripMenuItem.Name = "supprimerProjectionToolStripMenuItem";
+            this.supprimerProjectionToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.supprimerProjectionToolStripMenuItem.Text = "Supprimer projection";
+            this.supprimerProjectionToolStripMenuItem.Click += new System.EventHandler(this.supprimerProjectionToolStripMenuItem_Click);
+            // 
             // btProj
             // 
             this.btProj.BackColor = System.Drawing.SystemColors.Info;
@@ -1478,21 +1493,6 @@
             this.btProgrammer.Text = "Programmer";
             this.btProgrammer.UseVisualStyleBackColor = false;
             // 
-            // MenuProjection
-            // 
-            this.MenuProjection.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.supprimerProjectionToolStripMenuItem});
-            this.MenuProjection.Name = "MenuProjection";
-            this.MenuProjection.Size = new System.Drawing.Size(187, 48);
-            this.MenuProjection.Text = "MenuProjection";
-            // 
-            // supprimerProjectionToolStripMenuItem
-            // 
-            this.supprimerProjectionToolStripMenuItem.Name = "supprimerProjectionToolStripMenuItem";
-            this.supprimerProjectionToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.supprimerProjectionToolStripMenuItem.Text = "Supprimer projection";
-            this.supprimerProjectionToolStripMenuItem.Click += new System.EventHandler(this.supprimerProjectionToolStripMenuItem_Click);
-            // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1545,11 +1545,11 @@
             this.tableLayoutPanel21.PerformLayout();
             this.tableLayoutPanel19.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProjection)).EndInit();
+            this.MenuProjection.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSeance)).EndInit();
             this.MenuSeance.ResumeLayout(false);
             this.tableLayoutPanel22.ResumeLayout(false);
             this.tableLayoutPanel11.ResumeLayout(false);
-            this.MenuProjection.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

@@ -6,7 +6,7 @@ using Services;
 
 namespace CinemaAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class ClientController : ControllerBase
     {
@@ -16,16 +16,15 @@ namespace CinemaAPI.Controllers
             _clientSvc = pClientSvc;
         }
 
-        [HttpGet("Cinemas")]
-        public async Task<ActionResult> GetCinemas()
+        [HttpGet("Films")]
+        public async Task<ActionResult> GetFilms()
         {
             try
             {
-                List<CinemasDTO> lst;
+                List<FilmsDTO> lst;
 
-                IClientSvc clientSvc = _clientSvc;
-                lst = await clientSvc.GetCinemas<CinemasDTO>();
-
+                IClientFilmSvc filmSvc = _clientSvc;
+                lst = await filmSvc.GetFilms<FilmsDTO>();
                 return Ok(lst);
             }
             catch (Exception ex)
