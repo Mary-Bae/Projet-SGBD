@@ -33,8 +33,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lstFilms = new System.Windows.Forms.ListBox();
             this.lstLangue = new System.Windows.Forms.ListView();
+            this.Langue = new System.Windows.Forms.ColumnHeader();
+            this.SousTitre = new System.Windows.Forms.ColumnHeader();
             this.btCancel = new System.Windows.Forms.Button();
             this.btSave = new System.Windows.Forms.Button();
+            this.lblDescription = new System.Windows.Forms.Label();
+            this.lblGenre = new System.Windows.Forms.Label();
+            this.Horaire = new System.Windows.Forms.ColumnHeader();
             this.SuspendLayout();
             // 
             // lblCinemaNom
@@ -50,7 +55,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(50, 121);
+            this.label1.Location = new System.Drawing.Point(38, 92);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(194, 15);
             this.label1.TabIndex = 32;
@@ -59,7 +64,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(386, 121);
+            this.label2.Location = new System.Drawing.Point(386, 92);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(112, 15);
             this.label2.TabIndex = 33;
@@ -69,25 +74,42 @@
             // 
             this.lstFilms.FormattingEnabled = true;
             this.lstFilms.ItemHeight = 15;
-            this.lstFilms.Location = new System.Drawing.Point(50, 162);
+            this.lstFilms.Location = new System.Drawing.Point(47, 121);
             this.lstFilms.Name = "lstFilms";
-            this.lstFilms.Size = new System.Drawing.Size(194, 139);
+            this.lstFilms.Size = new System.Drawing.Size(126, 139);
             this.lstFilms.TabIndex = 34;
+            this.lstFilms.SelectedIndexChanged += new System.EventHandler(this.lstFilms_SelectedIndexChanged);
             // 
             // lstLangue
             // 
-            this.lstLangue.Location = new System.Drawing.Point(386, 162);
+            this.lstLangue.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Langue,
+            this.SousTitre,
+            this.Horaire});
+            this.lstLangue.FullRowSelect = true;
+            this.lstLangue.Location = new System.Drawing.Point(346, 121);
             this.lstLangue.Name = "lstLangue";
-            this.lstLangue.Size = new System.Drawing.Size(112, 139);
+            this.lstLangue.Size = new System.Drawing.Size(204, 139);
             this.lstLangue.TabIndex = 35;
             this.lstLangue.UseCompatibleStateImageBehavior = false;
+            this.lstLangue.View = System.Windows.Forms.View.Details;
+            // 
+            // Langue
+            // 
+            this.Langue.Text = "Langue";
+            this.Langue.Width = 70;
+            // 
+            // SousTitre
+            // 
+            this.SousTitre.Text = "Sous-Titre";
+            this.SousTitre.Width = 70;
             // 
             // btCancel
             // 
             this.btCancel.BackColor = System.Drawing.Color.Snow;
-            this.btCancel.Location = new System.Drawing.Point(290, 351);
+            this.btCancel.Location = new System.Drawing.Point(291, 402);
             this.btCancel.Name = "btCancel";
-            this.btCancel.Size = new System.Drawing.Size(125, 23);
+            this.btCancel.Size = new System.Drawing.Size(125, 33);
             this.btCancel.TabIndex = 37;
             this.btCancel.Text = "Retour";
             this.btCancel.UseVisualStyleBackColor = false;
@@ -95,19 +117,42 @@
             // btSave
             // 
             this.btSave.BackColor = System.Drawing.Color.Snow;
-            this.btSave.Location = new System.Drawing.Point(130, 351);
+            this.btSave.Location = new System.Drawing.Point(131, 402);
             this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(125, 23);
+            this.btSave.Size = new System.Drawing.Size(125, 33);
             this.btSave.TabIndex = 36;
             this.btSave.Text = "Reserver";
             this.btSave.UseVisualStyleBackColor = false;
+            // 
+            // lblDescription
+            // 
+            this.lblDescription.AutoSize = true;
+            this.lblDescription.Location = new System.Drawing.Point(47, 303);
+            this.lblDescription.MaximumSize = new System.Drawing.Size(500, 0);
+            this.lblDescription.Name = "lblDescription";
+            this.lblDescription.Size = new System.Drawing.Size(0, 15);
+            this.lblDescription.TabIndex = 38;
+            // 
+            // lblGenre
+            // 
+            this.lblGenre.AutoSize = true;
+            this.lblGenre.Location = new System.Drawing.Point(47, 278);
+            this.lblGenre.Name = "lblGenre";
+            this.lblGenre.Size = new System.Drawing.Size(0, 15);
+            this.lblGenre.TabIndex = 39;
+            // 
+            // Horaire
+            // 
+            this.Horaire.Text = "Horaire";
             // 
             // frmCinema
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SeaShell;
-            this.ClientSize = new System.Drawing.Size(573, 399);
+            this.ClientSize = new System.Drawing.Size(573, 447);
+            this.Controls.Add(this.lblGenre);
+            this.Controls.Add(this.lblDescription);
             this.Controls.Add(this.btCancel);
             this.Controls.Add(this.btSave);
             this.Controls.Add(this.lstLangue);
@@ -132,5 +177,10 @@
         private ListView lstLangue;
         private Button btCancel;
         private Button btSave;
+        private Label lblDescription;
+        private Label lblGenre;
+        private ColumnHeader Langue;
+        private ColumnHeader SousTitre;
+        private ColumnHeader Horaire;
     }
 }
