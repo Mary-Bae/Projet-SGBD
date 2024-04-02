@@ -521,6 +521,21 @@ namespace CinemaAPI.Controllers
             }
         }
 
+        [HttpDelete("Seance/DelSeance/{id}")]
+        public async Task<ActionResult> DelSeance(int id)
+        {
+            try
+            {
+                ISeanceSvc seanceSvc = _adminSvc;
+                await seanceSvc.DeleteSeance(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         //Projection
         [HttpPost("Projection/AddProjection")]
         public async Task<IActionResult> AddProjection(AddProjectionDTO pData)
@@ -547,6 +562,21 @@ namespace CinemaAPI.Controllers
                 IProjectionSvc projectionSvc = _adminSvc;
                 lst = await projectionSvc.GetProjections<ProjectionDTO>();
                 return Ok(lst);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("Projection/DelProjection/{id}")]
+        public async Task<ActionResult> DelProjection(int id)
+        {
+            try
+            {
+                IProjectionSvc projectionSvc = _adminSvc;
+                await projectionSvc.DeleteProjection(id);
+                return Ok();
             }
             catch (Exception ex)
             {

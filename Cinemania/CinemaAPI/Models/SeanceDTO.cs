@@ -5,6 +5,7 @@
         public string  se_horaire { get; set; }
         public DateTime se_dateFin { get; set; }
         public int se_pr_id { get; set; }
+
     }
 
     public class SeanceDTO

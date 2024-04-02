@@ -126,7 +126,7 @@ namespace Repositories
                 if (ex.Number == 0x00000a29)
                     throw new CustomError(ErreurCodeEnum.UK_CHAINE_NOM, ex);
                 if (ex.Number == 0x00000223)
-                    throw new CustomError(ErreurCodeEnum.FK_CINEMA_PROGRAMMATION, ex);
+                    throw new CustomError(ErreurCodeEnum.FK_SALLE_PROJECTION, ex);
                 throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
             }
             catch (Exception ex)
@@ -168,6 +168,7 @@ namespace Repositories
             parameters.Add("@ci_id", pId);
             var lst = await _Connection.QueryAsync<T>("[Client].[Salle_SelectByCinema]", parameters, commandType: CommandType.StoredProcedure);
             return lst.ToList();
+            
         }
         public async Task<List<T>> GetSalles<T>()
         {
@@ -230,16 +231,42 @@ namespace Repositories
         }
         async Task ISalleRepo.DeleteSalle(int pId)
         {
-            var parameters = new DynamicParameters();
-            parameters.Add("@id", pId);
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@id", pId);
 
-            await _Connection.ExecuteAsync("[Admin].[Salle_Delete]", parameters, commandType: CommandType.StoredProcedure);
+                await _Connection.ExecuteAsync("[Admin].[Salle_Delete]", parameters, commandType: CommandType.StoredProcedure);
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 0x00000223)
+                    throw new CustomError(ErreurCodeEnum.FK_SALLE_PROJECTION, ex);
+                throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
+            }
         }
         public async Task DeleteSallesByCinemaId(int cinemaId)
         {
-            var parameters = new DynamicParameters();
-            parameters.Add("@CinemaId", cinemaId);
-            await _Connection.ExecuteAsync("[Admin].[Salle_DeleteSallesByCinemaId]", parameters, commandType: CommandType.StoredProcedure);
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@CinemaId", cinemaId);
+                await _Connection.ExecuteAsync("[Admin].[Salle_DeleteSallesByCinemaId]", parameters, commandType: CommandType.StoredProcedure);
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 0x00000223)
+                    throw new CustomError(ErreurCodeEnum.FK_SALLE_PROJECTION, ex);
+                throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
+            }
         }
         async Task ISalleRepo.UpdateSalle(int pId, MajSalleDTO pData)
         {
@@ -350,8 +377,7 @@ namespace Repositories
             }
             catch(SqlException ex)
             {
-                if (ex.Number == 0x00000223)
-                    throw new CustomError(ErreurCodeEnum.FK_Film_PROGRAMMATION, ex);
+                throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
             }
             catch (Exception ex)
             {
@@ -373,6 +399,8 @@ namespace Repositories
             }
             catch (SqlException ex)
             {
+                if (ex.Number == 0x00000a43)
+                    throw new CustomError(ErreurCodeEnum.UK_PROGRAMMATION, ex);
                 throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
             }
             catch (Exception ex)
@@ -392,12 +420,33 @@ namespace Repositories
             var lst = await _Connection.QueryAsync<T>("[Admin].[ProgrammationAvecNoms]", parameters, commandType: CommandType.StoredProcedure);
             return lst.ToList();
         }
-        async Task IProgrammationRepo.DeleteProgrammation(int pId)
+        public async Task<T> GetProgrammationById<T>(int pId)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@id", pId);
+            parameters.Add("@ProgrammationId", pId);
+            return await _Connection.QuerySingleOrDefaultAsync<T>("[Admin].[Programmation_SelectProgrammationById]", parameters, commandType: CommandType.StoredProcedure);
+            
+        }
+        async Task IProgrammationRepo.DeleteProgrammation(int pId)
+        {
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@id", pId);
 
-            await _Connection.ExecuteAsync("[Admin].[Programmation_Delete]", parameters, commandType: CommandType.StoredProcedure);
+                await _Connection.ExecuteAsync("[Admin].[Programmation_Delete]", parameters, commandType: CommandType.StoredProcedure);
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 0x00000223)
+                    throw new CustomError(ErreurCodeEnum.FK_SEANCE_PROGRAMMATION, ex);
+                throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
+            }
+
         }
 
         // Traduction
@@ -436,10 +485,23 @@ namespace Repositories
         }
         async Task ITraductionRepo.DeleteTraduction(int pId)
         {
-            var parameters = new DynamicParameters();
-            parameters.Add("@id", pId);
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@id", pId);
 
-            await _Connection.ExecuteAsync("[Admin].[FilmTraduit_Delete]", parameters, commandType: CommandType.StoredProcedure);
+                await _Connection.ExecuteAsync("[Admin].[FilmTraduit_Delete]", parameters, commandType: CommandType.StoredProcedure);
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 0x00000223)
+                    throw new CustomError(ErreurCodeEnum.FK_PROGRAMMATION_FILMTRADUIT, ex);
+                throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
+            }
         }
 
         // Seance
@@ -456,6 +518,8 @@ namespace Repositories
             }
             catch (SqlException ex)
             {
+                if (ex.Number == 0x00000a29)
+                    throw new CustomError(ErreurCodeEnum.UK_SEANCE, ex);
                 throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
             }
             catch (Exception ex)
@@ -467,6 +531,26 @@ namespace Repositories
         {
             var lst = await _Connection.QueryAsync<T>("[Admin].[Seance_SelectAll]");
             return lst.ToList();
+        }
+        async Task ISeanceRepo.DeleteSeance(int pId)
+        {
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@id", pId);
+
+                await _Connection.ExecuteAsync("[Admin].[Seance_Delete]", parameters, commandType: CommandType.StoredProcedure);
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 0x00000223)
+                    throw new CustomError(ErreurCodeEnum.FK_PROJECTION_SEANCE, ex);
+                throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
+            }
         }
 
         // Projection
@@ -482,6 +566,10 @@ namespace Repositories
             }
             catch (SqlException ex)
             {
+                if (ex.Number == 0x00000a29)
+                    throw new CustomError(ErreurCodeEnum.UK_PROJECTION, ex);
+                if (ex.Number == 0x0000c350)
+                    throw new CustomError(ErreurCodeEnum.ConflitProjection, ex);
                 throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
             }
             catch (Exception ex)
@@ -493,6 +581,24 @@ namespace Repositories
         {
             var lst = await _Connection.QueryAsync<T>("[Admin].[Projection_SelectAll]");
             return lst.ToList();
+        }
+        async Task IProjectionRepo.DeleteProjection(int pId)
+        {
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@id", pId);
+
+                await _Connection.ExecuteAsync("[Admin].[Projection_Delete]", parameters, commandType: CommandType.StoredProcedure);
+            }
+            catch (SqlException ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
+            }
         }
     }
 }

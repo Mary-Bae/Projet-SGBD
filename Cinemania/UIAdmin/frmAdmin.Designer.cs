@@ -109,7 +109,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tabSeance = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
-            this.label9 = new System.Windows.Forms.Label();
+            this.lblStatusSeance = new System.Windows.Forms.Label();
             this.tableLayoutPanel18 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel21 = new System.Windows.Forms.TableLayoutPanel();
             this.label12 = new System.Windows.Forms.Label();
@@ -118,6 +118,8 @@
             this.dgvProjection = new System.Windows.Forms.DataGridView();
             this.btProj = new System.Windows.Forms.Button();
             this.dgvSeance = new System.Windows.Forms.DataGridView();
+            this.MenuSeance = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.supprimerSeanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel22 = new System.Windows.Forms.TableLayoutPanel();
             this.btSeance = new System.Windows.Forms.Button();
             this.cmbSalles = new System.Windows.Forms.ComboBox();
@@ -131,6 +133,8 @@
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.cmbCinemas = new System.Windows.Forms.ComboBox();
             this.btProgrammer = new System.Windows.Forms.Button();
+            this.MenuProjection = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.supprimerProjectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuCinema.SuspendLayout();
             this.MenuChaine.SuspendLayout();
             this.MenuSalle.SuspendLayout();
@@ -165,8 +169,10 @@
             this.tableLayoutPanel19.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProjection)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSeance)).BeginInit();
+            this.MenuSeance.SuspendLayout();
             this.tableLayoutPanel22.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
+            this.MenuProjection.SuspendLayout();
             this.SuspendLayout();
             // 
             // MenuCinema
@@ -1039,13 +1045,13 @@
             this.MenuFilmsTraduit.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.supprimerFilmTraduit});
             this.MenuFilmsTraduit.Name = "MenuFilmsTraduit";
-            this.MenuFilmsTraduit.Size = new System.Drawing.Size(156, 26);
+            this.MenuFilmsTraduit.Size = new System.Drawing.Size(189, 26);
             // 
             // supprimerFilmTraduit
             // 
             this.supprimerFilmTraduit.Name = "supprimerFilmTraduit";
-            this.supprimerFilmTraduit.Size = new System.Drawing.Size(155, 22);
-            this.supprimerFilmTraduit.Text = "Supprimer Film";
+            this.supprimerFilmTraduit.Size = new System.Drawing.Size(188, 22);
+            this.supprimerFilmTraduit.Text = "Supprimer Traduction";
             this.supprimerFilmTraduit.Click += new System.EventHandler(this.supprimerFilmTraduit_Click);
             // 
             // label6
@@ -1078,7 +1084,7 @@
             this.tableLayoutPanel16.BackColor = System.Drawing.Color.Black;
             this.tableLayoutPanel16.ColumnCount = 1;
             this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel16.Controls.Add(this.label9, 0, 2);
+            this.tableLayoutPanel16.Controls.Add(this.lblStatusSeance, 0, 2);
             this.tableLayoutPanel16.Controls.Add(this.tableLayoutPanel18, 0, 0);
             this.tableLayoutPanel16.Controls.Add(this.tableLayoutPanel19, 0, 1);
             this.tableLayoutPanel16.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1092,18 +1098,18 @@
             this.tableLayoutPanel16.Size = new System.Drawing.Size(1184, 716);
             this.tableLayoutPanel16.TabIndex = 1;
             // 
-            // label9
+            // lblStatusSeance
             // 
-            this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.Color.Black;
-            this.label9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(0, 644);
-            this.label9.Margin = new System.Windows.Forms.Padding(0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(1184, 21);
-            this.label9.TabIndex = 24;
+            this.lblStatusSeance.AutoSize = true;
+            this.lblStatusSeance.BackColor = System.Drawing.Color.Black;
+            this.lblStatusSeance.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblStatusSeance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblStatusSeance.ForeColor = System.Drawing.Color.Red;
+            this.lblStatusSeance.Location = new System.Drawing.Point(0, 644);
+            this.lblStatusSeance.Margin = new System.Windows.Forms.Padding(0);
+            this.lblStatusSeance.Name = "lblStatusSeance";
+            this.lblStatusSeance.Size = new System.Drawing.Size(1184, 21);
+            this.lblStatusSeance.TabIndex = 24;
             // 
             // tableLayoutPanel18
             // 
@@ -1203,6 +1209,7 @@
             dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvProjection.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
             this.dgvProjection.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProjection.ContextMenuStrip = this.MenuProjection;
             dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle23.BackColor = System.Drawing.Color.Gray;
             dataGridViewCellStyle23.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -1261,6 +1268,7 @@
             dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvSeance.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle25;
             this.dgvSeance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSeance.ContextMenuStrip = this.MenuSeance;
             dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle26.BackColor = System.Drawing.Color.Gray;
             dataGridViewCellStyle26.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -1289,6 +1297,20 @@
             this.dgvSeance.Size = new System.Drawing.Size(779, 216);
             this.dgvSeance.TabIndex = 22;
             this.dgvSeance.SelectionChanged += new System.EventHandler(this.dgvSeance_SelectionChanged);
+            // 
+            // MenuSeance
+            // 
+            this.MenuSeance.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.supprimerSeanceToolStripMenuItem});
+            this.MenuSeance.Name = "MenuSeance";
+            this.MenuSeance.Size = new System.Drawing.Size(170, 26);
+            // 
+            // supprimerSeanceToolStripMenuItem
+            // 
+            this.supprimerSeanceToolStripMenuItem.Name = "supprimerSeanceToolStripMenuItem";
+            this.supprimerSeanceToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.supprimerSeanceToolStripMenuItem.Text = "Supprimer Seance";
+            this.supprimerSeanceToolStripMenuItem.Click += new System.EventHandler(this.supprimerSeanceToolStripMenuItem_Click);
             // 
             // tableLayoutPanel22
             // 
@@ -1325,6 +1347,7 @@
             this.cmbSalles.Name = "cmbSalles";
             this.cmbSalles.Size = new System.Drawing.Size(121, 29);
             this.cmbSalles.TabIndex = 28;
+            this.cmbSalles.Text = "Salle";
             // 
             // cmbCine
             // 
@@ -1334,6 +1357,7 @@
             this.cmbCine.Name = "cmbCine";
             this.cmbCine.Size = new System.Drawing.Size(190, 29);
             this.cmbCine.TabIndex = 29;
+            this.cmbCine.Text = "Selection cinema";
             this.cmbCine.SelectedIndexChanged += new System.EventHandler(this.cmbCine_SelectedIndexChanged);
             // 
             // tableLayoutPanel6
@@ -1454,6 +1478,21 @@
             this.btProgrammer.Text = "Programmer";
             this.btProgrammer.UseVisualStyleBackColor = false;
             // 
+            // MenuProjection
+            // 
+            this.MenuProjection.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.supprimerProjectionToolStripMenuItem});
+            this.MenuProjection.Name = "MenuProjection";
+            this.MenuProjection.Size = new System.Drawing.Size(187, 48);
+            this.MenuProjection.Text = "MenuProjection";
+            // 
+            // supprimerProjectionToolStripMenuItem
+            // 
+            this.supprimerProjectionToolStripMenuItem.Name = "supprimerProjectionToolStripMenuItem";
+            this.supprimerProjectionToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.supprimerProjectionToolStripMenuItem.Text = "Supprimer projection";
+            this.supprimerProjectionToolStripMenuItem.Click += new System.EventHandler(this.supprimerProjectionToolStripMenuItem_Click);
+            // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1507,8 +1546,10 @@
             this.tableLayoutPanel19.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProjection)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSeance)).EndInit();
+            this.MenuSeance.ResumeLayout(false);
             this.tableLayoutPanel22.ResumeLayout(false);
             this.tableLayoutPanel11.ResumeLayout(false);
+            this.MenuProjection.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1573,7 +1614,7 @@
         private DataGridView dgvFilmTrad;
         private TabPage tabSeance;
         private TableLayoutPanel tableLayoutPanel16;
-        private Label label9;
+        private Label lblStatusSeance;
         private TableLayoutPanel tableLayoutPanel18;
         private Label label10;
         private TableLayoutPanel tableLayoutPanel19;
@@ -1589,5 +1630,9 @@
         private ComboBox cmbCine;
         private DateTimePicker DateProgrammation;
         private TableLayoutPanel tableLayoutPanel1;
+        private ContextMenuStrip MenuSeance;
+        private ToolStripMenuItem supprimerSeanceToolStripMenuItem;
+        private ContextMenuStrip MenuProjection;
+        private ToolStripMenuItem supprimerProjectionToolStripMenuItem;
     }
 }

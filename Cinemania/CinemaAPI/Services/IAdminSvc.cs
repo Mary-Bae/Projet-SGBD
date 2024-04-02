@@ -33,7 +33,7 @@ namespace Interfaces
     public interface IFilmSvc
     {
         Task<List<T>> GetFilms<T>();
-        Task<FilmsDTO> GetFilmByFilmId(int filmId);
+        Task<FilmsDTO?>GetFilmByFilmId(int filmId);
         Task AddFilm(AjoutFilmsDTO ajoutFilm);
         Task UpdateFilm(int pId, FilmsDTO MajFilm);
         Task DeleteFilm(int pId);
@@ -57,11 +57,13 @@ namespace Interfaces
     {
         Task AddSeance(AddSeanceDTO pData);
         Task<List<T>> GetSeance<T>();
+        Task DeleteSeance(int pId);
     }
     public interface IProjectionSvc
     {
         Task AddProjection(AddProjectionDTO pData);
         Task<List<T>> GetProjections<T>();
+        Task DeleteProjection(int pId);
     }
 
 

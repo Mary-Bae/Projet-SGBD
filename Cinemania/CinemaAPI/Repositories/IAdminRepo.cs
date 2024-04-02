@@ -43,6 +43,7 @@ namespace Interfaces
         Task AddProgrammation(AddProgrammationDTO pData);
         Task<List<T>> GetProgrammation<T>();
         Task<List<T>> GetProgrammationByFilm<T>(int pFilm);
+        Task<T> GetProgrammationById<T>(int pData);
         Task DeleteProgrammation(int pId);
     }
     public interface ITraductionRepo
@@ -56,10 +57,12 @@ namespace Interfaces
     {
         Task AddSeance(AddSeanceDTO pData);
         Task<List<T>> GetSeance<T>();
+        Task DeleteSeance(int pId);
     }
     public interface IProjectionRepo
     {
         Task AddProjection(AddProjectionDTO pData);
         Task<List<T>> GetProjections<T>();
+        Task DeleteProjection(int pId);
     }
 }

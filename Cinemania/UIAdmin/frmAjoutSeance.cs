@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Models;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Linq.Expressions;
 
 namespace UIAdmin
 {
@@ -19,6 +20,7 @@ namespace UIAdmin
         public frmAjoutSeance()
         {
             InitializeComponent();
+            calDateFin.MinDate = DateTime.Today;
             LoadData();
         }
         public async void LoadData()
@@ -64,43 +66,48 @@ namespace UIAdmin
         }
         private async void btSave_Click(object sender, EventArgs e)
         {
-            if (lstProgrammation.SelectedItems.Count > 0)
+            lblError.Text = "";
+
+            if (lstProgrammation.SelectedItems.Count > 0 && cmbHoraire.SelectedItem != null)
             {
-                ListViewItem selectedItem = lstProgrammation.SelectedItems[0];
-                int programmationTraduiteId = (int)selectedItem.Tag; // Pour récupérer l'ID à partir de la propriété Tag
-                string horaire = cmbHoraire.SelectedItem.ToString();
-                DateTime dateFin = calDateFin.SelectionStart;
+                try {
+                    ListViewItem selectedItem = lstProgrammation.SelectedItems[0];
+                    int programmationTraduiteId = (int)selectedItem.Tag; // Pour récupérer l'ID à partir de la propriété Tag
+                    string? horaire = cmbHoraire.SelectedItem.ToString();
+                    DateTime dateFin = calDateFin.SelectionStart;
 
-                var seanceData = new AddSeanceDTO
-                {
-                    se_pr_id = programmationTraduiteId,
-                    se_horaire = horaire,
-                    se_dateFin = dateFin
-                };
+                    var seanceData = new AddSeanceDTO
+                    {
+                        se_pr_id = programmationTraduiteId,
+                        se_horaire = horaire,
+                        se_dateFin = dateFin
+                    };
+                
+                    var content = new StringContent(JsonConvert.SerializeObject(seanceData), Encoding.UTF8, "application/json");
+                    var response = await client.PostAsync("https://localhost:7013/Admin/Seance/AddSeance", content);
 
-                var content = new StringContent(JsonConvert.SerializeObject(seanceData), Encoding.UTF8, "application/json");
-                var response = await client.PostAsync("https://localhost:7013/Admin/Seance/AddSeance", content);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Séance ajoutée avec succès", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        var errorContent = await response.Content.ReadAsStringAsync();
+                        lblError.Text = errorContent;
+                    }
 
-                if (response.IsSuccessStatusCode)
-                {
-                    MessageBox.Show("Séance ajoutée avec succès");
-                    // Optionnel : rafraîchir les données affichées
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Erreur lors de l'ajout de la séance");
+                    lblError.Text = ex.Message;
                 }
             }
             else
             {
-                MessageBox.Show("Veuillez sélectionner une programmation traduite");
+                lblError.Text = "Il faudra sélectionner un film dans la liste et un horaire pour pouvoir lui attribuer une plage horaire";
             }
-        }
-        private void calDateFin_DateSelected(object sender, DateRangeEventArgs e)
-        {
-            DateTime selectedDate = calDateFin.SelectionStart;
-        }
-        private void lstProgrammation_Resize(object sender, EventArgs e)
+}
+      private void lstProgrammation_Resize(object sender, EventArgs e)
         {
             if (lstProgrammation.Columns.Count > 0)
             {
@@ -115,5 +122,5 @@ namespace UIAdmin
             }
         }
     }
-    }
+}
 

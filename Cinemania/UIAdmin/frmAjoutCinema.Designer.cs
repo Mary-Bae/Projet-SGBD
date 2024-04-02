@@ -48,42 +48,45 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(48, 80);
+            this.label1.Location = new System.Drawing.Point(55, 107);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(104, 15);
+            this.label1.Size = new System.Drawing.Size(129, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Nom du cinema  *";
             // 
             // txtNomCinema
             // 
-            this.txtNomCinema.Location = new System.Drawing.Point(158, 80);
+            this.txtNomCinema.Location = new System.Drawing.Point(183, 104);
+            this.txtNomCinema.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtNomCinema.Name = "txtNomCinema";
-            this.txtNomCinema.Size = new System.Drawing.Size(169, 23);
+            this.txtNomCinema.Size = new System.Drawing.Size(193, 27);
             this.txtNomCinema.TabIndex = 1;
             // 
             // txtAdresseCinema
             // 
-            this.txtAdresseCinema.Location = new System.Drawing.Point(473, 80);
+            this.txtAdresseCinema.Location = new System.Drawing.Point(541, 107);
+            this.txtAdresseCinema.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtAdresseCinema.Multiline = true;
             this.txtAdresseCinema.Name = "txtAdresseCinema";
-            this.txtAdresseCinema.Size = new System.Drawing.Size(169, 51);
+            this.txtAdresseCinema.Size = new System.Drawing.Size(193, 67);
             this.txtAdresseCinema.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(360, 77);
+            this.label2.Location = new System.Drawing.Point(401, 107);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 15);
+            this.label2.Size = new System.Drawing.Size(134, 20);
             this.label2.TabIndex = 2;
             this.label2.Text = "Adresse du cinema";
             // 
             // btSave
             // 
             this.btSave.BackColor = System.Drawing.Color.Snow;
-            this.btSave.Location = new System.Drawing.Point(160, 330);
+            this.btSave.Location = new System.Drawing.Point(183, 440);
+            this.btSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(121, 30);
+            this.btSave.Size = new System.Drawing.Size(138, 40);
             this.btSave.TabIndex = 4;
             this.btSave.Text = "Ajouter Cinema";
             this.btSave.UseVisualStyleBackColor = false;
@@ -92,9 +95,10 @@
             // btCancel
             // 
             this.btCancel.BackColor = System.Drawing.Color.Snow;
-            this.btCancel.Location = new System.Drawing.Point(347, 330);
+            this.btCancel.Location = new System.Drawing.Point(408, 440);
+            this.btCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btCancel.Name = "btCancel";
-            this.btCancel.Size = new System.Drawing.Size(120, 30);
+            this.btCancel.Size = new System.Drawing.Size(137, 40);
             this.btCancel.TabIndex = 5;
             this.btCancel.Text = "Annuler";
             this.btCancel.UseVisualStyleBackColor = false;
@@ -105,19 +109,18 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(28, 55);
+            this.label4.Location = new System.Drawing.Point(32, 73);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(122, 15);
+            this.label4.Size = new System.Drawing.Size(155, 20);
             this.label4.TabIndex = 13;
             this.label4.Text = "Nombre de rangées  *";
             // 
             // cmbQteRangees
             // 
             this.cmbQteRangees.FormattingEnabled = true;
-            this.cmbQteRangees.Location = new System.Drawing.Point(177, 51);
-            this.cmbQteRangees.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbQteRangees.Location = new System.Drawing.Point(202, 68);
             this.cmbQteRangees.Name = "cmbQteRangees";
-            this.cmbQteRangees.Size = new System.Drawing.Size(64, 27);
+            this.cmbQteRangees.Size = new System.Drawing.Size(73, 31);
             this.cmbQteRangees.TabIndex = 12;
             this.cmbQteRangees.SelectedIndexChanged += new System.EventHandler(this.cmbQteRangees_SelectedIndexChanged);
             // 
@@ -126,19 +129,18 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(312, 55);
+            this.label5.Location = new System.Drawing.Point(357, 73);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(114, 15);
+            this.label5.Size = new System.Drawing.Size(145, 20);
             this.label5.TabIndex = 15;
             this.label5.Text = "Nombre de places  *";
             // 
             // cmbNbrPlace
             // 
             this.cmbNbrPlace.FormattingEnabled = true;
-            this.cmbNbrPlace.Location = new System.Drawing.Point(459, 51);
-            this.cmbNbrPlace.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbNbrPlace.Location = new System.Drawing.Point(508, 68);
             this.cmbNbrPlace.Name = "cmbNbrPlace";
-            this.cmbNbrPlace.Size = new System.Drawing.Size(64, 27);
+            this.cmbNbrPlace.Size = new System.Drawing.Size(73, 31);
             this.cmbNbrPlace.TabIndex = 14;
             this.cmbNbrPlace.SelectedIndexChanged += new System.EventHandler(this.cmbNbrPlace_SelectedIndexChanged);
             // 
@@ -153,11 +155,9 @@
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.groupBox1.Location = new System.Drawing.Point(48, 142);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Location = new System.Drawing.Point(55, 189);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(554, 152);
+            this.groupBox1.Size = new System.Drawing.Size(633, 203);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ajout de la Salle numero 1";
@@ -167,9 +167,9 @@
             this.lblNombreDePlaces.AutoSize = true;
             this.lblNombreDePlaces.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblNombreDePlaces.ForeColor = System.Drawing.Color.Red;
-            this.lblNombreDePlaces.Location = new System.Drawing.Point(38, 97);
+            this.lblNombreDePlaces.Location = new System.Drawing.Point(43, 129);
             this.lblNombreDePlaces.Name = "lblNombreDePlaces";
-            this.lblNombreDePlaces.Size = new System.Drawing.Size(0, 15);
+            this.lblNombreDePlaces.Size = new System.Drawing.Size(0, 20);
             this.lblNombreDePlaces.TabIndex = 17;
             // 
             // label6
@@ -177,9 +177,9 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label6.Location = new System.Drawing.Point(48, 16);
+            this.label6.Location = new System.Drawing.Point(55, 21);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(185, 30);
+            this.label6.Size = new System.Drawing.Size(237, 38);
             this.label6.TabIndex = 18;
             this.label6.Text = "Nouveau cinema";
             // 
@@ -188,17 +188,16 @@
             this.lblError.AutoSize = true;
             this.lblError.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblError.ForeColor = System.Drawing.Color.Red;
-            this.lblError.Location = new System.Drawing.Point(57, 305);
+            this.lblError.Location = new System.Drawing.Point(65, 407);
             this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(0, 15);
+            this.lblError.Size = new System.Drawing.Size(0, 20);
             this.lblError.TabIndex = 18;
             // 
             // frmAjoutCinema
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.SeaShell;
-            this.ClientSize = new System.Drawing.Size(660, 386);
+            this.ClientSize = new System.Drawing.Size(754, 515);
             this.ControlBox = false;
             this.Controls.Add(this.lblError);
             this.Controls.Add(this.label6);
@@ -210,6 +209,7 @@
             this.Controls.Add(this.txtNomCinema);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmAjoutCinema";
             this.Text = "Enregistrement d\'un nouveau cinema";
             this.groupBox1.ResumeLayout(false);
