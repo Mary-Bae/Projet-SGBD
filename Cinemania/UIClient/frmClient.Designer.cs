@@ -317,6 +317,7 @@
             this.btCinema.TabIndex = 25;
             this.btCinema.Text = "Choisir Cinema";
             this.btCinema.UseVisualStyleBackColor = false;
+            this.btCinema.Click += new System.EventHandler(this.btCinema_Click);
             // 
             // label1
             // 

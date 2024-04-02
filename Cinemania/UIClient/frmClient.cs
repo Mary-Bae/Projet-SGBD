@@ -83,5 +83,21 @@ namespace UIClient
             }
             
         }
+
+        private void btCinema_Click(object sender, EventArgs e)
+        {
+            if (cmbCinemas.SelectedItem != null)
+            {
+                var selectedCinema = (CinemasDTO)cmbCinemas.SelectedItem;
+                // var films = GetFilmsForCinema(selectedCinema.ci_id);
+
+                frmCinema detailsForm = new frmCinema(selectedCinema);//, films);
+                detailsForm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner un cinéma.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
     }
 }
