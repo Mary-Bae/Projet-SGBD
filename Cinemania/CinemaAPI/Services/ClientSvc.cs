@@ -3,17 +3,17 @@ using Repositories;
 
 namespace Services
 {
-    public class ClientSvc : IClientSvc
+    public class ClientSvc : IClientSvc, IClientFilmSvc
     {
         IClientRepo _clientRepo;
         public ClientSvc(IClientRepo pClientRepo)
         {
             _clientRepo = pClientRepo;
         }
-        async Task<List<T>> IClientSvc.GetCinemas<T>()
+        async Task<List<T>> IClientFilmSvc.GetFilms<T>()
         {
-            IClientRepo clientRepo = _clientRepo;
-            var lst = await clientRepo.GetCinemas<T>();
+            IClientFilmRepo filmRepo = _clientRepo;
+            var lst = await filmRepo.GetFilms<T>();
             return lst.ToList<T>();
         }
     }

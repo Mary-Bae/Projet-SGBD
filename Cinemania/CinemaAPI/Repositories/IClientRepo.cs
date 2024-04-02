@@ -1,7 +1,10 @@
 ﻿namespace Interfaces
 {
-    public interface IClientRepo
+    public interface IClientRepo : IClientFilmRepo
     {
-        Task<List<T>> GetCinemas<T>();
+    }
+    public interface IClientFilmRepo
+    {
+        Task<List<T>> GetFilms<T>();
     }
 }

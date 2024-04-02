@@ -1,7 +1,10 @@
 ﻿namespace Interfaces
 {
-    public interface IClientSvc
+    public interface IClientSvc : IClientFilmSvc
     {
-        Task<List<T>> GetCinemas<T>();
+    }
+    public interface IClientFilmSvc
+    {
+        Task<List<T>> GetFilms<T>();
     }
 }
