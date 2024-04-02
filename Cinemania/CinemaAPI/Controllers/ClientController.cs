@@ -32,5 +32,23 @@ namespace CinemaAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("Cinemas")]
+        public async Task<ActionResult> GetCinemas()
+        {
+            try
+            {
+                List<CinemasDTO> lst;
+
+                IClientCinemaSvc cinemasSvc = _clientSvc;
+                lst = await cinemasSvc.GetCinemas<CinemasDTO>();
+
+                return Ok(lst);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
