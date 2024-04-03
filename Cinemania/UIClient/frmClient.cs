@@ -1,6 +1,7 @@
 using Models;
 using Newtonsoft.Json;
 using System.ComponentModel;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 
 namespace UIClient
@@ -84,15 +85,32 @@ namespace UIClient
             
         }
 
-        private void btCinema_Click(object sender, EventArgs e)
+        private async void btCinema_Click(object sender, EventArgs e)
         {
             if (cmbCinemas.SelectedItem != null)
             {
                 var selectedCinema = (CinemasDTO)cmbCinemas.SelectedItem;
-                // var films = GetFilmsForCinema(selectedCinema.ci_id);
+                try
+                {
+                    var response = await client.GetAsync("https://localhost:7013/Client/FilmByCinema/" + selectedCinema.ci_id);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var content = await response.Content.ReadAsStringAsync();
+                        var films = JsonConvert.DeserializeObject<List<FilmsDTO>>(content);
 
-                frmCinema detailsForm = new frmCinema(selectedCinema);//, films);
-                detailsForm.ShowDialog();
+                        frmCinema detailsForm = new frmCinema(selectedCinema, films);
+                        detailsForm.ShowDialog();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Erreur lors du chargement des films pour le cinéma sélectionné.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception, show a message, etc.
+                    MessageBox.Show($"Une erreur s'est produite: {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {

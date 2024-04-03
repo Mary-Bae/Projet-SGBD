@@ -76,7 +76,7 @@ namespace UIAdmin
                 }
                 else
                 {
-                    // Lire le contenu de la réponse pour obtenir le message d'erreur métier
+                    // Lire le contenu de la réponse pour obtenir le message d'erreur de l'API
                     var errorContent = await response.Content.ReadAsStringAsync();
                     var statusCode = response.StatusCode;
                     Console.WriteLine("Échec de la requête : " + statusCode);
