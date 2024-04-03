@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Services;
+using System;
 
 namespace CinemaAPI.Controllers
 {
@@ -94,6 +95,30 @@ namespace CinemaAPI.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("SalleByProjection")]
+        public async Task<IActionResult> GetSalleByProjection(int CinemaId, int FilmId, int LangueId, string Horaire, string Date)
+        {
+            {
+                try
+                {
+                    DateTime date = DateTime.Parse(Date);
+                    var salleDetails = await _clientSvc.GetSalleByProjection(new SalleByProjectionDTO
+                    {
+                        CinemaId = CinemaId,
+                        FilmId = FilmId,
+                        LangueId = LangueId,
+                        Horaire = Horaire,
+                    }, date);
+
+                    return Ok(salleDetails);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
             }
         }
     }

@@ -6,7 +6,8 @@ using System.Data.Common;
 
 namespace Repositories
 {
-    public class ClientRepo : IClientRepo, IClientFilmRepo, IClientCinemaRepo, IClientTraductionRepo, IClientDatesRepo
+    public class ClientRepo : IClientRepo, IClientFilmRepo, IClientCinemaRepo, IClientTraductionRepo, 
+        IClientDatesRepo, IClientSalleRepo
     {
         IDbConnection _Connection;
         public ClientRepo(IDbConnection pConnection)
@@ -55,6 +56,22 @@ namespace Repositories
             parameters.Add("@Horaire", horaire, DbType.String);
 
             var result = await _Connection.QueryAsync<DatesDTO>("[Client].[Seance_GetDates]",parameters,commandType: CommandType.StoredProcedure);
+
+            return result.FirstOrDefault();
+        }
+
+        //Salle
+        public async Task<SalleDTO> GetSalleByProjection(SalleByProjectionDTO pSalle, DateTime pDate)
+        {
+            var parameters = new DynamicParameters();
+            
+            parameters.Add("@CinemaId", pSalle.CinemaId);
+            parameters.Add("@FilmId", pSalle.FilmId);
+            parameters.Add("@LangueId", pSalle.LangueId);
+            parameters.Add("@Horaire", pSalle.Horaire);
+            parameters.Add("@DateSelected", pDate);
+
+            var result = await _Connection.QueryAsync<SalleDTO>("[Client].[Salle_SalleByProjection]", parameters, commandType: CommandType.StoredProcedure);
 
             return result.FirstOrDefault();
         }

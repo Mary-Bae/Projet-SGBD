@@ -115,5 +115,56 @@ namespace UIClient
                 MessageBox.Show("Erreur lors de la récupération de la plage de dates.");
             }
         }
+
+        private async Task<SalleDTO> GetDetailsSalle(int cinemaId, int filmId, int langueId, string horaire, DateTime dateSelectionnee)
+        {
+            string formattedDate = dateSelectionnee.ToString("yyyy-MM-dd");
+            var response = await client.GetAsync($"https://localhost:7013/Client/SalleByProjection?CinemaId={cinemaId}&FilmId={filmId}&LangueId={langueId}&Horaire={horaire}&Date={formattedDate}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var salleDetails = JsonConvert.DeserializeObject<SalleDTO>(content);
+                return salleDetails;
+            }
+            else
+            {
+                MessageBox.Show("Erreur lors de la récupération des détails de la salle.");
+                return null;
+            }
+        }
+
+
+        private async void btReserver_Click(object sender, EventArgs e)
+        {
+            if (lstLangue.SelectedItems.Count > 0)
+            {
+                var selectedItem = lstLangue.SelectedItems[0];
+                int langueId = Convert.ToInt32(selectedItem.Tag);
+                string horaire = selectedItem.SubItems[2].Text;
+
+                DateTime dateSelectionnee = dateReservation.Value;
+
+                SalleDTO salleDetails = await GetDetailsSalle(_cinemaDetails.ci_id, _selectedFilmId, langueId, horaire, dateSelectionnee);
+
+                ReservationDetailsDTO reservationDetails = new ReservationDetailsDTO
+                {
+                    CinemaId = _cinemaDetails.ci_id,
+                    CinemaNom = _cinemaDetails.ci_nom,
+                    FilmId = _selectedFilmId,
+                    LangueId = langueId,
+                    Horaire = horaire,
+                    DateSelectionnee = dateSelectionnee,
+                    SalleDetails = salleDetails
+                };
+
+                frmReservation reservationForm = new frmReservation(reservationDetails);
+                reservationForm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner une langue et un horaire pour continuer.", "Sélection requise", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
     }
 }
