@@ -47,7 +47,7 @@ namespace UIClient
             }
         }
 
-        private async Task<List<LangueAndHoraireDTO>> GetLanguesPourFilm(int filmId, int cinemaId)
+        private async Task<List<LangueAndHoraireDTO>> GetLanguesPourFilm(int cinemaId,int filmId)
         {
             var response = await client.GetAsync($"https://localhost:7013/Client/LangueByFilmAndCinema/{cinemaId}/{filmId}");
             if (response.IsSuccessStatusCode)
@@ -67,6 +67,15 @@ namespace UIClient
             {
                 MessageBox.Show("Erreur lors de la récupération des langues pour le film sélectionné.");
                 return new List<LangueAndHoraireDTO>();
+            }
+        }
+
+        private void btCancel_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Voulez-vous quitter sans réserver ?", "Confirmer", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
             }
         }
     }

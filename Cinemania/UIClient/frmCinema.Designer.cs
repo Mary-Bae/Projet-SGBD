@@ -35,11 +35,11 @@
             this.lstLangue = new System.Windows.Forms.ListView();
             this.Langue = new System.Windows.Forms.ColumnHeader();
             this.SousTitre = new System.Windows.Forms.ColumnHeader();
+            this.Horaire = new System.Windows.Forms.ColumnHeader();
             this.btCancel = new System.Windows.Forms.Button();
             this.btSave = new System.Windows.Forms.Button();
             this.lblDescription = new System.Windows.Forms.Label();
             this.lblGenre = new System.Windows.Forms.Label();
-            this.Horaire = new System.Windows.Forms.ColumnHeader();
             this.SuspendLayout();
             // 
             // lblCinemaNom
@@ -104,6 +104,10 @@
             this.SousTitre.Text = "Sous-Titre";
             this.SousTitre.Width = 70;
             // 
+            // Horaire
+            // 
+            this.Horaire.Text = "Horaire";
+            // 
             // btCancel
             // 
             this.btCancel.BackColor = System.Drawing.Color.Snow;
@@ -113,6 +117,7 @@
             this.btCancel.TabIndex = 37;
             this.btCancel.Text = "Retour";
             this.btCancel.UseVisualStyleBackColor = false;
+            this.btCancel.Click += new System.EventHandler(this.btCancel_Click);
             // 
             // btSave
             // 
@@ -140,10 +145,6 @@
             this.lblGenre.Name = "lblGenre";
             this.lblGenre.Size = new System.Drawing.Size(0, 15);
             this.lblGenre.TabIndex = 39;
-            // 
-            // Horaire
-            // 
-            this.Horaire.Text = "Horaire";
             // 
             // frmCinema
             // 
