@@ -82,5 +82,19 @@ namespace CinemaAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("GetDatesByProjection/{filmId}/{cinemaId}/{langueId}/{horaire}")]
+        public async Task<IActionResult> GetDatesByProjection(int filmId, int cinemaId, int langueId, string horaire)
+        {
+            try
+            {
+                var dates = await _clientSvc.GetDatesByProjection(filmId, cinemaId, langueId, horaire);
+                return Ok(dates);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

@@ -17,6 +17,7 @@ namespace UIClient
     {
         private CinemasDTO _cinemaDetails;
         private List<FilmsDTO> _filmDetails;
+        private int _selectedFilmId;
 
         private static readonly HttpClient client = new HttpClient();
         public frmCinema(CinemasDTO cinemaDetails, List<FilmsDTO> filmDetails)
@@ -26,6 +27,7 @@ namespace UIClient
             _filmDetails = filmDetails;
             lblCinemaNom.Text = _cinemaDetails.ci_nom;
             LoadFilms();
+            dateReservation.Enabled = false;
         }
 
         private void LoadFilms()
@@ -40,10 +42,12 @@ namespace UIClient
         {
             if (lstFilms.SelectedIndex != -1)
             {
+                dateReservation.Enabled = false;
                 var selectedFilm = _filmDetails[lstFilms.SelectedIndex];
+                _selectedFilmId = selectedFilm.fi_id;
                 lblDescription.Text = selectedFilm.fi_description;
                 lblGenre.Text = selectedFilm.fi_genre;
-                await GetLanguesPourFilm(_cinemaDetails.ci_id, selectedFilm.fi_id);
+                await GetLanguesPourFilm(_cinemaDetails.ci_id, _selectedFilmId);
             }
         }
 
@@ -59,6 +63,7 @@ namespace UIClient
                 foreach (var langue in langues)
                 {
                     var item = new ListViewItem(new[] { langue.la_langue, langue.la_sousTitre, langue.se_horaire });
+                    item.Tag = langue.la_id;
                     lstLangue.Items.Add(item);
                 }
                 return langues;
@@ -76,6 +81,38 @@ namespace UIClient
             {
                 this.DialogResult = DialogResult.Cancel;
                 this.Close();
+            }
+        }
+
+        private async void lstLangue_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstLangue.SelectedIndices.Count > 0 && _selectedFilmId != 0)
+            {
+                var selectedItem = lstLangue.SelectedItems[0];
+                int langueId = Convert.ToInt32(selectedItem.Tag);  // Langue
+                var horaire = selectedItem.SubItems[2].Text; // Horaire
+
+                await GetPlageDeDates(_selectedFilmId, _cinemaDetails.ci_id, langueId, horaire);
+            }
+        }
+
+        private async Task GetPlageDeDates(int filmId, int cinemaId, int langueId, string horaire)
+        {
+            var response = await client.GetAsync($"https://localhost:7013/Client/GetDatesByProjection/{filmId}/{cinemaId}/{langueId}/{horaire}");
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var dates = JsonConvert.DeserializeObject<DatesDTO>(content);
+
+                var minDate = dates.DateDebut > DateTime.Today ? dates.DateDebut : DateTime.Today;
+
+                dateReservation.MinDate = minDate;
+                dateReservation.MaxDate = dates.DateFin;
+                dateReservation.Enabled = true;
+            }
+            else
+            {
+                MessageBox.Show("Erreur lors de la récupération de la plage de dates.");
             }
         }
     }
