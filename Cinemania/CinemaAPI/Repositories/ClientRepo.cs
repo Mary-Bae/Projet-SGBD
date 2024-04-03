@@ -2,10 +2,11 @@
 using Interfaces;
 using Models;
 using System.Data;
+using System.Data.Common;
 
 namespace Repositories
 {
-    public class ClientRepo : IClientRepo, IClientFilmRepo, IClientCinemaRepo, IClientTraductionRepo
+    public class ClientRepo : IClientRepo, IClientFilmRepo, IClientCinemaRepo, IClientTraductionRepo, IClientDatesRepo
     {
         IDbConnection _Connection;
         public ClientRepo(IDbConnection pConnection)
@@ -35,7 +36,6 @@ namespace Repositories
         }
 
         //Traduction
-
         public async Task<List<T>> GetLanguesByFilmsAndCine<T>(int pCinema, int pFilm)
         {
             var parameters = new DynamicParameters();
@@ -43,6 +43,20 @@ namespace Repositories
             parameters.Add("@FilmId", pFilm);
             var lst = await _Connection.QueryAsync<T>("[Client].[Langue_SelectByCinemaAndFilms]", parameters, commandType: CommandType.StoredProcedure);
             return lst.ToList();
+        }
+
+        //Dates
+        public async Task<DatesDTO?> GetDatesByProjection(int filmId, int cinemaId, int langueId, string horaire)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@FilmId", filmId, DbType.Int32);
+            parameters.Add("@CinemaId", cinemaId, DbType.Int32);
+            parameters.Add("@LangueId", langueId, DbType.Int32);
+            parameters.Add("@Horaire", horaire, DbType.String);
+
+            var result = await _Connection.QueryAsync<DatesDTO>("[Client].[Seance_GetDates]",parameters,commandType: CommandType.StoredProcedure);
+
+            return result.FirstOrDefault();
         }
     }
 }

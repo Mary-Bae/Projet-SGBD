@@ -40,6 +40,8 @@
             this.btSave = new System.Windows.Forms.Button();
             this.lblDescription = new System.Windows.Forms.Label();
             this.lblGenre = new System.Windows.Forms.Label();
+            this.dateReservation = new System.Windows.Forms.DateTimePicker();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblCinemaNom
@@ -55,26 +57,26 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(38, 92);
+            this.label1.Location = new System.Drawing.Point(25, 92);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(194, 15);
+            this.label1.Size = new System.Drawing.Size(98, 15);
             this.label1.TabIndex = 32;
-            this.label1.Text = "Choisissez le film qui vous interesse";
+            this.label1.Text = "Films disponibles";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(386, 92);
+            this.label2.Location = new System.Drawing.Point(229, 92);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(112, 15);
+            this.label2.Size = new System.Drawing.Size(172, 15);
             this.label2.TabIndex = 33;
-            this.label2.Text = "Choisissez la langue";
+            this.label2.Text = "Langues et horaires disponibles";
             // 
             // lstFilms
             // 
             this.lstFilms.FormattingEnabled = true;
             this.lstFilms.ItemHeight = 15;
-            this.lstFilms.Location = new System.Drawing.Point(47, 121);
+            this.lstFilms.Location = new System.Drawing.Point(25, 121);
             this.lstFilms.Name = "lstFilms";
             this.lstFilms.Size = new System.Drawing.Size(126, 139);
             this.lstFilms.TabIndex = 34;
@@ -87,12 +89,13 @@
             this.SousTitre,
             this.Horaire});
             this.lstLangue.FullRowSelect = true;
-            this.lstLangue.Location = new System.Drawing.Point(346, 121);
+            this.lstLangue.Location = new System.Drawing.Point(229, 121);
             this.lstLangue.Name = "lstLangue";
             this.lstLangue.Size = new System.Drawing.Size(204, 139);
             this.lstLangue.TabIndex = 35;
             this.lstLangue.UseCompatibleStateImageBehavior = false;
             this.lstLangue.View = System.Windows.Forms.View.Details;
+            this.lstLangue.SelectedIndexChanged += new System.EventHandler(this.lstLangue_SelectedIndexChanged);
             // 
             // Langue
             // 
@@ -111,7 +114,7 @@
             // btCancel
             // 
             this.btCancel.BackColor = System.Drawing.Color.Snow;
-            this.btCancel.Location = new System.Drawing.Point(291, 402);
+            this.btCancel.Location = new System.Drawing.Point(390, 402);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(125, 33);
             this.btCancel.TabIndex = 37;
@@ -122,7 +125,7 @@
             // btSave
             // 
             this.btSave.BackColor = System.Drawing.Color.Snow;
-            this.btSave.Location = new System.Drawing.Point(131, 402);
+            this.btSave.Location = new System.Drawing.Point(125, 402);
             this.btSave.Name = "btSave";
             this.btSave.Size = new System.Drawing.Size(125, 33);
             this.btSave.TabIndex = 36;
@@ -132,7 +135,7 @@
             // lblDescription
             // 
             this.lblDescription.AutoSize = true;
-            this.lblDescription.Location = new System.Drawing.Point(47, 303);
+            this.lblDescription.Location = new System.Drawing.Point(25, 303);
             this.lblDescription.MaximumSize = new System.Drawing.Size(500, 0);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(0, 15);
@@ -141,17 +144,35 @@
             // lblGenre
             // 
             this.lblGenre.AutoSize = true;
-            this.lblGenre.Location = new System.Drawing.Point(47, 278);
+            this.lblGenre.Location = new System.Drawing.Point(25, 278);
             this.lblGenre.Name = "lblGenre";
             this.lblGenre.Size = new System.Drawing.Size(0, 15);
             this.lblGenre.TabIndex = 39;
+            // 
+            // dateReservation
+            // 
+            this.dateReservation.Location = new System.Drawing.Point(475, 121);
+            this.dateReservation.Name = "dateReservation";
+            this.dateReservation.Size = new System.Drawing.Size(174, 23);
+            this.dateReservation.TabIndex = 40;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(475, 92);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(108, 15);
+            this.label3.TabIndex = 41;
+            this.label3.Text = "Date de reservation";
             // 
             // frmCinema
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SeaShell;
-            this.ClientSize = new System.Drawing.Size(573, 447);
+            this.ClientSize = new System.Drawing.Size(670, 447);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.dateReservation);
             this.Controls.Add(this.lblGenre);
             this.Controls.Add(this.lblDescription);
             this.Controls.Add(this.btCancel);
@@ -183,5 +204,7 @@
         private ColumnHeader Langue;
         private ColumnHeader SousTitre;
         private ColumnHeader Horaire;
+        private DateTimePicker dateReservation;
+        private Label label3;
     }
 }

@@ -3,7 +3,7 @@ using Models;
 
 namespace Interfaces
 {
-    public interface IClientRepo : IClientFilmRepo, IClientCinemaRepo, IClientTraductionRepo
+    public interface IClientRepo : IClientFilmRepo, IClientCinemaRepo, IClientTraductionRepo, IClientDatesRepo
     {
     }
     public interface IClientFilmRepo
@@ -18,5 +18,9 @@ namespace Interfaces
     public interface IClientTraductionRepo
     {
         Task<List<T>> GetLanguesByFilmsAndCine<T>(int pCinema, int pFilm);
+    }
+    public interface IClientDatesRepo
+    {
+        Task<DatesDTO> GetDatesByProjection(int filmId, int cinemaId, int langueId, string horaire);
     }
 }

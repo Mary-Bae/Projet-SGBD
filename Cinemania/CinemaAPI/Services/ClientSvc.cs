@@ -4,7 +4,7 @@ using Repositories;
 
 namespace Services
 {
-    public class ClientSvc : IClientSvc, IClientFilmSvc, IClientCinemaSvc, IClientTraductionSvc
+    public class ClientSvc : IClientSvc, IClientFilmSvc, IClientCinemaSvc, IClientTraductionSvc, IClientDatesSvc
     {
         IClientRepo _clientRepo;
         public ClientSvc(IClientRepo pClientRepo)
@@ -38,6 +38,12 @@ namespace Services
         {
             return await _clientRepo.GetLanguesByFilmsAndCine<T>(pCinema, pFilm);
         }
-         
+
+        // Dates
+        async Task<DatesDTO> IClientDatesSvc.GetDatesByProjection(int filmId, int cinemaId, int langueId, string horaire)
+        {
+            return await _clientRepo.GetDatesByProjection(filmId, cinemaId, langueId, horaire);
+        }
+
     }
 }
