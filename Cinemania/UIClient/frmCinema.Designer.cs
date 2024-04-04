@@ -172,6 +172,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SeaShell;
             this.ClientSize = new System.Drawing.Size(670, 447);
+            this.ControlBox = false;
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dateReservation);
             this.Controls.Add(this.lblGenre);

@@ -53,10 +53,11 @@
             // lblSalle
             // 
             this.lblSalle.AutoSize = true;
-            this.lblSalle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblSalle.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblSalle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.lblSalle.Location = new System.Drawing.Point(41, 85);
             this.lblSalle.Name = "lblSalle";
-            this.lblSalle.Size = new System.Drawing.Size(0, 21);
+            this.lblSalle.Size = new System.Drawing.Size(0, 25);
             this.lblSalle.TabIndex = 32;
             // 
             // tblPanelSeats
@@ -73,7 +74,7 @@
             // btCancel
             // 
             this.btCancel.BackColor = System.Drawing.Color.Snow;
-            this.btCancel.Location = new System.Drawing.Point(463, 415);
+            this.btCancel.Location = new System.Drawing.Point(397, 429);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(125, 33);
             this.btCancel.TabIndex = 39;
@@ -84,7 +85,7 @@
             // btReserver
             // 
             this.btReserver.BackColor = System.Drawing.Color.Snow;
-            this.btReserver.Location = new System.Drawing.Point(211, 415);
+            this.btReserver.Location = new System.Drawing.Point(145, 429);
             this.btReserver.Name = "btReserver";
             this.btReserver.Size = new System.Drawing.Size(125, 33);
             this.btReserver.TabIndex = 38;
@@ -131,7 +132,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.SeaShell;
             this.ClientSize = new System.Drawing.Size(731, 502);
+            this.ControlBox = false;
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.label1);
@@ -141,6 +144,7 @@
             this.Controls.Add(this.tblPanelSeats);
             this.Controls.Add(this.lblSalle);
             this.Controls.Add(this.lblCinemaNom);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "frmReservation";
             this.Text = "Reservation";
             ((System.ComponentModel.ISupportInitialize)(this.nbrTickets)).EndInit();
