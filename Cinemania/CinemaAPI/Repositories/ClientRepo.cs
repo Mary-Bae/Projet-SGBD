@@ -1,5 +1,4 @@
-﻿using CinemaAPI.Models;
-using Dapper;
+﻿using Dapper;
 using Interfaces;
 using Microsoft.Data.SqlClient;
 using Models;

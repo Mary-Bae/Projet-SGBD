@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -43,14 +44,14 @@ namespace UIClient
             for (int row = 0; row < _reservationDetails.SalleDetails.sa_qteRangees; row++)
             {
                 // Définition du style de rangée pour chaque rangée
-                tblPanelSeats.RowStyles.Add(new RowStyle(SizeType.Absolute, 50));
+                tblPanelSeats.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
 
                 for (int seat = 0; seat < _reservationDetails.SalleDetails.sa_qtePlace_Rangee; seat++)
                 {
                     // Définition du style de colonne pour la première rangée
                     if (row == 0)
                     {
-                        tblPanelSeats.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 50));
+                        tblPanelSeats.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 30));
                     }
 
                     Button seatButton = new Button
@@ -89,7 +90,10 @@ namespace UIClient
 
         private void nbrTickets_ValueChanged(object sender, EventArgs e)
         {
+            int prix = 10;
             _numberOfTickets = (int)nbrTickets.Value;
+            int prixTotal = prix *= _numberOfTickets;
+            lblTotal.Text = "Total à payer :" + prixTotal.ToString() + "€";
         }
 
         private void btReserver_Click(object sender, EventArgs e)
@@ -100,11 +104,17 @@ namespace UIClient
                 return;
             }
 
+            var sieges = _selectedSeats.Select(s => new SiegeDTO
+            {
+                Row = s.Row,
+                SeatNumber = s.Seat
+            }).ToList();
+
             ReservationDTO reservation = new ReservationDTO
             {
                 ProjectionId = _reservationDetails.SalleDetails.pro_id,
-                NumberOfPersons = _numberOfTickets,
-                Seats = _selectedSeats.ToList()
+                NbrPersonnes = _numberOfTickets,
+                Sieges = sieges
             };
             SaveReservation(reservation);
         }
@@ -114,7 +124,7 @@ namespace UIClient
             {
                 var jsonContent = JsonConvert.SerializeObject(reservation);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-                var response = await client.PostAsync("https://localhost:7013/Client/Reservation/AddReservation/", content);
+                var response = await client.PostAsync("https://localhost:7013/Client/Reservation/AddReservation", content);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -131,7 +141,7 @@ namespace UIClient
             }
         }
     }
-    // Une classe simple pour stocker les informations sur les sièges
+    // Une classe qui sert à stocker les informations sur les sièges
     public class SeatTag
     {
         public int Row { get; set; }

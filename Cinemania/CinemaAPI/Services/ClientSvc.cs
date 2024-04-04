@@ -1,5 +1,4 @@
-﻿using CinemaAPI.Models;
-using Interfaces;
+﻿using Interfaces;
 using Models;
 using Repositories;
 

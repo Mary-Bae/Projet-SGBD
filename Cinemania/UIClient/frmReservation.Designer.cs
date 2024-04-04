@@ -35,6 +35,8 @@
             this.btReserver = new System.Windows.Forms.Button();
             this.nbrTickets = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nbrTickets)).BeginInit();
             this.SuspendLayout();
             // 
@@ -106,11 +108,31 @@
             this.label1.TabIndex = 41;
             this.label1.Text = "Nombre de réservations";
             // 
+            // lblTotal
+            // 
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.ForeColor = System.Drawing.Color.Red;
+            this.lblTotal.Location = new System.Drawing.Point(29, 289);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(0, 15);
+            this.lblTotal.TabIndex = 43;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(29, 228);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(103, 15);
+            this.label2.TabIndex = 44;
+            this.label2.Text = "Prix du ticket : 10€";
+            // 
             // frmReservation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(731, 502);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.nbrTickets);
             this.Controls.Add(this.btCancel);
@@ -135,5 +157,7 @@
         private Button btReserver;
         private NumericUpDown nbrTickets;
         private Label label1;
+        private Label lblTotal;
+        private Label label2;
     }
 }

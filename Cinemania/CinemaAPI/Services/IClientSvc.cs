@@ -1,5 +1,4 @@
-﻿using CinemaAPI.Models;
-using Models;
+﻿using Models;
 
 namespace Interfaces
 {

@@ -21,7 +21,12 @@ namespace Models
     public class ReservationDTO
     {
         public int ProjectionId { get; set; }
-        public int NumberOfPersons { get; set; }
-        public List<SeatTag> Seats { get; set; }
+        public int NbrPersonnes { get; set; }
+        public List<SiegeDTO> Sieges { get; set; }
+    }
+    public class SiegeDTO
+    {
+        public int Row { get; set; }
+        public int SeatNumber { get; set; }
     }
 }

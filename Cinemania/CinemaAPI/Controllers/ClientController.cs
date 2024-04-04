@@ -1,5 +1,4 @@
-﻿using CinemaAPI.Models;
-using Interfaces;
+﻿using Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
