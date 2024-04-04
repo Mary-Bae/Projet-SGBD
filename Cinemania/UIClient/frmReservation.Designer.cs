@@ -63,7 +63,7 @@
             // 
             this.tblPanelSeats.ColumnCount = 1;
             this.tblPanelSeats.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tblPanelSeats.Location = new System.Drawing.Point(183, 123);
+            this.tblPanelSeats.Location = new System.Drawing.Point(211, 123);
             this.tblPanelSeats.Name = "tblPanelSeats";
             this.tblPanelSeats.RowCount = 1;
             this.tblPanelSeats.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -79,6 +79,7 @@
             this.btCancel.TabIndex = 39;
             this.btCancel.Text = "Retour";
             this.btCancel.UseVisualStyleBackColor = false;
+            this.btCancel.Click += new System.EventHandler(this.btCancel_Click);
             // 
             // btReserver
             // 
@@ -141,7 +142,7 @@
             this.Controls.Add(this.lblSalle);
             this.Controls.Add(this.lblCinemaNom);
             this.Name = "frmReservation";
-            this.Text = "frmReservation";
+            this.Text = "Reservation";
             ((System.ComponentModel.ISupportInitialize)(this.nbrTickets)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

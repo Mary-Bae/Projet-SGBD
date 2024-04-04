@@ -23,10 +23,17 @@ namespace Models
         public int ProjectionId { get; set; }
         public int NbrPersonnes { get; set; }
         public List<SiegeDTO> Sieges { get; set; }
+        public DateTime DateReservee { get; set; }
     }
     public class SiegeDTO
     {
         public int Row { get; set; }
         public int SeatNumber { get; set; }
     }
+    public class DateReserveeDTO
+    {
+        public int ProjectionId { get; set; }
+        public DateTime Date { get; set; }
+    }
+
 }
