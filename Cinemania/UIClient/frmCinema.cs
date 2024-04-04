@@ -70,7 +70,7 @@ namespace UIClient
             }
             else
             {
-                MessageBox.Show("Erreur lors de la récupération des langues pour le film sélectionné.");
+                MessageBox.Show("Erreur lors de la récupération des langues pour le film sélectionné.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return new List<LangueAndHoraireDTO>();
             }
         }
@@ -112,7 +112,7 @@ namespace UIClient
             }
             else
             {
-                MessageBox.Show("Erreur lors de la récupération de la plage de dates.");
+                MessageBox.Show("Erreur lors de la récupération de la plage de dates.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -129,11 +129,10 @@ namespace UIClient
             }
             else
             {
-                MessageBox.Show("Erreur lors de la récupération des détails de la salle.");
+                MessageBox.Show("Erreur lors de la récupération des détails de la salle.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
-
 
         private async void btReserver_Click(object sender, EventArgs e)
         {
@@ -158,15 +157,13 @@ namespace UIClient
                     SalleDetails = salleDetails
                 };
 
-                
-
                 frmReservation reservationForm = new frmReservation(reservationDetails);
                 reservationForm.Owner = this;
                 reservationForm.ShowDialog();
             }
             else
             {
-                MessageBox.Show("Veuillez sélectionner une langue et un horaire pour continuer.", "Sélection requise", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Veuillez sélectionner un film ainsi qu'une séance pour continuer.", "Sélection requise", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }
