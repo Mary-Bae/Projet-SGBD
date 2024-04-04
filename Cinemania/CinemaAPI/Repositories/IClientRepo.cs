@@ -1,10 +1,11 @@
 ﻿
+using CinemaAPI.Models;
 using Models;
 
 namespace Interfaces
 {
     public interface IClientRepo : IClientFilmRepo, IClientCinemaRepo, IClientTraductionRepo, IClientDatesRepo,
-        IClientSalleRepo
+        IClientSalleRepo, IClientReservationRepo
     {
     }
     public interface IClientFilmRepo
@@ -27,5 +28,9 @@ namespace Interfaces
     public interface IClientSalleRepo
     {
         Task<SalleDTO> GetSalleByProjection(SalleByProjectionDTO pSalle, DateTime pDate);
+    }
+    public interface IClientReservationRepo
+    {
+        Task<bool> AddReservation(ReservationDTO reservation);
     }
 }

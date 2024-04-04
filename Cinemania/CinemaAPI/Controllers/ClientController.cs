@@ -1,4 +1,5 @@
-﻿using Interfaces;
+﻿using CinemaAPI.Models;
+using Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
@@ -119,6 +120,20 @@ namespace CinemaAPI.Controllers
                 {
                     return BadRequest(ex.Message);
                 }
+            }
+        }
+
+        [HttpPost("Reservation/AddReservation")]
+        public async Task<IActionResult> Post(ReservationDTO reservation)
+        {
+            var success = await _clientSvc.AddReservation(reservation);
+            if (success)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
             }
         }
     }

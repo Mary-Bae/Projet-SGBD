@@ -344,6 +344,7 @@ namespace UIAdmin
                         {
                             MessageBox.Show("Cinémas supprimé avec succès.", "Suppression Réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             await LoadCinemasByChaine(_currentChaineId);
+
                             dgvCine.Columns["ci_id"].Visible = false;
                         }
                         else
@@ -391,7 +392,7 @@ namespace UIAdmin
 
                 var result = formAjoutCinema.ShowDialog();
                 if (result == DialogResult.OK)
-                    await LoadCinemasByChaine(chaineId);
+                    await LoadCinemasByChaine(chaineId);;
             }
             else
             {

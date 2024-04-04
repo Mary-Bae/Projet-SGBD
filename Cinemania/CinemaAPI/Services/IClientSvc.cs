@@ -1,8 +1,10 @@
-﻿using Models;
+﻿using CinemaAPI.Models;
+using Models;
 
 namespace Interfaces
 {
-    public interface IClientSvc : IClientFilmSvc, IClientCinemaSvc, IClientTraductionSvc, IClientDatesSvc, IClientSalleSvc
+    public interface IClientSvc : IClientFilmSvc, IClientCinemaSvc, IClientTraductionSvc, IClientDatesSvc, IClientSalleSvc,
+        IClientReservationSvc
     {
     }
     public interface IClientFilmSvc
@@ -26,6 +28,10 @@ namespace Interfaces
     public interface IClientSalleSvc
     {
         Task<SalleDTO> GetSalleByProjection(SalleByProjectionDTO pSalle, DateTime pDate);
+    }
+    public interface IClientReservationSvc
+    {
+        Task<bool> AddReservation(ReservationDTO reservation);
     }
 
 

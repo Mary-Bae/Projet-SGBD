@@ -14,5 +14,6 @@ namespace Models
         public int sa_qtePlace_Rangee { get; set; }
         public int sa_numeroSalle { get; set; }
         public int sa_ci_id { get; set; }
+        public int pro_id { get; set; }
     }
 }
