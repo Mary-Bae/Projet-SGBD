@@ -37,7 +37,7 @@
             this.SousTitre = new System.Windows.Forms.ColumnHeader();
             this.Horaire = new System.Windows.Forms.ColumnHeader();
             this.btCancel = new System.Windows.Forms.Button();
-            this.btSave = new System.Windows.Forms.Button();
+            this.btReserver = new System.Windows.Forms.Button();
             this.lblDescription = new System.Windows.Forms.Label();
             this.lblGenre = new System.Windows.Forms.Label();
             this.dateReservation = new System.Windows.Forms.DateTimePicker();
@@ -122,15 +122,16 @@
             this.btCancel.UseVisualStyleBackColor = false;
             this.btCancel.Click += new System.EventHandler(this.btCancel_Click);
             // 
-            // btSave
+            // btReserver
             // 
-            this.btSave.BackColor = System.Drawing.Color.Snow;
-            this.btSave.Location = new System.Drawing.Point(125, 402);
-            this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(125, 33);
-            this.btSave.TabIndex = 36;
-            this.btSave.Text = "Reserver";
-            this.btSave.UseVisualStyleBackColor = false;
+            this.btReserver.BackColor = System.Drawing.Color.Snow;
+            this.btReserver.Location = new System.Drawing.Point(125, 402);
+            this.btReserver.Name = "btReserver";
+            this.btReserver.Size = new System.Drawing.Size(125, 33);
+            this.btReserver.TabIndex = 36;
+            this.btReserver.Text = "Reserver";
+            this.btReserver.UseVisualStyleBackColor = false;
+            this.btReserver.Click += new System.EventHandler(this.btReserver_Click);
             // 
             // lblDescription
             // 
@@ -176,7 +177,7 @@
             this.Controls.Add(this.lblGenre);
             this.Controls.Add(this.lblDescription);
             this.Controls.Add(this.btCancel);
-            this.Controls.Add(this.btSave);
+            this.Controls.Add(this.btReserver);
             this.Controls.Add(this.lstLangue);
             this.Controls.Add(this.lstFilms);
             this.Controls.Add(this.label2);
@@ -198,7 +199,7 @@
         private ListBox lstFilms;
         private ListView lstLangue;
         private Button btCancel;
-        private Button btSave;
+        private Button btReserver;
         private Label lblDescription;
         private Label lblGenre;
         private ColumnHeader Langue;
