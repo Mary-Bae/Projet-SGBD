@@ -156,7 +156,7 @@ namespace UIClient
 
                 if (response.IsSuccessStatusCode)
                 {
-                    MessageBox.Show("Nous vous remercions pour votre réservation" , "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Nous vous remercions pour votre réservation et vous souhaitons un excellent visionnage !" , "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
