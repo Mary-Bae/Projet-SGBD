@@ -44,14 +44,14 @@ namespace UIClient
             for (int row = 0; row < _reservationDetails.SalleDetails.sa_qteRangees; row++)
             {
                 // Définition du style de rangée pour chaque rangée
-                tblPanelSeats.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
+                tblPanelSeats.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
 
                 for (int seat = 0; seat < _reservationDetails.SalleDetails.sa_qtePlace_Rangee; seat++)
                 {
                     // Définition du style de colonne pour la première rangée
                     if (row == 0)
                     {
-                        tblPanelSeats.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 30));
+                        tblPanelSeats.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 40));
                     }
 
                     Button seatButton = new Button
@@ -76,7 +76,7 @@ namespace UIClient
 
             if (_selectedSeats.Contains(seatTag))
             {
-                // Si le siège est déjà sélectionné, le désélectionner
+                // Si le siège est déjà sélectionné, permettre de le désélectionner
                 button.BackColor = Color.LightGreen;
                 _selectedSeats.Remove(seatTag);
             }
