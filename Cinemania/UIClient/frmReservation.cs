@@ -13,7 +13,6 @@ using System.Windows.Forms;
 
 namespace UIClient
 {
-    
 
     public partial class frmReservation : Form
     {
@@ -29,46 +28,62 @@ namespace UIClient
             lblSalle.Text = "salle " + reservationDetails.SalleDetails.sa_numeroSalle.ToString();
             LoadSeats();
         }
-        private void LoadSeats()
+        private async void LoadSeats()
         {
-            // Suppression de tous les contrôles existants pour éviter les doublons
+            var reservedSeats = await GetReservedSeats();
+
             tblPanelSeats.Controls.Clear();
             tblPanelSeats.RowStyles.Clear();
             tblPanelSeats.ColumnStyles.Clear();
 
-            // Configuration du TableLayoutPanel
             tblPanelSeats.RowCount = _reservationDetails.SalleDetails.sa_qteRangees;
             tblPanelSeats.ColumnCount = _reservationDetails.SalleDetails.sa_qtePlace_Rangee;
 
-            // Ajout dynamique des sièges (boutons) au TableLayoutPanel
             for (int row = 0; row < _reservationDetails.SalleDetails.sa_qteRangees; row++)
             {
-                // Définition du style de rangée pour chaque rangée
                 tblPanelSeats.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
-
                 for (int seat = 0; seat < _reservationDetails.SalleDetails.sa_qtePlace_Rangee; seat++)
                 {
-                    // Définition du style de colonne pour la première rangée
-                    if (row == 0)
-                    {
-                        tblPanelSeats.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 40));
-                    }
-
                     Button seatButton = new Button
                     {
                         Text = $"{row + 1}-{seat + 1}",
                         Size = new Size(40, 40),
                         Margin = new Padding(0),
                         BackColor = Color.LightGreen,
-                        Tag = new SeatTag { Row = row, Seat = seat } // Utilisation d'une classe personnalisée pour stocker les données de chaque siège
+                        Tag = new SeatTag { Row = row, Seat = seat }
                     };
-                    seatButton.Click += SeatButton_Click;
 
-                    // Ajout du bouton au TableLayoutPanel
+                    if (reservedSeats.Any(s => s.Row == row && s.SeatNumber == seat))
+                    {
+                        seatButton.Enabled = false; // Désactive le bouton pour les sièges réservés
+                        seatButton.BackColor = Color.LightGray; // Change la couleur pour indiquer qu'ils sont pris
+                    }
+                    else
+                    {
+                        seatButton.Click += SeatButton_Click;
+                    }
+
                     tblPanelSeats.Controls.Add(seatButton, seat, row);
                 }
             }
-    }
+        }
+
+        private async Task<List<SiegeDTO>> GetReservedSeats()
+        {
+            // Construisez l'URL pour l'API
+            string url = $"https://localhost:7013/Client/Reservation/SiegesReservesByProjection?projectionId={_reservationDetails.SalleDetails.pro_id}&date={_reservationDetails.DateSelectionnee.ToString("yyyy-MM-dd")}";
+
+            var response = await client.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var reservedSeats = JsonConvert.DeserializeObject<List<SiegeDTO>>(content);
+                return reservedSeats;
+            }
+            return new List<SiegeDTO>();
+            
+        }
         private void SeatButton_Click(object sender, EventArgs e)
         {
             var button = sender as Button;
@@ -114,9 +129,22 @@ namespace UIClient
             {
                 ProjectionId = _reservationDetails.SalleDetails.pro_id,
                 NbrPersonnes = _numberOfTickets,
-                Sieges = sieges
+                Sieges = sieges,
+                DateReservee = _reservationDetails.DateSelectionnee
             };
-            SaveReservation(reservation);
+            if (MessageBox.Show("Voulez-vous confirmer votre réservation ?", "Confirmer", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                SaveReservation(reservation);
+
+                // Vérifier si le formulaire parent existe et s'il n'est pas déjà fermé
+                if (this.Owner != null && !this.Owner.IsDisposed)
+                {
+                    // Fermer le formulaire parent
+                    this.Owner.Close();
+                }
+                this.Close();
+            }
+            
         }
         private async void SaveReservation(ReservationDTO reservation)
         {
@@ -128,7 +156,7 @@ namespace UIClient
 
                 if (response.IsSuccessStatusCode)
                 {
-                    MessageBox.Show("Réservation enregistrée avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Nous vous remercions pour votre réservation" , "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -138,6 +166,15 @@ namespace UIClient
             catch (Exception ex)
             {
                 MessageBox.Show($"Une erreur est survenue : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btCancel_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Voulez-vous quitter sans réserver ?", "Confirmer", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
             }
         }
     }

@@ -84,6 +84,7 @@ namespace Repositories
             var parameters = new DynamicParameters();
             parameters.Add("@ProjectionId", reservation.ProjectionId);
             parameters.Add("@NbrPersonnes", reservation.NbrPersonnes);
+            parameters.Add("@ReservationDate", reservation.DateReservee);
 
             // Convertir la liste des sièges en une chaîne formatée
             string seatsFormatted = string.Join(",", reservation.Sieges.Select(s => $"{s.Row}{s.SeatNumber}"));
@@ -94,6 +95,33 @@ namespace Repositories
 
             // Vérification si l'opération a affecté au moins une ligne
             return affectedRows > 0;
+        }
+
+        public async Task<List<SiegeDTO>> SiegesReservesByProjection(int projectionId, DateTime date)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@ProjectionId", projectionId);
+            parameters.Add("@Date", date);
+
+            var seatsString = await _Connection.QueryAsync<string>("[Client].[Reservation_SelectSiegeByDate]", parameters, commandType: CommandType.StoredProcedure);
+
+            var seats = new List<SiegeDTO>();
+
+            // Traiter chaque élément de la liste retournée par la DB
+            foreach (var seatChain in seatsString)
+            {
+                // Diviser chaque chaîne de siège (par exemple, "31,32" en "31" et "32")
+                foreach (var seat in seatChain.Split(','))
+                {
+                    // Substring pour diviser le premier chiffre du 2e et remplir SiegeDTO
+                    if (seat.Length >= 2 && int.TryParse(seat.Substring(0, 1), out int row) && int.TryParse(seat.Substring(1), out int seatNumber))
+                    {
+                        seats.Add(new SiegeDTO { Row = row, SeatNumber = seatNumber });
+                    }
+                }
+            }
+
+            return seats;
         }
     }
 }

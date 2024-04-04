@@ -135,5 +135,19 @@ namespace CinemaAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet("Reservation/SiegesReservesByProjection")]
+        public async Task<IActionResult> SiegesReservesByProjection(int projectionId, DateTime date)
+        {
+            try
+            {
+                var reservedSeats = await _clientSvc.SiegesReservesByProjection(projectionId, date);
+                return Ok(reservedSeats);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

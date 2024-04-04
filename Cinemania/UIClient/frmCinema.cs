@@ -158,7 +158,10 @@ namespace UIClient
                     SalleDetails = salleDetails
                 };
 
+                
+
                 frmReservation reservationForm = new frmReservation(reservationDetails);
+                reservationForm.Owner = this;
                 reservationForm.ShowDialog();
             }
             else
