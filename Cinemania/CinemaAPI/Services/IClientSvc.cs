@@ -3,7 +3,7 @@
 namespace Interfaces
 {
     public interface IClientSvc : IClientFilmSvc, IClientCinemaSvc, IClientTraductionSvc, IClientDatesSvc, IClientSalleSvc,
-        IClientReservationSvc
+        IClientReservationSvc, IClientChaineSvc, IClientAbonnementSvc
     {
     }
     public interface IClientFilmSvc
@@ -32,6 +32,14 @@ namespace Interfaces
     {
         Task<bool> AddReservation(ReservationDTO reservation);
         Task<List<SiegeDTO>> SiegesReservesByProjection(int projectionId, DateTime date);
+    }
+    public interface IClientChaineSvc
+    {
+        Task<List<T>> GetChaine<T>();
+    }
+    public interface IClientAbonnementSvc
+    {
+        Task<AbonnementInfosDTO> AddAbonnement(int chaineId);
     }
 
 

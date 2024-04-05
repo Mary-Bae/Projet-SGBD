@@ -1,4 +1,5 @@
-﻿using Interfaces;
+﻿using CustomErrors;
+using Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
@@ -145,6 +146,44 @@ namespace CinemaAPI.Controllers
                 return Ok(reservedSeats);
             }
             catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("Chaine")]
+        public async Task<ActionResult> GetChaine()
+        {
+            try
+            {
+                List<ChaineDTO> lst;
+
+                IClientChaineSvc clientSvc = _clientSvc;
+                lst = await clientSvc.GetChaine<ChaineDTO>();
+                return Ok(lst);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("Abonnement/AddAbonnement")]
+        public async Task<IActionResult> AddAbonnement(ChaineIdDTO chaineIdDto)
+        {
+            try
+            {
+                IClientAbonnementSvc clientSvc = _clientSvc;
+                var abonnementInfo = await _clientSvc.AddAbonnement(chaineIdDto.ch_id);
+
+                if (abonnementInfo != null)
+                    return Ok(abonnementInfo);
+                else
+                {
+                    return BadRequest("Impossible de créer l'abonnement.");
+                }
+            }
+            catch (CustomError ex)
             {
                 return BadRequest(ex.Message);
             }

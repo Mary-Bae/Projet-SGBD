@@ -5,7 +5,7 @@ using Repositories;
 namespace Services
 {
     public class ClientSvc : IClientSvc, IClientFilmSvc, IClientCinemaSvc, IClientTraductionSvc, IClientDatesSvc,
-        IClientSalleSvc, IClientReservationSvc
+        IClientSalleSvc, IClientReservationSvc, IClientChaineSvc, IClientAbonnementSvc
     {
         IClientRepo _clientRepo;
         public ClientSvc(IClientRepo pClientRepo)
@@ -60,6 +60,33 @@ namespace Services
         public async Task<List<SiegeDTO>> SiegesReservesByProjection(int projectionId, DateTime date)
         {
             return await _clientRepo.SiegesReservesByProjection(projectionId, date);
+        }
+
+        //Chaine
+        async Task<List<T>> IClientChaineSvc.GetChaine<T>()
+        {
+            IClientChaineRepo clientRepo = _clientRepo;
+            var lst = await clientRepo.GetChaine<T>();
+            return lst.ToList<T>();
+        }
+
+        //Abonnement
+        async Task<AbonnementInfosDTO> IClientAbonnementSvc.AddAbonnement(int chaineId)
+        {
+            var guid = Guid.NewGuid().ToString("N").Substring(0, 16);
+            var dateAchat = DateTime.Now;
+            var dateFinValidite = dateAchat.AddYears(1); // Valide pour 1 an
+
+            var abonnement = new AbonnementDTO
+            {
+                ChaineId = chaineId,
+                Uid = guid,
+                DateAchat = dateAchat,
+                DateFinValidite = dateFinValidite
+            };
+
+            return await _clientRepo.AddAbonnement(abonnement);
+            
         }
     }
 }

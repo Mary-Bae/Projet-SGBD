@@ -3,7 +3,7 @@
 namespace Interfaces
 {
     public interface IClientRepo : IClientFilmRepo, IClientCinemaRepo, IClientTraductionRepo, IClientDatesRepo,
-        IClientSalleRepo, IClientReservationRepo
+        IClientSalleRepo, IClientReservationRepo, IClientChaineRepo, IClientAbonnementRepo
     {
     }
     public interface IClientFilmRepo
@@ -31,6 +31,13 @@ namespace Interfaces
     {
         Task<bool> AddReservation(ReservationDTO reservation);
         Task<List<SiegeDTO>> SiegesReservesByProjection(int projectionId, DateTime date);
-
+    }
+    public interface IClientChaineRepo
+    {
+        Task<List<T>> GetChaine<T>();
+    }
+    public interface IClientAbonnementRepo
+    {
+        Task<AbonnementInfosDTO> AddAbonnement(AbonnementDTO abonnement);
     }
 }

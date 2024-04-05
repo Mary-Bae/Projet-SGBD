@@ -584,7 +584,5 @@ namespace CinemaAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-
     }
 }
