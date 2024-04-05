@@ -29,6 +29,8 @@ namespace Services
                 throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
             if (pData.QtePlace % pData.QteRangees != 0)
                 throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
+            if (pData.QtePlacesRangee > 10)
+                throw new CustomError(ErreurCodeEnum.QuantiteMaxPlacesParRangee);
             if (pData.NomChaine == "" || pData.NomChaine == null || pData.NomCinema == "" || pData.NomCinema == null)
                 throw new CustomError(ErreurCodeEnum.ChampVide);
 
@@ -110,6 +112,8 @@ namespace Services
                 throw new CustomError(ErreurCodeEnum.NumeroInvalide);
             if (pData.sa_qtePlace % pData.sa_qteRangees != 0)
                 throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
+            if (pData.sa_qtePlace_Rangee > 10)
+                throw new CustomError(ErreurCodeEnum.QuantiteMaxPlacesParRangee);
 
                 ISalleRepo salleRepo = _adminRepo;
                 await salleRepo.AddSalle(pData);
@@ -120,6 +124,8 @@ namespace Services
                 throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
             if (cinemaEtSalleDTO.QtePlace % cinemaEtSalleDTO.QteRangees != 0)
                 throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
+            if (cinemaEtSalleDTO.QtePlacesRangee > 10)
+                throw new CustomError(ErreurCodeEnum.QuantiteMaxPlacesParRangee);
             if (cinemaEtSalleDTO.NomCinema == "" || cinemaEtSalleDTO.NomCinema == null)
                 throw new CustomError(ErreurCodeEnum.ChampVide);
 
@@ -143,6 +149,8 @@ namespace Services
                 throw new CustomError(ErreurCodeEnum.NumeroInvalide);
             if (pData.sa_qtePlace % pData.sa_qteRangees != 0)
                 throw new CustomError(ErreurCodeEnum.QuantiteMinimaleDePlaces);
+            if (pData.sa_qtePlace_Rangee > 10)
+                throw new CustomError(ErreurCodeEnum.QuantiteMaxPlacesParRangee);
 
             ISalleRepo salleRepo = _adminRepo;
             await salleRepo.UpdateSalle(pId, pData);
