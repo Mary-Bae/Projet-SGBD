@@ -18,6 +18,7 @@ namespace CustomErrors
         FK_SALLE_PROJECTION,
         ErreurSQL,
         QuantiteMinimaleDePlaces,
+        QuantiteMaxPlacesParRangee,
         ChampVide,
         NumeroInvalide,
         ChampsSelectionnes,
@@ -97,6 +98,9 @@ namespace CustomErrors
                     break;
                 case ErreurCodeEnum.QuantiteMinimaleDePlaces:
                     _messageToReturn = "Le nombre de places de cinéma n'est pas correct.";
+                    break;
+                case ErreurCodeEnum.QuantiteMaxPlacesParRangee:
+                    _messageToReturn = "Le nombre de places par rangée ne doit pas dépasser 10";
                     break;
                 case ErreurCodeEnum.NumeroInvalide:
                     _messageToReturn = "Veuillez rentrer un numero de salle valide.";

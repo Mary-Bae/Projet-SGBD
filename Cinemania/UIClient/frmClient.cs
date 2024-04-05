@@ -49,7 +49,7 @@ namespace UIClient
         }
         private async void LoadCinemas()
         {
-            try
+                try
             {
                 HttpResponseMessage response = await client.GetAsync("https://localhost:7013/Client/Cinemas");
 
@@ -108,7 +108,7 @@ namespace UIClient
                 }
                 catch (Exception ex)
                 {
-                    // Log the exception, show a message, etc.
+
                     MessageBox.Show($"Une erreur s'est produite: {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }

@@ -47,7 +47,7 @@ namespace UIClient
                     Button seatButton = new Button
                     {
                         Text = $"{row + 1}-{seat + 1}",
-                        Size = new Size(40, 40),
+                        Size = new Size(50, 50),
                         Margin = new Padding(0),
                         BackColor = Color.LightGreen,
                         Tag = new SeatTag { Row = row, Seat = seat }
