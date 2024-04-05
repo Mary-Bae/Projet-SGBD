@@ -15,7 +15,6 @@ namespace UIClient
             LoadFilms();
             LoadCinemas();
         }
-
         async void LoadFilms()
         {
             const int maxRetries = 3;
@@ -72,7 +71,6 @@ namespace UIClient
                 MessageBox.Show("Une erreur s'est produite lors de la récupération des cinémas : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void cmbCinemas_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbCinemas.SelectedItem != null)
@@ -116,6 +114,12 @@ namespace UIClient
             {
                 MessageBox.Show("Veuillez sélectionner un cinéma.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void btAbonnement_Click(object sender, EventArgs e)
+        {
+            var frmAbonnement = new frmAbonnement();
+            frmAbonnement.ShowDialog();
         }
     }
 }

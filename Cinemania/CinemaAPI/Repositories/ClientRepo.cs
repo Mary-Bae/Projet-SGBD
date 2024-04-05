@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using CustomErrors;
+using Dapper;
 using Interfaces;
 using Microsoft.Data.SqlClient;
 using Models;
@@ -9,7 +10,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 namespace Repositories
 {
     public class ClientRepo : IClientRepo, IClientFilmRepo, IClientCinemaRepo, IClientTraductionRepo, 
-        IClientDatesRepo, IClientSalleRepo, IClientReservationRepo
+        IClientDatesRepo, IClientSalleRepo, IClientReservationRepo, IClientChaineRepo, IClientAbonnementRepo
     {
         IDbConnection _Connection;
         public ClientRepo(IDbConnection pConnection)
@@ -96,7 +97,6 @@ namespace Repositories
             // Vérification si l'opération a affecté au moins une ligne
             return affectedRows > 0;
         }
-
         public async Task<List<SiegeDTO>> SiegesReservesByProjection(int projectionId, DateTime date)
         {
             var parameters = new DynamicParameters();
@@ -122,6 +122,37 @@ namespace Repositories
             }
 
             return seats;
+        }
+
+        //Chaine
+        public async Task<List<T>> GetChaine<T>()
+        {
+            var lst = await _Connection.QueryAsync<T>("[Client].[Chaine_SelectAll]");
+            return lst.ToList();
+        }
+        //Abonnement
+        public async Task<AbonnementInfosDTO> AddAbonnement(AbonnementDTO abonnement)
+        {
+
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@ChaineId", abonnement.ChaineId);
+                parameters.Add("@Uid", abonnement.Uid);
+                parameters.Add("@DateAchat", abonnement.DateAchat);
+                parameters.Add("@DateFinValidite", abonnement.DateFinValidite);
+
+                return await _Connection.QueryFirstOrDefaultAsync<AbonnementInfosDTO>("[Client].[Abonnement_AddAbonnement]", parameters, commandType: CommandType.StoredProcedure);
+
+            }
+            catch (SqlException ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
+            }
         }
     }
 }

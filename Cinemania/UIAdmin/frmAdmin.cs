@@ -19,6 +19,7 @@ namespace UIAdmin
         private int _currentFilmId;
         private int _currentProgrammationId;
         private int _selectedSeanceId;
+        bool success;
 
         public frmAdmin()
         {
@@ -35,7 +36,7 @@ namespace UIAdmin
         {
             const int maxRetries = 3;
             int attempts = 0;
-            bool success = false;
+            
 
             //Recharge les chaines en trois tentatives si elles n'arrivent pas à se charger, ca laisse le temps à l'API de se charger
             while (attempts < maxRetries && !success)
@@ -65,7 +66,6 @@ namespace UIAdmin
         {
             const int maxRetries = 3;
             int attempts = 0;
-            bool success = false;
 
             while (attempts < maxRetries && !success)
             {
@@ -94,7 +94,6 @@ namespace UIAdmin
         {
             const int maxRetries = 3;
             int attempts = 0;
-            bool success = false;
 
             //Recharge les langues en trois tentatives si elles n'arrivent pas à se charger, ca laisse le temps à l'API de se charger
             while (attempts < maxRetries && !success)
@@ -125,7 +124,6 @@ namespace UIAdmin
         {
             const int maxRetries = 3;
             int attempts = 0;
-            bool success = false;
 
             //Recharge les chaines en trois tentatives si elles n'arrivent pas à se charger, ca laisse le temps à l'API de se charger
             while (attempts < maxRetries && !success)
@@ -160,7 +158,6 @@ namespace UIAdmin
         {
             const int maxRetries = 3;
             int attempts = 0;
-            bool success = false;
 
             //Recharge les langues en trois tentatives si elles n'arrivent pas à se charger, ca laisse le temps à l'API de se charger
             while (attempts < maxRetries && !success)
