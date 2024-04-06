@@ -30,6 +30,7 @@ namespace Interfaces
     public interface IClientReservationRepo
     {
         Task<bool> AddReservation(ReservationDTO reservation);
+        Task<bool> AddReservationWithAbonnement(ReservationDTO reservation);
         Task<List<SiegeDTO>> SiegesReservesByProjection(int projectionId, DateTime date);
     }
     public interface IClientChaineRepo
@@ -38,6 +39,6 @@ namespace Interfaces
     }
     public interface IClientAbonnementRepo
     {
-        Task<AbonnementInfosDTO> AddAbonnement(AbonnementDTO abonnement);
+        Task<AbonnementInfosDTO?> AddAbonnement(AbonnementDTO abonnement);
     }
 }

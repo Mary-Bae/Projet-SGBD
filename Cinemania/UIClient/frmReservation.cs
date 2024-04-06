@@ -27,6 +27,8 @@ namespace UIClient
             lblCinemaNom.Text = reservationDetails.CinemaNom;
             lblSalle.Text = "salle " + reservationDetails.SalleDetails.sa_numeroSalle.ToString();
             LoadSeats();
+            txtUid.Visible = false;
+            lblUid.Visible = false;
         }
         private async void LoadSeats()
         {
@@ -82,7 +84,7 @@ namespace UIClient
                 return reservedSeats;
             }
             return new List<SiegeDTO>();
-            
+
         }
         private void SeatButton_Click(object sender, EventArgs e)
         {
@@ -128,23 +130,22 @@ namespace UIClient
             ReservationDTO reservation = new ReservationDTO
             {
                 ProjectionId = _reservationDetails.SalleDetails.pro_id,
+                ChaineId = _reservationDetails.ChaineId, // Supposons que ce champ est ajouté dans les détails
                 NbrPersonnes = _numberOfTickets,
                 Sieges = sieges,
-                DateReservee = _reservationDetails.DateSelectionnee
+                DateReservee = _reservationDetails.DateSelectionnee,
+                UidAbonnement = rbtAbonnement.Checked ? txtUid.Text : null
             };
-            if (MessageBox.Show("Voulez-vous confirmer votre réservation ?", "Confirmer", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                SaveReservation(reservation);
 
-                // Vérifier si le formulaire parent existe et s'il n'est pas déjà fermé
-                if (this.Owner != null && !this.Owner.IsDisposed)
-                {
-                    // Fermer le formulaire parent
-                    this.Owner.Close();
-                }
-                this.Close();
+            SaveReservation(reservation);
+
+            // Vérifier si le formulaire parent existe et s'il n'est pas déjà fermé
+            if (this.Owner != null && !this.Owner.IsDisposed)
+            {
+                // Fermer le formulaire parent
+                this.Owner.Close();
             }
-            
+            this.Close();
         }
         private async void SaveReservation(ReservationDTO reservation)
         {
@@ -156,11 +157,11 @@ namespace UIClient
 
                 if (response.IsSuccessStatusCode)
                 {
-                    MessageBox.Show("Nous vous remercions pour votre réservation et vous souhaitons un excellent visionnage !" , "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Votre réservation a été enregistrée avec succès.");
                 }
                 else
                 {
-                    MessageBox.Show("Erreur lors de l'enregistrement de la réservation.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Une erreur est survenue lors de la réservation.");
                 }
             }
             catch (Exception ex)
@@ -168,7 +169,6 @@ namespace UIClient
                 MessageBox.Show($"Une erreur est survenue : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void btCancel_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Voulez-vous quitter sans réserver ?", "Confirmer", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -177,11 +177,22 @@ namespace UIClient
                 this.Close();
             }
         }
-    }
-    // Une classe qui sert à stocker les informations sur les sièges
-    public class SeatTag
-    {
-        public int Row { get; set; }
-        public int Seat { get; set; }
+        private void btChoix_Click(object sender, EventArgs e)
+        {
+            //txtUid.Visible = rbtAbonnement.Checked;
+            //lblUid.Visible = rbtAbonnement.Checked;
+        }
+        // Une classe qui sert à stocker les informations sur les sièges
+        public class SeatTag
+        {
+            public int Row { get; set; }
+            public int Seat { get; set; }
+        }
+
+        private void rbtAbonnement_CheckedChanged(object sender, EventArgs e)
+        {
+            txtUid.Visible = rbtAbonnement.Checked;
+            lblUid.Visible = rbtAbonnement.Checked;
+        }
     }
 }

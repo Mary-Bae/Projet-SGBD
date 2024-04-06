@@ -57,6 +57,10 @@ namespace Services
         {
             return await _clientRepo.AddReservation(reservation);
         }
+        public async Task<bool> AddReservationWithAbonnement(ReservationDTO reservation)
+        {
+            return await _clientRepo.AddReservationWithAbonnement(reservation);
+        }
         public async Task<List<SiegeDTO>> SiegesReservesByProjection(int projectionId, DateTime date)
         {
             return await _clientRepo.SiegesReservesByProjection(projectionId, date);

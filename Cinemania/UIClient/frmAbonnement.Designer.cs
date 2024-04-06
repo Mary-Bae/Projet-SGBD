@@ -112,15 +112,17 @@
             // lblPrix
             // 
             this.lblPrix.AutoSize = true;
-            this.lblPrix.Location = new System.Drawing.Point(24, 231);
+            this.lblPrix.ForeColor = System.Drawing.Color.Red;
+            this.lblPrix.Location = new System.Drawing.Point(302, 207);
             this.lblPrix.Name = "lblPrix";
-            this.lblPrix.Size = new System.Drawing.Size(0, 15);
+            this.lblPrix.Size = new System.Drawing.Size(147, 15);
             this.lblPrix.TabIndex = 12;
+            this.lblPrix.Text = "Prix de l\'abonnement : 50€";
             // 
             // lblUid
             // 
             this.lblUid.AutoSize = true;
-            this.lblUid.Location = new System.Drawing.Point(348, 255);
+            this.lblUid.Location = new System.Drawing.Point(348, 274);
             this.lblUid.Name = "lblUid";
             this.lblUid.Size = new System.Drawing.Size(0, 15);
             this.lblUid.TabIndex = 14;
@@ -128,7 +130,7 @@
             // lblDateAchat
             // 
             this.lblDateAchat.AutoSize = true;
-            this.lblDateAchat.Location = new System.Drawing.Point(348, 291);
+            this.lblDateAchat.Location = new System.Drawing.Point(348, 310);
             this.lblDateAchat.Name = "lblDateAchat";
             this.lblDateAchat.Size = new System.Drawing.Size(0, 15);
             this.lblDateAchat.TabIndex = 15;
@@ -136,7 +138,7 @@
             // lblDateValidite
             // 
             this.lblDateValidite.AutoSize = true;
-            this.lblDateValidite.Location = new System.Drawing.Point(348, 328);
+            this.lblDateValidite.Location = new System.Drawing.Point(348, 347);
             this.lblDateValidite.Name = "lblDateValidite";
             this.lblDateValidite.Size = new System.Drawing.Size(0, 15);
             this.lblDateValidite.TabIndex = 16;
@@ -145,7 +147,7 @@
             // 
             this.lblMerci.AutoSize = true;
             this.lblMerci.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblMerci.Location = new System.Drawing.Point(348, 220);
+            this.lblMerci.Location = new System.Drawing.Point(348, 239);
             this.lblMerci.Name = "lblMerci";
             this.lblMerci.Size = new System.Drawing.Size(0, 15);
             this.lblMerci.TabIndex = 17;
@@ -153,7 +155,7 @@
             // lblReservationRestante
             // 
             this.lblReservationRestante.AutoSize = true;
-            this.lblReservationRestante.Location = new System.Drawing.Point(348, 370);
+            this.lblReservationRestante.Location = new System.Drawing.Point(348, 389);
             this.lblReservationRestante.Name = "lblReservationRestante";
             this.lblReservationRestante.Size = new System.Drawing.Size(0, 15);
             this.lblReservationRestante.TabIndex = 18;

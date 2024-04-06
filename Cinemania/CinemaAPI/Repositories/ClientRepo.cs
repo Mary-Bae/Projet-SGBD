@@ -6,6 +6,7 @@ using Models;
 using System.Data;
 using System.Data.Common;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using static Repositories.ClientRepo;
 
 namespace Repositories
 {
@@ -97,7 +98,31 @@ namespace Repositories
             // Vérification si l'opération a affecté au moins une ligne
             return affectedRows > 0;
         }
-        public async Task<List<SiegeDTO>> SiegesReservesByProjection(int projectionId, DateTime date)
+        public async Task<bool> AddReservationWithAbonnement(ReservationDTO reservation)
+        {
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@ProjectionId", reservation.ProjectionId);
+                parameters.Add("@NbrPersonnes", reservation.NbrPersonnes);
+                // Convertir la liste des sièges en une chaîne formatée
+                string seatsFormatted = string.Join(",", reservation.Sieges.Select(s => $"{s.Row}{s.SeatNumber}"));
+                parameters.Add("@Siege", seatsFormatted);
+                parameters.Add("@ReservationDate", reservation.DateReservee);
+                parameters.Add("@UidAbonnement", reservation.UidAbonnement);
+                parameters.Add("@ChaineId", reservation.ChaineId);
+
+                await _Connection.ExecuteAsync("[Client].[Reservation_AddReservationWithAbonnement]", parameters, commandType: CommandType.StoredProcedure);
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
+                
+            }
+        }
+
+            public async Task<List<SiegeDTO>> SiegesReservesByProjection(int projectionId, DateTime date)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@ProjectionId", projectionId);
@@ -131,7 +156,7 @@ namespace Repositories
             return lst.ToList();
         }
         //Abonnement
-        public async Task<AbonnementInfosDTO> AddAbonnement(AbonnementDTO abonnement)
+        public async Task<AbonnementInfosDTO?> AddAbonnement(AbonnementDTO abonnement)
         {
 
             try
