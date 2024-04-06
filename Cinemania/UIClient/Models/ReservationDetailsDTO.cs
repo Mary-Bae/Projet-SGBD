@@ -16,6 +16,7 @@ namespace Models
         public string Horaire { get; set; }
         public DateTime DateSelectionnee { get; set; }
         public SalleDTO SalleDetails { get; set; }
+        public int ChaineId { get; set; }
     }
 
     public class ReservationDTO
@@ -24,6 +25,8 @@ namespace Models
         public int NbrPersonnes { get; set; }
         public List<SiegeDTO> Sieges { get; set; }
         public DateTime DateReservee { get; set; }
+        public string? UidAbonnement { get; set; }
+        public int ChaineId { get; set; }
     }
     public class SiegeDTO
     {

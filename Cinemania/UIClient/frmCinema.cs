@@ -150,6 +150,7 @@ namespace UIClient
                 {
                     CinemaId = _cinemaDetails.ci_id,
                     CinemaNom = _cinemaDetails.ci_nom,
+                    ChaineId = _cinemaDetails.ci_ch_id,
                     FilmId = _selectedFilmId,
                     LangueId = langueId,
                     Horaire = horaire,

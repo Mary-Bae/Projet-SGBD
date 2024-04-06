@@ -31,6 +31,7 @@ namespace Interfaces
     public interface IClientReservationSvc
     {
         Task<bool> AddReservation(ReservationDTO reservation);
+        Task<bool> AddReservationWithAbonnement(ReservationDTO reservation);
         Task<List<SiegeDTO>> SiegesReservesByProjection(int projectionId, DateTime date);
     }
     public interface IClientChaineSvc

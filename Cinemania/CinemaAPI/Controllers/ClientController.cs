@@ -126,15 +126,29 @@ namespace CinemaAPI.Controllers
         [HttpPost("Reservation/AddReservation")]
         public async Task<IActionResult> Post(ReservationDTO reservation)
         {
-            var success = await _clientSvc.AddReservation(reservation);
-            if (success)
-            {
-                return Ok();
-            }
-            else
-            {
-                return BadRequest();
-            }
+            bool success;
+
+                if (!string.IsNullOrEmpty(reservation.UidAbonnement))
+                {
+                    // UID d'abonnement fourni, tentative de réservation avec abonnement
+                    success = await _clientSvc.AddReservationWithAbonnement(reservation);
+                }
+                else
+                {
+                    // Pas d'UID d'abonnement, procéder avec une réservation normale
+                    success = await _clientSvc.AddReservation(reservation);
+                }
+
+                if (success)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            
+
         }
 
         [HttpGet("Reservation/SiegesReservesByProjection")]
