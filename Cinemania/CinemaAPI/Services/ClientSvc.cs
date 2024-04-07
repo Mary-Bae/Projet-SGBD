@@ -33,6 +33,12 @@ namespace Services
             var lst = await cinemasRepo.GetCinemas<T>();
             return lst.ToList<T>();
         }
+        public async Task<List<T>> GetCinemasByChaine<T>(int pId)
+        {
+            return await _clientRepo.GetCinemasByChaine<T>(pId);
+        }
+
+
 
         //Traductions
         async Task<List<T>> IClientTraductionSvc.GetLanguesByFilmsAndCine<T>(int pCinema, int pFilm)
@@ -41,7 +47,7 @@ namespace Services
         }
 
         // Dates
-        async Task<DatesDTO> IClientDatesSvc.GetDatesByProjection(int filmId, int cinemaId, int langueId, string horaire)
+        async Task<DatesDTO?> IClientDatesSvc.GetDatesByProjection(int filmId, int cinemaId, int langueId, string horaire)
         {
             return await _clientRepo.GetDatesByProjection(filmId, cinemaId, langueId, horaire);
         }
@@ -75,7 +81,7 @@ namespace Services
         }
 
         //Abonnement
-        async Task<AbonnementInfosDTO> IClientAbonnementSvc.AddAbonnement(int chaineId)
+        async Task<AbonnementInfosDTO?> IClientAbonnementSvc.AddAbonnement(int chaineId)
         {
             var guid = Guid.NewGuid().ToString("N").Substring(0, 16);
             var dateAchat = DateTime.Now;
@@ -88,9 +94,12 @@ namespace Services
                 DateAchat = dateAchat,
                 DateFinValidite = dateFinValidite
             };
-
             return await _clientRepo.AddAbonnement(abonnement);
-            
+        }
+
+        public async Task<int> GetPlacesRestantes(string uidAbonnement)
+        {
+            return await _clientRepo.GetPlacesRestantes(uidAbonnement);
         }
     }
 }

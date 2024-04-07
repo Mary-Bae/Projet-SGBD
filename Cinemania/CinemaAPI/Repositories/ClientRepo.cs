@@ -39,6 +39,13 @@ namespace Repositories
             var lst = await _Connection.QueryAsync<T>("[Client].[Cinema_SelectAll]");
             return lst.ToList();
         }
+        public async Task<List<T>> GetCinemasByChaine<T>(int pId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@ch_id", pId);
+            var lst = await _Connection.QueryAsync<T>("[Client].[Cinema_SelectByChain]", parameters, commandType: CommandType.StoredProcedure);
+            return lst.ToList();
+        }
 
         //Traduction
         public async Task<List<T>> GetLanguesByFilmsAndCine<T>(int pCinema, int pFilm)
@@ -158,7 +165,6 @@ namespace Repositories
         //Abonnement
         public async Task<AbonnementInfosDTO?> AddAbonnement(AbonnementDTO abonnement)
         {
-
             try
             {
                 var parameters = new DynamicParameters();
@@ -168,7 +174,6 @@ namespace Repositories
                 parameters.Add("@DateFinValidite", abonnement.DateFinValidite);
 
                 return await _Connection.QueryFirstOrDefaultAsync<AbonnementInfosDTO>("[Client].[Abonnement_AddAbonnement]", parameters, commandType: CommandType.StoredProcedure);
-
             }
             catch (SqlException ex)
             {
@@ -178,6 +183,16 @@ namespace Repositories
             {
                 throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
             }
+        }
+        public async Task<int> GetPlacesRestantes(string uidAbonnement)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@UidAbonnement", uidAbonnement);
+            parameters.Add("@PlacesRestantes", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+            await _Connection.ExecuteAsync("[Client].[Abonnement_SelectPlacesRestantes]", parameters, commandType: CommandType.StoredProcedure);
+
+            return parameters.Get<int>("@PlacesRestantes");
         }
     }
 }

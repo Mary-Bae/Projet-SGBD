@@ -16,12 +16,12 @@ namespace UIClient
     public partial class frmAbonnement : Form
     {
         private static readonly HttpClient client = new HttpClient();
-        private List<ChaineDTO> _chaine;
         private int _selectedChaineId;
         public frmAbonnement()
         {
             InitializeComponent();
             LoadChaine();
+            btAcheter.Enabled = false;
         }
         private async void LoadChaine()
         {
@@ -35,7 +35,6 @@ namespace UIClient
                 lstChaine.DataSource = chaines;
             }
         }
-
         private async void btAcheter_Click(object sender, EventArgs e)
         {
             if (lstChaine.SelectedItem is ChaineDTO selectedChaine)
@@ -48,7 +47,7 @@ namespace UIClient
                     lblUid.Text = $"UID: {abonnementInfo.Uid}";
                     lblDateAchat.Text = $"Date d'Achat: {abonnementInfo.DateAchat.ToShortDateString()}";
                     lblDateValidite.Text = $"Date de Validité: {abonnementInfo.DateFinValidite.ToShortDateString()}";
-                    lblReservationRestante.Text = "Vous avez droit à 6 réservations à partir de ce jour";
+                    lblReservationRestante.Text = "Vous avez droit à 6 réservations pour cette chaine de cinéma";
                 }
                 else
                 {
@@ -88,25 +87,48 @@ namespace UIClient
                 return null;
             }
         }
-
         private void lstChaine_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lstChaine.SelectedItem is ChaineDTO selectedChaine)
             {
                 _selectedChaineId = selectedChaine.ch_id;
+                AfficherCinemas(selectedChaine.ch_id);
+                btAcheter.Enabled = false;
+                lblPayement.Text = "";
             }
             else
             {
                 _selectedChaineId = -1;
+                lblCine.Text = "";
             }
         }
-
         private void btCancel_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Voulez-vous quitter la fenêtre d'abonnement ?", "Confirmer", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 this.DialogResult = DialogResult.Cancel;
                 this.Close();
+            }
+        }
+        private void btChoix_Click(object sender, EventArgs e)
+        {
+            lblPayement.Text = "Informations de payement :\nPrix de la réservation :  50€\nIBAN : BE65 2343 4433 9110";
+            btAcheter.Enabled = true;
+        }
+
+        private async void AfficherCinemas(int chaineId)
+        {
+            HttpResponseMessage response = await client.GetAsync("https://localhost:7013/Client/CinemasByChaine/" + chaineId);
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                var cinemas = JsonConvert.DeserializeObject<List<CinemasDTO>>(responseContent);
+
+                lblCine.Text = "Cinémas auxquels vous aurez droit en vous abonnant à cette chaine:\n\n" + string.Join("\n", cinemas.Select(cinema => cinema.ci_nom));
+            }
+            else
+            {
+                lblCine.Text = "";
             }
         }
     }
