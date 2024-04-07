@@ -104,7 +104,7 @@ namespace Repositories
         {
             var parameters = new DynamicParameters();
             parameters.Add("@ch_id", pId);
-            var lst = await _Connection.QueryAsync<T>("[Admin].[Cinema_SelectByChain]", parameters, commandType: CommandType.StoredProcedure);
+            var lst = await _Connection.QueryAsync<T>("[Client].[Cinema_SelectByChain]", parameters, commandType: CommandType.StoredProcedure);
             return lst.ToList();
         }
         public async Task<List<T>> GetCinemas<T>()

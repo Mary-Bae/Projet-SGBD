@@ -19,6 +19,7 @@ namespace UIClient
         private ReservationDetailsDTO _reservationDetails;
         private HashSet<SeatTag> _selectedSeats = new HashSet<SeatTag>();
         private int _numberOfTickets = 0;
+        private int prixTotal;
         private static readonly HttpClient client = new HttpClient();
         public frmReservation(ReservationDetailsDTO reservationDetails)
         {
@@ -28,7 +29,6 @@ namespace UIClient
             lblSalle.Text = "salle " + reservationDetails.SalleDetails.sa_numeroSalle.ToString();
             LoadSeats();
             txtUid.Visible = false;
-            lblUid.Visible = false;
         }
         private async void LoadSeats()
         {
@@ -109,15 +109,17 @@ namespace UIClient
         {
             int prix = 10;
             _numberOfTickets = (int)nbrTickets.Value;
-            int prixTotal = prix *= _numberOfTickets;
+            prixTotal = prix *= _numberOfTickets;
             lblTotal.Text = "Total à payer :" + prixTotal.ToString() + "€";
+            if (rbtVirement.Checked)
+                lblPayement.Text = "Informations de payement :\nPrix de la réservation : " + prixTotal + "€\nIBAN : BE65 2343 4433 9110";
         }
 
         private void btReserver_Click(object sender, EventArgs e)
         {
             if (_selectedSeats.Count != _numberOfTickets)
             {
-                MessageBox.Show("Veuillez sélectionner le nombre correct de sièges.");
+                MessageBox.Show("Veuillez sélectionner le nombre correct de sièges.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -130,7 +132,7 @@ namespace UIClient
             ReservationDTO reservation = new ReservationDTO
             {
                 ProjectionId = _reservationDetails.SalleDetails.pro_id,
-                ChaineId = _reservationDetails.ChaineId, // Supposons que ce champ est ajouté dans les détails
+                ChaineId = _reservationDetails.ChaineId,
                 NbrPersonnes = _numberOfTickets,
                 Sieges = sieges,
                 DateReservee = _reservationDetails.DateSelectionnee,
@@ -157,11 +159,11 @@ namespace UIClient
 
                 if (response.IsSuccessStatusCode)
                 {
-                    MessageBox.Show("Votre réservation a été enregistrée avec succès.");
+                    MessageBox.Show (await response.Content.ReadAsStringAsync(), "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    MessageBox.Show("Une erreur est survenue lors de la réservation.");
+                    MessageBox.Show("Une erreur est survenue lors de la réservation.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
@@ -177,11 +179,7 @@ namespace UIClient
                 this.Close();
             }
         }
-        private void btChoix_Click(object sender, EventArgs e)
-        {
-            //txtUid.Visible = rbtAbonnement.Checked;
-            //lblUid.Visible = rbtAbonnement.Checked;
-        }
+        
         // Une classe qui sert à stocker les informations sur les sièges
         public class SeatTag
         {
@@ -191,8 +189,14 @@ namespace UIClient
 
         private void rbtAbonnement_CheckedChanged(object sender, EventArgs e)
         {
-            txtUid.Visible = rbtAbonnement.Checked;
-            lblUid.Visible = rbtAbonnement.Checked;
+                lblPayement.Text = "Rentrez ici votre UID et confirmez la reservation pour valider.";
+                txtUid.Visible = true;
+        }
+
+        private void rbtVirement_CheckedChanged(object sender, EventArgs e)
+        {
+            lblPayement.Text = "Informations de payement :\nPrix de la réservation : " + prixTotal + "€\nIBAN : BE65 2343 4433 9110";
+            txtUid.Visible = false;
         }
     }
 }

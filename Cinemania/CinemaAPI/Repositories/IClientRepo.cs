@@ -14,6 +14,7 @@ namespace Interfaces
     public interface IClientCinemaRepo
     {
         Task<List<T>> GetCinemas<T>();
+        Task<List<T>> GetCinemasByChaine<T>(int pIdChaine);
     }
     public interface IClientTraductionRepo
     {
@@ -21,7 +22,7 @@ namespace Interfaces
     }
     public interface IClientDatesRepo // DTO Pour les paramètres
     {
-        Task<DatesDTO> GetDatesByProjection(int filmId, int cinemaId, int langueId, string horaire);
+        Task<DatesDTO?> GetDatesByProjection(int filmId, int cinemaId, int langueId, string horaire);
     }
     public interface IClientSalleRepo
     {
@@ -40,5 +41,6 @@ namespace Interfaces
     public interface IClientAbonnementRepo
     {
         Task<AbonnementInfosDTO?> AddAbonnement(AbonnementDTO abonnement);
+        Task<int>GetPlacesRestantes(string uidAbonnement);
     }
 }

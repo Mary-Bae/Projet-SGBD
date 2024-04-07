@@ -18,6 +18,7 @@ namespace CinemaAPI.Controllers
             _clientSvc = pClientSvc;
         }
 
+        //Films
         [HttpGet("Films")]
         public async Task<ActionResult> GetFilms()
         {
@@ -27,24 +28,6 @@ namespace CinemaAPI.Controllers
 
                 IClientFilmSvc filmSvc = _clientSvc;
                 lst = await filmSvc.GetFilms<FilmsDTO>();
-                return Ok(lst);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpGet("Cinemas")]
-        public async Task<ActionResult> GetCinemas()
-        {
-            try
-            {
-                List<CinemasDTO> lst;
-
-                IClientCinemaSvc cinemasSvc = _clientSvc;
-                lst = await cinemasSvc.GetCinemas<CinemasDTO>();
-
                 return Ok(lst);
             }
             catch (Exception ex)
@@ -69,6 +52,43 @@ namespace CinemaAPI.Controllers
             }
         }
 
+        //Cinema
+        [HttpGet("Cinemas")]
+        public async Task<ActionResult> GetCinemas()
+        {
+            try
+            {
+                List<CinemasDTO> lst;
+
+                IClientCinemaSvc cinemasSvc = _clientSvc;
+                lst = await cinemasSvc.GetCinemas<CinemasDTO>();
+
+                return Ok(lst);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("CinemasByChaine/{chaineId}")]
+        public async Task<ActionResult> GetCinemasByChaine(int chaineId)
+        {
+            try
+            {
+                List<CinemasDTO> lst;
+                IClientCinemaSvc cinemasSvc = _clientSvc;
+                lst = await cinemasSvc.GetCinemasByChaine<CinemasDTO>(chaineId);
+                return Ok(lst);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        //Langue
+
         [HttpGet("LangueByFilmAndCinema/{cinemaId}/{filmId}")]
         public async Task<ActionResult> GetLanguesByFilmsAndCine(int cinemaId, int filmId)
         {
@@ -84,6 +104,8 @@ namespace CinemaAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        //Projection
 
         [HttpGet("GetDatesByProjection/{filmId}/{cinemaId}/{langueId}/{horaire}")]
         public async Task<IActionResult> GetDatesByProjection(int filmId, int cinemaId, int langueId, string horaire)
@@ -123,32 +145,53 @@ namespace CinemaAPI.Controllers
             }
         }
 
+        //Reservation
         [HttpPost("Reservation/AddReservation")]
         public async Task<IActionResult> Post(ReservationDTO reservation)
         {
             bool success;
+            string notificationMessage = null;
 
-                if (!string.IsNullOrEmpty(reservation.UidAbonnement))
-                {
-                    // UID d'abonnement fourni, tentative de réservation avec abonnement
-                    success = await _clientSvc.AddReservationWithAbonnement(reservation);
-                }
-                else
-                {
-                    // Pas d'UID d'abonnement, procéder avec une réservation normale
-                    success = await _clientSvc.AddReservation(reservation);
-                }
+            // Vérifier si un UID d'abonnement est fourni
+            if (!string.IsNullOrEmpty(reservation.UidAbonnement))
+            {
+                // Tenter une réservation avec abonnement
+                success = await _clientSvc.AddReservationWithAbonnement(reservation);
 
+                // Si la réservation est réussie, vérifier les places restantes pour l'abonnement
                 if (success)
                 {
-                    return Ok();
+                    notificationMessage = await NotifierPlacesRestantes(reservation.UidAbonnement);
                 }
-                else
-                {
-                    return BadRequest();
-                }
-            
+            }
+            else
+            {
+                // Effectuer une réservation normale s'il n'y a pas d'UID d'abonnement
+                success = await _clientSvc.AddReservation(reservation);
+            }
 
+            // Si la réservation a réussi, retourner un message de succès avec ou sans notification
+            if (success)
+            {
+                if (!string.IsNullOrEmpty(notificationMessage))
+                {
+                    // Inclure le message de notification si disponible
+                    return Ok(notificationMessage);
+                }
+                return Ok("Réservation réussie");
+            }
+
+            // Si la réservation a échoué, retourner un message d'échec
+            return BadRequest("Échec de la réservation.");
+        }
+        private async Task<string> NotifierPlacesRestantes(string uidAbonnement)
+        {
+            int placesRestantes = await _clientSvc.GetPlacesRestantes(uidAbonnement);
+            if (placesRestantes <= 2)
+            {
+                return "Réservation réussie ! Nous vous souhaitons une excellente séance.\n\nATTENTION : Il ne reste que " + placesRestantes + " place(s) sur votre abonnement. N'hésitez pas à le renouveller";
+            }
+            return "Réservation réussie ! Nous vous souhaitons une excellente séance.";
         }
 
         [HttpGet("Reservation/SiegesReservesByProjection")]
@@ -165,6 +208,7 @@ namespace CinemaAPI.Controllers
             }
         }
 
+        //Chaine
         [HttpGet("Chaine")]
         public async Task<ActionResult> GetChaine()
         {
@@ -182,6 +226,7 @@ namespace CinemaAPI.Controllers
             }
         }
 
+        //Abonnement
         [HttpPost("Abonnement/AddAbonnement")]
         public async Task<IActionResult> AddAbonnement(ChaineIdDTO chaineIdDto)
         {

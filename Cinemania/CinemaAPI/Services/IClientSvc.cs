@@ -14,6 +14,7 @@ namespace Interfaces
     public interface IClientCinemaSvc
     {
         Task<List<T>> GetCinemas<T>();
+        Task<List<T>> GetCinemasByChaine<T>(int pIdChaine);
     }
 
     public interface IClientTraductionSvc
@@ -22,7 +23,7 @@ namespace Interfaces
     }
     public interface IClientDatesSvc
     {
-        Task<DatesDTO> GetDatesByProjection(int filmId, int cinemaId, int langueId, string horaire);
+        Task<DatesDTO?> GetDatesByProjection(int filmId, int cinemaId, int langueId, string horaire);
     }
     public interface IClientSalleSvc
     {
@@ -40,7 +41,8 @@ namespace Interfaces
     }
     public interface IClientAbonnementSvc
     {
-        Task<AbonnementInfosDTO> AddAbonnement(int chaineId);
+        Task<AbonnementInfosDTO?> AddAbonnement(int chaineId);
+        Task<int> GetPlacesRestantes(string uidAbonnement);
     }
 
 
