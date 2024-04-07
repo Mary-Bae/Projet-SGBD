@@ -20,6 +20,7 @@ namespace UIAdmin
         private int _currentProgrammationId;
         private int _selectedSeanceId;
         bool success;
+        private bool _cinemasLoaded = false;
 
         public frmAdmin()
         {
@@ -29,7 +30,6 @@ namespace UIAdmin
             LoadFilms();
             LoadLangues();
             LoadSeances();
-            GetCinemasCmb();
             LoadProjections();
         }
         async void LoadChaines()
@@ -389,7 +389,7 @@ namespace UIAdmin
 
                 var result = formAjoutCinema.ShowDialog();
                 if (result == DialogResult.OK)
-                    await LoadCinemasByChaine(chaineId);;
+                    await LoadCinemasByChaine(chaineId);
             }
             else
             {
@@ -1149,6 +1149,14 @@ namespace UIAdmin
             else
             {
                 lblStatusAdminCinema.Text = "Aucune projection n'a été sélectionnée. Veuillez choisir la projection à supprimer.";
+            }
+        }
+        private void cmbCine_DropDown(object sender, EventArgs e)
+        {
+            if (!_cinemasLoaded)
+            {
+                GetCinemasCmb();
+                _cinemasLoaded = true;
             }
         }
     }

@@ -9,11 +9,11 @@ namespace UIClient
     public partial class frmClient : Form
     {
         private static readonly HttpClient client = new HttpClient();
+        bool _cinemasLoaded = false;
         public frmClient()
         {
             InitializeComponent();
             LoadFilms();
-            LoadCinemas();
         }
         async void LoadFilms()
         {
@@ -120,6 +120,15 @@ namespace UIClient
         {
             var frmAbonnement = new frmAbonnement();
             frmAbonnement.ShowDialog();
+        }
+
+        private void cmbCinemas_DropDown(object sender, EventArgs e)
+        {
+            if (!_cinemasLoaded)
+            {
+                LoadCinemas();
+                _cinemasLoaded = true;
+            }
         }
     }
 }

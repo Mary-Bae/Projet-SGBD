@@ -178,7 +178,7 @@ namespace CinemaAPI.Controllers
                     // Inclure le message de notification si disponible
                     return Ok(notificationMessage);
                 }
-                return Ok("Réservation réussie");
+                return Ok();
             }
 
             // Si la réservation a échoué, retourner un message d'échec
@@ -189,9 +189,9 @@ namespace CinemaAPI.Controllers
             int placesRestantes = await _clientSvc.GetPlacesRestantes(uidAbonnement);
             if (placesRestantes <= 2)
             {
-                return "Réservation réussie ! Nous vous souhaitons une excellente séance.\n\nATTENTION : Il ne reste que " + placesRestantes + " place(s) sur votre abonnement. N'hésitez pas à le renouveller";
+                return "ATTENTION : Il ne reste que " + placesRestantes + " place(s) sur votre abonnement. N'hésitez pas à le renouveller";
             }
-            return "Réservation réussie ! Nous vous souhaitons une excellente séance.";
+            return "";
         }
 
         [HttpGet("Reservation/SiegesReservesByProjection")]

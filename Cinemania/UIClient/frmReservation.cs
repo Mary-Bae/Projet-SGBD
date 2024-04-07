@@ -27,8 +27,14 @@ namespace UIClient
             _reservationDetails = reservationDetails;
             lblCinemaNom.Text = reservationDetails.CinemaNom;
             lblSalle.Text = "salle " + reservationDetails.SalleDetails.sa_numeroSalle.ToString();
+            lblFilm.Text = reservationDetails.FilmNom + " - " + reservationDetails.DateSelectionnee.ToString("dd-MM-yyyy") + " - " + reservationDetails.Horaire;
             LoadSeats();
             txtUid.Visible = false;
+            rbtAbonnement.Enabled= false;
+            rbtVirement.Enabled= false;
+            btReserver.Enabled = false;
+
+
         }
         private async void LoadSeats()
         {
@@ -69,10 +75,8 @@ namespace UIClient
                 }
             }
         }
-
         private async Task<List<SiegeDTO>> GetReservedSeats()
         {
-            // Construisez l'URL pour l'API
             string url = $"https://localhost:7013/Client/Reservation/SiegesReservesByProjection?projectionId={_reservationDetails.SalleDetails.pro_id}&date={_reservationDetails.DateSelectionnee.ToString("yyyy-MM-dd")}";
 
             var response = await client.GetAsync(url);
@@ -111,6 +115,23 @@ namespace UIClient
             _numberOfTickets = (int)nbrTickets.Value;
             prixTotal = prix *= _numberOfTickets;
             lblTotal.Text = "Total à payer :" + prixTotal.ToString() + "€";
+            if (_numberOfTickets > 0)
+            {
+                rbtAbonnement.Enabled = true;
+                rbtVirement.Enabled = true;
+            }
+            else
+            {
+                rbtAbonnement.Enabled = false;
+                rbtVirement.Enabled = false;
+
+                rbtAbonnement.Checked = false;
+                rbtVirement.Checked = false;
+                lblPayement.Text = "";
+                txtUid.Visible = false;
+                btReserver.Enabled = false;
+            }
+
             if (rbtVirement.Checked)
                 lblPayement.Text = "Informations de payement :\nPrix de la réservation : " + prixTotal + "€\nIBAN : BE65 2343 4433 9110";
         }
@@ -159,7 +180,7 @@ namespace UIClient
 
                 if (response.IsSuccessStatusCode)
                 {
-                    MessageBox.Show (await response.Content.ReadAsStringAsync(), "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show ("Reservation réussie !\nNous vous souhaitons un excellent visionnage de " + _reservationDetails.FilmNom + " Pour la séance du " + _reservationDetails.DateSelectionnee.ToString("dd-MM-yyyy") + " à " + _reservationDetails.Horaire +"\n" + await response.Content.ReadAsStringAsync(), "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -191,12 +212,14 @@ namespace UIClient
         {
                 lblPayement.Text = "Rentrez ici votre UID et confirmez la reservation pour valider.";
                 txtUid.Visible = true;
+                btReserver.Enabled = true;
         }
 
         private void rbtVirement_CheckedChanged(object sender, EventArgs e)
         {
             lblPayement.Text = "Informations de payement :\nPrix de la réservation : " + prixTotal + "€\nIBAN : BE65 2343 4433 9110";
             txtUid.Visible = false;
+            btReserver.Enabled = true;
         }
     }
 }

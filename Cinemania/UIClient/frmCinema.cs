@@ -18,6 +18,7 @@ namespace UIClient
         private CinemasDTO _cinemaDetails;
         private List<FilmsDTO> _filmDetails;
         private int _selectedFilmId;
+        private string _selectedFilmNom;
 
         private static readonly HttpClient client = new HttpClient();
         public frmCinema(CinemasDTO cinemaDetails, List<FilmsDTO> filmDetails)
@@ -28,6 +29,7 @@ namespace UIClient
             lblCinemaNom.Text = _cinemaDetails.ci_nom;
             LoadFilms();
             dateReservation.Enabled = false;
+            btReserver.Enabled = false;
         }
 
         private void LoadFilms()
@@ -43,8 +45,10 @@ namespace UIClient
             if (lstFilms.SelectedIndex != -1)
             {
                 dateReservation.Enabled = false;
+                btReserver.Enabled = false;
                 var selectedFilm = _filmDetails[lstFilms.SelectedIndex];
                 _selectedFilmId = selectedFilm.fi_id;
+                _selectedFilmNom = selectedFilm.fi_nom;
                 lblDescription.Text = selectedFilm.fi_description;
                 lblGenre.Text = selectedFilm.fi_genre;
                 await GetLanguesPourFilm(_cinemaDetails.ci_id, _selectedFilmId);
@@ -88,11 +92,13 @@ namespace UIClient
         {
             if (lstLangue.SelectedIndices.Count > 0 && _selectedFilmId != 0)
             {
+                btReserver.Enabled = false;
                 var selectedItem = lstLangue.SelectedItems[0];
                 int langueId = Convert.ToInt32(selectedItem.Tag);  // Langue
                 var horaire = selectedItem.SubItems[2].Text; // Horaire
 
                 await GetPlageDeDates(_selectedFilmId, _cinemaDetails.ci_id, langueId, horaire);
+                
             }
         }
 
@@ -152,6 +158,7 @@ namespace UIClient
                     CinemaNom = _cinemaDetails.ci_nom,
                     ChaineId = _cinemaDetails.ci_ch_id,
                     FilmId = _selectedFilmId,
+                    FilmNom = _selectedFilmNom,
                     LangueId = langueId,
                     Horaire = horaire,
                     DateSelectionnee = dateSelectionnee,
@@ -166,6 +173,11 @@ namespace UIClient
             {
                 MessageBox.Show("Veuillez sélectionner un film ainsi qu'une séance pour continuer.", "Sélection requise", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void dateReservation_Enter(object sender, EventArgs e)
+        {
+            btReserver.Enabled = true;
         }
     }
 }
