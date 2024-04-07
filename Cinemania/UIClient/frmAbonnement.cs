@@ -47,7 +47,7 @@ namespace UIClient
                     lblUid.Text = $"UID: {abonnementInfo.Uid}";
                     lblDateAchat.Text = $"Date d'Achat: {abonnementInfo.DateAchat.ToShortDateString()}";
                     lblDateValidite.Text = $"Date de Validité: {abonnementInfo.DateFinValidite.ToShortDateString()}";
-                    lblReservationRestante.Text = "Vous avez droit à 6 réservations pour cette chaine de cinéma à partir de ce jour";
+                    lblReservationRestante.Text = "Vous avez droit à 6 réservations pour cette chaine de cinéma";
                 }
                 else
                 {
