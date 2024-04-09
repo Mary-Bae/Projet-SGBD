@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.Common;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using static Repositories.ClientRepo;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Repositories
 {
@@ -100,10 +101,8 @@ namespace Repositories
             parameters.Add("@Siege", seatsFormatted);
 
             // Exécution de la procédure stockée
-            int affectedRows = await _Connection.ExecuteAsync("[Client].[Reservation_AddReservation]", parameters, commandType: CommandType.StoredProcedure);
-
-            // Vérification si l'opération a affecté au moins une ligne
-            return affectedRows > 0;
+            await _Connection.ExecuteAsync("[Client].[Reservation_AddReservation]", parameters, commandType: CommandType.StoredProcedure);
+            return true;
         }
         public async Task<bool> AddReservationWithAbonnement(ReservationDTO reservation)
         {
@@ -124,8 +123,13 @@ namespace Repositories
             }
             catch (SqlException ex)
             {
+                if(ex.Number == 0x0000c351)
+                   throw new CustomError(ErreurCodeEnum.AbonnementInvalide, ex);
+                if (ex.Number == 0x0000c352)
+                    throw new CustomError(ErreurCodeEnum.AbonnementVide, ex);
+                if (ex.Number == 0x0000c353)
+                    throw new CustomError(ErreurCodeEnum.QuantiteRestanteAbonnement, ex);
                 throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
-                
             }
         }
 

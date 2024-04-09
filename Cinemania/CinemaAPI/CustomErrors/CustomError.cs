@@ -24,6 +24,9 @@ namespace CustomErrors
         ChampsSelectionnes,
         DateSeance,
         ConflitProjection,
+        AbonnementInvalide,
+        QuantiteRestanteAbonnement,
+        AbonnementVide,
         FK_Cine_Film_Programmation,
         UK_Programmation,
         UK_SEANCE,
@@ -113,6 +116,15 @@ namespace CustomErrors
                     break;
                 case ErreurCodeEnum.DateSeance:
                     _messageToReturn = "La date de fin de la séance doit être d'au moins un mois après le début de la programmation.";
+                    break;
+                case ErreurCodeEnum.AbonnementInvalide:
+                    _messageToReturn = "Abonnement invalide, vérifiez les données que vous avez rentrées";
+                    break;
+                case ErreurCodeEnum.AbonnementVide:
+                    _messageToReturn = "Attention, votre abonnement est vide, vous devriez le recharger avant de valider votre réservation";
+                    break;
+                case ErreurCodeEnum.QuantiteRestanteAbonnement:
+                    _messageToReturn = "Attention, il ne reste pas assez de places sur votre abonnement pour valider la réservation";
                     break;
                 case ErreurCodeEnum.FK_Cine_Film_Programmation:
                     _messageToReturn = "Un cinema et un film doivent être sélectionnés pour permettre une programmation";

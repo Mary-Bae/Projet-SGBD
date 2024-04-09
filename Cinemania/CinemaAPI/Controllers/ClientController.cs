@@ -152,33 +152,40 @@ namespace CinemaAPI.Controllers
             bool success;
             string notificationMessage = null;
 
-            // Vérifier si un UID d'abonnement est fourni
-            if (!string.IsNullOrEmpty(reservation.UidAbonnement))
+            try
             {
-                // Tenter une réservation avec abonnement
-                success = await _clientSvc.AddReservationWithAbonnement(reservation);
+                // Vérifier si un UID d'abonnement est fourni
+                if (!string.IsNullOrEmpty(reservation.UidAbonnement))
+                {
+                    // Tenter une réservation avec abonnement
+                    success = await _clientSvc.AddReservationWithAbonnement(reservation);
 
-                // Si la réservation est réussie, vérifier les places restantes pour l'abonnement
+                    // Si la réservation est réussie, vérifier les places restantes pour l'abonnement
+                    if (success)
+                    {
+                        notificationMessage = await NotifierPlacesRestantes(reservation.UidAbonnement);
+                    }
+                }
+                else
+                {
+                    // Effectuer une réservation normale s'il n'y a pas d'UID d'abonnement
+                    success = await _clientSvc.AddReservation(reservation);
+                }
+
+                // Si la réservation a réussi, retourner un message de succès avec ou sans notification
                 if (success)
                 {
-                    notificationMessage = await NotifierPlacesRestantes(reservation.UidAbonnement);
+                    if (!string.IsNullOrEmpty(notificationMessage))
+                    {
+                        // Inclure le message de notification si disponible
+                        return Ok(notificationMessage);
+                    }
+                    return Ok();
                 }
             }
-            else
+            catch (CustomError ex)
             {
-                // Effectuer une réservation normale s'il n'y a pas d'UID d'abonnement
-                success = await _clientSvc.AddReservation(reservation);
-            }
-
-            // Si la réservation a réussi, retourner un message de succès avec ou sans notification
-            if (success)
-            {
-                if (!string.IsNullOrEmpty(notificationMessage))
-                {
-                    // Inclure le message de notification si disponible
-                    return Ok(notificationMessage);
-                }
-                return Ok();
+                return BadRequest(ex.Message);
             }
 
             // Si la réservation a échoué, retourner un message d'échec

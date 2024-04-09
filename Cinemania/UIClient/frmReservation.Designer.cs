@@ -43,6 +43,7 @@
             this.txtUid = new System.Windows.Forms.TextBox();
             this.lblPayement = new System.Windows.Forms.Label();
             this.lblFilm = new System.Windows.Forms.Label();
+            this.lblError = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nbrTickets)).BeginInit();
             this.SuspendLayout();
             // 
@@ -199,6 +200,15 @@
             this.lblFilm.Size = new System.Drawing.Size(0, 38);
             this.lblFilm.TabIndex = 51;
             // 
+            // lblError
+            // 
+            this.lblError.AutoSize = true;
+            this.lblError.ForeColor = System.Drawing.Color.Red;
+            this.lblError.Location = new System.Drawing.Point(48, 499);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(0, 20);
+            this.lblError.TabIndex = 52;
+            // 
             // frmReservation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -206,6 +216,7 @@
             this.BackColor = System.Drawing.Color.SeaShell;
             this.ClientSize = new System.Drawing.Size(978, 613);
             this.ControlBox = false;
+            this.Controls.Add(this.lblError);
             this.Controls.Add(this.lblFilm);
             this.Controls.Add(this.lblPayement);
             this.Controls.Add(this.txtUid);
@@ -248,5 +259,6 @@
         private TextBox txtUid;
         private Label lblPayement;
         private Label lblFilm;
+        private Label lblError;
     }
 }
