@@ -36,7 +36,7 @@ namespace UIAdmin
         {
             const int maxRetries = 3;
             int attempts = 0;
-            
+            success = false;
 
             //Recharge les chaines en trois tentatives si elles n'arrivent pas à se charger, ca laisse le temps à l'API de se charger
             while (attempts < maxRetries && !success)
@@ -66,6 +66,7 @@ namespace UIAdmin
         {
             const int maxRetries = 3;
             int attempts = 0;
+            success = false;
 
             while (attempts < maxRetries && !success)
             {
@@ -94,7 +95,7 @@ namespace UIAdmin
         {
             const int maxRetries = 3;
             int attempts = 0;
-
+            success = false;
             //Recharge les langues en trois tentatives si elles n'arrivent pas à se charger, ca laisse le temps à l'API de se charger
             while (attempts < maxRetries && !success)
             {
@@ -124,7 +125,7 @@ namespace UIAdmin
         {
             const int maxRetries = 3;
             int attempts = 0;
-
+            success = false;
             //Recharge les chaines en trois tentatives si elles n'arrivent pas à se charger, ca laisse le temps à l'API de se charger
             while (attempts < maxRetries && !success)
             {
@@ -158,7 +159,7 @@ namespace UIAdmin
         {
             const int maxRetries = 3;
             int attempts = 0;
-
+            success = false;
             //Recharge les langues en trois tentatives si elles n'arrivent pas à se charger, ca laisse le temps à l'API de se charger
             while (attempts < maxRetries && !success)
             {
@@ -988,11 +989,12 @@ namespace UIAdmin
                 }
             }
         }
-        private void btSeance_Click(object sender, EventArgs e)
+        private async void btSeance_Click(object sender, EventArgs e)
         {
             var formAjoutSeance = new frmAjoutSeance();
             formAjoutSeance.ShowDialog();
             LoadSeances();
+            
         }
         private async void GetCinemasCmb()
         {

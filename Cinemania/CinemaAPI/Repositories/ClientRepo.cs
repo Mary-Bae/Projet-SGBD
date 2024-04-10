@@ -129,6 +129,8 @@ namespace Repositories
                     throw new CustomError(ErreurCodeEnum.AbonnementVide, ex);
                 if (ex.Number == 0x0000c353)
                     throw new CustomError(ErreurCodeEnum.QuantiteRestanteAbonnement, ex);
+                if (ex.Number == 0x0000c354)
+                    throw new CustomError(ErreurCodeEnum.DateFinAbonnement, ex);
                 throw new CustomError(ErreurCodeEnum.ErreurGenerale, ex);
             }
         }

@@ -593,6 +593,8 @@ namespace Repositories
             }
             catch (SqlException ex)
             {
+                if (ex.Number == 0x0000c350)
+                    throw new CustomError(ErreurCodeEnum.FK_Projection_Reservation, ex);
                 throw new CustomError(ErreurCodeEnum.ErreurSQL, ex);
             }
             catch (Exception ex)
