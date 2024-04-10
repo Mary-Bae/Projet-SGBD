@@ -42,6 +42,8 @@
             this.rbtAbonnement = new System.Windows.Forms.RadioButton();
             this.txtUid = new System.Windows.Forms.TextBox();
             this.lblPayement = new System.Windows.Forms.Label();
+            this.lblFilm = new System.Windows.Forms.Label();
+            this.lblError = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nbrTickets)).BeginInit();
             this.SuspendLayout();
             // 
@@ -188,6 +190,25 @@
             this.lblPayement.Size = new System.Drawing.Size(0, 20);
             this.lblPayement.TabIndex = 50;
             // 
+            // lblFilm
+            // 
+            this.lblFilm.AutoSize = true;
+            this.lblFilm.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblFilm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.lblFilm.Location = new System.Drawing.Point(378, 93);
+            this.lblFilm.Name = "lblFilm";
+            this.lblFilm.Size = new System.Drawing.Size(0, 38);
+            this.lblFilm.TabIndex = 51;
+            // 
+            // lblError
+            // 
+            this.lblError.AutoSize = true;
+            this.lblError.ForeColor = System.Drawing.Color.Red;
+            this.lblError.Location = new System.Drawing.Point(48, 499);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(0, 20);
+            this.lblError.TabIndex = 52;
+            // 
             // frmReservation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -195,6 +216,8 @@
             this.BackColor = System.Drawing.Color.SeaShell;
             this.ClientSize = new System.Drawing.Size(978, 613);
             this.ControlBox = false;
+            this.Controls.Add(this.lblError);
+            this.Controls.Add(this.lblFilm);
             this.Controls.Add(this.lblPayement);
             this.Controls.Add(this.txtUid);
             this.Controls.Add(this.rbtAbonnement);
@@ -235,5 +258,7 @@
         private RadioButton rbtAbonnement;
         private TextBox txtUid;
         private Label lblPayement;
+        private Label lblFilm;
+        private Label lblError;
     }
 }

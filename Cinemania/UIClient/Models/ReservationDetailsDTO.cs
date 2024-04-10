@@ -12,6 +12,7 @@ namespace Models
         public int CinemaId { get; set; }
         public string CinemaNom { get; set; }
         public int FilmId { get; set; }
+        public string FilmNom { get; set; }
         public int LangueId { get; set; }
         public string Horaire { get; set; }
         public DateTime DateSelectionnee { get; set; }

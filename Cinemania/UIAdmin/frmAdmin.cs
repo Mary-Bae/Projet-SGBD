@@ -20,6 +20,7 @@ namespace UIAdmin
         private int _currentProgrammationId;
         private int _selectedSeanceId;
         bool success;
+        private bool _cinemasLoaded = false;
 
         public frmAdmin()
         {
@@ -29,14 +30,13 @@ namespace UIAdmin
             LoadFilms();
             LoadLangues();
             LoadSeances();
-            GetCinemasCmb();
             LoadProjections();
         }
         async void LoadChaines()
         {
             const int maxRetries = 3;
             int attempts = 0;
-            
+            success = false;
 
             //Recharge les chaines en trois tentatives si elles n'arrivent pas à se charger, ca laisse le temps à l'API de se charger
             while (attempts < maxRetries && !success)
@@ -66,6 +66,7 @@ namespace UIAdmin
         {
             const int maxRetries = 3;
             int attempts = 0;
+            success = false;
 
             while (attempts < maxRetries && !success)
             {
@@ -94,7 +95,7 @@ namespace UIAdmin
         {
             const int maxRetries = 3;
             int attempts = 0;
-
+            success = false;
             //Recharge les langues en trois tentatives si elles n'arrivent pas à se charger, ca laisse le temps à l'API de se charger
             while (attempts < maxRetries && !success)
             {
@@ -124,7 +125,7 @@ namespace UIAdmin
         {
             const int maxRetries = 3;
             int attempts = 0;
-
+            success = false;
             //Recharge les chaines en trois tentatives si elles n'arrivent pas à se charger, ca laisse le temps à l'API de se charger
             while (attempts < maxRetries && !success)
             {
@@ -158,7 +159,7 @@ namespace UIAdmin
         {
             const int maxRetries = 3;
             int attempts = 0;
-
+            success = false;
             //Recharge les langues en trois tentatives si elles n'arrivent pas à se charger, ca laisse le temps à l'API de se charger
             while (attempts < maxRetries && !success)
             {
@@ -389,7 +390,7 @@ namespace UIAdmin
 
                 var result = formAjoutCinema.ShowDialog();
                 if (result == DialogResult.OK)
-                    await LoadCinemasByChaine(chaineId);;
+                    await LoadCinemasByChaine(chaineId);
             }
             else
             {
@@ -988,11 +989,12 @@ namespace UIAdmin
                 }
             }
         }
-        private void btSeance_Click(object sender, EventArgs e)
+        private async void btSeance_Click(object sender, EventArgs e)
         {
             var formAjoutSeance = new frmAjoutSeance();
             formAjoutSeance.ShowDialog();
             LoadSeances();
+            
         }
         private async void GetCinemasCmb()
         {
@@ -1149,6 +1151,14 @@ namespace UIAdmin
             else
             {
                 lblStatusAdminCinema.Text = "Aucune projection n'a été sélectionnée. Veuillez choisir la projection à supprimer.";
+            }
+        }
+        private void cmbCine_DropDown(object sender, EventArgs e)
+        {
+            if (!_cinemasLoaded)
+            {
+                GetCinemasCmb();
+                _cinemasLoaded = true;
             }
         }
     }

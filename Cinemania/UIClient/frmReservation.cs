@@ -27,8 +27,15 @@ namespace UIClient
             _reservationDetails = reservationDetails;
             lblCinemaNom.Text = reservationDetails.CinemaNom;
             lblSalle.Text = "salle " + reservationDetails.SalleDetails.sa_numeroSalle.ToString();
+            lblFilm.Text = reservationDetails.FilmNom + " - " + reservationDetails.DateSelectionnee.ToString("dd-MM-yyyy") + " - " + reservationDetails.Horaire;
             LoadSeats();
             txtUid.Visible = false;
+            rbtAbonnement.Enabled= false;
+            rbtVirement.Enabled= false;
+            btReserver.Enabled = false;
+            lblError.Text = "";
+
+
         }
         private async void LoadSeats()
         {
@@ -69,10 +76,8 @@ namespace UIClient
                 }
             }
         }
-
         private async Task<List<SiegeDTO>> GetReservedSeats()
         {
-            // Construisez l'URL pour l'API
             string url = $"https://localhost:7013/Client/Reservation/SiegesReservesByProjection?projectionId={_reservationDetails.SalleDetails.pro_id}&date={_reservationDetails.DateSelectionnee.ToString("yyyy-MM-dd")}";
 
             var response = await client.GetAsync(url);
@@ -107,19 +112,38 @@ namespace UIClient
 
         private void nbrTickets_ValueChanged(object sender, EventArgs e)
         {
+            lblError.Text = "";
             int prix = 10;
             _numberOfTickets = (int)nbrTickets.Value;
             prixTotal = prix *= _numberOfTickets;
             lblTotal.Text = "Total à payer :" + prixTotal.ToString() + "€";
+            if (_numberOfTickets > 0)
+            {
+                rbtAbonnement.Enabled = true;
+                rbtVirement.Enabled = true;
+            }
+            else
+            {
+                rbtAbonnement.Enabled = false;
+                rbtVirement.Enabled = false;
+
+                rbtAbonnement.Checked = false;
+                rbtVirement.Checked = false;
+                lblPayement.Text = "";
+                txtUid.Visible = false;
+                btReserver.Enabled = false;
+            }
+
             if (rbtVirement.Checked)
                 lblPayement.Text = "Informations de payement :\nPrix de la réservation : " + prixTotal + "€\nIBAN : BE65 2343 4433 9110";
         }
-
         private void btReserver_Click(object sender, EventArgs e)
         {
+            lblError.Text = "";
+
             if (_selectedSeats.Count != _numberOfTickets)
             {
-                MessageBox.Show("Veuillez sélectionner le nombre correct de sièges.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblError.Text = "Veuillez sélectionner le nombre correct de sièges.";
                 return;
             }
 
@@ -129,6 +153,11 @@ namespace UIClient
                 SeatNumber = s.Seat
             }).ToList();
 
+            if (rbtAbonnement.Checked & txtUid.Text == "")
+            {
+                lblError.Text = "Veuillez rentrer votre code GUID pour pouvoir utiliser votre abonnement";
+                return;
+            }
             ReservationDTO reservation = new ReservationDTO
             {
                 ProjectionId = _reservationDetails.SalleDetails.pro_id,
@@ -140,14 +169,6 @@ namespace UIClient
             };
 
             SaveReservation(reservation);
-
-            // Vérifier si le formulaire parent existe et s'il n'est pas déjà fermé
-            if (this.Owner != null && !this.Owner.IsDisposed)
-            {
-                // Fermer le formulaire parent
-                this.Owner.Close();
-            }
-            this.Close();
         }
         private async void SaveReservation(ReservationDTO reservation)
         {
@@ -159,16 +180,24 @@ namespace UIClient
 
                 if (response.IsSuccessStatusCode)
                 {
-                    MessageBox.Show (await response.Content.ReadAsStringAsync(), "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show ("Reservation réussie !\nNous vous souhaitons un excellent visionnage de " + _reservationDetails.FilmNom + " Pour la séance du " + _reservationDetails.DateSelectionnee.ToString("dd-MM-yyyy") + " à " + _reservationDetails.Horaire +"\n" + await response.Content.ReadAsStringAsync(), "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
+                    // Vérifier si le formulaire parent existe et s'il n'est pas déjà fermé
+                    if (this.Owner != null && !this.Owner.IsDisposed)
+                    {
+                        // Fermer le formulaire parent
+                        this.Owner.Close();
+                    }
+                    this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Une erreur est survenue lors de la réservation.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    lblError.Text = await response.Content.ReadAsStringAsync();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Une erreur est survenue : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Une erreur est survenue " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void btCancel_Click(object sender, EventArgs e)
@@ -191,12 +220,16 @@ namespace UIClient
         {
                 lblPayement.Text = "Rentrez ici votre UID et confirmez la reservation pour valider.";
                 txtUid.Visible = true;
+                btReserver.Enabled = true;
         }
 
         private void rbtVirement_CheckedChanged(object sender, EventArgs e)
         {
+            lblError.Text = "";
+
             lblPayement.Text = "Informations de payement :\nPrix de la réservation : " + prixTotal + "€\nIBAN : BE65 2343 4433 9110";
             txtUid.Visible = false;
+            btReserver.Enabled = true;
         }
     }
 }

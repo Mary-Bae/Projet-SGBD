@@ -24,7 +24,12 @@ namespace CustomErrors
         ChampsSelectionnes,
         DateSeance,
         ConflitProjection,
+        AbonnementInvalide,
+        QuantiteRestanteAbonnement,
+        AbonnementVide,
+        DateFinAbonnement,
         FK_Cine_Film_Programmation,
+        FK_Projection_Reservation,
         UK_Programmation,
         UK_SEANCE,
         ErreurGenerale
@@ -89,7 +94,9 @@ namespace CustomErrors
                 case ErreurCodeEnum.FK_SALLE_PROJECTION:
                     _messageToReturn = "Une salle de cinéma ne peut pas être supprimée tant qu'il y a des projections en cours. Supprimez d'abord les projections qui ont lieu dans cette salle avant de supprimer le cinéma et la salle en elle-même";
                     break;
-
+                case ErreurCodeEnum.FK_Projection_Reservation:
+                    _messageToReturn = "Vous ne pouvez pas supprimer des projections avec des réservations futures déjà réservées par des clients";
+                    break;
                 case ErreurCodeEnum.ErreurSQL:
                     _messageToReturn = "Erreur liée à la base de données SQL.";
                     break;
@@ -113,6 +120,18 @@ namespace CustomErrors
                     break;
                 case ErreurCodeEnum.DateSeance:
                     _messageToReturn = "La date de fin de la séance doit être d'au moins un mois après le début de la programmation.";
+                    break;
+                case ErreurCodeEnum.AbonnementInvalide:
+                    _messageToReturn = "Abonnement invalide, vérifiez les données que vous avez rentrées";
+                    break;
+                case ErreurCodeEnum.AbonnementVide:
+                    _messageToReturn = "Attention, votre abonnement est vide, vous devriez le recharger avant de valider votre réservation";
+                    break;
+                case ErreurCodeEnum.DateFinAbonnement:
+                    _messageToReturn = "Votre réservation dépasse la fin de validité de votre abonnement, vous pouvez réserver à une autre date ou changer votre abonnement";
+                    break;
+                case ErreurCodeEnum.QuantiteRestanteAbonnement:
+                    _messageToReturn = "Attention, il ne reste pas assez de places sur votre abonnement pour valider la réservation";
                     break;
                 case ErreurCodeEnum.FK_Cine_Film_Programmation:
                     _messageToReturn = "Un cinema et un film doivent être sélectionnés pour permettre une programmation";

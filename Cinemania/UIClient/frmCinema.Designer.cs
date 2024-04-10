@@ -161,6 +161,7 @@
             this.dateReservation.Name = "dateReservation";
             this.dateReservation.Size = new System.Drawing.Size(198, 27);
             this.dateReservation.TabIndex = 40;
+            this.dateReservation.Enter += new System.EventHandler(this.dateReservation_Enter);
             // 
             // label3
             // 
